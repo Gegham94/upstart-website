@@ -1,0 +1,29 @@
+<div class="home-courses">
+  <div class="home-courses__container container">
+    <h3 class="home-courses__title">{{ 'home.courses.title' | translate }}</h3>
+    <div class="home-courses__list">
+      <ng-container *ngFor="let course of courses; let i = index">
+        <ng-container *ngIf="i < 6">
+          <us-course [courseData]="course"></us-course>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div *ngIf="loader" class="loader">
+      <ngx-skeleton-loader
+        count="5"
+        [theme]="{ height: '30px', 'background-color': '#faf8ff' }"
+        appearance="line"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="home-courses__action-keeper">
+      <us-button
+        class="home-courses__action"
+        [theme]="buttonTheme.primary"
+        [outline]="true"
+        (clicked)="goCategories()"
+      >
+        {{ 'home.courses.see-all' | translate }}
+      </us-button>
+    </div>
+  </div>
+</div>

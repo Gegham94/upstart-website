@@ -1,0 +1,45 @@
+<div class="reviews__modal">
+  <div class="reviews__modal-header">
+    <h3 class="reviews__modal-title">{{ data.title }}</h3>
+    <us-button mat-dialog-close>
+      <us-icon class="reviews__modal-btn" name="close"></us-icon>
+    </us-button>
+  </div>
+  <div class="reviews__modal-body">
+    <div class="reviews__new-review">
+      <p class="reviews__add-rate">{{ 'reviews.click-stars' | translate }}</p>
+      <us-star-rating
+        [color]="'#6b63dd'"
+        [rateValue]="starRate"
+        [size]="30"
+        [maxStars]="5"
+        (ratingStarsOutput)="ratingStars($event)"
+      >
+      </us-star-rating>
+      <us-editor
+        [(ngModel)]="reviewContent"
+        [placeholder]="'reviews.add-review-lesson' | translate"
+      ></us-editor>
+    </div>
+  </div>
+  <div class="reviews__footer">
+    <us-button
+      [outline]="true"
+      mat-dialog-close
+      class="settings-page-btn"
+      [theme]="buttonTheme.primary"
+    >
+      {{ 'global.button.cancel' | translate }}
+    </us-button>
+
+    <us-button
+      class="settings-page-btn"
+      [disabled]="!reviewContent || !starRate || loader"
+      [loader]="loader"
+      [theme]="buttonTheme.primary"
+      (clicked)="saveReview()"
+    >
+      {{ 'global.button.save' | translate }}
+    </us-button>
+  </div>
+</div>

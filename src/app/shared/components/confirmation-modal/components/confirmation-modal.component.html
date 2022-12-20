@@ -1,0 +1,27 @@
+<div class="confirmation-modal">
+  <div class="confirmation-modal__body">
+    <h3 class="confirmation-modal__title">
+      {{ data.title }}
+    </h3>
+    <p class="confirmation-modal__body-desc">
+      {{ data.description }}
+    </p>
+    <div class="confirmation-modal__action-keeper">
+      <us-button
+        (clicked)="data.cancelled()"
+        class="confirmation-modal__action"
+        [outline]="true"
+        [theme]="buttonTheme.primary"
+      >
+        {{ 'global.button.cancel' | translate }}
+      </us-button>
+      <us-button
+        (clicked)="data.confirmed()"
+        class="confirmation-modal__action"
+        [theme]="buttonTheme.primary"
+      >
+        {{ 'global.button.confirm' | translate }}
+      </us-button>
+    </div>
+  </div>
+</div>

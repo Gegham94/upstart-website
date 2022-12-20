@@ -1,0 +1,63 @@
+@import 'src/assets/styles/variables/colors';
+
+.course-general {
+  margin-bottom: 20px;
+  &__container {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    padding-top: 22px;
+    us-course-general-details{
+      flex-grow: 1;
+      margin-top: 300px;
+    }
+
+  }
+  .top_section{
+    background: $grey-text;
+    margin-bottom: 20px;
+    width: 100%;
+    position: absolute;
+    color: white;
+    height: 300px;
+    .course-details__title {
+      font-weight: 700;
+      font-size: 24px;
+      color: $white;
+      line-height: 40px;
+    }
+    .sub_title{
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 22px;
+      color: $white;
+    }
+    .training_content{
+      padding: 27px 10px 54px 32px;
+      max-width: 855px;
+
+      h4{
+        font-weight: 500;
+        font-size: 16px;
+        color: $white;
+        opacity: 0.6;
+      }
+      ::ng-deep.stars-line{
+        justify-content: flex-start;
+      }
+      .created{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 130%;
+        color: $white;
+
+      }
+      .trainer_info{
+        font-weight: 600;
+        font-size: 16px;
+        color: $main;
+      }
+    }
+  }
+}
+

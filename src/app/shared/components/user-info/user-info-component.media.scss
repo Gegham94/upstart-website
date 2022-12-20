@@ -1,0 +1,43 @@
+@import "src/assets/styles/mixins/for-breakpoint";
+.user-info{
+    &.refactor{
+        @include for-breakpoint(mobile-lg) {
+            flex-direction: column-reverse;
+
+    .about-user{
+        .user-name{
+            align-items: center;
+            margin: 0;
+            margin-top: 25px;
+        }
+
+    }
+    .user-avatar__block{
+        .user-avatar{
+            margin-right: 0;
+            height: 170px;
+            width: 170px;
+            .not-image{
+                font-size: 60px;
+            }
+        }
+    }
+    .user-name{
+        .name-surname{
+            margin-bottom: 10px;
+            line-height: 39px;
+            font-size: 24px;
+            margin-bottom: 5px !important;
+        }
+        .role{
+            font-size: 20px;
+            margin-bottom: 5px !important;
+        }
+        .course-and-review{
+            width: 100% !important;
+        }
+    }
+    }
+}
+}
+

@@ -1,0 +1,159 @@
+@import 'src/assets/styles/variables/colors';
+
+.reviews {
+  font-family: 'Montserrat', Helvetica, sans-serif;
+  background: $white;
+  padding: 6px 12px;
+  border: 1px solid $dark-white;
+  box-shadow: 0 33px 30px -19px rgba(163, 163, 163, 0.08);
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-bottom: 10px;
+  &.active{
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  &__img-reviewer{
+    position: relative;
+    margin-right: 15px;
+    .reviewer-img{
+      border-radius: 8px;
+      width: 110px;
+      height: 108px;
+    }
+    .rating{
+      background: rgba(255, 255, 255, 0.65);
+      border: 0.5px solid #EEDFFF;
+      height: 17px;
+      backdrop-filter: blur(3.5px);
+      border-radius: 25px;
+      width: 71px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, 47px);
+      ::ng-deep{
+        .stars-line{
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  &__description{
+    display: flex;
+    flex-direction: column;
+    // align-items: flex-start;
+    width: 100%;
+    //justify-content: space-between;
+    .company_info{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      p{
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        color: #ACB1C6;
+      }
+      .company-img{
+        width: 25px;
+        height: 25px;
+        border-radius:50%
+      }
+    }
+
+  }
+
+  &__title{
+    font-weight: 600;
+    font-size: 16px;
+    color: $main;
+  }
+
+  &__review-date{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 140%;
+    color: $light-grey-text;
+  }
+
+  &__text{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: $light-grey-text;
+  }
+
+  &__author{
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 140%;
+    color: $main;
+  }
+  &__see-more{
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: $main;
+  }
+  &.profile{
+    border: none;
+    box-shadow: none;
+  }
+  .review-btn{
+    text-align: right;
+    .edit-review{
+      display: inline-block;
+      min-width: max-content;
+      padding: 7px;
+      background: $main;
+      border-radius: 10px;
+      border: 0;
+      color: $white;
+      cursor: pointer;
+      &:first-child{
+        margin-right: 10px;
+      }
+    }
+
+  }
+}
+.view-profile-side{
+  text-align: right;
+.view-profile{
+    font-weight: 500;
+    color: $main;
+    font-size: 16px;
+}
+}
+.loader-review-loading{
+  z-index: 1;
+  width: max-content;
+  height: max-content;
+  ::ng-deep.mat-progress-spinner {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  ::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: $main;
+  }
+  ::ng-deep.mat-progress-spinner svg {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  ::ng-deep.mat-progress-spinner {
+    margin: auto !important;
+    width: 50px !important;
+    overflow: visible;
+  }
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

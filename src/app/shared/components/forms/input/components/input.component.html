@@ -1,0 +1,72 @@
+<label class="input__label">
+  <span *ngIf="label" class="input__label-text">
+    {{ label }}
+  </span>
+  <div class="input" [class.input__read-only]="readonly" [class.input_error]="hasErrors">
+    <us-icon
+      class="input__icon_block"
+      *ngIf="iconName"
+      [name]="iconName"
+      [size]="iconSize"
+    ></us-icon>
+    <input
+      class="input__area"
+      [class.input__area_icon]="!!iconName"
+      [class.input__area_error]="hasErrors"
+      [type]="type"
+      [readonly]="readonly"
+      [placeholder]="placeholder + (requiredPlaceholder ? ' *' : '')"
+      [value]="value"
+      [min]="min"
+      [autocomplete]="autocomplete"
+      (input)="valueChange($event)"
+      (focusin)="focusIn.emit($event)"
+      (focusout)="focusOut.emit($event); onTouched()"
+    />
+    <us-icon
+      *ngIf="toggleIcon"
+      [class.hide]="!readonly"
+      class="input__icon toggle"
+      (click)="clickIcon()"
+      [size]="19"
+      [name]="toggleIcon"
+    ></us-icon>
+    <us-icon
+      *ngIf="activeIcon"
+      class="input__icon active"
+      (click)="showInputText()"
+      [size]="19"
+      [name]="activeIcon"
+    ></us-icon>
+  </div>
+  <div *ngIf="errors" class="input__error-block">
+    <span *ngFor="let error of errors | keyvalue">
+      <ng-container *ngIf="error.key === 'custom'; else errorText">
+        {{ error.value }}
+      </ng-container>
+      <ng-template #errorText>
+        <ng-container *ngIf="error.key === 'youtube'">
+          {{ 'global.input.wrong_youtube_url' | translate }}
+        </ng-container>
+        <div
+          *ngIf="getControlName?.dirty && getControlName.touched && getControlName?.errors"
+          class="input__error-block"
+        >
+          <span *ngIf="getControlName.errors?.['required']">{{
+            'global.input.field_required' | translate
+          }}</span>
+          <span *ngIf="getControlName.errors?.['minlength']"
+            >{{ 'global.input.the_field' | translate }}
+            {{ getControlName.errors?.['minlength']['requiredLength'] }}
+            {{ 'global.input.now_length' | translate }}
+            {{getControlName.errors?.['minlength']['actualLength']}}</span
+          >
+          <span
+            *ngIf="getControlName.errors?.['pattern'] && !getControlName.errors?.['minlength']"
+            >{{ 'global.input.wrong_password' | translate }}</span
+          >
+        </div>
+      </ng-template>
+    </span>
+  </div>
+</label>

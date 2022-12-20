@@ -1,0 +1,39 @@
+@import "src/assets/styles/variables/colors";
+
+.course-lesson-list {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    // Todo: Store this color in assets/variables/_colors.scss
+    color: #707070;
+    padding: 14px 34px;
+  }
+
+  &__toggle {
+    &_rotated {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    padding: 32px 34px 45px;
+
+    &-field {
+      width: 219px;
+    }
+  }
+
+  &__error-block{
+    margin: 5px 0;
+    color: $error;
+    font-size: 12px;
+  }
+}

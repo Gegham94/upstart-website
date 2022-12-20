@@ -1,0 +1,25 @@
+@import "src/assets/styles/mixins/for-breakpoint";
+.certificate{
+  @include for-breakpoint(mobile-lg) {
+    .certificate-body{
+      .name{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 15px;
+      }
+      .sub-title{
+        margin-bottom: 0;
+      }
+      .course-name{
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+      .degree-side{
+        margin-top: 25px;
+      }
+      .description{
+        width: 100%;
+      }
+    }
+  }
+}

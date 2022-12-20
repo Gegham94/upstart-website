@@ -1,0 +1,30 @@
+<div class="ticket">
+  <div class="image">
+    <img
+      class="reviewer-img"
+      src=""
+      alt=""
+      onerror="this.onerror=null; this.src='../../../../../assets/images/icons/review-user.svg'"
+    />
+    <div *ngIf="" class="rate-side">
+      <us-star-rating
+        [isReadOnly]="true"
+        [maxStars]="5"
+        [color]="'#6b63dd'"
+        [rateValue]="5"
+        [size]="12"
+      ></us-star-rating>
+    </div>
+  </div>
+  <div class="about-user">
+    <span class="name">Jennifer K.</span>
+    <span class="day-proffesion">2 days ago</span>
+    <div class="review-about">
+      <p class="text">
+        Harper is a really friendly place to be, the staff are approachable and helpful. My student
+        life rep is brilliant and has been supportive and really welcoming. There are lots of
+        opportunities to be around animals and to new skills.
+      </p>
+    </div>
+  </div>
+</div>

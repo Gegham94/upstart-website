@@ -1,0 +1,58 @@
+<div class="courses">
+  <div class="courses__container container">
+    <div class="courses__header-line">
+      <div class="courses__filter">
+        <us-icon class="courses__filter-icon" name="filter" [size]="16"></us-icon>
+        <span class="courses__filter-text" (click)="toggleFilter()">
+          {{ 'home.courses.filter' | translate }}
+        </span>
+      </div>
+      <us-select
+        class="courses__header-sort"
+        (changeValue)="sortBy($event)"
+        [(ngModel)]="sort"
+        [placeholder]="'home.courses.sort_by' | translate"
+        [options]="sortOptions"
+      ></us-select>
+    </div>
+
+    <div class="courses__body">
+      <div class="courses__body-left-side col-3" [ngClass]="{ close_togglebar: isColapsed }">
+        <div class="togglebar">
+          <ng-container *ngFor="let label of labeles">
+            <us-togglebar
+              [label]="label"
+              (selectFilter)="selectFilter($event)"
+              [selectedCategoryId]="label === 'Topic' ? selectedCategoryId : ''"
+            ></us-togglebar>
+          </ng-container>
+          <us-range-slider [label]="'Price'" (selectFilter)="selectFilter($event)">
+          </us-range-slider>
+        </div>
+      </div>
+      <div class="courses__body-right-side">
+        <div class="courses__body-list" *ngIf="!isLoading; else spinerModel">
+          <ng-container *ngIf="coursesData.length > 0; else noDataModel">
+            <ng-container *ngFor="let courseData of coursesData | paginate: config">
+              <us-inline-course [courseData]="courseData"></us-inline-course>
+            </ng-container>
+          </ng-container>
+          <ng-template #noDataModel>
+            <div class="notData-block">
+              <p>{{ 'home.courses.not-found' | translate }}</p>
+            </div>
+          </ng-template>
+          <us-pagination
+            *ngIf="coursesData && coursesData && totalPages > pageSize"
+            (pageChange)="pageChanged($event)"
+          ></us-pagination>
+        </div>
+        <ng-template #spinerModel>
+          <div class="loader-block">
+            <mat-spinner></mat-spinner>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

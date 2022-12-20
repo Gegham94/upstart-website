@@ -1,0 +1,72 @@
+@import "src/assets/styles/variables/colors";
+
+:host {
+  width: 100%;
+}
+
+.accordion {
+  border: 1px solid #EDE6FF;
+  border-radius: 8px;
+
+  &__header {
+    display: flex;
+    padding: 0 1rem;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid transparent;
+    color: $grey-text;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  ::ng-deep &__toggle {
+    &-btn {
+      border: none;
+      transition: transform 0.3s ease-in;
+      background: none;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+
+        svg path:nth-child(2) {
+          fill: $lighter-grey;
+        }
+      }
+    }
+  }
+
+  &__item {
+    .accordion__header:focus-within {
+      border-color: $main;
+      border-radius: 8px;
+    }
+
+    &:first-child .accordion__header {
+      border-radius: 8px 8px 0 0;
+    }
+
+    &:last-child .accordion__header {
+      border-radius: 0 0 8px 8px;
+    }
+
+    &.active {
+      padding-bottom: 25px;
+
+      .accordion__toggle-btn {
+        transform: rotate(180deg);
+      }
+    }
+
+    &.disabled {
+      .accordion__header {
+        color: $lighter-grey;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+

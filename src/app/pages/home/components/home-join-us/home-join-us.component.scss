@@ -1,0 +1,67 @@
+@import 'src/assets/styles/variables/colors';
+
+.home-join-us {
+  text-align: center;
+  margin-bottom: 84px;
+
+  &__container {
+    max-width: 888px;
+  }
+
+  &__subtitle {
+    color: $grey-text;
+    margin-bottom: 10px;
+    letter-spacing: 0.2px;
+  }
+
+  &__title {
+    letter-spacing: 0.2px;
+    color: $title-color;
+    margin-bottom: 10px;
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    color: $light-grey-text;
+    margin-bottom: 57px;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 15px 0 15px 37px;
+    border: none;
+    border-radius: 50px 0 0 50px;
+    background: $lighter-grey;
+    color: $grey-text;
+    outline-width: 0;
+
+    &::placeholder {
+      color: $light-grey-text;
+    }
+  }
+
+  &__button {
+    &::ng-deep {
+      .button {
+        border-radius: 0 50px 50px 0;
+        padding: 15px 20.5px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 28px;
+        letter-spacing: 0.2px;
+      }
+    }
+  }
+}

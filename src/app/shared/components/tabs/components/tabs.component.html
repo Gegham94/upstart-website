@@ -1,0 +1,34 @@
+<div class="tabs">
+  <ul class="tabs__list">
+    <li
+      class="tabs__element"
+      *ngFor="let tab of tabs; let ind = index"
+      (click)="
+        (isSteps && (!isStrict || tab.active || ind < activeTabIndex)) || !isSteps
+          ? selectTab(tab)
+          : null
+      "
+      [class.tabs__element_step]="isSteps"
+      [class.tabs__element_active]="tab.active"
+      [class.tabs__element_invalid]="tab.invalid"
+      [class.tabs__element_completed]="tab.completed || (isStrict && ind < activeTabIndex)"
+    >
+      <ng-container *ngIf="isSteps">
+        <span class="tabs__element-step" [class.tabs__element-step_invalid]="tab.invalid">
+          <ng-container
+            *ngIf="!tab.completed && (ind >= activeTabIndex || !isStrict); else activeStepCheckmark"
+          >
+            {{ ind + 1 }}
+          </ng-container>
+        </span>
+      </ng-container>
+      <ng-template #activeStepCheckmark>
+        <us-icon name="checkmark_white" [size]="19"></us-icon>
+      </ng-template>
+      <span class="tabs__title">
+        {{ tab.title }}
+      </span>
+    </li>
+  </ul>
+  <ng-content></ng-content>
+</div>

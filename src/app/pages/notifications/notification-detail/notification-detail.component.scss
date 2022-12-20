@@ -1,0 +1,57 @@
+@import 'src/assets/styles/variables/colors';
+
+.wrapper {
+  background-color: #f5f5f5;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.container {
+  background-color: $white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  height: 100vh;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.notification {
+  &__wrapper {
+    width: 800px;
+  }
+
+  &__block {
+    padding: 15px 25px 15px 25px;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    text-align: left;
+  }
+
+  &__text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    color: $light-grey-text;
+    word-wrap: break-word;
+  }
+
+  &__created {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0.05em;
+    text-align: left;
+    color: $icon-color;
+  }
+  &__delete-icon {
+    cursor: pointer;
+  }
+}

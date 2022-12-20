@@ -1,0 +1,39 @@
+@import 'src/assets/styles/variables/colors';
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.home-categories {
+  &__container {
+    @include for-breakpoint(tablet) {
+      align-items: center;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 8px;
+      height: 64px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      display: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  &__divider {
+    @include for-breakpoint(tablet) {
+      display: block;
+    }
+  }
+
+  &__element {
+    @include for-breakpoint(tablet) {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 24px;
+      word-break: keep-all;
+      white-space: nowrap;
+    }
+  }
+}

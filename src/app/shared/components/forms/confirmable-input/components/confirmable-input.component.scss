@@ -1,0 +1,37 @@
+@import 'src/assets/styles/variables/colors';
+
+.confirmable-input {
+  display: flex;
+  align-items: flex-end;
+  max-width: 426px;
+
+  &__input {
+    margin-right: -1px;
+    width: 100%;
+
+    &::ng-deep {
+      .input__field {
+        border-radius: 11px 0 0 11px;
+      }
+    }
+  }
+
+  &__button {
+    &::ng-deep {
+      .button {
+        border-radius: 0 11px 11px 0;
+        padding: 11.5px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        height: 48px;
+      }
+    }
+  }
+
+  &__error-block{
+    margin: 5px 0;
+    color: $error;
+    font-size: 12px;
+  }
+}

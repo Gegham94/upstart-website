@@ -1,0 +1,222 @@
+<us-accordion [collapsing]="false" [autoOpen]="collapsed">
+  <div class="course-lesson__header" usAccordionItem *ngIf="lessonForm" [formGroup]="lessonForm">
+    <ng-template usAccordionHeader let-item let-toggle="toggle" let-expanded="expanded">
+      <div class="course-lesson__header">
+        <p class="course-lesson__header-title">
+          {{
+            lessonForm.value.title
+              ? lessonForm.value.title
+              : ('dashboard.courses.lesson' | translate) + ' ' + (index + 1)
+          }}
+        </p>
+        <div class="course-lesson__action">
+          <div class="course-lesson__action-list">
+            <us-icon
+              class="course-lesson__action-icon"
+              (click)="!expanded && toggle(); lessonForm.get('isEdit')?.setValue(true)"
+              name="edit"
+              [size]="24"
+            ></us-icon>
+            <us-icon
+              class="course-lesson__action-icon"
+              (click)="deleteLesson(lessonForm.get('id')?.value)"
+              name="delete"
+              [size]="24"
+            ></us-icon>
+          </div>
+          <button
+            (click)="toggle()"
+            class="course-lesson__toggle accordion__toggle-btn"
+            [class.course-lesson__toggle_rotated]="expanded"
+            [disabled]="item.disabled"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template usAccordionContent>
+      <div class="course-lesson" [formGroup]="lessonForm">
+        <ng-container *ngIf="lessonForm.get('isEdit')?.value && lessonForm.get('title')">
+          <us-input
+            usValidationError
+            class="course-lesson__lesson-title-field"
+            [label]="'dashboard.courses.lesson-title' | translate"
+            formControlName="title"
+            [placeholder]="'dashboard.courses.lesson-title' | translate"
+          >
+          </us-input>
+          <div class="course-lesson__lesson-action">
+            <us-button (clicked)="cancelRename()" [theme]="buttonTheme.primary" [outline]="true">
+              {{ 'global.button.cancel' | translate }}
+            </us-button>
+            <us-button
+              (clicked)="updateLesson()"
+              [disabled]="
+                !!lessonForm.get('title') &&
+                (!lessonForm.get('title')?.dirty || !!lessonForm.get('title')?.invalid)
+              "
+              [theme]="buttonTheme.primary"
+            >
+              {{ 'global.button.save' | translate }}
+            </us-button>
+          </div>
+        </ng-container>
+        <ng-container [ngSwitch]="lessonForm.value.resource">
+          <ng-container *ngSwitchCase="resourceType.VIDEO">
+            <div class="course-lesson__video">
+              <ng-container *ngTemplateOutlet="descriptionBlock"></ng-container>
+              <us-input
+                usValidationError
+                [label]="'dashboard.courses.add-url' | translate"
+                [placeholder]="'dashboard.courses.insert-url' | translate"
+                formControlName="videoLink"
+                class="course-lesson__video-link"
+              ></us-input>
+              <us-editor
+                class="course-lesson__description-field"
+                *ngIf="descriptionControl"
+                [label]="'dashboard.courses.course-description' | translate"
+                [placeholder]="'dashboard.courses.insert-description' | translate"
+                formControlName="description"
+              ></us-editor>
+
+              <div class="course-lesson__resource" *ngIf="resourcesControl">
+                <div class="course-lesson__resource-field">
+                  <label class="course-lesson__resource-label">
+                    {{ 'dashboard.courses.select-resources' | translate }}
+                  </label>
+                  <us-select
+                    [placeholder]="'dashboard.courses.select-resources' | translate"
+                    [multiple]="true"
+                    [options]="resourceOptions"
+                    formControlName="resources"
+                  ></us-select>
+                </div>
+              </div>
+            </div>
+            <us-button
+              *ngIf="!descriptionControl"
+              [theme]="buttonTheme.primary"
+              icon="add"
+              [iconSize]="18"
+              autoSetSuffix="primary"
+              class="course-lesson__add-description"
+              (clicked)="addDescriptionField()"
+            >
+              <span>{{ 'dashboard.courses.description' | translate }}</span>
+            </us-button>
+            <us-button
+              *ngIf="!resourcesControl"
+              [theme]="buttonTheme.primary"
+              icon="add"
+              [iconSize]="18"
+              autoSetSuffix="primary"
+              class="course-lesson__add-description"
+              (clicked)="addResourcesField()"
+            >
+              <span>{{ 'dashboard.courses.resources' | translate }}</span>
+            </us-button>
+          </ng-container>
+          <ng-container *ngSwitchCase="resourceType.ARTICLE">
+            <div class="course-lesson__article">
+              <h3 class="course-lesson__description-title">
+                {{ 'dashboard.courses.article' | translate }}
+              </h3>
+              <us-editor
+                class="course-lesson__article-editor"
+                [placeholder]="'dashboard.courses.insert-description' | translate"
+                formControlName="article"
+              ></us-editor>
+              <us-editor
+                usValidationError
+                *ngIf="descriptionControl"
+                [label]="'dashboard.courses.course-description' | translate"
+                [placeholder]="'dashboard.courses.insert-description' | translate"
+                formControlName="description"
+              ></us-editor>
+
+              <div class="course-lesson__resource" *ngIf="resourcesControl">
+                <div class="course-lesson__resource-field">
+                  <label class="course-lesson__resource-label">
+                    {{ 'dashboard.courses.select-resources' | translate }}
+                  </label>
+                  <us-select
+                    [placeholder]="'dashboard.courses.select-resources' | translate"
+                    [multiple]="true"
+                    [options]="resourceOptions"
+                    formControlName="resources"
+                  ></us-select>
+                </div>
+              </div>
+            </div>
+            <us-button
+              *ngIf="!descriptionControl"
+              [theme]="buttonTheme.primary"
+              icon="add"
+              [iconSize]="18"
+              autoSetSuffix="primary"
+              class="course-lesson__add-description"
+              (clicked)="addDescriptionField()"
+            >
+              <span>{{ 'dashboard.courses.description' | translate }}</span>
+            </us-button>
+            <us-button
+              *ngIf="!resourcesControl"
+              [theme]="buttonTheme.primary"
+              icon="add"
+              [iconSize]="18"
+              autoSetSuffix="primary"
+              class="course-lesson__add-description"
+              (clicked)="addResourcesField()"
+            >
+              <span>{{ 'dashboard.courses.resources' | translate }}</span>
+            </us-button>
+          </ng-container>
+          <div *ngSwitchDefault class="course-lesson__article-add-keeper">
+            <button
+              class="course-lesson__article-add"
+              (click)="setElementResourceType(resourceType.VIDEO)"
+            >
+              <us-icon name="add_primary" [size]="18" class="course-lesson__article-icon"></us-icon>
+              <span class="course-lesson__article-text">{{
+                'dashboard.courses.video' | translate
+              }}</span>
+            </button>
+            <button
+              class="course-lesson__article-add"
+              (click)="setElementResourceType(resourceType.ARTICLE)"
+            >
+              <us-icon name="add_primary" [size]="18" class="course-lesson__article-icon"></us-icon>
+              <span class="course-lesson__article-text">{{
+                'dashboard.courses.article' | translate
+              }}</span>
+            </button>
+          </div>
+        </ng-container>
+        <div class="course-lesson__save-action-keeper">
+          <us-button
+            (clicked)="saveLesson()"
+            class="course-lesson__save-action"
+            [theme]="buttonTheme.primary"
+            [disabled]="lessonForm.invalid"
+          >
+            {{ 'dashboard.courses.save' | translate }}
+          </us-button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</us-accordion>
+
+<ng-template #descriptionBlock>
+  <div class="course-lesson__description">
+    <h3 class="course-lesson__description-title">{{ 'dashboard.courses.resource' | translate }}</h3>
+    <article class="course-lesson__description-article">
+      {{ 'dashboard.courses.course-video' | translate }}
+    </article>
+  </div>
+</ng-template>

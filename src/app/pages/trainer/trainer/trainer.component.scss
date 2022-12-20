@@ -1,0 +1,273 @@
+@import "src/assets/styles/variables/colors";
+
+.trainer{
+  min-height: 500px;
+    .title{
+    .profile{
+        font-size: 24px;
+        font-weight: 600;
+        color: $title-color;
+        display: block;
+        margin-top: 100px;
+        margin-bottom: 22px;
+    }
+    }
+    .info-side{
+        display: flex;
+        align-items: center;
+        min-height: 170px;
+        margin-top: 50px;
+      .profile{
+        margin-top: 100px;
+      }
+    }
+    .about-trainer{
+        margin-top:100px;
+        .links{
+            justify-content: start !important;
+            border: 1px solid $light-purple;
+            padding: 24px;
+            margin-top: 28px;
+            .link-list{
+                padding: 0;
+                margin: 0;
+                list-style-type: none;
+                .link-li{
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    overflow: hidden;
+                    .link{
+                        text-decoration: none;
+                        transition: all .5s;
+                        white-space: nowrap;
+                        font-weight: 500;
+                        margin-left: 10px;
+                        &:hover{
+                          color: $main;
+                        }
+                    }
+                    .icon{
+                        width: 24px;
+                        height: 24px;
+                        display: inline-block;
+                        border-radius: 50%;
+                        &.twitter{
+                            background-color: $light-blue;
+                            padding: 5px;
+                        }
+                        &.linkedin{
+                            background-color: $medium-blue;
+                            padding: 5px;
+                        }
+                        &.youtube{
+                            background-color: $red;
+                                padding: 5px;
+                        }
+                        &.facebook{
+                            background-color: $dark-blue;
+                                padding: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .courses-and-reviews{
+        margin-top: 46px;
+        margin-bottom: 40px;
+        .header{
+            display: flex;
+            border-bottom: 1px solid $light-purple;
+            padding-bottom: 15px;
+            .title{
+                color: $black;
+                position: relative;
+                width: 190px;
+                display: block;
+                text-align: center;
+                .line{
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 0;
+                    display: block;
+                    background-color: $main;
+                    height: 1px;
+                    transform: translateY(16px);
+                    transition: all .5s;
+                }
+                &:hover{
+                    cursor: pointer;
+                    .line{
+                        width: 100%;
+                    }
+                }
+                &.active{
+                    color: $main;
+                    .line{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        .content{
+          height: 50vh;
+          overflow-y: auto;
+          margin-top: 34px;
+          padding-right: 10px;
+          .no-data{
+            display: block;
+            text-align: center;
+            font-weight: 600;
+            font-size: 24px;
+            color: $light-grey-text;
+          }
+        .ticket{
+            border-bottom: 1px solid $light-purple;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .image-side{
+              margin-right: 13px;
+              .cover-image{
+                width: 151px;
+                height: 113px;
+                object-fit: cover;
+                border-radius: 8px 0 0 8px;
+              }
+            }
+            .desc-side{
+              width: 100%;
+              min-height: 113px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              .top-side{
+                display: flex;
+                justify-content: space-between;
+                .title-and-category{
+                  .title{
+                    font-weight: 700;
+                    font-size: 14px;
+                    color: $dark-blue;
+                  }
+                  .category-side{
+                    display: flex;
+                    align-items: center;
+                    margin: 5px 0;
+                    .category{
+                      color: #7A819F;
+                      font-weight: 500;
+                      &:last-child{
+                        &:after{
+                          display: none;
+                        }
+                      }
+                      &::after{
+                        content: '|';
+                        margin-left: 5px;
+                      }
+                    }
+                  }
+                }
+                .type{
+                  white-space: nowrap;
+                  min-width: 118px;
+                  height: 21px;
+                  background: #A5A6F6;
+                  border-radius: 68px;
+                  text-align: center;
+                  font-size: 12px;
+                  display: block;
+                  padding: 5px;
+                  font-weight: 500;
+                  color: $light-purple;
+                  &.course{
+                    background-color: #C585FF;
+                  }
+                }
+              }
+              .desc{
+                margin-top: 5px;
+                color: $light-grey-text;
+                font-weight: 400;
+                line-height: 22px;
+                position: relative;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                line-clamp: 3;
+                -webkit-box-orient: vertical;
+              .star-side{
+                  margin-right: 27px;
+                  align-items: center;
+                  position: absolute;
+                  top: 0;
+                  transform: translateY(-25px);
+                  display: none;
+                  .rate{
+                    color: black;
+                    margin-right: 5px;
+                    font-size: 14px;
+                    font-weight: 500;
+                  }
+                  .icon{
+                    margin-right: 2px;
+                  }
+                }
+              }
+              .bottom-side{
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .star-and-date{
+                  display: flex;
+                  align-items: center;
+                  .star-side{
+                    margin-right: 27px;
+                    display: flex;
+                    align-items: center;
+                    .rate{
+                      margin-right: 5px;
+                      font-size: 12px;
+                      font-weight: 500;
+                    }
+                    .icon{
+                      margin-right: 2px;
+                    }
+                  }
+                  .calendar-side{
+                    display: flex;
+                    align-items: center;
+                    .date{
+                      margin-left: 5px;
+                      color: $grey-text;
+                      font-weight: 500;
+                    }
+
+                  }
+                }
+                .price-side{
+                  display: flex;
+                  align-items: center;
+                  .price{
+                    margin-left: 5px;
+                    font-weight: 700;
+                    font-size: 16px;
+                    color: $dark-blue;
+                    &.old-price{
+                      color: $light-grey-text;
+                    }
+                  }
+                }
+              }
+
+            }
+          }
+          }
+    }
+}

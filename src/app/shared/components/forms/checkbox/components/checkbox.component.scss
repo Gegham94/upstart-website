@@ -1,0 +1,27 @@
+@import "src/assets/styles/variables/colors";
+
+.checkbox {
+  display: flex;
+  gap: 6px;
+  cursor: pointer;
+
+  &__hidden {
+    display: none;
+  }
+
+  &__box {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid $main;
+    border-radius: 2px;
+    background: transparent;
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

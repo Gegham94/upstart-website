@@ -1,0 +1,89 @@
+@import '../../../../../../assets/styles/variables/colors';
+
+.header-search {
+  position: relative;
+  max-width: 490px;
+  width: 100%;
+  &__input {
+    width: 100%;
+    padding: 10.5px 80px 10.5px 28px;
+    border-radius: 27px;
+    background: $white;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    color: $grey-text;
+    border: none;
+    outline: none;
+    &::placeholder {
+      color: $placeholder;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    z-index: 1;
+    right: 26px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  &__clear-icon {
+    position: absolute;
+    z-index: 1;
+    right: 55px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  ::ng-deep &__serach-input {
+    background-color: $lightest-grey;
+    border: solid 0.5px $light-grey;
+    border-radius: 5px;
+    .courses_content{
+      display: flex;
+      align-items: center;
+      a:hover{
+        color: #000;
+      }
+    }
+    .courseImg{
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+    .small_text {
+      font-weight: 700;
+      font-size: 12px;
+      color:$light-grey-text;
+      span{
+        font-weight: 500;
+      }
+    }
+  }
+
+}
+.not-found{
+  color: $light-grey-text;
+  font-style: italic;
+  font-size: 14px;
+}
+
+::ng-deep{
+  .mat-autocomplete-panel::-webkit-scrollbar{
+    width: 3px;
+  }
+  .mat-autocomplete-panel::-webkit-scrollbar-track{
+    box-shadow: inset 3px 2px 6px rgba(65, 64, 64, 0.37);
+    border-radius: 5px;
+    background-color: $lightest-grey;
+  }
+  .mat-autocomplete-panel::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    box-shadow: inset 3px 2px 6px rgba(100, 100, 100, 0.3);
+    background-color: $main;
+  }
+}
+::ng-deep.mat-option{
+  line-height: normal!important;
+}

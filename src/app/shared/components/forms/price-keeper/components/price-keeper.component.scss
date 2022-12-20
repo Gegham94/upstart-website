@@ -1,0 +1,74 @@
+@import "src/assets/styles/variables/colors";
+
+:host {
+  width: 100%;
+}
+
+.price-input {
+  width: 100%;
+  border-radius: 0 8px 8px 0;
+  padding: 6px 17px;
+  border: 1px solid $border-purple;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.05em;
+  outline-width: 0;
+
+  &::placeholder {
+    color: $placeholder;
+  }
+
+  &__group {
+    display: flex;
+    position: relative;
+    height: 48px;
+  }
+
+  &__currency {
+    padding: 11px;
+    background: $main;
+    color: $white;
+    border-radius: 8px 0 0 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 24px;
+
+    &-element {
+      padding: 8px 12px;
+      background: transparent;
+      transition: background .2s ease-in-out;
+      cursor: pointer;
+      width: 100%;
+
+      &:hover {
+        background: $lighter-grey;
+      }
+    }
+
+    &-list {
+      position: absolute;
+      left: 0;
+      top: calc(100% + 4px);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid $lighter-grey;
+      background: $white;
+    }
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+
+
+    &-text {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $grey-text;
+      margin-bottom: 6px;
+    }
+  }
+}

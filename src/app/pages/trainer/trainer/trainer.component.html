@@ -1,0 +1,114 @@
+<div *ngIf="loader" class="loader">
+  <ngx-skeleton-loader
+    count="10"
+    [theme]="{ height: '50px', 'background-color': '#faf8ff' }"
+    appearance="line"
+  ></ngx-skeleton-loader>
+</div>
+
+<div *ngIf="trainerData" class="trainer">
+  <div class="info-side">
+    <div class="profile container">
+      <us-user-info
+        [canUpload]="false"
+        [userInfo]="trainerData"
+        [hasHeadline]="true"
+        [courses]="courses"
+        [trainerReview]="trainerReview"
+        [doRefactor]="true"
+      ></us-user-info>
+    </div>
+  </div>
+  <div class="about-trainer container">
+    <div class="row">
+      <div class="bio col-lg-9 col-md-8">
+        <us-about-area
+          [height]="270"
+          [label]="'trainer_profile.about_me'"
+          [text]="trainerData.bio"
+        ></us-about-area>
+      </div>
+      <div class="links col-lg-3 col-md-4 d-flex justify-content-center">
+        <ul class="link-list">
+          <li *ngIf="trainerData.links?.website" class="link-li">
+            <span class="icon">
+              <us-icon [name]="'blue-glob'" [size]="24"></us-icon>
+            </span>
+            <a *ngIf="trainerData.links?.website" [href]="trainerData.links?.website" class="link"
+              >Website</a
+            >
+          </li>
+
+          <li *ngIf="trainerData.links?.twitter" class="link-li">
+            <span class="icon twitter">
+              <us-icon [name]="'twitter'" [size]="14"></us-icon>
+            </span>
+            <a [href]="trainerData.links?.twitter" class="link">Twitter</a>
+          </li>
+
+          <li *ngIf="trainerData.links?.linkedin" class="link-li">
+            <span class="icon linkedin">
+              <us-icon [name]="'linkedin'" [size]="14"></us-icon>
+            </span>
+            <a [href]="trainerData.links?.linkedin" class="link">Linked In</a>
+          </li>
+
+          <li *ngIf="trainerData.links?.youtube" class="link-li">
+            <span class="icon youtube">
+              <us-icon [name]="'youtube'" [size]="14"></us-icon>
+            </span>
+            <a [href]="trainerData.links?.youtube" class="link">YouTube</a>
+          </li>
+
+          <li *ngIf="trainerData.links?.facebook" class="link-li">
+            <span class="icon facebook">
+              <us-icon [name]="'fb'" [size]="14"></us-icon>
+            </span>
+            <a [href]="trainerData.links?.facebook" class="link">Facebook</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="courses-and-reviews container">
+    <div class="header">
+      <ng-container *ngFor="let tab of tabs">
+        <span
+          *ngIf="userRoles.TRAINING_CENTER"
+          [class.active]="tab.clicked"
+          (click)="switch(tab)"
+          class="title"
+        >
+          {{ tab.title }}
+          <span class="line"></span>
+        </span>
+      </ng-container>
+    </div>
+
+    <div class="content">
+      <ng-container *ngFor="let tab of tabs">
+        <div *ngIf="tab.id === 2 && tab.clicked" class="reviews">
+          <us-reviews [review]="trainerReview"></us-reviews>
+          <span *ngIf="!trainerReview || trainerReview.length === 0" class="no-data">{{
+            'trainer_profile.no_review' | translate
+          }}</span>
+        </div>
+
+        <div *ngIf="tab.id === 1 && tab.clicked" class="courses">
+          <ng-container *ngFor="let course of courses">
+            <us-course-ticket [course]="course"></us-course-ticket>
+          </ng-container>
+          <span *ngIf="!courses || courses.length === 0" class="no-data">{{
+            'trainer_profile.no_course' | translate
+          }}</span>
+        </div>
+        <div *ngIf="tab.id === 4 && tab.clicked" class="courses">
+          <us-reviews [trainers]="centerTrainers"></us-reviews>
+          <span *ngIf="!centerTrainers || centerTrainers.length === 0" class="no-data">{{
+            'trainer_profile.no_trainers' | translate
+          }}</span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

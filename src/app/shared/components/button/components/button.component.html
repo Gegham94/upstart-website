@@ -1,0 +1,28 @@
+<button
+  [class]="'button button_' + theme"
+  [class.button_outline]="outline"
+  [class.button_circle]="circle"
+  [type]="type"
+  [disabled]="disabled"
+  (mouseenter)="setHoverState(true)"
+  (mouseleave)="setHoverState(false)"
+  (click)="clicked.emit()"
+>
+  <us-icon
+    *ngIf="icon"
+    [name]="
+      autoSetSuffix && isHovered
+        ? outline
+          ? icon
+          : icon + '_' + autoSetSuffix
+        : outline
+        ? icon + '_' + autoSetSuffix
+        : icon
+    "
+    [size]="iconSize"
+  ></us-icon>
+  <ng-content> </ng-content>
+  <div class="spinner-border button__spinner-color" role="status" *ngIf="loader">
+    <span class="sr-only">Loading...</span>
+  </div>
+</button>

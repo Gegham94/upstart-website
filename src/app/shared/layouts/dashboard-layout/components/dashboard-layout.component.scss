@@ -1,0 +1,43 @@
+@import 'src/assets/styles/variables/colors';
+
+main {
+  background: $light-purple;
+  padding-top: 24px;
+
+  .container {
+    position: relative;
+    height: calc(100vh - 160px);
+    margin-top: 82px;
+    overflow-y: auto;
+    padding-left: 22px;
+    padding-right: 0;
+  }
+}
+
+.dashboard-layout {
+  &__page {
+    margin-right: 53px;
+    margin-left: 80px;
+    transition: 0.2s ease-in-out margin-left;
+    height: 100%;
+    overflow-y: auto;
+
+    &_toggled {
+      margin-left: 270px;
+    }
+  }
+}
+
+.dashboard-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $light-purple;
+  letter-spacing: 0.1px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: $icon-color;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}

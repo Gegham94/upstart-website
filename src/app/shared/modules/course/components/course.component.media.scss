@@ -1,0 +1,28 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.course {
+  &__image {
+    &-keeper {
+      @include for-breakpoint(tablet-sm) {
+        height: 240px;
+      }
+
+      @include for-breakpoint(mobile) {
+        height: 180px;
+      }
+    }
+  }
+
+  &__info {
+    @include for-breakpoint(mobile) {
+      padding: 17px 0 0;
+    }
+  }
+
+  &__details {
+    @include for-breakpoint(mobile) {
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+}

@@ -1,0 +1,560 @@
+{
+  "global": {
+    "header": {
+      "search-placeholder": "What do you want to learn",
+      "search-loading": "Loading...",
+      "profile": "Profile",
+      "favorites": "Favorites",
+      "log-in": "Log In",
+      "sign-up": "Sign Up",
+      "not-found": "Not Found!",
+      "header-notification": {
+        "notifications": "Notifcations",
+        "unread": "unread",
+        "mark-all": "Mark all as read",
+        "see-all": "See All",
+        "no-notifications": "No notifications"
+      },
+      "action-panel": {
+        "dashboard": "Dashboard",
+        "log out": "Log out",
+        "account-settings": "Account settings"
+      },
+      "my-cart": "My cart",
+      "edit-profile": "Edit profile",
+      "public-profile": "Public profile",
+      "menu": "Menu",
+      "my-learning": {
+        "title": "My learning"
+      }
+    },
+    "mobile-menu": {
+      "categories": "Categories",
+      "languages": "Languages"
+    },
+    "footer": {
+      "main-title": "Get In Touch",
+      "description": "the quick fox jumps over the lazy dog",
+      "company-info": {
+        "title": "Company info",
+        "about-us": "About Us",
+        "carrier": "Carrier",
+        "hiring": "We are hiring",
+        "blog": "Blog",
+        "contact-us": "Contact Us",
+        "privacy-policy": "Privacy Policy",
+        "home": "Home"
+      },
+      "features": {
+        "title": "Features",
+        "business-marketing": "Business Marketing",
+        "user-analytic": "User Analytic",
+        "live-chat": "Live Chat",
+        "unlimited-support": "Unlimited Support"
+      },
+      "resources": {
+        "title": "Resources",
+        "ios-and-android": "IOS & Android",
+        "demo": "Watch a Demo",
+        "customers": "Customers",
+        "api": "API",
+        "file_upload": "File upload",
+        "file_download": "File dowload",
+        "file_title": "File title",
+        "select_file": "Select file",
+        "upload": "Upload",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit title",
+        "delete_file": "Delete File",
+        "delete_question": "Are you sure you want to delete this file?",
+        "download_question": "Are you sure you want to download this file?",
+        "yes": "Yes",
+        "no": "No",
+        "field_required": "Field Required",
+        "no_more_than": "File size no more than",
+        "edit_title": "Edit title",
+        "empty_resource": "You have not resources yet",
+        "add_success": "Resource created successfully",
+        "remove_success": "Resource deleted successfully",
+        "update": "Resource updated successfully",
+        "download": "Download",
+        "file_edit": "File edit",
+        "file_update_btn": "Update"
+      }
+    },
+    "categories": {
+      "development": "Development",
+      "photography": "Photography",
+      "marketing": "Marketing",
+      "it": "IT and Software",
+      "design": "Design",
+      "business": "Business",
+      "music": "Music",
+      "health": "Health & Fitness"
+    },
+    "button": {
+      "save": "Save",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "input": {
+      "field_required": "Field Required",
+      "the_field": "The field must be at least",
+      "now_length": "characters. Now length",
+      "wrong_password": "Wrong password",
+      "wrong_youtube_url": "Must be YouTube link"
+    },
+    "modal": {
+      "desc_for_login": "Please login to create a review"
+    },
+    "placeholder": {
+      "requirement_here": "[Requirements]",
+      "will_learn_here": "[Will learn]",
+      "title_here": "[Title]",
+      "sub_title_here": "[Sub title]",
+      "description_here": "[Description]",
+      "lesson_date_here": "[First lesson date and time]",
+      "lesson_count_here": "[Lesson count]",
+      "course_price_here": "[Course price]",
+      "course_address_here": "[Course address]",
+      "course_level_here": "[Course level]",
+      "course_language_here": "[Course language]",
+      "max_participants_here": "[Maximum participants]",
+      "course_title_here": "[Course title]",
+      "course_categories_here": "[Course categories]"
+    },
+    "quiz-modal": {
+      "learn_skill": "Learn a New Skill Everyday, Anytime, and Anywhere.",
+      "course_preview": "Course preview",
+      "description": "Description",
+      "start_quiz_lesson": "Start quiz for lesson",
+      "quiz_contains": "Quiz contains",
+      "quiz_contains_1": "questions with single and multiple answers",
+      "good_luck": "Good luck",
+      "start": "Start",
+      "cancel": "Cancel",
+      "question_title": "Question",
+      "next": "Next",
+      "prev": "Previous",
+      "finish": "Finish"
+    },
+    "joined": "You are successfully Joined to this course",
+    "pass_quiz": "Your answers accepted"
+  },
+
+  "basket": {
+    "title": "Basket",
+    "delete_success": "Course successfully deleted from basket",
+    "add_success": "Course successfully moved into your basket",
+    "add_fail": "You've already added this course into your basket",
+    "empty_basket": "Oops` Basket is empty",
+    "main": {
+      "title": "Shopping Cart",
+      "count-text": "Courses in Cart",
+      "suggestion-title": "You might also like",
+      "total": "Total"
+    },
+    "courses": {
+      "checkout": "Checkout",
+      "graphic-design": "Graphic Design",
+      "mobile-development": "Mobile Development",
+      "remove": "Remove",
+      "hr": "hr",
+      "min": "min",
+      "trainer-name": "Trainer name",
+      "add-to-card": "Add to cart",
+      "remove-from-card": "Remove from card",
+      "remove-from-wishlist": "Remove from wishlist",
+      "add-to-wishlist": "Add to wishlist"
+    }
+  },
+  "favorites": {
+    "title": "My learning",
+    "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    "success": "Course successfuly addeded to wish list",
+    "error": "You already have this course into your favorites",
+    "remove-success": "Course removed from wishlist successfully",
+    "remove-error": "Something went wrong",
+    "no_data": "Oops favorites is empty"
+  },
+  "home": {
+    "title": "Home",
+    "main": {
+      "title": "Learn a New Skill\nEveryday, Anytime, and Anywhere.",
+      "description": "Courses covering all tech domains for you to learn and explore new oppurtunities. Learn from Industry Experts and land your Dream Job.",
+      "start-trial": "Start Trial",
+      "how-it-works": "How it Works",
+      "courses-to-choose": "Courses to\nchoose from",
+      "students-trained": "Students\nTrained",
+      "professional-trainers": "Professional\nTrainers"
+    },
+    "new": {
+      "title": "New In Upstart"
+    },
+    "courses": {
+      "title": "Open new doors with graduate level learning",
+      "see-all": "See All",
+      "filter": "FILTER",
+      "not-found": "Courses Not Found !",
+      "topic": "Topic",
+      "level": "Level",
+      "type": "Type",
+      "language": "Language",
+      "price": "Price",
+      "sort_by": "Sort by",
+      "newest": "Newest",
+      "highest": "Highest Rated"
+    },
+    "top-categories": {
+      "title": "Top categories"
+    },
+    "instructor": {
+      "title": "Become an instructor",
+      "description": "Instructors from around the world teach millions of students. We provide the tools and skills to teach what you love.",
+      "start": "Start Today"
+    },
+    "join-us": {
+      "title": "JOIN US",
+      "subtitle": "Practice Advice",
+      "description": "Problems trying to resolve the conflict between \nthe two major realms of Classical physics: Newtonian mechanics ",
+      "email": "Your Email",
+      "subscribe": "Subscribe"
+    }
+  },
+  "course": {
+    "title": "Course Details",
+    "reviews": "reviews",
+    "review": "review",
+    "requirements": "Requirements",
+    "you-will-learn": "You will learn",
+    "description": "Description",
+    "show-more": "Show More",
+    "show-less": "Show Less",
+    "start-trial": "Start Trial",
+    "go_to_class": "Join to class",
+    "joined": "Joined",
+    "add_to_cart": "Add to cart",
+    "lessons": "Lessons",
+    "quiz": "Quiz",
+    "progress": "Progress",
+    "related_courses": "Related courses",
+    "billing": {
+      "free": "Free Online Course"
+    },
+    "language": {
+      "english": "English",
+      "armenian": "Armenian"
+    },
+    "level": {
+      "beginner": "Beginner",
+      "advanced": "Advanced"
+    },
+    "paid-certificate": "Paid Certificate Available",
+    "max-participants": "Max participants"
+  },
+  "courses": {
+    "title": "Courses"
+  },
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "sign_in": "Sign in",
+      "upstart": "Upstart",
+      "dont_account": "If you don’t an account you can",
+      "register_here": "Register here!",
+      "enter_email": "Enter Email",
+      "password": "Password",
+      "reset_password": "Reset your password ?",
+      "continue_with": "Or continue with ?",
+      "with_google": "Login with Google",
+      "with_facebook": "Login with Facebook"
+    },
+    "register": {
+      "title": "Sign Up",
+      "have_account": "If you Already have an account you can",
+      "login_here": "Log in here!",
+      "join_us": "Join us as",
+      "student": "Student",
+      "trainer": "Trainer",
+      "training": "Training center",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "tax_num": "Tax Identity Number",
+      "training_name": "Training Center Name",
+      "email": "Email",
+      "phone": "Phone",
+      "password": "Password",
+      "verify_password": "Verify Password",
+      "sign_up": "Sign Up",
+      "headline": "Headline"
+    },
+    "reset": {
+      "title": "Reset Password",
+      "res_password": "Reset your password",
+      "res_text": "Enter the email address associated with your account and we'll send you a link to reset your password.",
+      "continue": "Continue",
+      "dont_account": "Don't have an account?",
+      "sign_up": "Sign Up"
+    },
+    "errors": {
+      "name": "Name is required.",
+      "last": "Last Name is required.",
+      "email": "Email is required.",
+      "email_correct": "Incorrect E-Mail Address",
+      "pass": "Password is required",
+      "pass_lenght": "Password length must be at least 8 symbols",
+      "confirm": "Confirm Password does not match",
+      "idenity": "Identity Number is required.",
+      "idenity_num": "Identity must be numbers only.",
+      "identity_lenght": "Length must be 8 characters",
+      "center": "Center Name is required.",
+      "phone": "Phone must be numbers only.",
+      "phone_lenght": "Length must be 6 characters"
+    }
+  },
+  "dashboard": {
+    "trainer": {
+      "trainer_dashboard": "Trainer Dashboard",
+      "courses_counts": "Courses Counts",
+      "paid_courses": "Paid courses statistics",
+      "payments_graph": "Payments monthly graph",
+      "average_stars": "Average stars and review counts",
+      "draft": "Draft",
+      "under_review": "Under review",
+      "published": "Published",
+      "avg_rating": "Avg. rating",
+      "no_stars": "No stars"
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "courses": "Courses",
+      "students": "Students",
+      "stats": "Stats"
+    },
+    "courses": {
+      "course-list": "Course List",
+      "create-course": "Create Course",
+      "no-courses": "No Courses found",
+      "what-category": "What category best fits the knowledge you'll share?",
+      "choose-category": "Choose a category or simply select",
+      "status": "Status",
+      "filter": "Filter",
+      "publish": "Publish",
+      "preview": "Preview",
+      "save-next": "Save & Next",
+      "select-language": "Select Language",
+      "select-level": "Select Level",
+      "what-will-students": "What will students learn in your course?",
+      "add-what-will-students": "Add what Will Your Students Learn",
+      "add-more": "Add more",
+      "course-price": "Course Price",
+      "select": "Select",
+      "course-title": "Course title",
+      "course-subtitle": "Course subtitle",
+      "course-description": "Course description",
+      "insert-title": "Insert your course title",
+      "insert-subtitle": "Insert your course subtitle",
+      "insert-description": "Insert your course description",
+      "course-requirements": "Course Requirements",
+      "add-requirement": "Add requirement",
+      "add-image": "Add image",
+      "course-image": "Upload your course image here. It must meet our course image quality standards to be accepted. Important guidelines: 750x422 pixels; .jpg, .jpeg,. gif, or .png. no text on the image.",
+      "promo-video": "Promotional video",
+      "course-video": "Students who watch a well-made promo video are 5X more likely to enroll in your course. We've seen that statistic go up to 10X for exceptionally awesome videos. Learn how to make yours awesome!",
+      "add-url": "Add URL",
+      "insert-url": "Insert your course video url",
+      "lesson": "Lesson",
+      "video": "Video",
+      "article": "Article",
+      "description": "Description",
+      "resource": "Resource",
+      "resources": "Resources",
+      "save": "Save",
+      "enter-date": "Enter Date",
+      "start-time": "Start Time",
+      "enter-duration": "Enter Duration",
+      "quiz": "Quiz",
+      "add-question": "Add question",
+      "insert-question": "Insert question",
+      "add-answers": "Add Answers",
+      "add-answer": "Add Answer",
+      "answer": "Answer",
+      "multiple-choice": "Multiple Choice",
+      "correct-answer": "Please Select the Correct Answer(-s)",
+      "save-question": "Save Question",
+      "section": "Section",
+      "add-section": "Add Section",
+      "add-content": "Add content",
+      "delete": "Delete",
+      "rename": "Rename",
+      "add-quiz": "Add Quiz",
+      "add-lesson": "Add Lesson",
+      "type-of-content": "Select the main type of content. Files and links can be added as resources",
+      "add-select": "Add or select Trainer",
+      "add-trainer": "Add Trainer",
+      "select-trainer": "Select Trainer",
+      "select-trainer-placeholder": "Name Surname",
+      "warning": "WARNING",
+      "update-trainer": "Now you updating existing trainer. All changed information will be also changed everywhere!",
+      "name": "Name",
+      "surname": "Surname",
+      "insert-bio": "Insert trainer bio",
+      "what-course": "First, let's find out what type of course you're making",
+      "description-here": "Some description here",
+      "edit": "Edit",
+      "category-no-set": "[Category not set]",
+      "description-no-set": "[Description not set]",
+      "title-no-set": "[Title not set]",
+      "requirements-no-set": "[Requirements not set]",
+      "hour": "hr",
+      "minut": "min",
+      "choose_category": "Choose a category",
+      "course-landing-page": "Course landing page",
+      "course-info": "Course information",
+      "plan-course": "Plan your course",
+      "section-title": "Section Title",
+      "lesson-title": "Lesson Title",
+      "select-address": "Select Address",
+      "select-resources": "Select Resources",
+      "address": "Address",
+      "insert-link": "Insert Link",
+      "link": "Link",
+      "lessons-count": "Lessons Count",
+      "max-participants": "Max Participants",
+      "apply": "Apply",
+      "publication-available": "The publication will be available only after the course is fully completed",
+      "course-publication": "Course publication",
+      "online": "Online",
+      "offline": "Offline",
+      "online-webinar": "Online Webinar",
+      "consultation": "Consultation",
+      "sub-title-not-set": "[Sub title not set]",
+      "saved-toast": "Saved Successfully",
+      "published-toast": "Published Successfully",
+      "edit_certificate": "Edit certificate",
+      "paid": "Paid",
+      "free": "Free",
+      "add-resource": "Add Resource",
+      "publish-modal": {
+        "title": "Are you sure want to publish course?",
+        "description": "Confirmation of the action will send the course you created for verification, during which you will not be able to edit or delete the course."
+      },
+      "download_certificate": "Download Certificate"
+    },
+    "footer": {
+      "made": "Made by BrainFors"
+    }
+  },
+  "reviews": {
+    "add_review": "Add review",
+    "see_all": "See all reviews",
+    "hide_all": "Hide all reviews",
+    "view-profile": "View Profile",
+    "see-more": "See more",
+    "hide": "Hide",
+    "click-stars": "Click the stars to rate the course",
+    "add-review-lesson": "Add review for lesson",
+    "leave-review": "Leave Review",
+    "remove_review": "Are you sure you want to delete this review?",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "students": {
+    "participated_in": "Participated in",
+    "lesson": "lessons",
+    "no-student": "Students not found",
+    "participated_courses": "Participated courses",
+    "pass": "Pass",
+    "view_details": "View Details"
+  },
+  "trainer_profile": {
+    "bio": "Biography",
+    "about_me": "About me",
+    "profile": "Profile",
+    "courses": "Courses",
+    "reviews": "Reviews",
+    "trainers": "Trainers",
+    "show_more": "Show more",
+    "information": "Trainer Information",
+    "course_type": {
+      "online": "Online",
+      "offline": "Offline",
+      "online_webinar": "Online Webinar",
+      "online_courses": "Online Courses",
+      "consultation": "Consultation"
+    },
+    "no_review": "There is no reviews yet",
+    "no_course": "There is no courses yet",
+    "no_trainers": "There is no trainers yet",
+    "website": "Website",
+    "delete-img": "Delete image"
+  },
+  "settings": {
+    "profile_settings": "Profile & settings",
+    "instructor": "Instructor at Upstart",
+    "insertBio": "Insert your biography here",
+    "check_password": "Check password",
+    "new_password": "New password",
+    "enter_password": "Enter New password",
+    "passwords_not_match": "Passwords do not match",
+    "change_password": "Change Password",
+    "current_password": "Current password",
+    "enter_current_password": "Enter current password"
+  },
+  "not-found": {
+    "page-not-found": "Page not found",
+    "text": "This Page doesn`t exist or was removed! We suggest you  back to home page.",
+    "back-home": "Back to home page"
+  },
+  "course-ticket": {
+    "remove": "Remove",
+    "remove-wishlist": "Remove from wishlist",
+    "move-wishlist": "Move to wishlist"
+  },
+  "auth-attention": {
+    "title": "Please login for continue this action",
+    "login": "Login now"
+  },
+  "contact-us": {
+    "connecting-people": "Connecting people with knowledge",
+    "improving-lives": "Improving lives through",
+    "practice-advice": "Practice Advice",
+    "join-us": "JOIN US",
+    "problems": "Problems trying to resolve the conflict between the two major realms of Classical physics:",
+    "newtonian": "Newtonian mechanics"
+  },
+  "privacy-policy": {
+    "title": "Privacy Policy",
+    "subtitle": "This Privacy Policy was last updated on July 14, 2022."
+  },
+  "about-us": {
+    "title": "About Us",
+    "become": "BECOME ONE OF US!",
+    "keep-growing": "We just keep growing"
+  },
+  "roles": {
+    "super_admin": "Super admin",
+    "moderator": "Moderator",
+    "trainer": "Trainer",
+    "training_center": "Training center",
+    "student": "Student"
+  },
+  "learnings": {
+    "no_data": "Oops you have not purchases yet"
+  },
+  "course-content": {
+    "expend_all": "Expend all",
+    "close_all": "Close all",
+    "sections": "Sections",
+    "quizes": "Quizes",
+    "course_content": "Course content",
+    "question": "Question",
+    "lesson": "Lesson"
+  },
+  "test": {
+    "newest": "Newest",
+    "highest": "Highest Rated"
+  }
+}

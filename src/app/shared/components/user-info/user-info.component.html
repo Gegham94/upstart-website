@@ -1,0 +1,96 @@
+<div *ngIf="!doRefactor" class="user-info">
+  <div class="user-avatar__block">
+    <div class="user-avatar">
+      <img [src]="imagePath" (load)="loader = false" *ngIf="imagePath" alt="Avatar" />
+      <span *ngIf="!imagePath" class="not-image">{{ nameFirstLetters }}</span>
+      <span *ngIf="canUpload" class="add-photo" (click)="showUploadModal()">
+        <us-icon name="add_photo"></us-icon>
+      </span>
+      <input type="file" (change)="onImageUpload($event)" class="d-none" #input />
+    </div>
+  </div>
+
+  <div class="about-user">
+    <div class="user-name">
+      {{ userInfo?.first_name }} {{ userInfo?.last_name }}
+      <div class="spinner-border spinner-color" role="status" *ngIf="loader">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <span *ngIf="!hasHeadline" class="user-email">{{ userInfo?.email }}</span>
+    <span *ngIf="hasHeadline" class="user-email">{{ userInfo?.headline }}</span>
+    <span *ngIf="imagePath && deleteImg" (click)="deleteAvatar()" class="about-user__delete">
+      {{ 'trainer_profile.delete-img' | translate }}
+    </span>
+  </div>
+</div>
+
+<div [class.refactor]="doRefactor" *ngIf="doRefactor" class="user-info">
+  <div class="about-user">
+    <div class="user-name">
+      <span class="role" *ngIf="userInfo?.headline">{{ userInfo?.headline }}</span>
+      <span *ngIf="userInfo?.role_id !== userRoles.TRAINING_CENTER" class="name-surname"
+        >{{ userInfo?.first_name }} {{ userInfo?.last_name }}</span
+      >
+      <span
+        *ngIf="userInfo?.role_id === userRoles.TRAINING_CENTER && userInfo?.company_name"
+        class="name-surname"
+        >{{ userInfo?.company_name }}</span
+      >
+      <div class="spinner-border spinner-color" role="status" *ngIf="loader">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <span class="category" *ngIf="userInfo?.role_id === userRoles.TRAINER">{{
+        'roles.trainer' | translate
+      }}</span>
+      <span class="category" *ngIf="userInfo?.role_id === userRoles.SUPER_ADMIN">{{
+        'roles.super_admin' | translate
+      }}</span>
+      <span class="category" *ngIf="userInfo?.role_id === userRoles.MODERATOR">{{
+        'roles.moderator' | translate
+      }}</span>
+      <span class="category" *ngIf="userInfo?.role_id === userRoles.TRAINING_CENTER">{{
+        'roles.training_center' | translate
+      }}</span>
+      <span class="category" *ngIf="userInfo?.role_id === userRoles.STUDENT">{{
+        'roles.student' | translate
+      }}</span>
+
+      <div class="course-and-review">
+        <div class="devide">
+          <span class="title">{{ 'courses.title' | translate }}</span>
+          <span *ngIf="courses && courses.length > 0" class="count">{{ courses.length }}</span>
+          <span *ngIf="(courses && courses.length === 0) || !courses" class="count">0</span>
+        </div>
+
+        <div class="devide">
+          <span class="title">{{ 'trainer_profile.reviews' | translate }}</span>
+          <span *ngIf="trainerReview && trainerReview.length > 0" class="count">{{
+            trainerReview.length
+          }}</span>
+          <span
+            *ngIf="(trainerReview && trainerReview.length === 0) || !trainerReview"
+            class="count"
+            >0</span
+          >
+        </div>
+      </div>
+    </div>
+    <span *ngIf="!hasHeadline" class="user-email">{{ userInfo?.email }}</span>
+    <span *ngIf="hasHeadline" class="user-email">{{ userInfo?.headline }}</span>
+    <span *ngIf="imagePath && deleteImg" (click)="deleteAvatar()" class="about-user__delete">
+      {{ 'trainer_profile.delete-img' | translate }}
+    </span>
+  </div>
+
+  <div class="user-avatar__block">
+    <div class="user-avatar">
+      <img [src]="imagePath" (load)="loader = false" *ngIf="imagePath" alt="Avatar" />
+      <span *ngIf="!imagePath" class="not-image">{{ nameFirstLetters }}</span>
+      <span *ngIf="canUpload" class="add-photo" (click)="showUploadModal()">
+        <us-icon name="add_photo"></us-icon>
+      </span>
+      <input type="file" (change)="onImageUpload($event)" class="d-none" #input />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="searchable-input" usClickOutside (clickOutside)="closeSearchBox()">
+  <us-input
+    class="searchable-input__field"
+    [label]="label"
+    [placeholder]="placeholder + (requiredPlaceholder ? ' *' : '')"
+    [disabled]="disabled"
+    [autocomplete]="false"
+    [(ngModel)]="value"
+    (ngModelChange)="valueChange()"
+    (focusIn)="openSearchBox()"
+  ></us-input>
+  <div
+    class="searchable-input__search-box"
+    *ngIf="searchBoxOpened && value && value.length >= 3 && displayOptions.length > 0"
+  >
+    <a
+      class="searchable-input__search-element"
+      (click)="searchElementClicked(element.value)"
+      *ngFor="let element of displayOptions"
+    >
+      {{ element.displayName }}
+    </a>
+  </div>
+</div>
+<div *ngIf="errors" class="searchable-input__error-block">
+  <span *ngFor="let error of errors | keyvalue">
+    {{ error.value }}
+  </span>
+</div>

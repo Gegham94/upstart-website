@@ -1,0 +1,124 @@
+<ng-container *ngIf="review && review.length > 0">
+  <div *ngIf="showLoader" class="loader-review-loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div [class.active]="showLoader" *ngFor="let info of review; let i = index" class="reviews">
+    <div class="reviews__img-reviewer">
+      <div *ngIf="info.rate" class="rating">
+        <us-star-rating
+          [isReadOnly]="true"
+          [size]="starSize"
+          [maxStars]="5"
+          [rateValue]="info.rate"
+          [color]="'#6b63dd'"
+        ></us-star-rating>
+      </div>
+      <img
+        onerror="this.onerror=null;this.src='./assets/images/icons/review-user.svg'"
+        [src]="info.avatar"
+        alt="Reviews"
+        class="reviewer-img"
+      />
+    </div>
+    <div class="reviews__description">
+      <h4 class="reviews__title">{{ info.first_name }} {{ info.last_name }}</h4>
+      <span class="reviews__review-date">{{ info?.date! }}</span>
+      <p
+        class="reviews__text"
+        [innerHTML]="info.message | slice: sliceOptions.start:sliceOptions.end"
+      >
+        <span *ngIf="info.message.length >= sliceOptions.default" (click)="seeMore(i)">
+          <span *ngIf="!hideMore" class="reviews__see-more">{{
+            'reviews.see-more' | translate
+          }}</span>
+          <span *ngIf="hideMore" class="reviews__see-more">{{ 'reviews.hide' | translate }}</span>
+        </span>
+      </p>
+
+      <div class="review-btn" *ngIf="currentUserId === info.user_id">
+        <a (click)="deleteRreview(info)" class="edit-review">
+          <us-icon [name]="'delete_white'"></us-icon>
+        </a>
+        <a (click)="editReview(info)" class="edit-review">
+          <us-icon [name]="'edit_white'"></us-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="trainerData">
+  <div *ngIf="showLoader" class="loader">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="reviews profile">
+    <div class="reviews__img-reviewer">
+      <img
+        onerror="this.onerror=null;this.src='./assets/images/icons/review-user.svg'"
+        [src]="trainerData.avatar"
+        alt="Reviews"
+        class="reviewer-img"
+      />
+    </div>
+    <div class="reviews__description">
+      <h4 class="reviews__title">{{ trainerData.first_name }} {{ trainerData.last_name }}</h4>
+      <p
+        class="reviews__text"
+        [innerHTML]="trainerData.bio | slice: sliceOptions.start:sliceOptions.end"
+      >
+        <span *ngIf="trainerData?.bio?.length! >= sliceOptions.default">
+          <span *ngIf="!hideMore" class="reviews__see-more">{{
+            'reviews.see-more' | translate
+          }}</span>
+          <span *ngIf="hideMore" class="reviews__see-more">{{ 'reviews.hide' | translate }}</span>
+        </span>
+      </p>
+      <div class="d-flex justify-content-between h-100 align-items-end">
+        <div class="company_info" *ngIf="trainerData.company_name !== null">
+          <img
+            onerror="this.onerror=null;this.src='./assets/images/icons/review-user.svg'"
+            [src]="trainerData.company_avatar"
+            alt="Company logo"
+            class="company-img"
+          />
+          <p class="ms-1">{{ trainerData.company_name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="view-profile-side">
+    <a class="view-profile" routerLink="/profile/{{ trainerData.id }}">{{
+      'reviews.view-profile' | translate
+    }}</a>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="centerTrainers">
+  <div *ngIf="showLoader" class="loader">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div [class.active]="showLoader" *ngFor="let trainer of centerTrainers" class="reviews profile">
+    <div class="reviews__img-reviewer">
+      <img
+        onerror="this.onerror=null;this.src='./assets/images/icons/review-user.svg'"
+        [src]="trainer.avatar"
+        alt="Reviews"
+        class="reviewer-img"
+      />
+    </div>
+    <div class="reviews__description">
+      <h4 class="reviews__title">{{ trainer.first_name }} {{ trainer.last_name }}</h4>
+      <p
+        class="reviews__text"
+        [innerHTML]="trainer.bio | slice: sliceOptions.start:sliceOptions.end"
+      >
+        <span *ngIf="trainer.bio.length >= sliceOptions.default">
+          <span *ngIf="!hideMore" class="reviews__see-more">{{
+            'reviews.see-more' | translate
+          }}</span>
+          <span *ngIf="hideMore" class="reviews__see-more">{{ 'reviews.hide' | translate }}</span>
+        </span>
+      </p>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,90 @@
+@import 'src/assets/styles/variables/colors';
+
+.contact-us {
+  padding: 50px 100px 50px 100px;
+  background-color: #f5f5f5;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 50px;
+
+    &-first {
+      width: 30%;
+      align-self: center;
+    }
+  }
+
+    &__img {
+      object-fit: contain;
+      width: 300px;
+    }
+
+
+  &__info {
+    padding: 130px 260px;
+    background-color: $white;
+    text-align: center;
+
+    .center {
+      margin: 20px auto;
+    }
+
+    &__text {
+      font-family: Open Sans;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 26px;
+      color: $light-grey-text;
+    }
+  }
+
+  &__email {
+    &__subtitle {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: 0.2px;
+      color: $grey-text;
+    }
+
+    &__text {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.2px;
+    }
+
+    &__form {
+      width: 44%;
+      display: flex;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 28px;
+      letter-spacing: 0.2px;
+      margin: 50px;
+    }
+
+    &__input {
+      width: 100%;
+      padding: 15px 0 15px 37px;
+      border: none;
+      border-radius: 50px 0 0 50px;
+      color: $grey-text;
+      outline-width: 0;
+    }
+
+    &__button {
+      &::ng-deep {
+        .button {
+          border-radius: 0 50px 50px 0;
+          padding: 15px 20.5px;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 28px;
+          letter-spacing: 0.2px;
+        }
+      }
+    }
+  }
+}

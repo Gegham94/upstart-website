@@ -1,0 +1,246 @@
+@import "src/assets/styles/mixins/for-breakpoint";
+@import "src/assets/styles/variables/colors";
+.displayed{
+  display: none !important;
+}
+.ticket-action-loader {
+  width: 10px;
+  height: 10px;
+::ng-deep.mat-progress-spinner {
+  width: 20px !important;
+  height: 20px !important;
+}
+::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $main;
+}
+::ng-deep.mat-progress-spinner svg {
+  width: 10px !important;
+  height: 20px !important;
+}
+::ng-deep.mat-progress-spinner {
+  width: 10px !important;
+  overflow: visible;
+}
+}
+        .ticket{
+            border-bottom: 1px solid $light-purple;
+            padding: 10px 0;
+            position: relative;
+            .fill-loader{
+              ::ng-deep.mat-progress-spinner {
+                width: 50px !important;
+                height: 50px !important;
+              }
+              ::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+                stroke: $main;
+              }
+              ::ng-deep.mat-progress-spinner svg {
+                width: 50px !important;
+                height: 50px !important;
+              }
+              ::ng-deep.mat-progress-spinner {
+                margin: auto !important;
+                width: 50px !important;
+                overflow: visible;
+              }
+              width: 100%;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+            }
+            .fill{
+              position: relative;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              &.remove-action{
+                opacity: 0.2;
+              }
+            .image-side{
+              margin-right: 13px;
+              .cover-image{
+                width: 151px;
+                height: 113px;
+                object-fit: cover;
+                border-radius: 8px 0 0 8px;
+              }
+            }
+            .desc-side{
+              width: 100%;
+              min-height: 113px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              .top-side{
+                display: flex;
+                justify-content: space-between;
+                .title-and-category{
+                  .title{
+                    font-weight: 700;
+                    font-size: 14px;
+                    color: $dark-blue;
+                  }
+                  .category-side{
+                    display: flex;
+                    align-items: center;
+                    margin: 5px 0;
+                    flex-wrap: wrap;
+                    .category{
+                      color: #7A819F;
+                      font-weight: 500;
+                      &:last-child{
+                        &:after{
+                          display: none;
+                        }
+                      }
+                      &::after{
+                        content: '|';
+                        margin-left: 5px;
+                        margin-right: 5px;
+                      }
+                    }
+                  }
+                }
+                .price-side{
+                  display: flex;
+                  align-items: center;
+                  .price{
+                    margin-left: 5px;
+                    font-weight: 700;
+                    font-size: 16px;
+                    color: $dark-blue;
+                    white-space: nowrap;
+                    &.old-price{
+                      color: $light-grey-text;
+                      text-decoration: line-through;
+                      opacity: 0.5;
+                    }
+                  }
+                }
+              }
+              .free-price{
+                font-weight: 500;
+                color: $free-text-color;
+              }
+              .star-side{
+                display: none;
+              }
+              .desc{
+                margin-top: 5px;
+                color: $light-grey-text;
+                font-weight: 400;
+                line-height: 22px;
+                position: relative;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                line-clamp: 3;
+                -webkit-box-orient: vertical;
+              }
+              .bottom-side{
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                &.basket{
+                  .remove-side{
+                    align-items: flex-end;
+                    flex-direction: column;
+                    .remove{
+                      display: inline-block;
+                    }
+                  }
+                }
+                .star-and-date{
+                  display: flex;
+                  align-items: center;
+                  .star-side{
+                    margin-right: 27px;
+                    display: flex;
+                    align-items: center;
+                    z-index: -1;
+                    .rate{
+                      margin-right: 5px;
+                      font-size: 12px;
+                      font-weight: 500;
+                    }
+                    .icon{
+                      margin-right: 2px;
+                    }
+                  }
+                  .calendar-side{
+                    display: flex;
+                    align-items: center;
+                    .date{
+                      display: flex;
+                      align-items: center;
+                      .date-text{
+                        margin-left: 5px;
+                      }
+                    }
+                    .basket{
+                      display: flex;
+                      align-items: center;
+                      .trainer-name{
+                        font-weight: 500;
+                        font-size: 12px;
+                        display: flex;
+                        align-items: center;
+                        .name{
+                          margin-left: 5px;
+                        }
+                        .trainer-avatar{
+                          width: 20px;
+                          height: 20px;
+                          border-radius: 50%;
+                        }
+                      }
+                    }
+                    .date{
+                      margin-left: 5px;
+                      color: $grey-text;
+                      font-weight: 500;
+                      margin-right: 27px;
+                    }
+
+                  }
+
+                }
+                .remove-side{
+                  display: flex;
+                  flex-direction: column;
+                  text-align: right;
+                  .action{
+                    font-weight: 500;
+                    font-size: 14px;
+                    color: $main;
+                    &.remove{
+                      margin-bottom: 10px;
+                    }
+                    &:hover{
+                      cursor: pointer;
+                    }
+                  }
+                }
+                .price-side{
+                  display: flex;
+                  align-items: center;
+                  .price{
+                    margin-left: 5px;
+                    font-weight: 700;
+                    font-size: 16px;
+                    color: $dark-blue;
+                    &.old-price{
+                      color: $light-grey-text;
+                      text-decoration: line-through;
+                      opacity: 0.5;
+                    }
+                  }
+                }
+              }
+
+            }
+          }
+        }

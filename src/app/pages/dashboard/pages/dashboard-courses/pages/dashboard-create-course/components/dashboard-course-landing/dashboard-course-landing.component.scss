@@ -1,0 +1,133 @@
+@import 'src/assets/styles/variables/colors';
+
+.course-landing {
+  padding-top: 32px;
+  padding-bottom: 54px;
+
+  &__general {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+    margin-bottom: 10px;
+
+    &-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    &-image {
+      max-width: 367px;
+    }
+  }
+
+  &__requirements {
+    max-width: 465px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 22px;
+
+    &-title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $grey-text;
+    }
+
+    &-input {
+      width: 100%;
+      margin-right: -1px;
+
+      &::ng-deep {
+        .input__field {
+          border-radius: 11px;
+        }
+      }
+
+      &_buttoned::ng-deep {
+        .input {
+          border-radius: 11px 0 0 11px;
+        }
+      }
+
+      &-keeper {
+        display: flex;
+
+        &::ng-deep {
+          .button {
+            border-radius: 0 11px 11px 0;
+            height: 48px;
+          }
+        }
+      }
+    }
+
+    &-add-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0.05em;
+      color: $main;
+      cursor: pointer;
+    }
+  }
+
+  &__cover,
+  &__promotional {
+    margin-bottom: 29px;
+
+    &-title {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 29px;
+      color: $grey-text;
+      margin-bottom: 6px;
+    }
+
+    &-description {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      color: $light-grey-text;
+      margin-bottom: 14px;
+      text-transform: capitalize;
+    }
+  }
+
+  &__promotional {
+    &::ng-deep {
+      .input__label {
+        max-width: 460px;
+      }
+    }
+  }
+
+  &__action {
+    &::ng-deep {
+      button {
+        padding: 10px 17.5px;
+        min-width: 129px;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-width: 1px;
+      }
+    }
+
+    &-keeper {
+      display: flex;
+      justify-content: flex-end;
+      position: absolute;
+      gap: 8px;
+      bottom: 24px;
+      right: 40px;
+    }
+  }
+}

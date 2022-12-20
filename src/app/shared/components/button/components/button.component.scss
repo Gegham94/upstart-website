@@ -1,0 +1,120 @@
+@import '../../../../../assets/styles/variables/colors';
+
+.button {
+  height: auto;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 28px;
+  border-radius: 50px;
+  transition: all 0.15s ease-in-out;
+  padding: 12.5px 24px;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+
+  &__spinner-color{
+    color: $main;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 10px;
+  }
+
+  &_circle {
+    padding: 8px;
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  &_primary {
+    background: $main;
+    color: $white;
+
+    &:disabled {
+      background: #d2cfff;
+    }
+
+    &:not(:disabled) {
+      &.button_outline,
+      &:hover,
+      &:active {
+        border-color: $main;
+        color: $main;
+        background: $white;
+      }
+
+      &.button_outline:hover,
+      &.button_outline:active {
+        background: $main;
+        color: $white;
+      }
+    }
+  }
+
+  &_light {
+    background: $white;
+    color: $grey-text;
+    border-width: 0;
+
+    &:not(:disabled) {
+      &.button_outline,
+      &:hover,
+      &:active {
+        border-color: $grey-text;
+        color: $grey-text;
+        background: $white;
+      }
+
+      &.button_outline:hover,
+      &.button_outline:active {
+        background: $grey-text;
+        color: $white;
+      }
+    }
+  }
+
+  &_error {
+    background: $error;
+    color: $white;
+    border-width: 0;
+
+    &:not(:disabled) {
+      &.button_outline,
+      &:hover,
+      &:active {
+        border-color: $error;
+        color: $error;
+        background: $white;
+      }
+
+      &.button_outline:hover,
+      &.button_outline:active {
+        background: $error;
+        color: $white;
+      }
+    }
+  }
+
+  &_transparent {
+    background: transparent;
+    color: $grey-text;
+  }
+
+  &:not(:disabled):hover {
+    box-shadow: 2px 4px 20px 0 $black-opacity-20;
+  }
+
+  &:not(:disabled):active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}

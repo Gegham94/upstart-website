@@ -1,0 +1,14 @@
+<div class="course-view">
+  <us-course-general
+    (previewEmitter$)="getPrevew($event)"
+    (trainerEmitter$)="lessonTrainer($event)"
+    [reviewCount]="reviewCount"
+    [preview]="preview"
+  ></us-course-general>
+  <us-course-trainer *ngIf="trainer?.company_name !== null" [trainer]="trainer"></us-course-trainer>
+  <us-course-reviews
+    *ngIf="!preview"
+    (reviewCountEmitter$)="getRviewCount($event)"
+  ></us-course-reviews>
+  <us-course-related *ngIf="!preview"></us-course-related>
+</div>

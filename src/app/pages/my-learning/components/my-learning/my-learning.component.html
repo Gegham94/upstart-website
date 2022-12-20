@@ -1,0 +1,21 @@
+<div class="home-courses">
+  <div class="home-courses__container container">
+    <h3 class="home-courses__title">{{ 'favorites.title' | translate }}</h3>
+    <p class="home-courses__subtitle">{{ 'favorites.subtitle' | translate }}</p>
+    <h1 *ngIf="showEmptyMessage" class="no-data">{{ 'learnings.no_data' | translate }}</h1>
+    <div *ngIf="showLoader" class="loader">
+      <ngx-skeleton-loader
+        count="5"
+        [theme]="{ height: '40px', 'background-color': '#faf8ff' }"
+        appearance="line"
+      ></ngx-skeleton-loader>
+    </div>
+    <ng-container *ngIf="courses">
+      <div class="home-courses__list">
+        <div class="row" *ngFor="let course of courses">
+          <us-course [hideBasketAndWishList]="true" [courseData]="course.course"></us-course>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

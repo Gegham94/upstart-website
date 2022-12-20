@@ -1,0 +1,14 @@
+<div class="info">
+  <div class="info__body">
+    <p *ngIf="modalTypeEnum.login === data.type" class="info__body-desc">
+      {{ 'global.modal.desc_for_login' | translate }}
+    </p>
+    <us-button
+      (clicked)="close()"
+      class="info__footer-btn"
+      [theme]="buttonTheme.primary"
+    >
+      {{ 'global.button.cancel' | translate }}
+    </us-button>
+  </div>
+</div>

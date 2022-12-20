@@ -1,0 +1,80 @@
+<div class="course-trainer">
+  <div class="course-trainer__form-keeper">
+    <form class="course-trainer__form" [formGroup]="trainerForm">
+      <h3 class="course-trainer__title">{{ 'dashboard.courses.add-select' | translate }}</h3>
+      <div class="course-trainer__field">
+        <label class="course-trainer__label">
+          {{ 'dashboard.courses.select-trainer' | translate }}
+        </label>
+        <us-select
+          class="course-trainer__input"
+          [value]="selectedTrainer"
+          (changeValue)="trainerSelected($event)"
+          [options]="displayTrainerOptions"
+          [placeholder]="'dashboard.courses.select-trainer-placeholder' | translate"
+        ></us-select>
+      </div>
+      <us-input
+        usValidationError
+        class="course-trainer__input"
+        formControlName="name"
+        [label]="'dashboard.courses.add-trainer' | translate"
+        [placeholder]="'dashboard.courses.name' | translate"
+      ></us-input>
+      <us-input
+        usValidationError
+        class="course-trainer__input"
+        formControlName="surname"
+        [placeholder]="'dashboard.courses.surname' | translate"
+      ></us-input>
+      <us-editor
+        usValidationError
+        class="course-trainer__input"
+        formControlName="bio"
+        [placeholder]="'dashboard.courses.insert-bio' | translate"
+      ></us-editor>
+      <h3 class="course-trainer__title">{{ 'dashboard.courses.add-image' | translate }}</h3>
+      <us-image-input usValidationError formControlName="image"></us-image-input>
+
+      <article class="course-trainer__update-warning" *ngIf="isUpdating">
+        <strong>{{ 'dashboard.courses.warning' | translate }}.</strong>
+        {{ 'dashboard.courses.update-trainer' | translate }}
+      </article>
+    </form>
+    <img
+      class="course-trainer__illustration"
+      src="assets/images/dashboard/courses/course-creation-illustration.png"
+    />
+  </div>
+  <div class="course-trainer__action-keeper">
+    <us-button
+      class="course-trainer__action"
+      [theme]="buttonTheme.primary"
+      [disabled]="publishDisabled"
+      (clicked)="publish()"
+      [usTooltip]="
+        publishDisabled
+          ? 'The publication will be available only after the course is fully completed'
+          : 'Course publication'
+      "
+    >
+      {{ 'dashboard.courses.publish' | translate }}
+    </us-button>
+    <us-button
+      class="course-trainer__action"
+      (clicked)="preview()"
+      [theme]="buttonTheme.primary"
+      [outline]="true"
+    >
+      {{ 'dashboard.courses.preview' | translate }}
+    </us-button>
+    <us-button
+      [disabled]="trainerForm.invalid"
+      class="course-trainer__action"
+      [theme]="buttonTheme.primary"
+      (clicked)="saveAndNext()"
+    >
+      {{ 'dashboard.courses.save' | translate }}
+    </us-button>
+  </div>
+</div>

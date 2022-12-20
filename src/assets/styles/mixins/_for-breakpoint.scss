@@ -1,0 +1,31 @@
+/* Media Queries */
+$media_queries: (
+  mobile : screen and (max-width: 480px),
+  mobile-sm : screen and (max-width: 600px),
+  mobile-lg : screen and (max-width: 768px),
+  tablet-sm : screen and (max-width: 840px),
+  tablet : screen and (max-width: 1024px),
+  desktop-sm : screen and (max-width: 1280px),
+  desktop : screen and (max-width: 1440px),
+  desktop-lg : screen and (min-width: 1441px),
+);
+
+@mixin for-breakpoint($breakpoints, $custom-media: '') {
+  $conditions: ();
+  @if (length($breakpoints) > 0) {
+    @each $breakpoint in $breakpoints {
+      // If the key exists in the map
+      $conditions: append(
+          $conditions,
+          #{inspect(map-get($media_queries, $breakpoint))},
+          comma
+      );
+    }
+  } @else {
+    $conditions: $custom-media;
+  }
+
+  @media #{$conditions} {
+    @content;
+  }
+}

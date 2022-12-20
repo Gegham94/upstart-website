@@ -1,0 +1,44 @@
+@import 'src/assets/styles/variables/colors';
+
+.home-become-instructor {
+  background: $light-purple;
+  margin-bottom: 53px;
+
+  &__container {
+    padding: 64px 155px 95.42px 147px;
+    display: flex;
+  }
+
+  &__image {
+    max-width: 632px;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  &__content {
+    margin-left: -27px;
+    padding-top: 121px;
+    max-width: 528px;
+    width: 100%;
+  }
+
+  &__title {
+    margin-bottom: 36px;
+  }
+
+  &__description {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: $light-grey-text;
+    margin-bottom: 43px;
+  }
+
+  &__action {
+    &::ng-deep {
+      .button {
+        min-width: 207px;
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+<div class="dashboard-course">
+  <div class="dashboard-course__information-keeper">
+    <img
+      class="dashboard-course__image"
+      [src]="courseData.cover_image"
+      onerror="this.onerror=null;this.src='./assets/images/course-view/empty-course-image.webp'"
+      [alt]="courseData.title"
+    />
+    <div class="dashboard-course__information">
+      <div class="dashboard-course__title-keeper">
+        <h4 class="dashboard-course__title">
+          {{ courseData.title ? courseData.title : ('dashboard.courses.title-no-set' | translate) }}
+        </h4>
+        <h5 class="dashboard-course__category">
+          {{
+            courseData.category_id
+              ? (courseData.category_id | category: categories)
+              : ('dashboard.courses.category-no-set' | translate)
+          }}
+        </h5>
+      </div>
+      <!-- <article
+        class="dashboard-course__description"
+        [innerHTML]="
+          courseData.description
+            ? courseData.description
+            : ('dashboard.courses.description-no-set' | translate)
+        "
+      ></article> -->
+      <div class="dashboard-course__progress">
+        <div class="progress-bar">
+          <div style="width: {{ courseData.completed_percent }}%" class="progress-body"></div>
+          <span class="progress-data"
+            >{{ courseData.completed_percent }} %<span class="arrow"></span
+          ></span>
+        </div>
+      </div>
+      <div class="dashboard-course__property-keeper">
+        <div *ngIf="courseData.type !== courseType.ONLINE" class="dashboard-course__property">
+          <us-icon name="calendar-icon" [size]="16"></us-icon>
+          {{ courseData.first_lesson_date | translateDate: 'd MMM, YYYY / HH:mm' }}
+        </div>
+        <!-- <div class="dashboard-course__property">
+          <us-icon name="chart-area" [size]="16"></us-icon>
+          {{ courseData.status }}
+        </div> -->
+        <div
+          [routerLink]="'/profile/' + courseData.trainer.id"
+          *ngIf="courseData.trainer"
+          class="dashboard-course__property"
+        >
+          <img
+            onerror="this.onerror=null;this.src='../../../../../../../assets/images/icons/profile_course.svg'"
+            class="trainer-avatar"
+            [src]="courseData.trainer.avatar"
+            alt=""
+          />
+          {{ courseData.trainer.first_name }} {{ courseData.trainer.last_name }}
+        </div>
+      </div>
+      <div class="dashboard-course__course-type">
+        <us-course-type
+          [courseType]="courseData.type"
+          [blockPosition]="courseTypePosition"
+        ></us-course-type>
+        <us-course-type
+          [courseStatus]="courseData.status"
+          [blockPosition]="courseTypePosition"
+        ></us-course-type>
+      </div>
+    </div>
+  </div>
+  <us-button
+    usDropdown
+    class="dashboard-course__dropdown-toggler"
+    icon="dots"
+    [iconSize]="15"
+    [theme]="buttonTheme.transparent"
+    [tooltipOrientation]="tooltipOrientation.vertical"
+    [tooltipContent]="dropdownOptions"
+    [circle]="true"
+  ></us-button>
+</div>
+
+<ng-template #dropdownOptions>
+  <div class="dashboard-course__dropdown">
+    <a
+      *ngIf="courseData.status !== courseStatus.UNDER_REVIEW"
+      class="dashboard-course__dropdown-button"
+      (click)="editCourse()"
+    >
+      {{ 'dashboard.courses.edit' | translate }}
+    </a>
+
+    <a class="dashboard-course__dropdown-button" (click)="openCertificateDialog()">
+      {{ 'dashboard.courses.edit_certificate' | translate }}
+    </a>
+
+    <a
+      *ngIf="courseData.status !== courseStatus.UNDER_REVIEW"
+      class="dashboard-course__dropdown-button dashboard-course__dropdown-button_red"
+      (click)="deleteCourse()"
+    >
+      {{ 'dashboard.courses.delete' | translate }}
+    </a>
+  </div>
+</ng-template>

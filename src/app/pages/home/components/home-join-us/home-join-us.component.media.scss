@@ -1,0 +1,34 @@
+@import 'src/assets/styles/variables/colors';
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.home-join-us {
+  &__container {
+    @include for-breakpoint(mobile) {
+      padding: 0 15px;
+    }
+  }
+
+  &__description {
+    @include for-breakpoint(mobile) {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__input {
+    @include for-breakpoint(mobile) {
+      padding: 10px 0 10px 21px;
+      font-size: 14px;
+      line-height: 28px;
+    }
+  }
+  &__button {
+    @include for-breakpoint(mobile) {
+      &::ng-deep {
+        .button {
+          border-radius: 0 50px 50px 0;
+          padding: 10px 16px;
+        }
+      }
+    }
+  }
+}

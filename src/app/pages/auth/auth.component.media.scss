@@ -1,0 +1,9 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+
+::ng-deep .container {
+  @include for-breakpoint(mobile-lg) {
+    background-image: none !important;
+  }
+};
+

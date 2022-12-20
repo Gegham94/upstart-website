@@ -1,0 +1,136 @@
+@import "src/assets/styles/variables/colors";
+
+.course-information {
+  &__image {
+    width: 354px;
+
+    &-keeper {
+      display: flex;
+      align-items: center;
+      gap: 75px;
+      margin-bottom: 11px;
+    }
+  }
+
+  &__general {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__form {
+    &-row {
+      width: 100%;
+      display: flex;
+      gap: 13px;
+
+      &_labeled {
+        flex-wrap: wrap;
+      }
+
+      &-label {
+        width: 100%;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: $grey-text;
+        user-select: none;
+      }
+    }
+
+    &-field {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    &-label {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $grey-text;
+    }
+  }
+
+  &__action {
+    &::ng-deep {
+      button {
+        padding: 10px 17.5px;
+        min-width: 129px;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-width: 1px;
+      }
+    }
+
+    &-keeper {
+      display: flex;
+      justify-content: flex-end;
+      position: absolute;
+      gap: 8px;
+      bottom: 24px;
+      right: 40px;
+    }
+  }
+  &__will-learn {
+    max-width: 465px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 22px;
+    margin-top: 14px;
+
+    &-title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $grey-text;
+    }
+
+    &-input {
+      width: 100%;
+      margin-right: -1px;
+
+      &::ng-deep {
+        .input__field {
+          border-radius: 11px;
+        }
+      }
+
+      &_buttoned::ng-deep {
+        .input {
+          border-radius: 11px 0 0 11px;
+        }
+      }
+
+      &-keeper {
+        display: flex;
+
+        &::ng-deep {
+          .button {
+            border-radius: 0 11px 11px 0;
+            height: 48px;
+          }
+        }
+      }
+    }
+
+    &-add-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0.05em;
+      color: $main;
+      cursor: pointer;
+    }
+  }
+}

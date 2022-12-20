@@ -1,0 +1,19 @@
+<div class="home-join-us">
+  <div class="home-join-us__container container">
+    <h5 class="home-join-us_subtitle">{{ 'home.join-us.subtitle' | translate }}</h5>
+    <h2 class="home-join-us__title">{{ 'home.join-us.title' | translate }}</h2>
+    <article class="home-join-us__description">
+      {{ 'home.join-us.description' | translate }}
+    </article>
+    <form class="home-join-us__form">
+      <input
+        type="email"
+        class="home-join-us__input"
+        [placeholder]="'home.join-us.email' | translate"
+      />
+      <us-button [theme]="buttonTheme.primary" class="home-join-us__button">{{
+        'home.join-us.subscribe' | translate
+      }}</us-button>
+    </form>
+  </div>
+</div>

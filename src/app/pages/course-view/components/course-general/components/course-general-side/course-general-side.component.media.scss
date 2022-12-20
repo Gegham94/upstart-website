@@ -1,0 +1,42 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+:host {
+  @include for-breakpoint(mobile) {
+    min-width: auto;
+    width: 100%;
+  }
+}
+
+.course-side {
+  @include for-breakpoint(tablet-sm) {
+    padding: 0;
+  }
+
+  &__image {
+    @include for-breakpoint(tablet-sm) {
+      margin-bottom: 23px;
+    }
+  }
+
+  &__element {
+    padding: 8px 0 2px;
+  }
+
+  &__list {
+    @include for-breakpoint(tablet-sm) {
+      margin-bottom: 17px;
+    }
+  }
+
+  &__button {
+    ::ng-deep .button {
+      @include for-breakpoint(tablet-sm) {
+        width: 100%;
+        padding: 14px 0;
+        font-size: 14px;
+        line-height: 16px;
+        height: auto;
+      }
+    }
+  }
+}

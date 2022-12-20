@@ -1,0 +1,46 @@
+<div class="course-category" [formGroup]="categoryForm">
+  <div class="course-category__keeper">
+    <h3 class="course-category__title">{{ 'dashboard.courses.what-category' | translate }}</h3>
+    <h5 class="course-category__subtitle">{{ 'dashboard.courses.choose-category' | translate }}</h5>
+
+    <us-select
+      class="course-category__select"
+      [placeholder]="'dashboard.courses.choose_category' | translate"
+      [formControl]="categoryControl"
+      [options]="categoryList"
+      [searchable]="true"
+    ></us-select>
+    <span class="course-category__error" *ngIf="errors">{{ errors['category_id'] }}</span>
+  </div>
+
+  <div class="course-category__action-keeper">
+    <us-button
+      class="course-category__action"
+      [theme]="buttonTheme.primary"
+      (clicked)="publish()"
+      [disabled]="publishDisabled"
+      [usTooltip]="
+        publishDisabled
+          ? ('dashboard.courses.publication-available' | translate)
+          : ('dashboard.courses.course-publication' | translate)
+      "
+    >
+      {{ 'dashboard.courses.publish' | translate }}
+    </us-button>
+    <us-button
+      class="course-category__action"
+      (clicked)="preview()"
+      [theme]="buttonTheme.primary"
+      [outline]="true"
+    >
+      {{ 'dashboard.courses.preview' | translate }}
+    </us-button>
+    <us-button
+      class="course-category__action"
+      [theme]="buttonTheme.primary"
+      (clicked)="saveAndNext()"
+    >
+      {{ 'dashboard.courses.save-next' | translate }}
+    </us-button>
+  </div>
+</div>

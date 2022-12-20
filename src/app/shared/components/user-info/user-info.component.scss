@@ -1,0 +1,223 @@
+@import "src/assets/styles/variables/colors";
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .user-avatar {
+    position: relative;
+    cursor: default;
+    overflow: hidden;
+    margin-right: 13px;
+    border-radius: 50%;
+    height: 92px;
+    width: 92px;
+
+    &:hover .add-photo {
+      top: 0;
+
+    }
+
+    .not-image {
+      width: 100%;
+      height: 100%;
+      background: $main;
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 30px;
+      color: #FAF8FF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .add-photo {
+      top: 100px;
+      position: absolute;
+      cursor: pointer;
+      background: #6b63ddba;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      transition: .5s all;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .about-user {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .user-name {
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      color: $grey-text;
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+    .spinner-color{
+      color: $main;
+      width: 25px;
+      height: 25px;
+      margin-left: 5px;
+    }
+
+    .user-email {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: $light-grey-text;
+    }
+    &__delete{
+      cursor: pointer;
+      color: $main;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      margin-top: 5px;
+      display: inline-block;
+    }
+  }
+  &.refactor{
+    justify-content: space-between;
+
+    .user-avatar {
+      position: relative;
+      cursor: default;
+      overflow: hidden;
+      margin-right: 13px;
+      border-radius: 50%;
+      height: 224px;
+      width: 224px;
+
+      &:hover .add-photo {
+        top: 0;
+
+      }
+
+      .not-image {
+        width: 100%;
+        height: 100%;
+        background: $main;
+        font-weight: 600;
+        font-size: 90px;
+        line-height: 30px;
+        color: #FAF8FF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .add-photo {
+        top: 100px;
+        position: absolute;
+        cursor: pointer;
+        background: #6b63ddba;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: .5s all;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .about-user {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      .user-name {
+        margin-bottom: 6px;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 22px;
+        color: $grey-text;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        .role{
+          color: $light-grey-text;
+          margin-bottom: 20px;
+        }
+        .name-surname{
+          margin-bottom: 20px;
+          line-height: 40px;
+        }
+        .category{
+          color: $main;
+          font-size: 16px;
+          font-weight: 500;
+        }
+        .course-and-review{
+          margin-top: 15px;
+          display: flex;
+          justify-content: space-between;
+          width: 50%;
+          .devide{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            .title{
+              color: $light-grey-text;
+              margin-bottom: 5px;
+              font-size: 16px;
+              font-weight: 600;
+            }
+            .count{
+              font-size: 24px;
+              font-weight: 600;
+              color: $title-color;
+            }
+          }
+        }
+      }
+      .spinner-color{
+        color: $main;
+        width: 25px;
+        height: 25px;
+        margin-left: 5px;
+      }
+
+      .user-email {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: $light-grey-text;
+      }
+      &__delete{
+        cursor: pointer;
+        color: $main;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        margin-top: 5px;
+        display: inline-block;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<label class="editor__label">
+  <span *ngIf="label" class="editor__label-text">
+    {{ label }}
+  </span>
+  <ckeditor
+    class="editor"
+    [class.readonly]="readonly"
+    [config]="editorConfig"
+    [readOnly]="readonly!"
+    #ckEditor
+    (dataChange)="valueChange($event)"
+    [data]="value"
+    (blur)="onTouched()"
+  ></ckeditor>
+  <us-icon
+    *ngIf="toggleIcon"
+    class="editor__icon toggle"
+    (click)="clickIcon()"
+    [size]="19"
+    [name]="toggleIcon"
+  ></us-icon>
+</label>
+
+<div *ngIf="errors" class="editor__error-block">
+  <span *ngFor="let error of errors | keyvalue">
+    {{ error.value }}
+  </span>
+</div>

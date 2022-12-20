@@ -1,0 +1,161 @@
+<div *ngIf="!data && !isEdit && !isDownload" class="upload-resource">
+  <span class="title">{{ 'global.footer.resources.file_upload' | translate }}</span>
+  <div mat-button mat-dialog-close class="close">
+    <us-icon [name]="'close'" [size]="20"></us-icon>
+  </div>
+  <div class="content">
+    <form [formGroup]="resourceForm">
+      <input
+        formControlName="title"
+        type="text"
+        class="title-input"
+        placeholder="{{ 'global.footer.resources.file_title' | translate }}"
+      />
+      <span
+        *ngIf="resourceForm.controls.title.invalid && resourceForm.controls.title.dirty"
+        class="hint"
+        >{{ 'global.footer.resources.field_required' | translate }}</span
+      >
+      <div class="file-place" [class.big-size]="isBigSize">
+        <div class="text-side">
+          <us-icon [name]="'file-cloud'" [size]="50"></us-icon>
+          <div class="desc">
+            <span *ngIf="fileName === ''" class="title">{{
+              'global.footer.resources.select_file' | translate
+            }}</span>
+            <span *ngIf="fileName !== ''" class="title">{{ fileName }}</span>
+            <span class="more"
+              >JPG, PNG or PDF, {{ 'global.footer.resources.no_more_than' | translate }} 20MB</span
+            >
+          </div>
+        </div>
+        <button (click)="fileUpload.click()" class="select">
+          {{ 'global.footer.resources.select_file' | translate }}
+        </button>
+        <input
+          (change)="uploadFile($event)"
+          type="file"
+          accept="image/png, image/jpeg, application/pdf"
+          class="file-place"
+          #fileUpload
+        />
+      </div>
+      <span *ngIf="isBigSize" class="big-file">File is bigger than 20MB</span>
+      <div class="buttons">
+        <button
+          [class.disabled]="resourceForm.invalid || loader"
+          (click)="fetch()"
+          class="btn upload"
+        >
+          <div *ngIf="loader" class="loader">
+            <mat-spinner></mat-spinner>
+          </div>
+          {{ 'global.footer.resources.upload' | translate }}
+        </button>
+        <button mat-dialog-close class="btn cancel">
+          {{ 'global.footer.resources.cancel' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="data && !isEdit && !isDownload" class="upload-resource">
+  <span class="title">{{ 'global.footer.resources.delete_file' | translate }}</span>
+  <div mat-button mat-dialog-close class="close">
+    <us-icon [name]="'close'" [size]="20"></us-icon>
+  </div>
+  <div class="content delete">
+    <span class="delete-message">{{ 'global.footer.resources.delete_question' | translate }}</span>
+    <div class="buttons">
+      <button (click)="delete()" class="btn upload">
+        {{ 'global.footer.resources.yes' | translate }}
+      </button>
+      <button mat-dialog-close class="btn cancel">
+        {{ 'global.footer.resources.no' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="data && isEdit && !isDownload" class="upload-resource">
+  <span class="title">{{ 'global.footer.resources.file_edit' | translate }}</span>
+  <div mat-button mat-dialog-close class="close">
+    <us-icon [name]="'close'" [size]="20"></us-icon>
+  </div>
+  <div class="content">
+    <form [formGroup]="resourceForm">
+      <input
+        formControlName="title"
+        type="text"
+        class="title-input"
+        placeholder="{{ 'global.footer.resources.file_title' | translate }}"
+      />
+      <span
+        *ngIf="resourceForm.controls.title.invalid && resourceForm.controls.title.dirty"
+        class="hint"
+        >{{ 'global.footer.resources.field_required' | translate }}</span
+      >
+      <div class="file-place" [class.has-file]="isEdit">
+        <div class="text-side">
+          <us-icon [name]="'file-cloud'" [size]="50"></us-icon>
+          <div class="desc">
+            <span *ngIf="fileName === ''" class="title">{{
+              'global.footer.resources.select_file' | translate
+            }}</span>
+            <span *ngIf="fileName !== ''" class="title">{{ fileName }}</span>
+            <span class="more"
+              >JPG, PNG or PDF, {{ 'global.footer.resources.no_more_than' | translate }} 20MB</span
+            >
+          </div>
+        </div>
+        <button (click)="fileUpload.click()" class="select">
+          {{ 'global.footer.resources.select_file' | translate }}
+        </button>
+        <input
+          (change)="uploadFile($event)"
+          type="file"
+          accept="image/png, image/jpeg, application/pdf"
+          class="file-place"
+          #fileUpload
+        />
+      </div>
+      <span *ngIf="isBigSize" class="big-file">File is bigger than 20MB</span>
+      <div class="buttons">
+        <button
+          [class.disabled]="resourceForm.invalid || loader"
+          (click)="fetch()"
+          class="btn upload"
+        >
+          <div *ngIf="loader" class="loader">
+            <mat-spinner></mat-spinner>
+          </div>
+          {{ 'global.footer.resources.file_update_btn' | translate }}
+        </button>
+        <button mat-dialog-close class="btn cancel">
+          {{ 'global.footer.resources.cancel' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="isDownload" class="upload-resource">
+  <span class="title">{{ 'global.footer.resources.file_download' | translate }}</span>
+  <div mat-button mat-dialog-close class="close">
+    <us-icon [name]="'close'" [size]="20"></us-icon>
+  </div>
+  <div class="content delete">
+    <span class="delete-message">{{
+      'global.footer.resources.download_question' | translate
+    }}</span>
+    <div class="buttons">
+      <button (click)="delete()" class="btn upload">
+        {{ 'global.footer.resources.yes' | translate }}
+      </button>
+      <button mat-dialog-close class="btn cancel">
+        {{ 'global.footer.resources.no' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

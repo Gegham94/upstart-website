@@ -1,0 +1,34 @@
+export interface TrainerCourse {
+  address: string;
+  category_id: number;
+  cover_image: string;
+  created_at: Date;
+  currency: string;
+  definition: null;
+  description: string;
+  id: number;
+  language: number;
+  lessons_count: null;
+  level: number;
+  max_participants: number;
+  names: string[];
+  title: string;
+  price: number;
+  promo_video: string;
+  rate: number;
+  rating: number;
+  requirements: null;
+  status: number;
+  sub_title: string;
+  trainer_id: number;
+  type: number;
+  updated_at: Date;
+  profile_id: number;
+  will_learn: null;
+  trainer_name: string;
+  course_id: number;
+  in_basket: number;
+  in_wishlist: number;
+  trainer_avatar: string;
+  first_lesson_date: Date;
+}

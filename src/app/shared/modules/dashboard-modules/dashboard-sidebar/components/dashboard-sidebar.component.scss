@@ -1,0 +1,132 @@
+@import 'src/assets/styles/variables/colors';
+
+.dashboard-sidebar {
+  width: 56px;
+  position: absolute;
+  left: 22px;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: width 0.2s ease-in-out;
+
+  &__link {
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 100%;
+    position: relative;
+    height: 55px;
+    display: flex;
+    gap: 16px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: $grey-text;
+    overflow: hidden;
+    background: transparent;
+    transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
+
+    span {
+      display: none;
+    }
+
+    &:before {
+      content: '';
+      width: 6px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: none;
+      background: $main;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover {
+      background: $white;
+      color: $main;
+
+      svg {
+        [fill],
+        [stroke] {
+          transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out;
+        }
+
+        [fill='#ACB1C6'] {
+          fill: $main;
+        }
+
+        [stroke='#ACB1C6'] {
+          stroke: $main;
+        }
+      }
+    }
+
+    &_active {
+      background: $white;
+      color: $main;
+
+      svg {
+        [fill],
+        [stroke] {
+          transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out;
+        }
+
+        [fill='#ACB1C6'] {
+          fill: $white;
+        }
+
+        [stroke='#ACB1C6'] {
+          stroke: $white;
+        }
+      }
+    }
+
+    &_active {
+      background: $main;
+    }
+  }
+
+  &_toggled &__link {
+    border-radius: 8px 12px 12px 8px;
+    padding-left: 16px;
+    justify-content: flex-start;
+
+    &:before,
+    span {
+      display: block;
+    }
+
+    &:hover,
+    &_active {
+      background: $white;
+
+      svg {
+        [fill],
+        [stroke] {
+          transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out;
+        }
+
+        [fill='#ACB1C6'] {
+          fill: $main;
+        }
+
+        [stroke='#ACB1C6'] {
+          stroke: $main;
+        }
+      }
+
+      &:before {
+        transform: scaleY(1);
+      }
+    }
+  }
+
+  &_toggled {
+    width: 233px;
+  }
+}

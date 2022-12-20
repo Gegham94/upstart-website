@@ -1,0 +1,24 @@
+.type{
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(-15px, 15px);
+    display: inline-block;
+    min-width: 120px;
+    height: 21px;
+    border-radius: 68px;
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+    &.block-position{
+        margin-left: 10px;
+        position: static;
+        transform: none;
+    }
+    &.basket-mobile{
+      position: absolute;
+      transform: translate(-15px, -240px);
+    }
+}

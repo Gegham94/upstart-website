@@ -1,0 +1,169 @@
+<div class="course">
+  <div class="course__image-keeper">
+    <img
+      [routerLink]="['/course', courseData.id]"
+      class="course__image"
+      alt="Course Example"
+      src="{{
+        courseData.cover_image
+          ? courseData.cover_image
+          : 'assets/images/course-view/empty-course-image.webp'
+      }}"
+    />
+  </div>
+  <div class="course__info">
+    <div class="course__info-left">
+      <div [routerLink]="['/course', courseData.id]" class="course__title-keeper">
+        <h4 class="course__profession">{{ courseData.title }}</h4>
+        <div class="course__profession-category-title">
+          <span class="course__title" *ngFor="let category of courseData.categories">
+            {{ category }}
+          </span>
+        </div>
+      </div>
+      <div class="course__details-part">
+        <article class="course__description">
+          {{ courseData.sub_title }}
+        </article>
+      </div>
+      <div class="course__details">
+        <div class="course__details-element" *ngIf="courseData.rating">
+          <span class="text-rateing"> {{ courseData.rating | number: '1.1-1' }} </span>
+          <us-star-rating
+            [color]="'#6b63dd'"
+            [rateValue]="starRate"
+            [size]="18"
+            [maxStars]="5"
+            [isReadOnly]="true"
+          ></us-star-rating>
+        </div>
+        <div *ngIf="courseType.ONLINE !== courseData.type" class="course__details-element">
+          <us-icon
+            *ngIf="courseData.first_lesson_date"
+            name="calendar-icon"
+            [size]="16"
+            class="course__details-icon"
+          ></us-icon>
+          <span *ngIf="courseData.first_lesson_date" class="text date">{{
+            courseData.first_lesson_date | translateDate: 'd MMM, YYYY / HH:mm'
+          }}</span>
+        </div>
+        <div
+          routerLink="/profile/{{ courseData.profile_id }}"
+          class="course__details-element profile"
+        >
+          <img
+            class="course__details-icon trainer-avatar"
+            src="{{
+              courseData.trainer_avatar
+                ? courseData.trainer_avatar
+                : 'assets/images/icons/profile_dark.svg'
+            }}"
+          />
+          <span class="text">{{ courseData.trainer_name }}</span>
+        </div>
+        <div class="course__details-element">
+          <div class="course__type" [style.background]="typeColor">
+            <span>
+              <us-course-type
+                [blockPosition]="typePosition"
+                [courseType]="courseData.type"
+              ></us-course-type>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="course__info-right">
+      <ng-container
+        *ngIf="
+          courseType.ONLINE !== courseData.type || !courseData.lessons_status;
+          else studentCourse
+        "
+      >
+        <div class="course__price-keeper">
+          <ng-container *ngIf="courseData.price > 0; else freeBlock">
+            <span *ngIf="courseData.currency === 'USD'" class="course__price">
+              $ {{ courseData.price | number }}
+            </span>
+            <span *ngIf="courseData.currency === 'AMD'" class="course__price">
+              ֏ {{ courseData.price | number }}
+            </span>
+          </ng-container>
+          <ng-template #freeBlock>
+            <span class="course__price course__free">{{
+              'dashboard.courses.free' | translate
+            }}</span>
+          </ng-template>
+        </div>
+        <div class="course__btns">
+          <!-- basket -->
+          <ng-container *ngIf="courseData.in_basket === 0">
+            <h5 *ngIf="courseData.price > 0" class="btn m-0 p-0">
+              <span *ngIf="!showBasketLoader" (click)="addToCard(courseData.id, courseData)">
+                {{ 'basket.courses.add-to-card' | translate }}
+              </span>
+              <div *ngIf="showBasketLoader" class="loader-block">
+                <mat-spinner></mat-spinner>
+              </div>
+            </h5>
+          </ng-container>
+          <!-- is auth -->
+          <ng-container *ngIf="courseData.in_basket !== 0">
+            <h5 class="btn m-0 p-0">
+              <span *ngIf="!showBasketLoader" (click)="deleteFromBasket(courseData.id, courseData)">
+                {{ 'basket.courses.remove-from-card' | translate }}
+              </span>
+              <div *ngIf="showBasketLoader" class="loader-block">
+                <mat-spinner></mat-spinner>
+              </div>
+            </h5>
+          </ng-container>
+          <!-- end basket -->
+
+          <!-- wishlist -->
+          <ng-container *ngIf="courseData.in_wishlist === 0">
+            <h5 class="btn m-0 p-0">
+              <span *ngIf="!showWishListLoader" (click)="addToWishlist(courseData.id, courseData)">
+                {{ 'basket.courses.add-to-wishlist' | translate }}
+              </span>
+              <div *ngIf="showWishListLoader" class="loader-block">
+                <mat-spinner></mat-spinner>
+              </div>
+            </h5>
+          </ng-container>
+          <!-- is auth -->
+          <ng-container *ngIf="courseData.in_wishlist !== 0">
+            <h5 class="btn m-0 p-0">
+              <span
+                *ngIf="!showWishListLoader"
+                (click)="deleteFromWishList(courseData.id, courseData)"
+              >
+                {{ 'basket.courses.remove-from-wishlist' | translate }}
+              </span>
+              <div *ngIf="showWishListLoader" class="loader-block">
+                <mat-spinner></mat-spinner>
+              </div>
+            </h5>
+          </ng-container>
+          <!-- end wishlist -->
+        </div>
+      </ng-container>
+      <ng-template #studentCourse>
+        <p class="course__lessons-status">
+          {{ 'students.pass' | translate }} {{ courseData.lessons_status }}
+        </p>
+        <div class="course__btns">
+          <h5 class="btn m-0 p-0">
+            <span *ngIf="!showBasketLoader" (click)="viewDetails(courseData.id)">
+              {{ 'students.view_details' | translate }}
+            </span>
+            <div *ngIf="showBasketLoader" class="loader-block">
+              <mat-spinner></mat-spinner>
+            </div>
+          </h5>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

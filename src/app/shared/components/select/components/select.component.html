@@ -1,0 +1,38 @@
+<div
+  class="select"
+  usClickOutside
+  (clickOutside)="closeOptionsList()"
+  [class.select_disabled]="disabled"
+>
+  <input
+    #input
+    class="select__input"
+    [class.select__input_searchable]="searchable"
+    type="text"
+    [readOnly]="!searchable"
+    (click)="openOptionsList()"
+    (input)="searchInOptions($event)"
+    [placeholder]="placeholder + (requiredPlaceholder ? ' *' : '')"
+    [value]="multiple ? multipleDisplayValue.join(', ') : displayValue"
+  />
+  <us-icon
+    class="select__icon"
+    name="chevron-down_dark"
+    [size]="14"
+    [class.select__icon_toggled]="optionsListOpened"
+  ></us-icon>
+  <div class="select__option-keeper" *ngIf="optionsListOpened">
+    <us-option-list
+      *ngFor="let option of displayOptions"
+      [option]="option"
+      [selected]="multiple && isOptionSelected(option)"
+      (optionSelected)="optionSelected($event)"
+    ></us-option-list>
+  </div>
+</div>
+
+<div *ngIf="errors" class="select__error-block">
+  <span *ngFor="let error of errors | keyvalue">
+    {{ error.value }}
+  </span>
+</div>

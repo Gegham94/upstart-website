@@ -1,0 +1,114 @@
+@import 'src/assets/styles/variables/colors';
+
+:host {
+  width: 100%;
+}
+
+.input {
+  border: 1px solid $border-purple;
+  border-radius: 8px;
+  width: 100%;
+  background: $white;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 12px;
+
+  &_error {
+    border: 1px solid $error;
+  }
+
+  &__read-only {
+    opacity: .5;
+    //background: #73737342;
+  }
+
+  &:hover & {
+    &__icon {
+      &.toggle {
+        opacity: .5;
+      }
+    }
+  }
+
+  &__icon_block {
+    padding: 11px 13px;
+    border-radius: 8px 0 0 8px;
+    background: $main;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    margin-left: -1px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    min-height: calc(100% + 2px);
+  }
+
+  &__icon {
+    margin-left: 12px;
+    cursor: pointer;
+
+    &.hide {
+      visibility: hidden;
+    }
+
+    &.toggle {
+      opacity: 0;
+      transition: .2s;
+    }
+
+  }
+
+  &__area {
+    border: none;
+    background: none;
+    width: 100%;
+    color: $grey-text;
+    padding: 14.5px 20px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    outline: none;
+
+    &_icon {
+      border-radius: 0 8px 8px 0;
+    }
+
+    &_error {
+      color: $error;
+    }
+
+    &::-webkit-input-placeholder,
+    &::placeholder {
+      color: $placeholder!important;
+    }
+
+    &_error::-webkit-input-placeholder,
+    &_error::placeholder {
+      color: $error!important;
+    }
+  }
+
+  &__label {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    &-text {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $grey-text;
+      margin-bottom: 6px;
+    }
+  }
+
+  &__error-block {
+    margin: 5px 0;
+    color: $error;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,16 @@
+@import "src/assets/styles/variables/colors";
+
+::ng-deep :host {
+  padding: 4px 8px;
+  background: $light-grey;
+  color: $white;
+}
+
+p {
+  padding: 4px 8px;
+  background: $light-grey-text;
+  color: $white;
+  border-radius: 4px;
+  max-width: 400px;
+  text-align: center;
+}

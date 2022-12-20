@@ -1,0 +1,95 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.about-us {
+  @include for-breakpoint(desktop-sm) {
+    &__section-2 {
+      flex-direction: column;
+      padding: 30px 30px;
+      align-items: flex-end
+    }
+
+    &__about-section {
+      width: 100%;
+    }
+
+    &__title {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    &__video {
+      width: 100%;
+    }
+  }
+
+  @include for-breakpoint(tablet-sm) {
+    &__section-1 {
+      flex-direction: column;
+      align-items: center
+    }
+  }
+
+  @include for-breakpoint(mobile-lg) {
+
+    &__about-section {
+      padding: 20px;
+    }
+
+    &__section-2 {
+      width: 90vw;
+    }
+
+    &__section-4__info-item {
+      width: auto;
+    }
+
+    &__main-section-3 {
+      padding: 0 30px;
+    }
+  }
+
+
+
+  @include for-breakpoint(mobile) {
+
+    &__image {
+      object-fit: contain;
+    }
+
+    &__video {
+      width: 100%;
+      height: auto;
+    }
+
+    &__section-4__info-block {
+      flex-direction: column;
+      align-items: center
+    }
+
+    &__section-3 {
+      &__text-block-wrapper {
+        flex-direction: column;
+      }
+
+      &__text-block {
+        width: 100%;
+      }
+    }
+
+    &__section-4 {
+      &__title-block {
+        padding: 30px 10px;
+
+        &_subtitle {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@include for-breakpoint(mobile) {
+  .divider {
+    margin-bottom: 20px;
+  }
+}

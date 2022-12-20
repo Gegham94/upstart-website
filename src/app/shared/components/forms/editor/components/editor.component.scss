@@ -1,0 +1,240 @@
+@import 'src/assets/styles/variables/colors';
+
+.editor {
+  width: 100%;
+  &.readonly{
+    opacity: .5;
+  }
+
+  &__label {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    position: relative;
+
+    &-text {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $grey-text;
+      margin-bottom: 6px;
+    }
+  }
+
+  &__icon{
+    margin-left: 12px;
+    cursor: pointer;
+    position: absolute;
+    right: 13px;
+    top: 40px;
+
+    &.toggle{
+      opacity: 0;
+    }
+  }
+  ::ng-deep {
+    .cke {
+      overflow: hidden;
+      border: 1px solid $border-purple;
+      border-radius: 8px;
+    }
+
+    .cke_inner {
+      position: relative;
+      padding-bottom: 25px;
+    }
+
+    .cke_toolbox {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .cke_toolgroup {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cke_button,
+    .cke_button_on,
+    .cke_button_off:hover,
+    .cke_button_off:focus,
+    .cke_button_off:active,
+    .cke_button_disabled:hover,
+    .cke_button_disabled:focus,
+    .cke_button_disabled:active,
+    .cke_button_expandable.cke_button_off:hover,
+    .cke_button_expandable.cke_button_off:focus,
+    .cke_button_expandable.cke_button_off:active,
+    .cke_button_expandable.cke_button_on {
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+
+    .cke_button_arrow,
+    .cke_toolbar_break,
+    .cke_bottom {
+      display: none;
+    }
+
+    .cke_top {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 17px !important;
+      padding: 4px 23px;
+      border: none;
+      background-color: $light-purple;
+    }
+
+    .cke_toolgroup a.cke_button:last-child:after,
+    .cke_toolgroup a.cke_button.cke_button_disabled:hover:last-child:after {
+      display: none;
+    }
+
+    .cke_button__bold_icon {
+      background: url('../../../../../../assets/images/icons/editor/bold.svg') no-repeat 0 0 !important;
+      background-size: 100% 100% !important;
+
+      &:hover {
+        background-image: url('../../../../../../assets/images/icons/editor/bold_dark.svg') !important;
+      }
+    }
+
+    .cke_button_on > .cke_button__bold_icon {
+      background-image: url('../../../../../../assets/images/icons/editor/bold_primary.svg') !important;
+    }
+
+    .cke_button__italic_icon {
+      background: url('../../../../../../assets/images/icons/editor/italic.svg') no-repeat 0 0 !important;
+      background-size: 100% 100% !important;
+
+      &:hover {
+        background-image: url('../../../../../../assets/images/icons/editor/italic_dark.svg') !important;
+      }
+    }
+
+    .cke_button_on > .cke_button__italic_icon {
+      background-image: url('../../../../../../assets/images/icons/editor/italic_primary.svg') !important;
+    }
+
+    .cke_button__underline_icon {
+      background: url('../../../../../../assets/images/icons/editor/underlined.svg') no-repeat 0 0 !important;
+      background-size: 100% 100% !important;
+
+      &:hover {
+        background-image: url('../../../../../../assets/images/icons/editor/underlined_dark.svg') !important;
+      }
+    }
+
+    .cke_button_on > .cke_button__underline_icon {
+      background-image: url('../../../../../../assets/images/icons/editor/underlined_primary.svg') !important;
+    }
+
+    .cke_button__justifyleft_icon {
+      background: url('../../../../../../assets/images/icons/editor/align-left.svg') no-repeat 0 0 !important;
+      background-size: 100% 100% !important;
+
+      &:hover {
+        background-image: url('../../../../../../assets/images/icons/editor/align-left_dark.svg') !important;
+      }
+    }
+
+    .cke_button_on > .cke_button__justifyleft_icon {
+      background-image: url('../../../../../../assets/images/icons/editor/align-left_primary.svg') !important;
+    }
+
+    .cke_button__justifyright_icon {
+      background: url('../../../../../../assets/images/icons/editor/align-right.svg') no-repeat 0 0 !important;
+      background-size: 100% 100% !important;
+
+      &:hover {
+        background-image: url('../../../../../../assets/images/icons/editor/align-right_dark.svg') !important;
+      }
+    }
+
+    .cke_button_on > .cke_button__justifyright_icon {
+      background-image: url('../../../../../../assets/images/icons/editor/align-right_primary.svg') !important;
+    }
+
+    .cke_button__justifycenter_icon {
+      background: url('../../../../../../assets/images/icons/editor/align-center.svg') no-repeat 0 0 !important;
+      background-size: 100% 100% !important;
+
+      &:hover {
+        background-image: url('../../../../../../assets/images/icons/editor/align-center_dark.svg') !important;
+      }
+    }
+
+    .cke_button_on > .cke_button__justifycenter_icon {
+      background-image: url('../../../../../../assets/images/icons/editor/align-center_primary.svg') !important;
+    }
+
+    .cke_button__justifyblock_icon {
+      background: url('../../../../../../assets/images/icons/editor/justify.svg') no-repeat 0 0 !important;
+      background-size: 100% 100% !important;
+
+      &:hover {
+        background-image: url('../../../../../../assets/images/icons/editor/justify_dark.svg') !important;
+      }
+    }
+
+    .cke_button_on > .cke_button__justifyblock_icon {
+      background-image: url('../../../../../../assets/images/icons/editor/justify_primary.svg') !important;
+    }
+
+    .cke_button__link_icon {
+      background: url('../../../../../../assets/images/icons/editor/link.svg') no-repeat 0 0 !important;
+      background-size: 100% 100% !important;
+
+      &:hover {
+        background-image: url('../../../../../../assets/images/icons/editor/link_dark.svg') !important;
+      }
+    }
+
+    .cke_button_on > .cke_button__link_icon {
+      background-image: url('../../../../../../assets/images/icons/editor/link_primary.svg') !important;
+    }
+
+    .cke_button_on > .cke_button__image_icon {
+      background-image: url('../../../../../../assets/images/icons/editor/image_primary.svg') !important;
+    }
+
+    .cke_button__emojipanel_icon {
+      background: url('../../../../../../assets/images/icons/editor/emoji.svg') no-repeat 0 0 !important;
+      background-size: 100% 100% !important;
+
+      &:hover {
+        background-image: url('../../../../../../assets/images/icons/editor/emoji_dark.svg') !important;
+      }
+    }
+
+    .cke_button_on > .cke_button__emojipanel_icon {
+      background-image: url('../../../../../../assets/images/icons/editor/emoji_primary.svg') !important;
+    }
+  }
+
+  &__error-block{
+    margin: 5px 0;
+    color: $error;
+    font-size: 12px;
+  }
+}
+::ng-deep {
+  .cke_reset_all * {
+    font-family: 'Montserrat', Helvetica, sans-serif !important;
+  }
+  .cke_dialog_ui_button_ok {
+    background: $main !important;
+    border: 1px solid $main !important;
+  }
+}
+
+.editor__label:hover .editor__icon.toggle{
+  opacity: .5;
+}

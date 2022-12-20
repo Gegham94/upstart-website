@@ -1,0 +1,188 @@
+@import "src/assets/styles/variables/colors";
+
+.course-section-list {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 36px;
+
+    &-title {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 22px;
+      letter-spacing: 0.05em;
+      color: $grey-text;
+    }
+  }
+
+  &__toggle {
+    &_rotated {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__action {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  &__add {
+    ::ng-deep .button {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 14px;
+      gap: 8px;
+      color: $main;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 3px;
+
+      &:hover {
+        box-shadow: none!important;
+      }
+    }
+  }
+
+  &__section {
+    background: $light-purple;
+    padding: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:not(&:last-child) {
+      margin-bottom: 16px;
+    }
+
+    &-title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0.05em;
+      color: $light-grey-text;
+      margin-bottom: 30px;
+    }
+  }
+
+  &__type {
+    background: $white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    gap: 11px;
+    border: none;
+    outline: none;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    color: $title-color;
+    width: 154px;
+    height: 86px;
+    transition: box-shadow .2s ease-in-out;
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 4px #A997FF;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+
+    &-keeper {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  &__button {
+    align-self: flex-end;
+
+    ::ng-deep .button {
+      border-radius: 8px;
+      padding: 6px 10px;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.05em;
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+    &__dropdown {
+      border-radius: 4px;
+      background: $white;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      width: 222px;
+      box-shadow: 2px 4px 20px 0 $black-opacity-20;
+      display: flex;
+      flex-direction: column;
+
+      &-button {
+        padding: 8px 14px 8px 29px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        // Todo: Store this color in assets/variables/_colors.scss
+        color: #707070;
+        cursor: pointer;
+
+        &:hover {
+          background: $lightest-grey;
+        }
+
+        &:active {
+          background: $lighter-grey;
+        }
+
+        &_remove {
+          color: $error;
+        }
+      }
+    }
+
+  &__keeper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__section {
+    &-title-field {
+      padding-left: 60px;
+      padding-right: 36px;
+      display: block;
+    }
+
+    &-action {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 36px;
+      margin-top: 12px;
+      margin-bottom: 24px;
+      gap: 16px;
+
+      &::ng-deep {
+        button {
+          padding: 6px 10px;
+          text-transform: uppercase;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 14px;
+          letter-spacing: 0.05em;
+          display: flex;
+          gap: 8px;
+        }
+      }
+    }
+  }
+}

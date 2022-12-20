@@ -1,0 +1,42 @@
+<div class="contact-us">
+  <div class="d-flex justify-content-around contact-us__circle-block">
+    <h2 class="contact-us__title-first">
+      {{ 'contact-us.connecting-people' | translate }}
+    </h2>
+    <img
+      class="contact-us__img"
+      src="assets/images/contact/contact-us.png"
+      alt="Contact us image"
+    />
+  </div>
+</div>
+<div class="contact-us__info">
+  <h2 class="contact-us__title center">{{ 'contact-us.improving-lives' | translate }}</h2>
+  <p class="contact-us__info__text">
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+    the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+    of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+    but also the leap into electronic typesetting, remaining essentially unchanged. It was
+    popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+    and more recently with desktop publishing software like Aldus PageMaker including versions of
+    Lorem Ipsum.
+  </p>
+</div>
+<div class="contact-us d-flex align-items-center flex-column">
+  <p class="contact-us__email__subtitle">{{ 'contact-us.practice-advice' | translate }}</p>
+  <h2 class="contact-us__title">{{ 'contact-us.join-us' | translate }}</h2>
+  <p class="contact-us__email__text">
+    {{ 'contact-us.problems' | translate }}
+  </p>
+  <p class="contact-us__email__text">{{ 'contact-us.newtonian' | translate }}</p>
+  <form class="contact-us__email__form">
+    <input
+      type="email"
+      class="contact-us__email__input"
+      [placeholder]="'home.join-us.email' | translate"
+    />
+    <us-button [theme]="buttonTheme.primary" class="contact-us__email__button">{{
+      'home.join-us.subscribe' | translate
+    }}</us-button>
+  </form>
+</div>

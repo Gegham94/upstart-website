@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="not-found">
+    <p class="not-found__oops">Oops...</p>
+    <p class="not-found__page-not-found">{{ 'not-found.page-not-found' | translate }}</p>
+    <p class="not-found__text">{{ 'not-found.text' | translate }}</p>
+    <us-button [theme]="buttonTheme.primary" class="not-found__button-back" routerLink="/">
+      {{ 'not-found.back-home' | translate }}
+    </us-button>
+  </div>
+  <img
+    class="not-found__image"
+    src="/assets/images/not-found/not-found.png"
+    alt="Page not found image"
+  />
+</div>

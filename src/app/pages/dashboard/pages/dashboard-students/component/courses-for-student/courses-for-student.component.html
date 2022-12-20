@@ -1,0 +1,22 @@
+<div class="students__courses">
+  <div class="students__header">
+    <h3 class="students__header-title">{{ title | translate }}</h3>
+  </div>
+  <div class="students__courses-list">
+    <div *ngIf="loader; else dataList" class="loader">
+      <ngx-skeleton-loader
+        count="4"
+        [theme]="{
+          marginBottom: '8px',
+          height: '100px',
+          width: '100%',
+          'background-color': '#faf8ff'
+        }"
+        appearance="line"
+      ></ngx-skeleton-loader>
+    </div>
+    <ng-template #dataList>
+          <us-inline-course *ngFor="let course of courseList" [courseData]="course"></us-inline-course>
+    </ng-template>
+  </div>
+</div>

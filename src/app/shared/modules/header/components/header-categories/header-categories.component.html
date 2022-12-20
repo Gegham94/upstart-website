@@ -1,0 +1,38 @@
+<div *ngIf="hideCategoryList" class="categories">
+  <p class="categories__title">
+    {{ 'global.mobile-menu.categories' | translate }}
+  </p>
+  <div class="categories__dropdown-list">
+    <ng-container *ngFor="let category of categoriesSubscription$ | async">
+      <a
+        *ngIf="category.parent_id === null"
+        [routerLink]="'/courses/' + category.id"
+        [class.dropdown-child]="category.children.length > 0"
+        class="categories__dropdown-item"
+      >
+        <ng-container *ngIf="category.children.length > 0; else noChild">
+          <a (click)="navigate(category)">
+            {{ category.title }}
+          </a>
+        </ng-container>
+        <ng-template #noChild>
+          <a>
+            {{ category.title }}
+          </a>
+        </ng-template>
+        <span class="categories__element-arrow" *ngIf="category.children.length > 0">
+          <us-icon name="chevron-right" [size]="10"></us-icon>
+        </span>
+        <div class="categories__children-list" *ngIf="category.children.length > 0">
+          <a
+            *ngFor="let child of category.children"
+            class="categories__children-item"
+            [routerLink]="'/courses/' + child.id"
+          >
+            {{ child.title }}
+          </a>
+        </div>
+      </a>
+    </ng-container>
+  </div>
+</div>

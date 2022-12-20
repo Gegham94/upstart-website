@@ -1,0 +1,50 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.footer {
+  @include for-breakpoint(tablet) {
+    &__company-info {
+      width: 38%;
+    }
+  }
+
+  @include for-breakpoint(mobile-lg) {
+    &__title {
+      align-self: center;
+    }
+
+    &__company-info {
+      flex-direction: column;
+    }
+
+    &__items {
+      width: 100%;
+      // align-items: baseline;
+      align-self: center;
+    }
+  }
+
+  @include for-breakpoint(mobile) {
+    &__container {
+      display: block;
+    }
+
+    &__company-info {
+      width: 100%;
+    }
+
+    &__subfooter {
+      &__container {
+        flex-direction: column;
+      }
+    }
+
+    &__social-keeper {
+      gap: 70px;
+    }
+
+    &__copyright {
+      margin: 30px 0;
+      align-self: center;
+    }
+  }
+}

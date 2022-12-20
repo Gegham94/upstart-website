@@ -1,0 +1,23 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.privacy {
+  @include for-breakpoint(mobile-lg) {
+    &__header {
+      padding: 50px;
+      text-align: center;
+      height: 200px;
+
+      @include for-breakpoint(mobile) {
+        &__title {
+          font-size: 30px;
+        }
+      }
+    }
+
+    &__body {
+      padding: 0 50px 50px 50px;
+    }
+  }
+
+
+}

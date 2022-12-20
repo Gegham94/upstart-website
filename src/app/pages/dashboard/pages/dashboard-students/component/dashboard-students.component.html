@@ -1,0 +1,31 @@
+<div class="dashboard-students students">
+  <div class="students__header">
+    <h3 class="students__header-title">{{ title | translate }}</h3>
+  </div>
+  <div class="students__list" *ngIf="studentsList; else notData">
+    <div *ngIf="loader; else dataList" class="loader">
+      <ngx-skeleton-loader
+        count="4"
+        [theme]="{
+          marginRight: '8px',
+          height: '253px',
+          width: '253px',
+          'background-color': '#faf8ff'
+        }"
+        appearance="line"
+      ></ngx-skeleton-loader>
+    </div>
+    <ng-template #dataList>
+      <ng-container *ngFor="let student of studentsList">
+        <us-students
+          (click)="openCourseList(student)"
+          [studentList]="student"></us-students>
+      </ng-container>
+    </ng-template>
+  </div>
+  <ng-template #notData>
+    <p class="students__not-data">
+      {{ 'students.no-student' | translate }}
+    </p>
+  </ng-template>
+</div>

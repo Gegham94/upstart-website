@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="notification__block mb-3">
+      <p class="header-title">
+        {{ 'global.header.header-notification.notifications' | translate }}
+      </p>
+    </div>
+
+    <div
+      *ngIf="notification?.title; else skeletonLoading"
+      class="notification__wrapper notification__block"
+      [class.notification__left-border]="!notification?.status"
+    >
+      <p class="notification__subtitle">{{ notification?.title }}</p>
+      <p class="notification__text mt-2">
+        {{ notification?.message }}
+      </p>
+      <div class="d-flex justify-content-between mt-3">
+        <p class="notification__created">{{ notification?.created_at | date }}</p>
+        <us-icon
+          name="delete"
+          class="notification__delete-icon"
+          [size]="20"
+          (click)="deleteNotification()"
+        ></us-icon>
+      </div>
+    </div>
+    <ng-template #skeletonLoading>
+      <ngx-skeleton-loader
+        count="1"
+        [theme]="{ height: '113px', 'background-color': '#faf8ff' }"
+        appearance="line"
+      ></ngx-skeleton-loader>
+    </ng-template>
+  </div>
+</div>

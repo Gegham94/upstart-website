@@ -1,0 +1,151 @@
+@import 'src/assets/styles/variables/colors';
+
+.wrapper {
+  background-color: #f5f5f5;
+  overflow: hidden;
+}
+
+.container {
+  margin-bottom: 250px;
+}
+
+.about-us {
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 50px;
+    color: $title-color;
+  }
+
+  &__text {
+    font-family: Open Sans;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 26px;
+    color: $light-grey-text;
+  }
+
+  &__image {
+    width: 450px;
+    height: 450px;
+    object-fit: cover;
+  }
+
+  &__about-section {
+    width: 52%;
+  }
+
+  &__section-1 {
+    padding: 70px 0;
+  }
+
+  &__section-2 {
+    margin: auto;
+    transform: translateY(-280px);
+    width: 81vw;
+    background-color: $white;
+    // height: 520px;
+    padding: 70px 50px;
+    align-items: center;
+  }
+
+  &__main-section-3 {
+    padding: 0 113px;
+    transform: translateY(-130px);
+  }
+
+  &__section-3 {
+    background-color: #262626;
+
+    &__title-block {
+      text-align: center;
+
+      &_small-title {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 22px;
+        color: $white;
+      }
+
+      &_big-title {
+        color: $white;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 50px;
+      }
+    }
+
+    &__text-block-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__text-block {
+      width: 30%;
+
+      &_item {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 26px;
+        color: $white;
+      }
+    }
+  }
+
+  &__section-4 {
+    &__title-block {
+      text-align: center;
+      padding: 30px 0;
+      background-color: #f5f5f5;
+
+      &_title {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 50px;
+        color: $title-color;
+        margin-bottom: 10px;
+      }
+
+      &_subtitle {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 26px;
+        color: $grey-text;
+        width: 44%;
+        margin: auto;
+      }
+    }
+
+    &__info-block {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      padding: 70px;
+      background-color: white;
+    }
+
+    &__info-item {
+      color: $main;
+      width: 21%;
+      margin-bottom: 60px;
+
+      &_number {
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 67px;
+      }
+
+      &_text {
+        font-family: Open Sans;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 26px;
+      }
+    }
+  }
+}
+
+.divider {
+  border: 1px solid white;
+  margin-top: 55px;
+}

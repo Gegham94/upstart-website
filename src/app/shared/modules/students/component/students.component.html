@@ -1,0 +1,27 @@
+<div class="student">
+  <div class="student__card">
+    <div class="student__image">
+      <img
+        [src]="studentList.user_avatar"
+        *ngIf="studentList.user_avatar; else imageNot"
+        class="student__image-avatar"
+        alt="Avatar"
+      />
+      <ng-template #imageNot>
+        <span class="student__image-not"></span>
+      </ng-template>
+    </div>
+    <div class="student__info">
+      <h4 class="student__info-name">
+        {{ studentList.user_first_name }}
+        {{ studentList.user_last__name }}
+      </h4>
+
+      <p class="student__info-participated">
+        {{ 'students.participated_in' | translate }}
+        {{ studentList.participated_course }}
+        {{ 'students.lesson' | translate }}
+      </p>
+    </div>
+  </div>
+</div>

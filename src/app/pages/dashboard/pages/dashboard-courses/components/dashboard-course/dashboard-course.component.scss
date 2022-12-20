@@ -1,0 +1,219 @@
+@import "src/assets/styles/variables/colors";
+
+.dashboard-course {
+  background: $light-purple;
+  min-height: 113px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  height: max-content;
+  ::ng-deep .mat-progress-bar-fill::after {
+    background-color: $main;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+    background: #E4E8EB;
+}
+
+::ng-deep .mat-progress-bar {
+    border-radius: 2px;
+}
+  &:not(:host:last-child &) {
+    margin-bottom: 16px;
+  }
+
+  &__information {
+    padding: 10px 13px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &-keeper {
+      display: flex;
+    }
+  }
+
+  &__title {
+    letter-spacing: 0.1px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    color: $title-color;
+    padding-right: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &-keeper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 5px;
+    }
+  }
+
+  &__category {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.05em;
+    color: $main;
+    white-space: nowrap;
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    color: $light-grey-text;
+    margin-bottom: 10px;
+    max-width: 80%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    // flex-grow: 1;
+  }
+
+  &__property {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    color: $grey-text;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    .trainer-avatar{
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+
+    &-keeper {
+      display: flex;
+      align-items: center;
+      gap: 23px;
+      margin-top: 5px;
+    }
+  }
+
+  &__dropdown {
+    background: $white;
+    border-radius: 11px;
+    padding: 8px 0;
+    width: 186px;
+    display: flex;
+    flex-direction: column;
+    transition: .2s all ease-in-out;
+
+    &-button {
+      padding: 0 12px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        background: $lightest-grey;
+        color: $title-color;
+      }
+
+      &:active {
+        background: $lighter-grey;
+      }
+
+      &_red {
+        color: $error;
+
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+
+    &-toggler {
+      position: absolute;
+      top: 50%;
+      right: 27.8px;
+      transform: translateY(-50%);
+    }
+  }
+
+  &__image {
+    height: 113px;
+    min-width: 151px;
+    width: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+  &__course-type{
+    margin-top: 5px;
+    ::ng-deep .block-position{
+      &:first-child{
+        margin-left: 0 !important;
+        margin-right: 10px !important;
+      }
+
+    }
+  }
+  &__categories{
+    margin-bottom: 5px;
+    .category{
+      &::after{
+        content: '|';
+        margin: 0 5px;
+      }
+    }
+  }
+  &__progress{
+    margin: 5px 0;
+    position: relative;
+    .progress-data{
+      display: none;
+      width: 110px;
+      height: 15px;
+      background-color: $main;
+      border-radius: 5px;
+      text-align: center;
+      color: $white;
+      font-weight: 500;
+      font-size: 12px;
+      padding: 2px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, 66%);
+      .arrow{
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        width: 10px;
+        height: 10px;
+        background-color:$main;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -150%);
+      }
+    }
+    .progress-bar{
+      cursor: pointer;
+      width: 100%;
+      height: 10px;
+      border-radius: 18px;
+      background-color: #E4E8EB;
+      .progress-body{
+        height: 10px;
+        background-color: $main;
+      }
+      &:hover{
+        .progress-data{
+          display: block;
+
+        }
+      }
+
+    }
+  }
+}

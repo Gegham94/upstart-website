@@ -1,0 +1,28 @@
+@import '../../../../../assets/styles/variables/colors';
+
+::ng-deep pagination-controls {
+  nav {
+    text-align: end;
+
+    .ngx-pagination {
+      .current {
+        background: none;
+        color: #6b63dd;
+      }
+      li {
+        color: $title-color;
+        font-size: 22px;
+        a{
+          border-radius: 8px;
+          background-color: transparent;
+          &:hover{
+            color: $white;
+            background-color: #A5A6F6;
+            //background-color: rgb(197 133 255 / 23%);
+          }
+          transition: .5s;
+        }
+      }
+    }
+  }
+}

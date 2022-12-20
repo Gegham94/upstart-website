@@ -1,0 +1,72 @@
+<div class="dashboard-courses">
+  <div class="dashboard-courses__title-keeper">
+    <h3 class="dashboard-courses__title">{{ 'dashboard.courses.course-list' | translate }}</h3>
+    <us-button
+      class="dashboard-courses__filter-button"
+      [class.dashboard-courses__filter-button_active]="isFilterActive"
+      [circle]="true"
+      icon="filter"
+      autoSetSuffix="primary"
+      [iconSize]="14"
+      [theme]="buttonTheme.primary"
+      [outline]="filterToggled"
+      (clicked)="toggleFilterBlock(true)"
+      usDropdown
+      [tooltipContent]="filterBlock"
+      (dropdownClosed)="toggleFilterBlock(false)"
+    ></us-button>
+    <us-button
+      class="dashboard-courses__add-button"
+      [theme]="buttonTheme.primary"
+      icon="add"
+      [iconSize]="16"
+      autoSetSuffix="primary"
+      (clicked)="createCourse()"
+      *ngIf="getUserRole !== 'ST'"
+    >
+      <span>{{ 'dashboard.courses.create-course' | translate }}</span>
+    </us-button>
+  </div>
+  <ng-template #filterBlock>
+    <div class="dashboard-courses__filter-block" *ngIf="filterToggled">
+      <h3 class="dashboard-courses__filter-title">{{ 'dashboard.courses.filter' | translate }}</h3>
+      <div class="dashboard-courses__filter-form-field-row">
+        <div class="dashboard-courses__filter-form-field">
+          <label class="dashboard-courses__filter-form-label">
+            {{ 'dashboard.courses.status' | translate }}
+          </label>
+          <us-select
+            [placeholder]="'dashboard.courses.status' | translate"
+            [options]="courseStatusOptions"
+            (changeValue)="filterCoursesBy($event)"
+            [value]="selectedOption?.value"
+          ></us-select>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <div class="dashboard-courses__list">
+    <ng-container *ngIf="courseList; else skeletonLoading">
+      <ng-container *ngIf="courseList.length > 0; else emptyCourses">
+        <us-dashboard-course
+          *ngFor="let course of courseList | paginate: config"
+          [courseData]="course"
+          (courseDeleted)="getCourseList()"
+        ></us-dashboard-course>
+      </ng-container>
+    </ng-container>
+    <ng-template #skeletonLoading>
+      <ngx-skeleton-loader
+        [count]="totalPages ? totalPages - pageSize * (currentPage - 1) : 10"
+        [theme]="{ height: '113px', 'background-color': '#faf8ff' }"
+        appearance="line"
+      ></ngx-skeleton-loader>
+    </ng-template>
+  </div>
+  <us-pagination
+    *ngIf="courseList && totalPages > pageSize"
+    (pageChange)="pageChanged($event)"
+  ></us-pagination>
+</div>
+
+<ng-template #emptyCourses>{{ 'dashboard.courses.no-courses' | translate }}</ng-template>

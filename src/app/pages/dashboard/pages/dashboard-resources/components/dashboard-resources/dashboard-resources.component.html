@@ -1,0 +1,51 @@
+<div class="resources">
+  <div class="resources__title-side">
+    <h1 class="resources__title-side-title">{{ 'global.footer.resources.title' | translate }}</h1>
+    <button (click)="openUploadDialog()" class="resources__title-btn">
+      {{ 'global.footer.resources.file_upload' | translate }}
+    </button>
+  </div>
+  <div class="resources__file-side">
+    <div class="loading" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+    <span [class.disabled]="resources?.length === 0 && !loading" class="no-data">{{
+      'global.footer.resources.empty_resource' | translate
+    }}</span>
+    <div *ngFor="let resource of resources; let i = index" class="resources__file-side-file-item">
+      <div class="resources__file-side-file-left">
+        <us-icon [class.opacity]="resource.id === -1" [name]="'file'" [size]="30"></us-icon>
+        <div class="title-side">
+          <span [class.opacity]="resource.id === -1" class="title">{{ resource.title }}</span>
+          <span *ngIf="resource.id !== -1" class="date">21 Jun 2021</span>
+          <div *ngIf="resource.id === -1" class="loader">
+            <div style="width: {{ progress }}%;" class="progress"></div>
+          </div>
+          <span *ngIf="resource.id === -1" class="mb">{{ progress }}% &nbsp; {{ megabytes }}</span>
+        </div>
+      </div>
+      <us-button
+        *ngIf="resource.id !== -1 && !loading"
+        usDropdown
+        class="dashboard-course__dropdown-toggler"
+        icon="dots-horizontal"
+        [iconSize]="18"
+        [tooltipOrientation]="tooltipOrientation.vertical"
+        [tooltipContent]="dropdownOptions"
+      ></us-button>
+      <ng-template #dropdownOptions>
+        <div (click)="$event.stopPropagation()" class="resources__action">
+          <span (click)="openEditDialog(resource)" class="do">{{
+            'global.footer.resources.edit_title' | translate
+          }}</span>
+          <span (click)="openDownloadModal(resource)" class="do">{{
+            'global.footer.resources.download' | translate
+          }}</span>
+          <span (click)="openDeleteDialog(resource)" class="do">{{
+            'global.footer.resources.delete' | translate
+          }}</span>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

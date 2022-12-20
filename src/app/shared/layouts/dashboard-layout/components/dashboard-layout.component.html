@@ -1,0 +1,15 @@
+<us-dashboard-header></us-dashboard-header>
+<main>
+  <div class="container">
+    <us-dashboard-sidebar></us-dashboard-sidebar>
+    <section class="dashboard-layout__page" [class.dashboard-layout__page_toggled]="sidebarOpened">
+      <ng-content></ng-content>
+    </section>
+  </div>
+</main>
+<footer class="dashboard-footer">
+  <span class="dashboard-footer__copyright">
+    © 2022, {{ 'dashboard.footer.made' | translate }}
+  </span>
+</footer>
+<us-loading [isGlobal]="true"></us-loading>

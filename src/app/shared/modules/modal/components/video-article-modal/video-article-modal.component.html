@@ -1,0 +1,143 @@
+<div [class.start-quiz-side]="startQuiz" class="section-modal">
+  <span mat-button mat-dialog-close class="close">
+    <us-icon [name]="'close'" [size]="24"></us-icon>
+  </span>
+  <span *ngIf="modalData.id !== 3 && modalData.id !== -1" class="preview">
+    {{ 'global.quiz-modal.course_preview' | translate }}
+  </span>
+  <span
+    *ngIf="modalData.id !== 3 && modalData.id !== -1"
+    class="title"
+    [innerHTML]="modalData.lesson.title"
+  >
+  </span>
+
+  <div *ngIf="modalData.id === 1" class="article">
+    <p class="text" [innerHTML]="modalData.lesson.article"></p>
+  </div>
+
+  <div *ngIf="modalData.id === 2" class="video">
+    <div class="video-side">
+      <div class="image-and-video">
+        <div *ngIf="modalData.lesson.video_url; else cover_image">
+          <iframe
+            width="100%"
+            height="350"
+            [src]="videoUrl"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+      <span class="description">
+        {{ 'global.quiz-modal.description' | translate }}
+      </span>
+      <div class="desc-side">
+        <p class="desc" [innerHTML]="modalData.lesson.description"></p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="modalData.id === 3 && !startQuiz" class="quiz">
+    <ng-container *ngIf="step <= 0">
+      <div class="content">
+        <span class="title"> {{ 'global.quiz-modal.start_quiz_lesson' | translate }} 1 </span>
+        <span class="desc"
+          >{{ 'global.quiz-modal.quiz_contains' | translate }}
+          {{ modalData.lesson.questions_count }}
+          {{ 'global.quiz-modal.quiz_contains_1' | translate }}</span
+        >
+        <span class="good-luck"> {{ 'global.quiz-modal.good_luck' | translate }}</span>
+      </div>
+      <div class="bottom-side">
+        <button (click)="startQuizAction()" class="btn start">
+          {{ 'global.quiz-modal.start' | translate }}
+        </button>
+        <button mat-button mat-dialog-close class="btn cancel">
+          {{ 'global.quiz-modal.cancel' | translate }}
+        </button>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngIf="startQuiz && modalData.id === 3" class="questions">
+    <ng-container *ngIf="step >= 0">
+      <span class="title">{{ 'global.quiz-modal.question_title' | translate }} {{ step + 1 }}</span>
+      <div class="question-content">
+        <span class="score">{{ step + 1 }}/{{ modalData.lesson.questions_count }}</span>
+        <p class="question" [innerHTML]="question?.title"></p>
+        <div class="quiz-question">
+          <ul class="quiz-ul">
+            <form [formGroup]="answerForm">
+              <li
+                *ngFor="let answer of question?.answers"
+                class="quiz-li"
+                [class.disabled]="answer === answerForm.controls['answer_radio'].value"
+              >
+                <span class="checkboxes">
+                  <input
+                    (change)="chooseCheckbox($event, answer)"
+                    [formControlName]="answer"
+                    *ngIf="question?.multiple_choice === 1"
+                    type="checkbox"
+                    name="answer"
+                    class="checkbox"
+                  />
+                  <input
+                    (change)="chooseAnAnswer()"
+                    formControlName="answer_radio"
+                    *ngIf="question?.multiple_choice === 0"
+                    type="radio"
+                    [value]="answer"
+                    name="answer_radio"
+                    class="checkbox"
+                  />
+                </span>
+                <span class="quest">{{ answer }}</span>
+              </li>
+            </form>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom-side quiz-bottom">
+        <span *ngIf="modalData.lesson.questions_count !== step + 1">
+          <button
+            (click)="stepAction(true)"
+            [class.disabled]="answerForm.invalid"
+            class="btn start"
+          >
+            {{ 'global.quiz-modal.next' | translate }}
+          </button>
+        </span>
+
+        <span *ngIf="modalData.lesson.questions_count === step + 1">
+          <button (click)="finishQuiz()" [class.disabled]="answerForm.invalid" class="btn start">
+            {{ 'global.quiz-modal.finish' | translate }}
+          </button>
+        </span>
+
+        <button (click)="stepAction(false)" [class.disabled]="step < 0" class="btn cancel">
+          {{ 'global.quiz-modal.prev' | translate }}
+        </button>
+      </div>
+    </ng-container>
+  </div>
+  <div *ngIf="modalData.id === -1">
+    <span class="title-resource-main">Download resource</span>
+    <div class="resources" *ngFor="let resource of modalData.resources">
+      <div class="title-and-file">
+        <us-icon [name]="'files-icon'" [size]="30"></us-icon>
+        <span class="title-resource">{{ resource.title }}</span>
+        <a class="download-icon" target="_blank" [href]="resource.path"
+          ><us-icon [name]="'download'" [size]="30"></us-icon
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #cover_image>
+  <img src="../../../../../../assets/images/course-view/no-photo.png" class="no-photo" />
+</ng-template>

@@ -1,0 +1,114 @@
+<div class="course-landing">
+  <div class="course-landing__general">
+    <div class="course-landing__general-form">
+      <us-input
+        usValidationError
+        [formControl]="titleControl"
+        [label]="'dashboard.courses.course-title' | translate"
+        [placeholder]="'dashboard.courses.insert-title' | translate"
+      ></us-input>
+      <us-input
+        usValidationError
+        [formControl]="subtitleControl"
+        [label]="'dashboard.courses.course-subtitle' | translate"
+        [placeholder]="'dashboard.courses.insert-subtitle' | translate"
+      ></us-input>
+      <us-editor
+        [formControl]="descriptionControl"
+        [label]="'dashboard.courses.course-description' | translate"
+        [placeholder]="'dashboard.courses.insert-description' | translate"
+      ></us-editor>
+    </div>
+    <div class="course-landing__general-image">
+      <img
+        src="./assets/images/dashboard/courses/course-creation-illustration.png"
+        alt="Create Course Category"
+      />
+    </div>
+  </div>
+  <div class="course-landing__requirements">
+    <h3 class="course-landing__requirements-title">
+      {{ 'dashboard.courses.course-requirements' | translate }}
+    </h3>
+    <div
+      class="course-landing__requirements-input-keeper"
+      *ngFor="let control of requirementsControlArray.controls; let i = index"
+    >
+      <us-input
+        usValidationError
+        [placeholder]="'dashboard.courses.add-requirement' | translate"
+        class="course-landing__requirements-input"
+        [class.course-landing__requirements-input_buttoned]="
+          requirementsControlArray.controls.length > 1
+        "
+        [formControl]="convertAbstractControlToFormControl(control)"
+      ></us-input>
+      <us-button
+        *ngIf="requirementsControlArray.controls.length > 1"
+        [theme]="buttonTheme.error"
+        icon="trash"
+        autoSetSuffix="error"
+        (clicked)="removeRequirement(i)"
+      ></us-button>
+    </div>
+    <span class="course-landing__requirements-add-button" (click)="addRequirement()">
+      <us-icon name="add_primary"></us-icon>
+      {{ 'dashboard.courses.add-more' | translate }}
+    </span>
+  </div>
+  <div class="course-landing__cover">
+    <h3 class="course-landing__cover-title">{{ 'dashboard.courses.add-image' | translate }}</h3>
+    <article class="course-landing__cover-description">
+      {{ 'dashboard.courses.course-image' | translate }}
+    </article>
+    <us-image-input
+      usValidationError
+      [formControl]="coverImageControl"
+      [multiple]="false"
+    ></us-image-input>
+  </div>
+  <div class="course-landing__promotional">
+    <h3 class="course-landing__promotional-title">
+      {{ 'dashboard.courses.promo-video' | translate }}
+    </h3>
+    <article class="course-landing__promotional-description">
+      {{ 'dashboard.courses.course-video' | translate }}
+    </article>
+    <us-input
+      usValidationError
+      [formControl]="promotionalVideoControl"
+      [label]="'dashboard.courses.add-url' | translate"
+      [placeholder]="'dashboard.courses.insert-url' | translate"
+    ></us-input>
+  </div>
+  <div class="course-landing__action-keeper">
+    <us-button
+      class="course-landing__action"
+      [theme]="buttonTheme.primary"
+      [disabled]="publishDisabled"
+      (clicked)="publish()"
+      [usTooltip]="
+        publishDisabled
+          ? ('dashboard.courses.publication-available' | translate)
+          : ('dashboard.courses.course-publication' | translate)
+      "
+    >
+      {{ 'dashboard.courses.publish' | translate }}
+    </us-button>
+    <us-button
+      class="course-landing__action"
+      (clicked)="preview()"
+      [theme]="buttonTheme.primary"
+      [outline]="true"
+    >
+      {{ 'dashboard.courses.preview' | translate }}
+    </us-button>
+    <us-button
+      class="course-landing__action"
+      [theme]="buttonTheme.primary"
+      (clicked)="saveAndNext()"
+    >
+      {{ 'dashboard.courses.save-next' | translate }}
+    </us-button>
+  </div>
+</div>

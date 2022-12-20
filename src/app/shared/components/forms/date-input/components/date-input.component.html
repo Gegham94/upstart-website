@@ -1,0 +1,22 @@
+<label class="date-input">
+  <span class="date-input__label" *ngIf="label">{{ label }}</span>
+  <div class="date-input__keeper">
+    <div class="date-input__icon">
+      <us-icon name="calendar"></us-icon>
+    </div>
+    <input
+      class="date-input__field"
+      type="text"
+      [value]="value | date: (mode !== 'time' ? 'dd-MM-YYYY' : 'HH:mm')"
+      [readOnly]="true"
+      [mode]="mode"
+      [dpDayPicker]="{ min: minDate, showTwentyFourHours: true, showGoToCurrent: false }"
+      (onChange)="calendarDaySelected($event)"
+    />
+  </div>
+</label>
+<div *ngIf="errors" class="date-input__error-block">
+  <span *ngFor="let error of errors | keyvalue">
+    {{ error.value }}
+  </span>
+</div>

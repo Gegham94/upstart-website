@@ -1,0 +1,13 @@
+<div class="trainer-info container">
+  <div class="content">
+    <h3 class="trainer-label">{{ 'trainer_profile.information' | translate }}</h3>
+    <div *ngIf="!trainerData" class="loader">
+      <ngx-skeleton-loader
+        count="5"
+        [theme]="{ height: '20px', 'background-color': '#f8f8f8' }"
+        appearance="line"
+      ></ngx-skeleton-loader>
+    </div>
+    <us-reviews [trainer]="trainerData"></us-reviews>
+  </div>
+</div>

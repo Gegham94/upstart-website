@@ -1,0 +1,7 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+main {
+  @include for-breakpoint(mobile) {
+    margin-top: 67px;
+  }
+}

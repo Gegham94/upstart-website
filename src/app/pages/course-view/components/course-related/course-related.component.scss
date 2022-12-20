@@ -1,0 +1,11 @@
+@import '../../../../../assets/styles/variables/colors';
+
+.course-related {
+  padding-bottom: 93px;
+
+  &__title {
+    color: $title-color;
+    margin-bottom: 24px;
+  }
+
+}

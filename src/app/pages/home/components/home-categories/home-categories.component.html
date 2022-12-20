@@ -1,0 +1,40 @@
+<div class="home-categories">
+  <div class="home-categories__container container">
+    <ng-container *ngFor="let category of categories">
+      <a
+        *ngIf="category.parent_id === null"
+        class="home-categories__element"
+        [routerLink]="category.children.length > 0 ? null : '/courses/' + category.id"
+        [class.home-categories__element_child]="category.children.length > 0"
+      >
+        <ng-container *ngIf="category.children.length > 0; else noChild">
+          <!-- <a [routerLink]="'/courses/' + category.children[0].id">
+            {{ category.title }}
+          </a> -->
+          <a (click)="navigate(category)">
+            {{ category.title }}
+          </a>
+        </ng-container>
+        <ng-template #noChild>
+          {{ category.title }}
+        </ng-template>
+        <span class="home-categories__element-arrow" *ngIf="category.children.length > 0">
+          <us-icon name="nav_list-icon" [size]="24"></us-icon>
+        </span>
+        <ng-template [ngIf]="category.children.length > 0">
+          <div class="home-categories__element-child-keeper" *ngIf="category.children.length > 0">
+            <div class="home-categories__element-child-container">
+              <a
+                *ngFor="let child of category.children"
+                class="home-categories__child-list"
+                [routerLink]="'/courses/' + child.id"
+              >
+                {{ child.title }}
+              </a>
+            </div>
+          </div>
+        </ng-template>
+      </a>
+    </ng-container>
+  </div>
+</div>

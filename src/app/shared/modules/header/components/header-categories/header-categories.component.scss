@@ -1,0 +1,105 @@
+@import 'src/assets/styles/variables/colors';
+
+.categories {
+  display: flex;
+  align-items: center;
+
+  &__title {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: $white;
+
+    transition: .5s;
+
+    &:hover {
+      color: $title-color;
+    }
+  }
+
+  &__children-list {
+    cursor: default;
+    position: absolute;
+    left: 239px;
+    top: 0;
+    width: 15rem;
+    flex-direction: column;
+    background: $white;
+    height: 100%;
+    opacity: 0;
+    display: flex;
+    transform-origin: left;
+    transform: scaleX(0);
+    outline: 1px solid #d1d7dc;
+
+    transition: .3s;
+    a{
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+      letter-spacing: 0.1px;
+      color: $grey-text;
+      padding: 0.8rem 1.6rem;
+      &:hover{
+        color: $main;
+      }
+    }
+  }
+
+
+  &__dropdown {
+    &-list {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      background: $white;
+      width: 15rem;
+      border: 1px solid #d1d7dc;
+      top: 76px;
+      left: -10px;
+      opacity: 0;
+      transform-origin: top;
+      transform: scaleY(0);
+
+      transition: .3s;
+    }
+
+    &-item {
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+      letter-spacing: 0.1px;
+      color: $grey-text;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1.6rem;
+      &:hover > a {
+        color: $main;
+      }
+      a {
+        &:hover {
+
+        }
+      }
+    }
+  }
+
+  .dropdown-child {
+    &:hover {
+      .categories__children-list {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+  }
+
+
+  &:hover > &__dropdown-list {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}

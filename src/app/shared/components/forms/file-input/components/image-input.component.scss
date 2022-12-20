@@ -1,0 +1,75 @@
+@import 'src/assets/styles/variables/colors';
+
+.image-input {
+  visibility: hidden;
+  display: none;
+
+  &__custom {
+    width: 64px;
+    height: 64px;
+    background: $placeholder;
+    opacity: 0.64;
+    border-radius: 13px;
+    transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      opacity: 1;
+      box-shadow: 2px 4px 20px 0 $black-opacity-20;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+  }
+
+  &__uploaded {
+    position: relative;
+
+    &-close {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: $placeholder;
+      opacity: 0.64;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &-image {
+      vertical-align: middle;
+      border-radius: 13px;
+    }
+
+    &-list {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  &__keeper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__error-block{
+    margin: 5px 0;
+    color: $error;
+    font-size: 12px;
+  }
+}

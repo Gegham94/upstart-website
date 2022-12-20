@@ -1,0 +1,61 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.home-become-instructor {
+  @include for-breakpoint(mobile) {
+    margin-bottom: 13px;
+  }
+
+  &__container {
+    @include for-breakpoint(desktop-sm) {
+      padding: 64px 64px 95.42px;
+    }
+    @include for-breakpoint(tablet) {
+      flex-direction: column;
+      align-items: center;
+    }
+    @include for-breakpoint(mobile) {
+      padding: 0 18px 47px;
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+
+  &__content {
+    @include for-breakpoint(tablet) {
+      margin-left: 0;
+      text-align: center;
+      padding-top: 24px;
+    }
+  }
+
+  &__image {
+    @include for-breakpoint(tablet) {
+      transform: translateX(7%);
+    }
+  }
+
+  &__title {
+    @include for-breakpoint(mobile) {
+      margin-bottom: 21px;
+    }
+  }
+
+  &__description {
+    @include for-breakpoint(mobile) {
+      margin-bottom: 36px;
+    }
+  }
+
+  &__action {
+    &::ng-deep .button {
+      @include for-breakpoint(tablet) {
+        width: 100%;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<div class="basket-courses">
+  <div class="basket-courses__container container">
+    <div *ngIf="loader" class="loader">
+      <ngx-skeleton-loader
+        count="5"
+        [theme]="{ height: '40px', 'background-color': '#faf8ff' }"
+        appearance="line"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="basket-courses__header-line">
+      <h3 class="basket-courses__title">{{ 'basket.main.title' | translate }}</h3>
+      <p class="basket-courses__desc">
+        {{ coursesData?.length }} {{ 'basket.main.count-text' | translate }}
+      </p>
+    </div>
+
+    <span *ngIf="emptyBasket" class="empty-basket">{{ 'basket.empty_basket' | translate }}</span>
+    <ng-container *ngFor="let course of coursesData">
+      <us-course-ticket
+        (removeEmitter$)="removedCourse()"
+        [course]="course"
+        [isBusket]="true"
+      ></us-course-ticket>
+    </ng-container>
+
+    <div *ngIf="coursesData?.length" class="basket-courses__action-keeper">
+      <div class="basket-courses__title">
+        <span class="basket-courses__title-text"> {{ 'basket.main.total' | translate }}: </span>
+        <span class="basket-courses__title-price">
+          {{ getCurrency.AMD }} {{ totalPrice | number }}
+        </span>
+      </div>
+      <us-button class="basket-courses__action" [theme]="buttonTheme.primary">
+        {{ 'basket.courses.checkout' | translate }}
+      </us-button>
+    </div>
+
+    <div class="basket-courses__slider-keeper">
+      <p class="basket-courses__slider-suggestion-title">
+        {{ 'basket.main.suggestion-title' | translate }}
+      </p>
+      <us-course-slider
+        (addIntoBasket$)="basketEvent()"
+        [show]="'courses'"
+        [updateCarousel]="update"
+      ></us-course-slider>
+    </div>
+  </div>
+</div>

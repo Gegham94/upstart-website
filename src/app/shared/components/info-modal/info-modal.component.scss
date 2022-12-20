@@ -1,0 +1,35 @@
+@import 'src/assets/styles/variables/colors';
+
+.auth {
+  ::ng-deep {
+    .mat-dialog-container {
+      background: $white;
+      width: 30vw !important;
+      padding: 15px !important;
+    }
+
+    us-button {
+      button {
+        margin: 10px auto;
+        padding: 2px 28px !important;
+      }
+    }
+  }
+
+  .info {
+    &__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &-desc {
+        font-weight: 500;
+        font-size: 16px;
+        text-align: center;
+        line-height: 22px;
+        color: $title-color;
+        margin-bottom: 25px;
+      }
+    }
+  }
+}

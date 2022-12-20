@@ -1,0 +1,155 @@
+<header class="dashboard-header" *ngIf="!isMobile; else mobileHeader">
+  <div class="dashboard-header__container container">
+    <div class="dashboard-header__logo-keeper">
+      <us-button
+        icon="dashboard/burger-menu"
+        [iconSize]="32"
+        class="dashboard-header__sidebar-action"
+        [class.dashboard-header__sidebar-action_active]="isSidebarOpened"
+        (click)="toggleSidebar()"
+      ></us-button>
+      <a routerLink="/" class="dashboard-header__logo-link">
+        <img
+          class="dashboard-header__logo"
+          src="./assets/images/logos/upstart-logo.svg"
+          alt="Upstart Logo"
+        />
+      </a>
+    </div>
+    <div class="dashboard-header__action-keeper">
+      <!-- <us-button icon="profile_white" [iconSize]="32" class="dashboard-header__action"> </us-button> -->
+
+      <div
+        *ngIf="!nameFirstLetters"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasExample"
+        aria-controls="offcanvasExample"
+        #sideMenuToggler
+      >
+        <img class="profile-icon__avatar" [src]="userInfo?.avatar" alt="Avatar" />
+      </div>
+      <div
+        *ngIf="nameFirstLetters"
+        class="profile-icon"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasExample"
+        aria-controls="offcanvasExample"
+        #sideMenuToggler
+      >
+        <span class="profile-icon__text">{{ nameFirstLetters }}</span>
+      </div>
+
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+        *ngIf="loggedIn"
+      >
+        <div>
+          <div class="d-flex user__header">
+            <div
+              *ngIf="!nameFirstLetters"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasExample"
+              aria-controls="offcanvasExample"
+            >
+              <img class="profile-icon__avatar" [src]="userInfo?.avatar" alt="Avatar" />
+            </div>
+            <div
+              *ngIf="nameFirstLetters"
+              class="profile-icon__sidebar"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasExample"
+              aria-controls="offcanvasExample"
+            >
+              <span class="profile-icon__text-main">{{ nameFirstLetters }}</span>
+            </div>
+            <div class="d-flex ms-3 flex-column">
+              <p class="user__name">{{ userInfo?.first_name }}</p>
+              <p class="user__email mt-1">{{ userInfo?.email }}</p>
+            </div>
+          </div>
+          <div class="offcanvas-body">
+            <p class="user__menu-item" routerLink="/dashboard">
+              {{ 'global.header.action-panel.dashboard' | translate }}
+            </p>
+            <div
+              class="d-flex justify-content-between"
+              routerLink="/my-learning"
+              (click)="sideMenuToggler.nativeElement.click()"
+            >
+              <p class="user__menu-item">
+                {{ 'global.header.my-learning.title' | translate }}
+              </p>
+              <!-- <p class="user__item-count mt-3">{{ unreadCount }}</p> -->
+            </div>
+            <div
+              class="d-flex justify-content-between"
+              routerLink="/notifications"
+              (click)="sideMenuToggler.nativeElement.click()"
+            >
+              <p class="user__menu-item">
+                {{ 'global.header.header-notification.notifications' | translate }}
+              </p>
+              <p class="user__item-count mt-3">{{ unreadCount }}</p>
+            </div>
+            <p
+              class="user__menu-item"
+              routerLink="/basket"
+              (click)="sideMenuToggler.nativeElement.click()"
+            >
+              {{ 'global.header.my-cart' | translate }}
+            </p>
+            <p
+              class="user__menu-item"
+              routerLink="/favorites"
+              (click)="sideMenuToggler.nativeElement.click()"
+            >
+              {{ 'global.header.favorites' | translate }}
+            </p>
+            <p
+              class="user__menu-item"
+              routerLink="/settings"
+              (click)="sideMenuToggler.nativeElement.click()"
+            >
+              {{ 'global.header.edit-profile' | translate }}
+            </p>
+            <p
+              class="user__menu-item"
+              [routerLink]="'/profile/' + userInfo?.id"
+              (click)="sideMenuToggler.nativeElement.click()"
+            >
+              {{ 'global.header.public-profile' | translate }}
+            </p>
+            <hr class="user__divider" />
+
+            <p class="user__menu-item" (click)="logOut()">
+              {{ 'global.header.action-panel.log out' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <us-header-language></us-header-language>
+    </div>
+  </div>
+</header>
+<ng-template #mobileHeader>
+  <header
+    class="dashboard-header dashboard-header_mobile container"
+    [class.header_scrolled]="isScrolled"
+  >
+    <us-dashboard-header-mobile-menu [isLoggedIn]="false"></us-dashboard-header-mobile-menu>
+    <a class="dashboard-header__logo-keeper" routerLink="/">
+      <img
+        class="dashboard-header__logo"
+        src="./assets/images/logos/upstart-logo-mobile.svg"
+        alt="Upstart Logo"
+      />
+    </a>
+    <div class="dashboard-header__action-keeper">
+      <us-button icon="profile" [iconSize]="32" class="dashboard-header__action"> </us-button>
+    </div>
+  </header>
+</ng-template>

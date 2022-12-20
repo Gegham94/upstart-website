@@ -1,0 +1,8 @@
+<us-default-layout *ngIf="!isDashboard; else dashboardLayout">
+  <router-outlet></router-outlet>
+</us-default-layout>
+<ng-template #dashboardLayout>
+  <us-dashboard-layout>
+    <router-outlet></router-outlet>
+  </us-dashboard-layout>
+</ng-template>

@@ -1,0 +1,27 @@
+<div
+  class="select__option"
+  [class.select__option_child]="option.children && option.children.length > 0"
+  [class.select__option_selected]="selected"
+>
+  <div class="select__option-name">
+    <img
+      *ngIf="option.children && option.children.length > 0"
+      class="select__option-chevron"
+      [class.select__option-chevron_opened]="isOpened"
+      src="./assets/images/icons/chevron-down_dark.svg"
+      alt="Chevron"
+      (click)="isOpened = !isOpened"
+    />
+    <span class="select__option-text" (click)="optionSelected.emit(option)">
+      {{ option.displayName }}
+    </span>
+  </div>
+  <ng-container *ngIf="option.children && option.children.length > 0 && isOpened">
+    <us-option-list
+      class="select__option-children"
+      *ngFor="let childOption of option.children"
+      [option]="childOption"
+      (optionSelected)="optionSelected.emit($event)"
+    ></us-option-list>
+  </ng-container>
+</div>

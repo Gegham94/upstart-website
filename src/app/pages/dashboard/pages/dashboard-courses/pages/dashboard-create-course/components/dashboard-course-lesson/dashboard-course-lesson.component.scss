@@ -1,0 +1,230 @@
+@import "src/assets/styles/variables/colors";
+
+:host {
+  background: $light-purple;
+  display: block;
+
+  ::ng-deep {
+    .accordion {
+      border-radius: 0;
+      background: transparent;
+    }
+  }
+}
+
+.course-lesson {
+  width: 100%;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 36px 11px 60px;
+  }
+
+  &__toggle {
+    &_rotated {
+      transform: rotate(180deg);
+    }
+  }
+
+  //TODO: Here is bad code repeat, needs to make this in shared component :)
+  &__article-add {
+    background: $white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    gap: 11px;
+    border: none;
+    outline: none;
+    color: $title-color;
+    width: 154px;
+    height: 86px;
+    transition: box-shadow .2s ease-in-out;
+
+    &-text {
+      color: $title-color;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 4px #A997FF;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+
+    &-keeper {
+      display: flex;
+      justify-content: center;
+      gap: 11px;
+      padding-top: 29px;
+      padding-bottom: 29px;
+    }
+  }
+
+  &__description {
+    margin-bottom: 14px;
+
+    &-title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $grey-text;
+      margin-bottom: 7px;
+    }
+
+    &-article {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      color: $light-grey-text;
+    }
+
+    &-field {
+      display: block;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__video,
+  &__article {
+    padding: 17px 60px 0;
+
+    &-link {
+      max-width: 350px;
+    }
+
+    &-link,
+    &-editor {
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    ::ng-deep {
+      .confirmable-input__button {
+        .button {
+          height: 46px;
+        }
+      }
+
+      .confirmable-input__input {
+        .input__field {
+          padding-top: 10.5px;
+          padding-bottom: 10.5px;
+        }
+      }
+    }
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+
+    &-icon {
+      cursor: pointer;
+    }
+
+    &-list {
+      display: flex;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+      pointer-events: none;
+    }
+  }
+
+  &__save-action {
+    &::ng-deep {
+      .button {
+        padding: 11px 29px;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+    }
+
+    &-keeper {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 36px;
+    }
+  }
+
+  &__header:hover &__action-list {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__add-description {
+    &::ng-deep {
+      .button {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 10px 9px;
+        border-radius: 0 50px 50px 0;
+        margin-top: 31px;
+      }
+    }
+  }
+
+  &__lesson {
+    &-title-field {
+      padding-left: 60px;
+      padding-right: 36px;
+      display: block;
+    }
+
+    &-action {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 36px;
+      margin-top: 12px;
+      margin-bottom: 24px;
+      gap: 16px;
+
+      &::ng-deep {
+        button {
+          padding: 6px 10px;
+          text-transform: uppercase;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 14px;
+          letter-spacing: 0.05em;
+          display: flex;
+          gap: 8px;
+        }
+      }
+    }
+  }
+
+  &__resource {
+    margin-bottom: 16px;
+
+    &-label {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: #262626;
+      margin-bottom: 6px;
+    }
+  }
+}

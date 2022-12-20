@@ -1,0 +1,162 @@
+@import 'src/assets/styles/variables/colors';
+
+.courses {
+  margin-bottom: 30px;
+
+  &__header {
+    &-line {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding-top: 24px;
+      gap: 15px;
+    }
+
+    &-sort {
+      max-width: 180px;
+
+      ::ng-deep {
+        input {
+          font-size: 13px;
+          height: initial;
+          padding: 8px 8px 9px 20px;
+          cursor: pointer;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .select__option-keeper {
+          padding: 0 7px;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  &__filter {
+    background: $main;
+    padding: 5px;
+    width: 128px;
+    height: 34px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    &-text {
+      font-size: 12px;
+      color: $white;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 14px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  }
+
+  &__title {
+    margin: 34px 10px 10px 0;
+    white-space: nowrap;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 600px;
+    &-left-side {
+      display: flex;
+      flex-direction: column;
+      margin-right: 10px;
+      min-width: 200px;
+      transition: 0.2s;
+      .togglebar{
+        position: relative;
+        border: 1px solid $light-grey;
+        border-radius: 8px;
+        padding: 15px;
+        transition: 0.1s;
+        ::ng-deep .treeview-container{
+          overflow: inherit;
+          .form-inline {
+            white-space: normal;
+          }
+        }
+      }
+    }
+    &-right-side{
+      flex: 1;
+      position: relative;
+    }
+    .close_togglebar{
+      width: 0;
+      height: 0;
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+      .togglebar{
+        width: 0;
+        display: none;
+        position: absolute;
+      }
+    }
+
+    .loader-block {
+      position: absolute;
+      top: 50%;
+      left: 55%;
+      transform: translate(-50%, -50%);
+      ::ng-deep.mat-progress-spinner {
+        width: 50px !important;
+        height: 90px !important;
+      }
+      ::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+        stroke: $main;
+      }
+      ::ng-deep.mat-progress-spinner svg {
+        width: 50px !important;
+      }
+    }
+
+    &-list {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      row-gap: 10px;
+      column-gap: 18px;
+      margin-bottom: 35px;
+      > us-inline-course {
+        &:not(:last-child) {
+          content: '';
+          border-bottom: 1px solid $light-grey;
+          padding-bottom: 7px;
+        }
+      }
+      .notData-block{
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        p{
+          font-size: 22px;
+          font-style: italic;
+          color: $light-grey-text;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+  .colapsed_block{
+    flex-direction: column;
+  }
+  us-pagination {
+    margin-top: 35px;
+  }
+}

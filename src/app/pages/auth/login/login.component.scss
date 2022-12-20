@@ -1,0 +1,37 @@
+@import 'src/assets/styles/variables/colors';
+@import 'src/assets/styles/mixins/for-breakpoint';
+@import 'src/toast';
+
+.container {
+  @include for-breakpoint(mobile-lg) {
+    .social_btn {
+      max-width: 64px;
+      max-height: 32px;
+      border: 1px solid $border-purple;
+      img {
+        width: 15px;
+      }
+    }
+    .mobile_btns {
+      .google_btn {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+  .social_btn {
+    background: #f6f6f6;
+    border: 1px solid #dddfdd;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+    color: $light-grey-text;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+  }
+}
+

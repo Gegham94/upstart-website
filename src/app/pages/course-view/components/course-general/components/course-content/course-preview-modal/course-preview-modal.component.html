@@ -1,0 +1,112 @@
+<div class="course_preview">
+  <mat-dialog-content>
+    <div
+      [ngClass]="{ title_position: step !== 0 && step !== questionData.length + 1 }"
+      class="modal_header mx-2"
+    >
+      <p class="ps-2" *ngIf="step !== 0 && step !== questionData.length + 1">Question 1</p>
+      <us-icon mat-dialog-close name="close" class="m-2" [size]="24"> </us-icon>
+    </div>
+    <div *ngIf="data.type === 'lesson'; else quiz" class="m-3">
+      <h3 class="preview_class">Course Preview</h3>
+      <p class="preview_title mb-2">{{ data.data?.title }}</p>
+      <div class="w-100" *ngIf="data?.data?.video_url && data.data?.video_url !== ''">
+        <iframe class="preview_video" [src]="videoUrl" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p class="preview_article pt-3" [innerHTML]="data.data?.article"></p>
+    </div>
+    <ng-template #quiz>
+      <div class="quiz_content">
+        <div
+          class="d-flex justify-content-center align-items-center flex-column"
+          *ngIf="step === 0"
+        >
+          <h1 class="quiz_title">Start quiz for lesson 1</h1>
+          <p class="quiz_subtitle">Quiz contains 15 questions with single and multiple answers</p>
+          <p class="good">Good luck!</p>
+        </div>
+        <div *ngFor="let question of questionData; let i = index">
+          <div
+            class="d-flex justify-content-center align-items-start flex-column pt-2 px-3"
+            *ngIf="step === i + 1"
+          >
+            <div class="d-flex w-100 justify-content-between align-items-center pe-2"></div>
+            <p class="step_2_subtitle">
+              Do you want to become a programmer? Do you want to learn how to create games, automate
+              your browser, visualize data, and much more?
+            </p>
+            <div class="check_forms pt-2" *ngIf="question.type === 0; else radiobtn">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="1" checked />
+                <label class="form-check-label" for="1"> {{ question.answer1 }} </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="2" />
+                <label class="form-check-label" for="2"> Answer 2 </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="3" />
+                <label class="form-check-label" for="3"> Answer 3 </label>
+              </div>
+            </div>
+            <ng-template #radiobtn>
+              <div class="check_forms pt-2 d-flex">
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio1"
+                    value="option1"
+                  />
+                  <label class="form-check-label" for="inlineRadio1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio2"
+                    value="option2"
+                  />
+                  <label class="form-check-label" for="inlineRadio2">2</label>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <div
+          class="d-flex justify-content-center align-items-center flex-column px-4"
+          *ngIf="step === questionData.length + 1"
+        >
+          <h1 class="quiz_title">Compilet</h1>
+          <p class="quiz_subtitle">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+            has been the industry's standard dummy text ever
+          </p>
+        </div>
+        <div class="button_content">
+          <mat-dialog-actions align="end">
+            <us-button
+              *ngIf="step !== questionData.length + 1"
+              class="me-2"
+              [theme]="buttonTheme.primary"
+              [outline]="true"
+              (clicked)="backStep()"
+              >{{ step === 0 ? 'Cancel' : 'previus' }}</us-button
+            >
+            <us-button [theme]="buttonTheme.primary" (clicked)="nexStep()">{{
+              step === 0
+                ? 'Start'
+                : step === questionData.length
+                ? 'finish'
+                : step === questionData.length + 1
+                ? 'ok'
+                : 'Next'
+            }}</us-button>
+          </mat-dialog-actions>
+        </div>
+      </div>
+    </ng-template>
+  </mat-dialog-content>
+</div>

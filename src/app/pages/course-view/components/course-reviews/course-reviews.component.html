@@ -1,0 +1,46 @@
+<div class="reviews container">
+  <div class="reviews__container">
+    <div class="reviews__header">
+      <h3 class="reviews__title">{{ 'course.reviews' | translate }}</h3>
+      <ng-container *ngIf="!isPreview">
+        <us-button
+          *ngIf="!isUserHasReview"
+          (click)="openDialog()"
+          class="reviews__add-review desktop"
+          [theme]="buttonTheme.primary"
+        >
+          {{ 'reviews.add_review' | translate }}
+        </us-button>
+      </ng-container>
+    </div>
+    <ng-container *ngIf="!isPreview">
+      <span *ngIf="review.length === 0 || isPreview" class="no-review">{{
+        'trainer_profile.no_review' | translate
+      }}</span>
+    </ng-container>
+    <div *ngIf="!isPreview" [class.view-all-list]="seeAllReview" class="reviews__block-list">
+      <us-reviews
+        [showLoader]="reviewLoader"
+        (deleteReviewEmitter)="deleteReviewDialog($event)"
+        (editReviewEmitter)="editReview($event)"
+        [review]="review"
+      ></us-reviews>
+    </div>
+    <p
+      *ngIf="review.length > 2"
+      (click)="seeAllReview = !seeAllReview"
+      class="reviews__all-reviews"
+    >
+      <span *ngIf="!seeAllReview; else hide">{{ 'reviews.see_all' | translate }} </span>
+      <ng-template #hide>{{ 'reviews.hide_all' | translate }} </ng-template>
+    </p>
+    <us-button
+      *ngIf="!isUserHasReview"
+      (click)="openDialog()"
+      class="reviews__add-review mobile"
+      [theme]="buttonTheme.primary"
+    >
+      {{ 'reviews.add_review' | translate }}
+    </us-button>
+  </div>
+</div>

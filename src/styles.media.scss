@@ -1,0 +1,11 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.container {
+  @include for-breakpoint(tablet) {
+    padding: 0 40px;
+  }
+
+  @include for-breakpoint(mobile) {
+    padding: 0 18px;
+  }
+}

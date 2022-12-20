@@ -1,0 +1,202 @@
+<div>
+  <us-button
+    (clicked)="openMobileMenu()"
+    class="header-mobile-menu__toggle"
+    icon="burger-menu"
+    [iconSize]="32"
+  ></us-button>
+  <div class="header-mobile-menu" [class.header-mobile-menu_toggled]="menuOpened">
+    <div
+      class="header-mobile-menu__container"
+      [class.header-mobile-menu__container_subcategories]="
+        subcategories && subcategories.length > 0
+      "
+    >
+      <us-icon (click)="closeMobileMenu()" class="header-mobile-menu__close" name="close"></us-icon>
+      <!-- <us-header-search></us-header-search> -->
+
+      <ng-container *ngIf="isLoggedIn; else authActions">
+        <div class="d-flex justify-content-between" (click)="openMenu()">
+          <div class="d-flex">
+            <div *ngIf="!nameFirstLetters" class="profile-icon__img">
+              <div *ngIf="unreadCount" class="profile-icon__sidebar_circle"></div>
+              <img class="profile-icon__avatar" [src]="userInfo?.avatar" alt="Avatar" />
+            </div>
+            <div *ngIf="nameFirstLetters" class="profile-icon__sidebar">
+              <div *ngIf="unreadCount" class="profile-icon__sidebar_circle"></div>
+              <span class="profile-icon__text">{{ nameFirstLetters }}</span>
+            </div>
+            <div class="d-flex ms-1 flex-column user">
+              <p class="user__name">{{ userInfo?.first_name }}</p>
+              <p class="user__email mt-1">{{ userInfo?.email }}</p>
+            </div>
+          </div>
+
+          <us-icon
+            class="header-mobile-menu__category-icon mt-2"
+            name="chevron-right"
+            [size]="14"
+          ></us-icon>
+        </div>
+      </ng-container>
+
+      <div class="profile-menu" [class.profile-menu_active]="isOpenMenu" (click)="closeMenu()">
+        <div class="d-flex align-items-center profile-menu__header">
+          <us-icon name="chevron-left" [size]="18"></us-icon>
+          <span class="profile-menu__text ms-4">{{ 'global.header.menu' | translate }}</span>
+        </div>
+
+        <div class="profile-menu__list">
+          <div class="d-flex justify-content-between mt-3">
+            <p
+              class="profile-menu__list_item-text"
+              routerLink="/notifications"
+              (click)="menuOpened = false"
+            >
+              {{ 'global.header.header-notification.notifications' | translate }}
+            </p>
+            <p class="profile-menu__list_item-count">{{ unreadCount }}</p>
+          </div>
+          <div class="d-flex justify-content-between mt-3" (click)="openBasketPage()">
+            <p class="profile-menu__list_item-text">{{ 'global.header.my-cart' | translate }}</p>
+            <p class="profile-menu__list_item-count">{{ coursesInBasket }}</p>
+          </div>
+          <div class="d-flex justify-content-between mt-3">
+            <p
+              class="profile-menu__list_item-text"
+              routerLink="/favorites"
+              (click)="menuOpened = false"
+            >
+              {{ 'global.header.favorites' | translate }}
+            </p>
+            <p class="profile-menu__list_item-count">{{ coursesInWishList }}</p>
+          </div>
+          <div class="mt-3">
+            <p class="profile-menu__list_item-text">
+              {{ 'global.header.edit-profile' | translate }}
+            </p>
+          </div>
+          <div class="mt-3">
+            <p class="profile-menu__list_item-text">
+              {{ 'global.header.public-profile' | translate }}
+            </p>
+          </div>
+          <hr class="header-mobile-menu__divider" />
+          <p class="profile-menu__list_item-text" (click)="logOut()">
+            {{ 'global.header.action-panel.log out' | translate }}
+          </p>
+        </div>
+      </div>
+
+      <hr class="header-mobile-menu__divider" />
+
+      <div class="header-mobile-menu__category-list">
+        <div class="header-mobile-menu__category" *ngFor="let category of categories">
+          <a
+            class="header-mobile-menu__category-button"
+            [routerLink]="'/courses/' + category.id"
+            (click)="closeMobileMenu()"
+          >
+            {{ category.title }}
+          </a>
+          <us-icon
+            name="chevron-right"
+            [size]="10"
+            *ngIf="category.children.length > 0"
+            (click)="setSubcategories(category.children)"
+          ></us-icon>
+          <div
+            class="header-mobile-menu__category-submenu"
+            *ngIf="category.children.length > 0"
+          ></div>
+        </div>
+      </div>
+      <div class="header-mobile-menu__action-keeper"></div>
+      <div class="header-mobile-menu__language" (click)="openLanguages = true">
+        <!-- <us-header-language [isMobile]="true"></us-header-language> -->
+        <div class="header-mobile-menu__language_block">
+          <us-icon class="header-language__icon" [name]="'globe_dark'" [size]="20"></us-icon>
+          <p class="ms-2 header-mobile-menu__language_block-text">
+            {{ selectedLanguage?.viewValue }}
+          </p>
+        </div>
+        <div
+          class="header-mobile-menu__languages"
+          [class.header-mobile-menu__languages_active]="openLanguages"
+        >
+          <div
+            class="d-flex align-items-center header-mobile-menu__languages_header"
+            (click)="closeLanguages($event)"
+          >
+            <us-icon name="chevron-left" [size]="18"></us-icon>
+            <span class="profile-menu__text ms-4">{{
+              'global.mobile-menu.languages' | translate
+            }}</span>
+          </div>
+          <div
+            *ngFor="let language of languages"
+            class="header-mobile-menu__languages__list"
+            [class.header-mobile-menu__languages__list_active]="
+              selectedLanguage?.value === language.value
+            "
+          >
+            <p class="header-mobile-menu__languages__text" (click)="changeLanguage(language.value)">
+              {{ language.fullValue }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="header-mobile-menu__subcategory"
+        [class.header-mobile-menu__subcategory_active]="subcategories && subcategories.length > 0"
+      >
+        <div class="header-mobile-menu__subcategory-back" (click)="setSubcategories(null)">
+          <us-icon name="chevron-left" [size]="18"></us-icon>
+          <span>{{ 'global.mobile-menu.categories' | translate }}</span>
+        </div>
+        <div class="header-mobile-menu__category-list ms-2">
+          <div class="header-mobile-menu__category" *ngFor="let category of subcategories">
+            <a
+              class="header-mobile-menu__category-button"
+              [routerLink]="'/courses/' + category.id"
+              (click)="closeMobileMenu()"
+            >
+              {{ category.title }}
+            </a>
+            <us-icon
+              class="header-mobile-menu__category-icon"
+              name="chevron-right"
+              [size]="10"
+              *ngIf="category.children.length > 0"
+              (click)="setSubcategories(category.children)"
+            ></us-icon>
+            <div
+              class="header-mobile-menu__category-submenu"
+              *ngIf="category.children.length > 0"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        (click)="closeMobileMenu()"
+        class="header-mobile-menu__backdrop"
+        [class.header-mobile-menu__backdrop_toggled]="menuOpened"
+      ></div>
+    </div>
+  </div>
+
+  <ng-template #authActions>
+    <a class="header-mobile-menu__action" routerLink="auth/login" (click)="menuOpened = false">
+      {{ 'global.header.log-in' | translate }}
+    </a>
+    <a
+      class="header-mobile-menu__action mt-3"
+      routerLink="auth/registration"
+      (click)="menuOpened = false"
+    >
+      {{ 'global.header.sign-up' | translate }}
+    </a>
+  </ng-template>
+</div>

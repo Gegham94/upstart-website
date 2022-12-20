@@ -1,0 +1,78 @@
+@import 'src/assets/styles/variables/colors';
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.basket-courses {
+  &__header-line{
+    @include for-breakpoint(mobile) {
+      align-items: center;
+    }
+  }
+  &__title {
+    @include for-breakpoint(mobile) {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 34px;
+      text-align: center;
+      color: $title-color;
+    }
+  }
+
+  &__list {
+    @include for-breakpoint(tablet) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    @include for-breakpoint(mobile-lg) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
+
+  &__action {
+    @include for-breakpoint(mobile) {
+      ::ng-deep {
+        .button {
+          width: 100%;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          padding-top: 12px;
+          padding-bottom: 12px;
+        }
+      }
+    }
+
+    &-keeper {
+      @include for-breakpoint(mobile) {
+        display: block;
+      }
+    }
+  }
+
+  &__slider {
+    &-arrow {
+      @include for-breakpoint(mobile) {
+        position: static;
+        right: 0;
+        left: 0;
+        transform: none;
+      }
+
+      ::ng-deep .button {
+        @include for-breakpoint(desktop-sm) {
+          height: 48px;
+        }
+      }
+    }
+
+    &-arrows {
+      @include for-breakpoint(mobile) {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+    }
+  }
+}

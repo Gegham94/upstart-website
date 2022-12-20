@@ -1,0 +1,76 @@
+@import 'src/assets/styles/variables/colors';
+
+.reviews {
+  &__container {
+    background: $white;
+    border-radius: 8px;
+    padding: 24px 32px;
+    margin-bottom: 20px;
+
+    .no-review {
+      display: block;
+      color: $light-grey-text;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+  &__block-list{
+    position: relative;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  &__title {
+    text-transform: capitalize;
+  }
+
+  &__add-review {
+    ::ng-deep button {
+      padding: 6px 28px;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 140%;
+    }
+
+    &.mobile {
+      display: none;
+    }
+  }
+
+  &__block-list {
+    max-height: 270px;
+    overflow-y: hidden;
+
+    &.view-all-list {
+      max-height: 540px;
+      overflow-y: auto;
+    }
+  }
+
+  &__all-reviews {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 140%;
+    color: $main;
+    width: max-content;
+    margin-left: auto;
+    margin-top: 16px;
+  }
+
+  &__not-reviews {
+    margin-bottom: 22px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 22px;
+    color: $placeholder;
+    opacity: .5;
+  }
+}

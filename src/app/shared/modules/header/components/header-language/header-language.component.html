@@ -1,0 +1,18 @@
+<div class="header-language" [class.header-language_dark]="isDark">
+  <us-icon
+    class="header-language__icon"
+    [name]="isDark ? 'globe_dark' : 'globe'"
+    [size]="20"
+  ></us-icon>
+  <div class="header-language__select" [class.header-language__select_dark]="isDark">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ selectedLanguage?.viewValue }}</mat-label>
+      <mat-select [ngModel]="selectedLang" (selectionChange)="changeLanguage($event)">
+        <mat-option class="language" *ngFor="let language of languages" [value]="language.value">
+          <us-icon class="header-language__icon" [name]="language.src" [size]="20"></us-icon>
+          {{ language.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

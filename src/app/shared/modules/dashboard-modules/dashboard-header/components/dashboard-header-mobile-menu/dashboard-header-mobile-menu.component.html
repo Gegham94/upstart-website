@@ -1,0 +1,63 @@
+<div usClickOutside (clickOutside)="closeMobileMenu()">
+  <us-button
+    (clicked)="openMobileMenu()"
+    class="dashboard-header-mobile-menu__toggle"
+    icon="burger-menu"
+    [iconSize]="32"
+  ></us-button>
+  <div
+    class="dashboard-header-mobile-menu"
+    [class.dashboard-header-mobile-menu_toggled]="menuOpened"
+  >
+    <div class="dashboard-header-mobile-menu__container">
+      <us-icon
+        (click)="closeMobileMenu()"
+        class="dashboard-header-mobile-menu__close"
+        name="close"
+      ></us-icon>
+      <div class="dashboard-header-mobile-menu__category-list">
+        <a class="dashboard-header-mobile-menu__category">
+          {{ 'global.categories.development' | translate }}
+        </a>
+        <a class="dashboard-header-mobile-menu__category">
+          {{ 'global.categories.photography' | translate }}
+        </a>
+        <a class="dashboard-header-mobile-menu__category">
+          {{ 'global.categories.marketing' | translate }}
+        </a>
+        <a class="dashboard-header-mobile-menu__category">
+          {{ 'global.categories.it' | translate }}
+        </a>
+        <a class="dashboard-header-mobile-menu__category">
+          {{ 'global.categories.design' | translate }}
+        </a>
+        <a class="dashboard-header-mobile-menu__category">
+          {{ 'global.categories.business' | translate }}
+        </a>
+        <a class="dashboard-header-mobile-menu__category">
+          {{ 'global.categories.music' | translate }}
+        </a>
+        <a class="dashboard-header-mobile-menu__category">
+          {{ 'global.categories.health' | translate }}
+        </a>
+      </div>
+      <hr class="dashboard-header-mobile-menu__divider" />
+      <div class="dashboard-header-mobile-menu__action-keeper">
+        <a
+          class="dashboard-header-mobile-menu__action dashboard-header-mobile-menu__action_profile"
+        >
+          <us-icon name="profile"></us-icon>
+          {{ 'global.header.profile' | translate }}
+        </a>
+      </div>
+      <div class="dashboard-header-mobile-menu__language">
+        <us-header-language [isDark]="true"></us-header-language>
+      </div>
+    </div>
+    <div
+      (click)="closeMobileMenu()"
+      class="dashboard-header-mobile-menu__backdrop"
+      [class.dashboard-header-mobile-menu__backdrop_toggled]="menuOpened"
+    ></div>
+  </div>
+</div>

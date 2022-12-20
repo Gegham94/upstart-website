@@ -1,0 +1,15 @@
+<label class="checkbox">
+  <input
+    type="checkbox"
+    [disabled]="disabled"
+    [checked]="value"
+    (change)="valueChange($event)"
+    class="checkbox__hidden"
+  />
+  <div class="checkbox__box">
+    <us-icon *ngIf="value" name="checkmark" [size]="12" class="checkbox__icon"></us-icon>
+  </div>
+  <span *ngIf="!!label" class="checkbox__label">
+    {{ label }}
+  </span>
+</label>

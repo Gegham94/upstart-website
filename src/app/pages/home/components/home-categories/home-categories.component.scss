@@ -1,0 +1,96 @@
+@import 'src/assets/styles/variables/colors';
+
+.home-categories {
+  width: 100%;
+  background: $white;
+  position: relative;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 76px;
+    align-items: stretch;
+  }
+
+  &__divider {
+    display: none;
+    min-width: 1px;
+    height: 16px;
+    background: $placeholder;
+  }
+
+  &__element {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.1px;
+    color: $grey-text;
+    transition: background .2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover & {
+      &-child-keeper{
+        display: block;
+      }
+      &-arrow{
+        display: block;
+      }
+    }
+
+    &-arrow {
+      position: absolute;
+      bottom: -7px;
+      display: none;
+    }
+    &_child {
+      padding: 8px 16px;
+
+      &:before {
+        bottom: 0;
+      }
+      &:hover {
+        cursor: pointer;
+        color: $main;
+      }
+    }
+  }
+
+  &__element-child-keeper {
+    position: absolute;
+    background: $grey-text;
+    color: $white;
+    width: 100%;
+    left: 0;
+    height: 50px;
+    padding: 12px 90px;
+    bottom: -47px;
+    overflow: auto;
+    display: none;
+  }
+
+  &__element-child-container{
+    max-width: 1440px;
+    justify-content: center;
+    margin: auto;
+    display: flex;
+    width: inherit;
+    gap: 40px;
+    flex-flow: wrap;
+  }
+
+  &__child-list{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.1px;
+    color: $white;
+
+    transition: .5s;
+    &:hover{
+      opacity: .8;
+    }
+  }
+}

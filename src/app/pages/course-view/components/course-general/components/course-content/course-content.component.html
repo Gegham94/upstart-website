@@ -1,0 +1,160 @@
+<div class="sections" *ngIf="courseData.sections">
+  <ng-container *ngIf="type !== 'ST'">
+    <span class="sections__title">{{ 'course-content.course_content' | translate }}</span>
+    <div class="sections__about-side">
+      <div class="sections__count-side">
+      <span class="sections__count"
+      >{{ courseData.sections.length }} {{ 'course-content.sections' | translate }}</span
+      >
+        <span class="sections__count"
+        >{{ courseData.quiz_count }} {{ 'course-content.quizes' | translate }}</span
+        >
+      </div>
+      <div class="sections__expended">
+      <span
+        *ngIf="!isAllSelected"
+        class="sections__expended-title"
+        (click)="expendAllSections(true)"
+      >
+        {{ 'course-content.expend_all' | translate }}
+      </span>
+        <span
+          *ngIf="isAllSelected"
+          class="sections__expended-title"
+          (click)="expendAllSections(false)"
+        >
+        {{ 'course-content.close_all' | translate }}
+      </span>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="sections__expansion-panel">
+    <mat-accordion [multi]="true">
+      <div class="panel" *ngFor="let section of courseData.sections">
+        <mat-expansion-panel
+          (opened)="toggleSection(true, section)"
+          (closed)="toggleSection(false, section)"
+          [expanded]="isExpendAllSections"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="icon-and-title">
+                <span class="icon" [class.active]="section.isOpen">
+                  <us-icon [name]="'blue-arrow-top'" [size]="20"></us-icon>
+                </span>
+                <span class="title">{{ section.title }}</span>
+              </div>
+              <div class="quiz-lesson-count">
+                <span class="count"
+                >{{ section.lessons.length }} {{ 'course-content.lesson' | translate }}</span
+                >
+                <span class="count">1 {{ 'course-content.quizes' | translate }}</span>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="panel-content-body">
+            <div *ngFor="let lesson of section.lessons" class="desc">
+              <div class="icon-title">
+                <div class="left-side">
+                  <span
+                    [class.disable]="!courseData.full_access"
+                    *ngIf="sectionType.ARTICLE === lesson.type"
+                    class="icon"
+                  >
+                    <span *ngIf="lesson.passed && lesson.passed === 1" class="check-green-icon"
+                      ><us-icon [name]="'check-green'" [size]="12"></us-icon
+                    ></span>
+                    <span (click)="showAboutSection(1, lesson)" class="icon-action"
+                      ><us-icon [name]="'article-gray'" [size]="24"></us-icon
+                    ></span>
+                  </span>
+
+                  <span
+                    [class.disable]="!courseData.full_access"
+                    *ngIf="sectionType.VIDEO === lesson.type"
+                    class="icon"
+                  >
+                    <span *ngIf="lesson.passed && lesson.passed === 1" class="check-green-icon"
+                      ><us-icon [name]="'check-green'" [size]="12"></us-icon
+                    ></span>
+                    <span (click)="showAboutSection(2, lesson)" class="icon-action"
+                      ><us-icon [name]="'gray-play'" [size]="24"></us-icon
+                    ></span>
+                  </span>
+                  <span
+                    [class.disable]="!courseData.full_access"
+                    *ngIf="sectionType.QUIZ === lesson.type"
+                    class="icon"
+                  >
+                    <span *ngIf="lesson.passed && lesson.passed === 1" class="check-green-icon"
+                      ><us-icon [name]="'check-green'" [size]="12"></us-icon
+                    ></span>
+                    <span (click)="showAboutSection(3, lesson)" class="icon-action"
+                      ><us-icon [name]="'quizz-gray'" [size]="24"></us-icon
+                    ></span>
+                  </span>
+                  <span
+                    (click)="toggleDescription(desc, icon)"
+                    class="cont"
+                    [class.active]="lesson.description"
+                  >
+                    <span class="title">{{ lesson.title }}</span>
+                    <div class="check-question">
+                      <span #icon class="icon-span">
+                        <us-icon
+                          *ngIf="lesson.description"
+                          [name]="'check-grey'"
+                          [size]="16"
+                        ></us-icon>
+                      </span>
+                      <span
+                        class="question"
+                        *ngIf="lesson.questions_count && lesson.questions_count > 0"
+                      >
+                        {{ lesson.questions_count }} {{ 'course-content.question' | translate }}
+                      </span>
+                    </div>
+                  </span>
+                  <span
+                    (click)="openResourceDialog(lesson.resources)"
+                    *ngIf="lesson.resources_count > 0"
+                    class="count-side"
+                    >{{ lesson.resources_count }} resources</span
+                  >
+                </div>
+                <div *ngIf="courseData.full_access" class="prev-side">
+                  <span
+                    *ngIf="sectionType.ARTICLE === lesson.type"
+                    (click)="showAboutSection(1, lesson)"
+                    class="prev"
+                    >Preview</span
+                  >
+                  <span
+                    *ngIf="sectionType.VIDEO === lesson.type"
+                    (click)="showAboutSection(2, lesson)"
+                    class="prev"
+                    >Preview</span
+                  >
+                  <span
+                    *ngIf="sectionType.QUIZ === lesson.type"
+                    (click)="showAboutSection(3, lesson)"
+                    class="prev"
+                    >Preview</span
+                  >
+                </div>
+              </div>
+              <div #desc>
+                <p
+                  *ngIf="lesson.description"
+                  class="description"
+                  [innerHTML]="lesson.description"
+                ></p>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </div>
+</div>

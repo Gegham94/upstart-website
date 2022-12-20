@@ -1,0 +1,110 @@
+<div class="course-general">
+  <div *ngIf="loader" class="loader container">
+    <ngx-skeleton-loader
+      count="10"
+      [theme]="{ height: '20px', 'background-color': '#f8f8f8' }"
+      appearance="line"
+    ></ngx-skeleton-loader>
+  </div>
+  <div *ngIf="!loader" class="top_section">
+    <div class="container">
+      <div class="col-12">
+        <div class="training_content">
+          <h4 class="course-details__category" *ngIf="!preview">
+            <span *ngFor="let category of course?.categories">
+              {{ category }}
+            </span>
+          </h4>
+          <h4 class="course-details__category" *ngIf="preview">
+            <span *ngFor="let category of course?.categories">
+              <span *ngIf="category">{{ category }}</span>
+            </span>
+
+            <span *ngIf="!course?.categories">{{
+              'global.placeholder.course_categories_here' | translate
+            }}</span>
+          </h4>
+          <h1 class="course-details__title" *ngIf="!preview">{{ course?.title }}</h1>
+          <h1 class="course-details__title" *ngIf="preview">
+            {{
+              course?.title ? course?.title : ('global.placeholder.course_title_here' | translate)
+            }}
+          </h1>
+          <p class="sub_title mb-1" *ngIf="!preview">{{ course?.sub_title }}</p>
+          <p class="sub_title mb-1" *ngIf="preview">
+            {{
+              course?.sub_title
+                ? course?.sub_title
+                : ('global.placeholder.sub_title_here' | translate)
+            }}
+          </p>
+          <div class="course-details__review-keeper" *ngIf="!preview">
+            <div
+              *ngIf="course?.rate"
+              class="course-details__review-star-list d-flex align-items-center"
+            >
+              <us-star-rating
+                [maxStars]="5"
+                [color]="'#6B63DD'"
+                [isReadOnly]="true"
+                [size]="24"
+                [rateValue]="course ? course.rate : -1"
+              ></us-star-rating>
+              <span class="course-details__review ms-1" *ngIf="reviewCount > 1; else review">
+                {{ reviewCount }} {{ 'course.reviews' | translate }}
+              </span>
+              <ng-template #review
+                ><span class="course-details__review">
+                  {{ reviewCount }} {{ 'course.review' | translate }}
+                </span></ng-template
+              >
+            </div>
+            <p class="created mt-2">
+              Created by
+              <a class="ms-1 trainer_info" routerLink="/profile/{{ course?.trainer?.id }}">{{
+                course?.trainer?.company_name
+                  ? course?.trainer?.company_name
+                  : course?.trainer?.first_name + ' ' + ' ' + course?.trainer?.last_name
+              }}</a>
+            </p>
+            <div class="d-flex align-items-center mt-2">
+              <us-icon name="globe" class="pe-2" [size]="24"> </us-icon>
+              <p class="created">{{ course?.language }}</p>
+            </div>
+          </div>
+          <div class="course-details__review-keeper" *ngIf="preview">
+            <div class="d-flex align-items-center mt-2">
+              <us-icon name="globe" class="pe-2" [size]="24"> </us-icon>
+              <p class="created">
+                {{
+                  course?.language
+                    ? course?.language
+                    : ('global.placeholder.course_language_here' | translate)
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!loader && course" class="course-general__container container">
+    <us-course-general-details
+      [preview]="preview"
+      [course]="course"
+      [reviewCount]="reviewCount"
+    ></us-course-general-details>
+    <us-course-general-side
+      (reloadData)="reloadData($event)"
+      [preview]="preview"
+      [course]="course"
+    ></us-course-general-side>
+  </div>
+  <div class="container">
+    <us-course-content
+      *ngIf="course && course.type_id === CourseType.ONLINE"
+      [course]="course"
+      [isJoined]="isJoined"
+    ></us-course-content>
+  </div>
+</div>

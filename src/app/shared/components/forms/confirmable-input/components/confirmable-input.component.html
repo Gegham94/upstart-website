@@ -1,0 +1,22 @@
+<div class="confirmable-input" usClickOutside (clickOutside)="resetConfirmedValue()">
+  <us-input
+    class="confirmable-input__input"
+    [placeholder]="placeholder + (requiredPlaceholder ? ' *' : '')"
+    [label]="label"
+    [disabled]="!!disabled"
+    [(ngModel)]="unconfirmedValue"
+  ></us-input>
+  <us-button
+    class="confirmable-input__button"
+    [theme]="buttonTheme"
+    [disabled]="!unconfirmedValue || unconfirmedValue === value"
+    (clicked)="valueConfirmed()"
+  >
+    {{ buttonText }}
+  </us-button>
+</div>
+<div *ngIf="errors" class="confirmable-input__error-block">
+  <span *ngFor="let error of errors | keyvalue">
+    {{ error.value }}
+  </span>
+</div>

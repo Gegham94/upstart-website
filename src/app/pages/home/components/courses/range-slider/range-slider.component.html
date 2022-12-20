@@ -1,0 +1,15 @@
+<div class="title" (click)="expandCollapse()">
+  <label class="label">{{ 'home.courses.price' | translate }}</label>
+  <us-icon name="chevron-down_dark" [size]="13" *ngIf="isExpanded; else titleExpanded"></us-icon>
+  <ng-template #titleExpanded>
+    <us-icon name="chevron-up_dark" [size]="13"></us-icon>
+  </ng-template>
+</div>
+<div class="slider" [hidden]="isExpanded">
+  <ngx-slider
+    [(value)]="minValue"
+    [(highValue)]="maxValue"
+    [options]="options"
+    (userChangeEnd)="onUserChangeEnd($event)"
+  ></ngx-slider>
+</div>

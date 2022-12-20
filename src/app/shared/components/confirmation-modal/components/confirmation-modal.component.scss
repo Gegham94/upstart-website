@@ -1,0 +1,51 @@
+@import 'src/assets/styles/variables/colors';
+
+.confirmation-modal {
+  background: $white;
+  border-radius: 8px;
+  max-width: 450px;
+  width: 100%;
+
+  &__title {
+    font-size: 21px;
+    line-height: 24px;
+    margin-bottom: 12px;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px 20px;
+
+    &-desc {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      color: $title-color;
+      margin-bottom: 25px;
+    }
+
+    &::ng-deep {
+      .button {
+        padding: 10px 17.5px;
+        min-width: 129px;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-width: 1px;
+      }
+    }
+  }
+
+  &__action {
+    &-keeper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+  }
+}

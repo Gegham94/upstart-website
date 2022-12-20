@@ -1,0 +1,6 @@
+*.json
+*.md
+dist/
+node-modules/
+.angular/
+src/index.html

@@ -1,0 +1,50 @@
+@import 'src/assets/styles/variables/colors';
+::ng-deep .attention-dialog{
+    background-color: white;
+    border-radius: 18px;
+    .attention{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        color: $title-color;
+        position: relative;
+        padding: 20px 0;
+        .close{
+            padding: 7px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background-color: $placeholder;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+        }
+    .message{
+        line-height: normal;
+        text-align: center;
+        font-size: 24px;
+        line-height: 45px;
+        color: $light-grey-text;
+    }
+    .btn-side{
+        text-align: center;
+        margin-top: 10px;
+        .login{
+            transition: all .5s;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 700;
+            color: white;
+            background-color: $main;
+            border: none;
+            height: 40px;
+            width: 200px;
+            &:hover{
+                background-color: #6b63dda1;
+
+            }
+        }
+    }
+}
+}

@@ -1,0 +1,7 @@
+<div
+  class="loading"
+  [class.loading_global]="isGlobal"
+  *ngIf="(isGlobal && (loadingState | async)) || show"
+>
+  <span class="loading__spinner"></span>
+</div>

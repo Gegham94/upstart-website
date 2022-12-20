@@ -1,0 +1,59 @@
+@import "src/assets/styles/variables/colors";
+
+.select {
+  &__option {
+    cursor: pointer;
+
+    & > us-option-list {
+      padding-left: 18px;
+      display: block;
+    }
+
+    &-name {
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+      width: calc(100% + 14px);
+      margin: 0 -7px;
+
+      &:hover {
+        background: $lighter-grey;
+      }
+    }
+
+    &_child &-text {
+      padding-left: 0;
+    }
+
+    &_child &-name {
+      padding-left: 16px;
+    }
+
+    &-text {
+      width: 100%;
+      padding: 8px 16px;
+      display: block;
+    }
+
+    &-chevron {
+      transform: scaleY(1);
+      transition: .2s ease-in-out transform;
+
+      &_opened {
+        transform: scaleY(-1);
+      }
+    }
+
+    &_selected &-text {
+      background: $lighter-grey;
+
+      &:hover {
+        background: $light-grey;
+      }
+    }
+  }
+
+  &-children {
+    width: 100%;
+  }
+}

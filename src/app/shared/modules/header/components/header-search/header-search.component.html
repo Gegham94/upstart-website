@@ -1,0 +1,67 @@
+<div class="header-search">
+  <input
+    (keyup.enter)="redirectToSearch(selectedValue)"
+    [(ngModel)]="selectedValue"
+    [placeholder]="'global.header.search-placeholder' | translate"
+    class="header-search__input"
+    type="text"
+    [formControl]="searchValuesForm"
+    [matAutocomplete]="auto"
+  />
+  <us-icon
+    (click)="redirectToSearch(selectedValue)"
+    class="header-search__icon"
+    name="search"
+  ></us-icon>
+  <us-icon
+    *ngIf="selectedValue"
+    class="header-search__clear-icon"
+    name="close"
+    (click)="clearSelection(); removeParam()"
+  ></us-icon>
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="onSelected()"
+    class="header-search__serach-input"
+  >
+    <mat-option *ngIf="isLoading" class="is-loading">{{
+      'global.header.search-loading' | translate
+    }}</mat-option>
+    <ng-container *ngIf="!isLoading">
+      <mat-option *ngFor="let text of filteredText" (click)="redirectToSearch(text)" [value]="text">
+        <span class="position-relative"
+          ><b>
+            <span class="serched-text">{{ text }}</span>
+            <!-- <a class="text-link" routerLink="categories"></a> -->
+            <!--            <img *ngIf="data.cover_image" [src]="data.cover_image" />{{-->
+            <!--              data.title ? data.title : data-->
+            <!--            }}</b-->
+
+            <!--          <p class="small_text position-absolute" *ngIf="data.trainer_name">-->
+            <!--            Course: <span>{{ data.trainer_name }}</span>-->
+            <!--          </p>-->
+          </b></span
+        >
+      </mat-option>
+      <mat-option *ngFor="let course of publicCourse" [value]="selectedValue">
+        <span class="position-relative">
+          <span class="courses_content">
+            <img class="courseImg" [src]="course.cover_image" />
+            <a routerLink="course/{{ course.id }}">
+              <p>
+                <b>{{ course.title }}</b>
+              </p>
+              <p class="small_text">
+                Course: <span>{{ course.trainer_name }}</span>
+              </p>
+            </a>
+          </span>
+        </span>
+      </mat-option>
+    </ng-container>
+    <mat-option *ngIf="errorMsg">
+      <span class="not-found">{{ errorMsg }}</span>
+    </mat-option>
+  </mat-autocomplete>
+</div>

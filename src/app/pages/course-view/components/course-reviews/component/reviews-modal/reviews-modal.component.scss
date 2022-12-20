@@ -1,0 +1,121 @@
+@import 'src/assets/styles/variables/colors';
+
+::ng-deep {
+  .add-reviews{
+    width: 50vw;
+    mat-dialog-container {
+      background: $white;
+      padding: 0 !important;
+    }
+
+    us-star-rating {
+      .stars-line {
+        margin: 12px 0 37px;
+      }
+    }
+
+    us-button {
+      button {
+        padding: 10px 37px;
+      }
+    }
+  }
+
+
+}
+
+.reviews {
+  &__modal {
+    &-header {
+      border-bottom: 1px solid $placeholder;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      ::ng-deep button {
+        padding: 0;
+
+        &:hover:not(:disabled) {
+          box-shadow: none;
+        }
+
+      }
+    }
+
+    &-body {
+      padding: 24px;
+    }
+
+    &-content{
+      height: 410px;
+      overflow-y: auto;
+    }
+
+    &-rate {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+
+      ::ng-deep button {
+        padding: 6px 28px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 140%;
+      }
+    }
+  }
+
+  &__new-review {
+    text-align: center;
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: $title-color;
+
+    us-icon {
+      margin-right: 8px;
+    }
+  }
+
+  &__new-review {
+    max-width: 649px;
+    margin: auto;
+  }
+
+  &__add-rate {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: $title-color;
+  }
+
+  &__footer {
+    background: $light-purple;
+    padding: 21px 45px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    us-button {
+      ::ng-deep {
+        button {
+          padding: 10px 37px;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 14px;
+
+          &:last-child {
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+  }
+}

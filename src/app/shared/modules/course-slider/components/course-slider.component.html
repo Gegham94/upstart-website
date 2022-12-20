@@ -1,0 +1,35 @@
+<div class="course-related">
+  <div *ngIf="loader" class="loader">
+    <ngx-skeleton-loader
+      count="5"
+      [theme]="{ height: '30px', 'background-color': '#faf8ff' }"
+      appearance="line"
+    ></ngx-skeleton-loader>
+  </div>
+  <div class="course-related__container">
+    <h3 [class.pb-3]="isPreview" class="ps-4 pt-3 course-related__title">
+      {{ 'course.related_courses' | translate }}
+    </h3>
+    <div *ngIf="!isPreview" class="course-related__slider-keeper">
+      <ngx-slick-carousel class="course-related__slider" #slider>
+        <div *ngFor="let data of dataToShow" class="course" ngxSlickItem>
+          <us-course (basketEvent$)="basketEvent()" [courseData]="data"></us-course>
+        </div>
+      </ngx-slick-carousel>
+      <div class="course-related__slider-arrows">
+        <us-button
+          class="course-related__slider-arrow course-related__slider-arrow_left"
+          icon="arrow-left"
+          autoSetSuffix="primary"
+          [theme]="buttonTheme.primary"
+        ></us-button>
+        <us-button
+          class="course-related__slider-arrow course-related__slider-arrow_right"
+          icon="arrow-right"
+          autoSetSuffix="primary"
+          [theme]="buttonTheme.primary"
+        ></us-button>
+      </div>
+    </div>
+  </div>
+</div>

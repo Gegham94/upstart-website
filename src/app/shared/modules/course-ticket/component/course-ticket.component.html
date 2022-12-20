@@ -1,0 +1,140 @@
+<div class="ticket">
+  <div class="fill-loader" *ngIf="mainLoader">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div [class.remove-action]="mainLoader" class="fill">
+    <a routerLink="/course/{{ course.id }}" class="image-blank">
+      <div class="image-side">
+        <img
+          class="cover-image"
+          onerror="this.onerror=null; this.src='../../../../assets/images/notebook.svg'"
+          src="{{ course.cover_image }}"
+          alt=""
+        />
+      </div>
+    </a>
+    <div class="desc-side">
+      <a routerLink="/course/{{ course.id }}">
+        <div class="top-side">
+          <span class="title-and-category">
+            <span class="title">{{ course.title }}</span>
+            <span class="category-side">
+              <span class="category" *ngFor="let category of course.names"> {{ category }}</span>
+            </span>
+          </span>
+          <span [class.displayed]="isBusket">
+            <us-course-type [courseType]="course.type"></us-course-type>
+          </span>
+
+          <div [class.displayed]="!isBusket" class="price-side">
+            <ng-container *ngIf="course.price > 0; else freeBlock">
+              <div *ngIf="course.currency === getCurrency.DOLLAR; else amd">
+                <span class="new-price price"
+                  >{{ getCurrency.USD }} {{ course.price | number }}</span
+                >
+              </div>
+            </ng-container>
+            <ng-template #freeBlock>
+              <span class="new-price free-price">{{ 'dashboard.courses.free' | translate }}</span>
+            </ng-template>
+          </div>
+        </div>
+      </a>
+      <span *ngIf="course.rating" class="star-side">
+        <us-star-rating
+          [size]="14"
+          [color]="'#6b63dd'"
+          [rateValue]="course.rating"
+          [maxStars]="5"
+        ></us-star-rating>
+      </span>
+      <div class="desc" [innerHTML]="course.sub_title"></div>
+      <div [class.basket]="isBusket" class="bottom-side">
+        <div class="star-and-date">
+          <div *ngIf="course.rating" class="star-side">
+            <us-star-rating
+              [size]="14"
+              [color]="'#6b63dd'"
+              [isReadOnly]="true"
+              [rateValue]="course.rating"
+              [maxStars]="5"
+            ></us-star-rating>
+          </div>
+          <div class="calendar-side">
+            <span *ngIf="courseType.ONLINE !== course.type" class="date"
+              ><us-icon
+                *ngIf="course.first_lesson_date"
+                [name]="'calendar-icon'"
+                [size]="16"
+              ></us-icon
+              ><span *ngIf="course.first_lesson_date" class="date-text">{{
+                course.first_lesson_date | translateDate: 'd MMM, YYYY / HH:mm'
+              }}</span></span
+            >
+            <div [class.displayed]="!isBusket" class="basket">
+              <span class="trainer-name">
+                <img
+                  *ngIf="course.trainer_avatar"
+                  class="trainer-avatar"
+                  [src]="course.trainer_avatar"
+                  alt=""
+                />
+                <us-icon
+                  *ngIf="!course.trainer_avatar"
+                  [name]="'default-user'"
+                  [size]="16"
+                ></us-icon>
+                <a routerLink="/profile/{{ course.profile_id }}" class="name">{{
+                  course.trainer_name
+                }}</a>
+              </span>
+              <us-course-type
+                [courseType]="course.type"
+                [blockPosition]="!isMobile"
+                [basketMobile]="isMobile"
+              ></us-course-type>
+            </div>
+          </div>
+        </div>
+
+        <div [class.displayed]="!isBusket" class="remove-side">
+          <span (click)="deleteFromBusket(course.id)" class="action remove">
+            <span *ngIf="!basketLoader">{{ 'basket.courses.remove-from-card' | translate }}</span>
+            <div *ngIf="basketLoader" class="ticket-action-loader">
+              <mat-spinner></mat-spinner>
+            </div>
+          </span>
+          <span class="action wishlist">
+            <span
+              (click)="addToWishList(course.id)"
+              *ngIf="!wishListLoader && course.in_wishlist < 1"
+              >{{ 'basket.courses.add-to-wishlist' | translate }}</span
+            >
+            <span
+              (click)="removeFromWishList(course.id)"
+              *ngIf="!wishListLoader && course.in_wishlist > 0"
+              >{{ 'basket.courses.remove-from-wishlist' | translate }}</span
+            >
+            <div *ngIf="wishListLoader" class="ticket-action-loader">
+              <mat-spinner></mat-spinner>
+            </div>
+          </span>
+        </div>
+
+        <div [class.displayed]="isBusket" class="price-side">
+          <ng-container *ngIf="course.price > 0; else freeBlock">
+            <ng-template *ngIf="course.currency === getCurrency.DOLLAR; else amd">
+              <span class="new-price price">{{ getCurrency.USD }} {{ course.price | number }}</span>
+            </ng-template>
+          </ng-container>
+          <ng-template #freeBlock>
+            <span class="new-price free-price">{{ 'dashboard.courses.free' | translate }}</span>
+          </ng-template>
+        </div>
+        <ng-template #amd>
+          <span class="new-price price">{{ getCurrency.AMD }} {{ course.price | number }}</span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

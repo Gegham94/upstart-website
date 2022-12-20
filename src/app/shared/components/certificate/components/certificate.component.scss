@@ -1,0 +1,195 @@
+@import "src/assets/styles/variables/colors";
+@import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Open+Sans:wght@300;500&family=Roboto+Slab:wght@300&display=swap');
+
+::ng-deep .certificate-dialog {
+  background: $white;
+  border-radius: 2px;
+
+  .mat-dialog-container{
+    padding: 0;
+  }
+
+  .certificate-modal {
+    padding: 24px;
+    position: relative;
+  }
+
+  .close-btn{
+    position: absolute;
+    right: 15px;
+    top: 18px;
+    ::ng-deep button{
+      padding: 0;
+    }
+  }
+
+  .loader {
+    text-align: center;
+    max-width: 545px;
+    padding: 30px 25px 35px;
+    margin: auto;
+  }
+
+  .certificate {
+    background: url('../../../../../assets/images/certificate/certificate-bg.svg') no-repeat center center;
+    background-size: contain;
+
+    &.pdf {
+      background-size: 750px;
+
+      input {
+        background: transparent;
+      }
+
+      .certificate__container {
+        padding: 75px 40px;
+      }
+    }
+
+    &__input {
+      text-align: center;
+      border: none;
+      margin: auto;
+      display: block;
+      width: 100%;
+      background: $lightest-purple;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &__banner {
+      left: 0;
+      top: 0;
+      height: 585px;
+      width: 100%;
+    }
+
+    &__container {
+      padding: 30px 40px;
+      text-align: center;
+      max-width: 665px;
+      margin: auto;
+      z-index: 1;
+    }
+
+    &__title {
+      p, input {
+        margin: auto;
+        font-size: 60px;
+        font-family: 'Roboto Slab';
+        letter-spacing: 6px;
+        text-align: center;
+        font-weight: 600;
+      }
+
+    }
+
+    &__sub-title {
+      p, input {
+        margin: 10px auto 0;
+        font-size: 38px;
+        font-family: 'Roboto Slab';
+        font-weight: 300;
+        letter-spacing: 3px;
+      }
+    }
+
+    &__for {
+      p, input {
+        font-size: 20px;
+        letter-spacing: 8px;
+        text-transform: uppercase;
+        margin: 30px 0;
+      }
+    }
+
+    &__student-name {
+      p, input {
+        margin: auto;
+        font-family: 'Roboto Slab';
+        background: transparent;
+        font-size: 50px;
+        letter-spacing: 3px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid black;
+        max-width: 500px;
+        min-width: 400px;
+      }
+    }
+
+    &__description-title {
+      p, input {
+        font-weight: 100;
+        font-size: 18px;
+        margin: 15px auto 0;
+      }
+    }
+
+    &__description {
+      p, input {
+        margin: 10px auto 0;
+        font-size: 18px;
+        text-transform: capitalize;
+        font-weight: 600;
+      }
+    }
+
+    &__footer {
+      max-width: 560px;
+      margin: 22px auto 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+
+      &-label {
+        font-weight: 100;
+        display: block;
+        margin-top: 12px;
+      }
+    }
+
+    &__date {
+      p, input {
+        font-family: "Roboto Slab";
+        font-size: 20px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid black;
+        max-width: 225px;
+        min-width: 200px;
+        background: transparent;
+      }
+    }
+
+    &__signature {
+      p, input {
+        min-width: 200px;
+        font-size: 38px;
+        font-family: 'Mrs Saint Delafield', cursive;
+        border-bottom: 1px solid black;
+        max-width: 225px;
+      }
+
+    }
+  }
+}
+.certificate-modal-footer{
+  background: #faf8ff;
+  padding: 21px 45px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .custom-btn {
+    ::ng-deep {
+      button {
+        padding: 2px 37px;
+        font-size: 15px;
+        margin-left: auto;
+        margin-top: 12px;
+        margin-right: 18px;
+      }
+    }
+  }
+}
+

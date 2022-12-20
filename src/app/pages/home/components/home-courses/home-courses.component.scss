@@ -1,0 +1,30 @@
+.home-courses {
+  margin-bottom: 30px;
+
+  &__title {
+    margin-bottom: 26px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 26px;
+    column-gap: 18px;
+  }
+
+  &__action {
+    &::ng-deep {
+      .button {
+        padding: 15px 60px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 25px;
+      }
+    }
+    &-keeper {
+      margin-top: 43px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

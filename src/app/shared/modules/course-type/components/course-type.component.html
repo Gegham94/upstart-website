@@ -1,0 +1,52 @@
+<span
+  [ngClass]="{ 'block-position': blockPosition, 'basket-mobile': basketMobile }"
+  *ngIf="courseType === courseTypes.ONLINE"
+  [style]="{ 'background-color': '#C585FF' }"
+  class="type"
+  >{{ online }}</span
+>
+<span
+  [ngClass]="{ 'block-position': blockPosition, 'basket-mobile': basketMobile }"
+  *ngIf="courseType === courseTypes.ONLINE_WEBINAR"
+  [style]="{ 'background-color': '#C585FF' }"
+  class="type"
+  >{{ onlineWebinar }}</span
+>
+<span
+  [ngClass]="{ 'block-position': blockPosition, 'basket-mobile': basketMobile }"
+  *ngIf="courseType === courseTypes.OFFLINE"
+  [style]="{ 'background-color': '#A5A6F6' }"
+  class="type"
+  >{{ offline }}</span
+>
+<span
+  [ngClass]="{ 'block-position': blockPosition, 'basket-mobile': basketMobile }"
+  *ngIf="courseType === courseTypes.CONSULTATION"
+  [style]="{ 'background-color': '#A5A6F6' }"
+  class="type"
+  >{{ consultation }}</span
+>
+
+<span
+  [ngClass]="{ 'block-position': blockPosition, 'basket-mobile': basketMobile }"
+  *ngIf="courseStatus === courseStatusType.DRAFT"
+  [style]="{ 'background-color': 'rgb(243 123 123)' }"
+  class="type"
+  >{{ draft }}</span
+>
+
+<span
+  [ngClass]="{ 'block-position': blockPosition, 'basket-mobile': basketMobile }"
+  *ngIf="courseStatus === courseStatusType.PUBLISHED"
+  [style]="{ 'background-color': 'rgb(128 197 138)' }"
+  class="type"
+  >{{ published }}</span
+>
+
+<span
+  [ngClass]="{ 'block-position': blockPosition, 'basket-mobile': basketMobile }"
+  *ngIf="courseStatus === courseStatusType.UNDER_REVIEW"
+  [style]="{ 'background-color': 'rgb(199 201 30)' }"
+  class="type"
+  >{{ underReview }}</span
+>

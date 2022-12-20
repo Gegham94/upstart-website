@@ -1,0 +1,176 @@
+@import 'src/assets/styles/variables/colors';
+::ng-deep .upload-dialog{
+    background-color: $white;
+    border-radius: 4px;
+    .upload-resource{
+        position: relative;
+        height: 100%;
+        .title{
+            font-size: 18px;
+            font-weight: 500;
+            color: $title-color;
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+            .title-input{
+                margin-top: 46px;
+                height: 46px;
+                border: 1px solid $border-purple;
+                border-radius: 8px;
+                outline: none;
+                padding: 0 20px;
+                width: 100%;
+            }
+            .file-place{
+                height: 80px;
+                border: 1px dashed $border-purple;
+                border-radius: 10px;
+                margin-top: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px;
+                &.big-size{
+                    border: 1px dashed $error;
+                }
+                &.has-file{
+                    opacity: 0.5;
+                    pointer-events: none;
+                }
+                input {
+                    display: none;
+                }
+                .text-side{
+                    display: flex;
+                     align-items: center;
+                    .desc{
+                        margin-left: 15px;
+                        display: flex;
+                        flex-direction: column;
+                        .title{
+                            font-size: 14px;
+                            color: $text-color;
+                            font-weight: 400;
+                        }
+                        .more{
+                            color: $light-grey-text;
+                            font-size: 12px;
+                            font-weight: 400;
+                            margin-top: 5px;
+                            display: inline-block;
+                        }
+                    }
+
+                }
+                .select{
+                    border: 1px solid $main;
+                    color: $main;
+                    border-radius: 40px;
+                    width: 112px;
+                    height: 34px;
+                    background-color: transparent;
+                    transition: all .5s;
+                    white-space: nowrap;
+                    &:hover{
+                        background-color: $main;
+                        color: $white;
+                    }
+                }
+            }
+            .big-file{
+                color: $error;
+                font-size: 12px;
+                display: inline-block;
+                margin: 10px;
+            }
+            &.delete{
+                margin-top: 60px;
+                text-align: center;
+                .delete-message {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: $text-color;
+                }
+            }
+            .hint {
+                font-size: 12px;
+                display: inline-block;
+                margin: 12px 12px 0;
+                color: $error;
+            }
+        }
+        .buttons{
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 155%;
+            height: 64px;
+            background: $light-purple;
+            transform: translate(24px, 23px);
+            padding-right: 23px;
+            .btn {
+                border-radius: 40px;
+                border: 1px solid $main;
+                text-align: center;
+                background-color: transparent;
+                width: 112px;
+                height: 34px;
+                font-size: 12px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &.cancel{
+                    color: $main;
+                    transition: all .5s;
+                    &:hover{
+                        background-color: $main;
+                        color: $white;
+                    }
+                }
+                &.upload{
+                    background-color: $main;
+                    color: $white;
+                    margin-left: 10px;
+                    transition: all .5s;
+                    &:hover{
+                        background-color: $white;
+                        color: $main;
+                    }
+                    &.disabled{
+                        pointer-events: none;
+                        opacity: 0.5;
+                    }
+                }
+            }
+            .loader{
+                ::ng-deep.mat-progress-spinner {
+                    width: 10px !important;
+                    height: 10px !important;
+                  }
+                  ::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+                    stroke: $white;
+                  }
+                  ::ng-deep.mat-progress-spinner svg {
+                    width: 10px !important;
+                    height: 10px !important;
+                  }
+                  ::ng-deep.mat-progress-spinner {
+                    margin: auto !important;
+                    width: 10px !important;
+                    overflow: visible;
+                    margin-right: 5px !important;
+                  }
+            }
+        }
+        .close{
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+@import 'src/assets/styles/variables/colors';
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.course-view {
+  @include for-breakpoint(desktop-sm) {
+    background-color: $white;
+    color: black;
+  }
+}

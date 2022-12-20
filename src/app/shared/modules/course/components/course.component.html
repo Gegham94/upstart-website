@@ -1,0 +1,97 @@
+<div class="course">
+  <div *ngIf="showLoader" class="loader-block">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div [class.loading]="showLoader" class="fill">
+    <div class="course__image-keeper">
+      <us-course-type [courseType]="courseData.type"></us-course-type>
+      <img
+        onerror="this.onerror=null; this.src='../../../../assets/images/notebook.svg'"
+        [routerLink]="['/course/', courseData.id]"
+        class="course__image"
+        [src]="courseData.cover_image"
+        alt="Course Example"
+      />
+      <div *ngIf="!hideBasketAndWishList" class="course__action-keeper">
+        <us-button
+          *ngIf="courseData.in_wishlist === 0"
+          (click)="addToWishList(courseData.id, courseData)"
+          icon="heart"
+          [iconSize]="20"
+          [theme]="buttonTheme.light"
+          [circle]="true"
+        ></us-button>
+
+        <us-button
+          *ngIf="courseData.in_wishlist !== 0"
+          (click)="removeFromWishList(courseData.id, courseData)"
+          icon="heart-blue"
+          [iconSize]="20"
+          [theme]="buttonTheme.light"
+          [circle]="true"
+        ></us-button>
+
+        <us-button
+          *ngIf="courseData.in_basket !== 0"
+          (click)="removeFromBasket(courseData.id, courseData)"
+          icon="full-basket"
+          [iconSize]="40"
+          [theme]="buttonTheme.light"
+          [circle]="true"
+        ></us-button>
+
+        <us-button
+          *ngIf="courseData.in_basket === 0"
+          (click)="addToCart(courseData.id, courseData)"
+          icon="cart"
+          [iconSize]="20"
+          [theme]="buttonTheme.light"
+          [circle]="true"
+        ></us-button>
+      </div>
+    </div>
+
+    <div class="course__info" [routerLink]="'/course/' + courseData.id">
+      <div class="course__title-keeper">
+        <h4 class="course__title">{{ courseData.title }}</h4>
+      </div>
+      <article class="course__description">
+        <span class="course_category" *ngFor="let category of courseData.categories">{{
+          category
+        }}</span>
+      </article>
+      <div class="course__star-side">
+        <div class="stars" *ngIf="courseData.rating !== null">
+          <us-star-rating
+            *ngIf="courseData.rating"
+            [isReadOnly]="true"
+            [color]="'#6b63dd'"
+            [maxStars]="5"
+            [size]="14"
+            [rateValue]="courseData.rating"
+          ></us-star-rating>
+        </div>
+      </div>
+      <div class="course__price-keeper">
+        <span class="course__calendar" *ngIf="courseData.type !== courseType.ONLINE">
+          <us-icon
+            *ngIf="courseData.first_lesson_date !== null"
+            [name]="'calendar-icon'"
+            [size]="16"
+          ></us-icon>
+          <span *ngIf="courseData.first_lesson_date !== null" class="date">{{
+            courseData.first_lesson_date | translateDate: 'd MMM, YYYY / HH:mm'
+          }}</span>
+        </span>
+        <div class="course__price-side">
+          <span *ngIf="courseData.price > 0; else freeBlock" class="course_price">
+            {{ currencyType.AMD }}{{ courseData.price | number }}
+          </span>
+          <ng-template #freeBlock>
+            <span class="course_price course_free">{{ 'dashboard.courses.free' | translate }}</span>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+@import 'src/assets/styles/mixins/_for-breakpoint';
+
+
+.notification {
+  &__wrapper {
+    @include for-breakpoint(tablet) {
+      width: 100%;
+    }
+  }
+}

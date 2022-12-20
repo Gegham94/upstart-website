@@ -1,0 +1,38 @@
+@import './variables/_colors';
+@import './mixins/for-breakpoint';
+
+h1 {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 67px;
+  color: $title-color;
+
+  @include for-breakpoint(tablet-sm) {
+    font-size: 32px;
+    line-height: 36px;
+  }
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 50px;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 34px;
+}
+
+h4 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+h5 {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+}

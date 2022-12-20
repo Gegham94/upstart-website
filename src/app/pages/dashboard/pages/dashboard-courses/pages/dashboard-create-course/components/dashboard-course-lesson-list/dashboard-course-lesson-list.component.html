@@ -1,0 +1,77 @@
+<div class="course-lesson-list__keeper">
+  <us-accordion class="course-lesson-list" [autoOpen]="true" [collapsing]="true">
+    <div
+      class="course-lesson-list__header"
+      usAccordionItem
+      *ngFor="let lessonControl of lessonsForms; let i = index"
+    >
+      <ng-template
+        usAccordionHeader
+        let-item
+        let-index="index"
+        let-toggle="toggle"
+        let-expanded="expanded"
+      >
+        <div class="course-lesson-list__header">
+          <p class="course-lesson-list__header-title">
+            {{ 'dashboard.courses.lesson' | translate }} {{ index + 1 }}
+          </p>
+          <div class="course-lesson-list__action">
+            <button
+              (click)="toggle()"
+              class="course-lesson-list__toggle accordion__toggle-btn"
+              [class.course-lesson-list__toggle_rotated]="expanded"
+              [disabled]="item.disabled"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template usAccordionContent>
+        <form
+          class="course-lesson-list__form"
+          [formGroup]="getFormGroupFromAbstractControl(lessonControl)"
+        >
+          <us-date-input
+            formControlName="enterDate"
+            [label]="'dashboard.courses.enter-date' | translate"
+          ></us-date-input>
+          <us-date-input
+            formControlName="enterTime"
+            [mode]="'time'"
+            [minDate]="undefined"
+            [label]="'dashboard.courses.start-time' | translate"
+          ></us-date-input>
+          <us-input
+            class="course-lesson-list__form-field"
+            [label]="'dashboard.courses.enter-duration' | translate"
+            iconName="minutes"
+            type="number"
+            [min]="1"
+            formControlName="duration"
+          ></us-input>
+          <div
+            *ngIf="lessonControl.get('enterDate')?.errors"
+            class="course-lesson-list__error-block"
+          >
+            <span *ngFor="let error of lessonControl.get('enterDate')?.errors | keyvalue">
+              {{ error.value }}
+            </span>
+          </div>
+          <div
+            *ngIf="lessonControl.get('duration')?.errors"
+            class="course-lesson-list__error-block"
+          >
+            <span *ngFor="let error of lessonControl.get('duration')?.errors | keyvalue">
+              {{ error.value }}
+            </span>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+  </us-accordion>
+</div>

@@ -1,0 +1,154 @@
+<div class="dashboard">
+  <div class="dashboard__container">
+    <h4 class="dashboard__title">{{ title | translate }}</h4>
+
+    <ng-container *ngIf="dashboardData; else loader">
+      <div class="dashboard__course-counts">
+        <h5 class="dashboard__course-title">
+          {{ 'dashboard.trainer.courses_counts' | translate }}
+        </h5>
+        <div class="dashboard__course-cards">
+          <div class="dashboard__course-item">
+            <span class="dashboard__course-item-text">{{ 'basket.main.total' | translate }}</span>
+            <p class="dashboard__course-item-count">{{ dashboardData.total_count }}</p>
+          </div>
+          <div class="dashboard__course-item" [ngStyle]="{ background: '#F88F93' }">
+            <span class="dashboard__course-item-text">{{
+              'dashboard.trainer.draft' | translate
+            }}</span>
+            <p class="dashboard__course-item-count">{{ dashboardData.draft }}</p>
+          </div>
+          <div class="dashboard__course-item" [ngStyle]="{ background: '#85BEEC' }">
+            <span class="dashboard__course-item-text">{{
+              'dashboard.trainer.under_review' | translate
+            }}</span>
+            <p class="dashboard__course-item-count">{{ dashboardData.under_review }}</p>
+          </div>
+          <div class="dashboard__course-item" [ngStyle]="{ background: '#98C5A5' }">
+            <span class="dashboard__course-item-text">{{
+              'dashboard.trainer.published' | translate
+            }}</span>
+            <p class="dashboard__course-item-count">{{ dashboardData.under_review }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard__graph-block">
+        <div class="dashboard__graph">
+          <div class="dashboard__graph-header">
+            <h5 class="dashboard__graph-title">
+              {{ 'dashboard.trainer.paid_courses' | translate }}
+            </h5>
+          </div>
+          <div class="dashboard__graph-content">
+            <us-chart-pie [chartLabels]="coursesPaidLabels"></us-chart-pie>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard__course-charts">
+        <div class="dashboard__graph dashboard__course-items">
+          <div class="dashboard__graph-header">
+            <h5 class="dashboard__graph-title">
+              {{ 'dashboard.trainer.payments_graph' | translate }}
+            </h5>
+          </div>
+          <div class="dashboard__graph-content">
+            <us-chart-line
+              [labels]="paymentAmountMonthly?.['months']!"
+              [data]="paymentAmountMonthly?.['amount']!"
+            ></us-chart-line>
+          </div>
+        </div>
+        <div class="dashboard__graph dashboard__course-items">
+          <div class="dashboard__graph-header">
+            <h5 class="dashboard__graph-title">
+              {{ 'dashboard.trainer.average_stars' | translate }}
+            </h5>
+          </div>
+          <div class="dashboard__graph-content">
+            <div class="dashboard__graph-star">
+              <div class="dashboard__graph-star-block">
+                <div class="dashboard__graph-star-count">
+                  <p class="total_rate_title">{{ 'dashboard.trainer.avg_rating' | translate }}</p>
+                  <span class="total_rate">{{ reviews?.average_number }}</span>
+                </div>
+                <div class="dashboard__graph-star-progress">
+                  <ng-container *ngIf="reviews?.total_reviews! > 0; else notRate">
+                    <ng-container *ngFor="let rate of reviews?.rates">
+                      <p
+                        *ngIf="rate.count > 0"
+                        class="star_line"
+                        [ngStyle]="{ width: rate.percent }"
+                      >
+                        <span
+                          class="star_color"
+                          [ngStyle]="{
+                            background:
+                              rate.name === 1
+                                ? '#EF7777'
+                                : rate.name === 2
+                                ? '#F6B36F'
+                                : rate.name === 3
+                                ? '#FBD569'
+                                : rate.name === 4
+                                ? '#BDD280'
+                                : rate.name === 5
+                                ? '#66B47C'
+                                : '#FAF8FF'
+                          }"
+                        ></span>
+                        <span class="star_count">
+                          <span class="count">
+                            {{ rate.name }}
+                            <span
+                              class="star"
+                              [ngStyle]="{
+                                color:
+                                  rate.name === 1
+                                    ? '#EF7777'
+                                    : rate.name === 2
+                                    ? '#F6B36F'
+                                    : rate.name === 3
+                                    ? '#FBD569'
+                                    : rate.name === 4
+                                    ? '#BDD280'
+                                    : rate.name === 5
+                                    ? '#66B47C'
+                                    : '#FAF8FF'
+                              }"
+                              >&bigstar;</span
+                            >
+                          </span>
+                          <span class="all_star_count">{{ rate.count }}</span>
+                        </span>
+                      </p>
+                    </ng-container>
+                  </ng-container>
+
+                  <ng-template #notRate>
+                    <div class="not-rate-block">
+                      <p class="not-rate-line"></p>
+                      <h4 class="not-rate-text">{{ 'dashboard.trainer.no_stars' | translate }}</h4>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #loader>
+      <ngx-skeleton-loader
+        count="4"
+        [theme]="{
+          marginRight: '8px',
+          height: '117px',
+          width: '250px',
+          'background-color': '#faf8ff'
+        }"
+        appearance="line"
+      ></ngx-skeleton-loader>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="course-details">
+  <div class="course-details__will-learn">
+    <div class="course-details__will-learn-side">
+      <h3 class="course-details__will-learn-title">{{ 'course.you-will-learn' | translate }}</h3>
+      <ng-container>
+        <ul class="course-details__will-learn-list">
+          <ng-container *ngIf="!preview && courseWill_learn.length > 0">
+            <li *ngFor="let learn of courseWill_learn" class="course-details__will-learn-element">
+              <us-icon
+                class="course-details__will-learn-element-icon"
+                name="checkmark"
+                [size]="18"
+              ></us-icon>
+              <span class="course-details__will-learn-element-text">
+                {{ learn }}
+              </span>
+            </li>
+          </ng-container>
+
+          <li
+            *ngIf="preview && courseWill_learn.length === 0"
+            class="course-details__will-learn-element"
+          >
+            <us-icon
+              class="course-details__will-learn-element-icon"
+              name="checkmark"
+              [size]="18"
+            ></us-icon>
+            <span class="course-details__will-learn-element-text">
+              {{ 'global.placeholder.will_learn_here' | translate }}
+            </span>
+          </li>
+        </ul>
+      </ng-container>
+    </div>
+
+    <div class="course-details__will-learn-side">
+      <h3 class="course-details__requirements-title">{{ 'course.requirements' | translate }}</h3>
+
+      <ng-container>
+        <ul class="course-details__will-learn-list">
+          <ng-container *ngIf="!preview && courseRequirements.length > 0">
+            <li
+              *ngFor="let requirement of courseRequirements"
+              class="course-details__will-learn-element"
+            >
+              <us-icon
+                class="course-details__will-learn-element-icon"
+                name="checkmark"
+                [size]="18"
+              ></us-icon>
+              <span class="course-details__will-learn-element-text">
+                {{ requirement }}
+              </span>
+            </li>
+          </ng-container>
+          <li
+            *ngIf="preview && courseRequirements.length === 0"
+            class="course-details__will-learn-element"
+          >
+            <us-icon
+              class="course-details__will-learn-element-icon"
+              name="checkmark"
+              [size]="18"
+            ></us-icon>
+            <span class="course-details__will-learn-element-text">
+              {{ 'global.placeholder.requirement_here' | translate }}
+            </span>
+          </li>
+        </ul>
+      </ng-container>
+    </div>
+  </div>
+  <div class="course-details__description-keeper">
+    <div class="course-details__description-keeper">
+      <div class="course-details__description-block" [class.active]="showCoverSide">
+        <ng-container *ngIf="!preview">
+          <us-about-area
+            [label]="'course.description'"
+            [height]="200"
+            [text]="course.description"
+          ></us-about-area>
+        </ng-container>
+
+        <ng-container *ngIf="preview && !course.description">
+          <us-about-area
+            [label]="'global.placeholder.description_here'"
+            [height]="200"
+            [text]="course.description"
+          ></us-about-area>
+        </ng-container>
+
+        <!-- <article
+          #mainBlock
+          class="course-details__description course-details__description_toggled"
+          [innerHTML]="course.description"
+        ></article> -->
+      </div>
+      <!-- <span
+        *ngIf="!showBtn"
+        (click)="showCoverSide = !showCoverSide"
+        [class.active]="showCoverSide"
+        class="show-more"
+      >
+        <span *ngIf="!showCoverSide">{{ 'course.show-more' | translate }}</span>
+        <span *ngIf="showCoverSide">{{ 'course.show-less' | translate }}</span>
+        <span class="icon">
+          <us-icon [name]="'arrow-down'" [size]="14"></us-icon>
+        </span>
+      </span> -->
+    </div>
+  </div>
+</div>

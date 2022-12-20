@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="row h-100">
+    <div class="col-12 col-lg-8 justify-content-start align-items-center d-flex">
+      <div class="left_content d-none d-md-block">
+        <p class="title">
+          <span class="bold">{{ 'auth.login.sign_in' | translate }}</span>
+          {{ 'auth.login.upstart' | translate }}
+        </p>
+        <p class="subtitle">
+          {{ 'auth.login.dont_account' | translate }}
+          <a routerLink="/auth/registration" class="purple">
+            {{ 'auth.login.register_here' | translate }}</a
+          >
+        </p>
+      </div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="form_content">
+        <p class="title">{{ 'auth.login.sign_in' | translate }}</p>
+        <form [formGroup]="loginForm">
+          <div class="mb-3">
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              placeholder="{{ 'auth.login.enter_email' | translate }}"
+              required
+              [ngClass]="{ error: loginForm.controls.email.errors?.['pattern'] || emailError}"
+            />
+            <div
+              class="errors_text"
+              *ngIf="f['email'].errors?.['required'] && (f['email'].dirty || f['email'].touched)"
+            >
+              <p>{{ 'auth.errors.email' | translate }}</p>
+            </div>
+            <div class="errors_text" *ngIf="f['email'].errors?.['pattern']">
+              <p>{{ 'auth.errors.email_correct' | translate }}</p>
+            </div>
+            <div class="errors_text" *ngIf="errorMessage">
+              <p>{{ errorMessage }}</p>
+            </div>
+          </div>
+          <div class="input-group">
+            <input
+              formControlName="password"
+              type="{{ fieldTextType ? 'text' : 'password' }}"
+              placeholder="{{ 'auth.login.password' | translate }}"
+              class="form-control w-100"
+              required
+            />
+            <img
+              *ngIf="!fieldTextType"
+              (click)="toggleFieldTextType()"
+              class="close_eye"
+              src="../../../../assets/images/icons/close_eye.svg"
+            />
+            <img
+              *ngIf="fieldTextType"
+              (click)="toggleFieldTextType()"
+              class="close_eye"
+              src="../../../../assets/images/icons/auth/show_eye.svg"
+            />
+            <div
+              class="errors_text"
+              *ngIf="f['password'].errors?.['required'] && (f['password'].dirty || f['password'].touched)"
+            >
+              <p>{{ 'auth.errors.pass' | translate }}</p>
+            </div>
+            <div class="errors_text" *ngIf="f['password'].errors?.['pattern']">
+              <p>{{ 'auth.errors.pass_lenght' | translate }}</p>
+            </div>
+          </div>
+          <div class="form-text" (click)="goReset()">
+            {{ 'auth.login.reset_password' | translate }}
+          </div>
+          <us-button
+            [ngClass]="{ disabled: loginForm.invalid || loader }"
+            [theme]="buttonTheme.primary"
+            (clicked)="submitForm()"
+            [disabled]="loginForm.invalid || loader"
+            [loader]="loader"
+          >
+            {{ 'auth.login.sign_in' | translate }}
+          </us-button>
+        </form>
+        <h2 class="line">
+          <span>{{ 'auth.login.continue_with' | translate }}</span>
+        </h2>
+      </div>
+      <div class="row mobile_btns">
+        <div class="col-6 col-lg-6 ps-lg-0 px-2 my-2 my-lg-0 hide-sm google_btn">
+          <button class="social_btn" #googleBtn>
+            <img src="../../../../assets/images/auth/google.png" />{{
+              !isMobile ? ('auth.login.with_google' | translate) : ''
+            }}
+          </button>
+        </div>
+        <div class="col-6 col-lg-6 pe-lg-0 px-2 my-2 my-lg-0 apple_btn">
+          <button class="social_btn">
+            <img *ngIf="!isMobile" src="../../../../assets/images/auth/facebbok.png" />
+            <us-icon *ngIf="isMobile" class="course-side__element-icon" name="auth/apple"></us-icon>
+            {{ !isMobile ? ('auth.login.with_facebook' | translate) : '' }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <p class="subtitle_mobile d-block d-md-none">
+      {{ 'auth.login.dont_account' | translate }}
+      <a routerLink="/auth/registration" class="purple">
+        {{ 'auth.login.register_here' | translate }}</a
+      >
+    </p>
+  </div>
+</div>

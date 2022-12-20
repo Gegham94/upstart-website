@@ -1,0 +1,13 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.course-related {
+  @include for-breakpoint(tablet-sm) {
+    padding-bottom: 74px;
+  }
+
+  &__title {
+    @include for-breakpoint(tablet-sm) {
+      margin-bottom: 17px;
+    }
+  }
+}

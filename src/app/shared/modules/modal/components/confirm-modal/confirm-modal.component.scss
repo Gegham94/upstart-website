@@ -1,0 +1,50 @@
+@import 'src/assets/styles/variables/colors';
+::ng-deep .confirm-dialog{
+    background-color: $white;
+    border-radius: 8px;
+    min-height: 150px;
+
+    .confirm-dialog-modal{
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        .message{
+            margin-top: 10%;
+            color: $title-color;
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .buttons{
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .btn{
+                min-width: 120px;
+                text-align: center;
+                border-radius: 8px;
+                background-color: $main;
+                color: $white;
+                font-weight: 500;
+                border:2px solid $main;
+                &:first-child{
+                    margin-right: 10px;
+                    background-color: transparent;
+                    color: $main;
+                    &:hover{
+                        background-color: $main;
+                        color: $white;
+                    }
+                }
+                &:last-child{
+                    &:hover{
+                        background-color: $white;
+                        color: $main;
+                    }
+                }
+            }
+        }
+    }
+}

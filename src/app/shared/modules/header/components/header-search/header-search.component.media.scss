@@ -1,0 +1,23 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.header-search {
+  &__input {
+    @include for-breakpoint(mobile) {
+      padding: 6px 35px 6px 17px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+
+  &__icon {
+    @include for-breakpoint(mobile) {
+      right: 17px;
+
+      &::ng-deep img {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}

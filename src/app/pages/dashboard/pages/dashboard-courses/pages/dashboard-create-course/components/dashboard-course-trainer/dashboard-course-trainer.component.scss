@@ -1,0 +1,74 @@
+@import "src/assets/styles/variables/colors";
+
+.course-trainer {
+  &__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin-bottom: 20px;
+    color: $grey-text;
+  }
+
+  &__form {
+    width: 100%;
+
+    &-keeper {
+      display: flex;
+      gap: 22px;
+      padding-top: 52px;
+    }
+  }
+
+  &__input {
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  &__image {
+    width: 435px;
+  }
+
+  &__action {
+    &::ng-deep {
+      button {
+        padding: 10px 17.5px;
+        min-width: 129px;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-width: 1px;
+      }
+    }
+
+    &-keeper {
+      display: flex;
+      justify-content: flex-end;
+      position: absolute;
+      gap: 8px;
+      bottom: 24px;
+      right: 40px;
+    }
+  }
+
+  &__update-warning {
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 18px;
+    color: $grey-text;
+  }
+
+  &__illustration {
+    object-fit: contain;
+    object-position: top center;
+  }
+
+  &__label {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: $grey-text;
+    margin-bottom: 6px;
+  }
+}

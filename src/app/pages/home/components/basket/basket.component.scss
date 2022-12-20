@@ -1,0 +1,127 @@
+@import 'src/assets/styles/variables/colors';
+
+.basket-courses {
+  margin-bottom: 30px;
+.empty-basket{
+  text-align: center;
+  display: block;
+  font-weight: 700;
+  color: $light-grey;
+  font-size: 27px;
+  margin-bottom: 60px;
+}
+  &__header-line{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    padding-top: 24px;
+  }
+
+  &__slider {
+    &-suggestion-title{
+      margin-bottom: 27px;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 140%;
+      color: $title-color;
+    }
+    &-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 1;
+      transition: opacity 0.2s ease-in-out;
+
+      &::ng-deep .button {
+        width: 34px;
+        height: 79px;
+        border-radius: 5px;
+      }
+
+      &_left {
+        left: -23.5px;
+      }
+
+      &_right {
+        right: -23.5px;
+      }
+
+      &.slick-disabled {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    &-keeper {
+      margin: 0 -9px;
+      width: calc(100% + 18px);
+      position: relative;
+    }
+  }
+
+  &__slide {
+    margin: 0 9px 0 0;
+  }
+
+  &__desc {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: $light-grey-text;
+    white-space: nowrap;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    row-gap: 26px;
+    column-gap: 18px;
+    > us-basket-course {
+      &:not(:last-child) {
+        content: '';
+        border-bottom: 1px solid $light-grey;
+        padding-bottom: 7px;
+      }
+    }
+  }
+
+  &__title {
+    margin: 34px 10px 10px 0;
+    white-space: nowrap;
+    &-text {
+      color: $light-grey-text;
+      opacity: 0.5;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.1px;
+      margin-right: 6px;
+    }
+    &-price {
+      color: $title-color;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 18px;
+      letter-spacing: 0.1px;
+    }
+  }
+
+  &__action {
+    &::ng-deep {
+      .button {
+        height: 50px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 25px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+      }
+    }
+    &-keeper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+}

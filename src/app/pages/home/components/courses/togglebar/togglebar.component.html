@@ -1,0 +1,14 @@
+<div class="title" (click)="expandCollapse()">
+  <label #labelText class="label">{{ label }}</label>
+  <us-icon name="chevron-down_dark" [size]="13" *ngIf="isExpanded; else titleExpanded"></us-icon>
+  <ng-template #titleExpanded>
+    <us-icon name="chevron-up_dark" [size]="13"></us-icon>
+  </ng-template>
+</div>
+<ngx-treeview
+  [hidden]="isExpanded"
+  class="togglebar_body"
+  [config]="config"
+  [items]="items"
+  (selectedChange)="selectedValue($event)"
+></ngx-treeview>

@@ -1,0 +1,47 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.contact-us {
+
+  @include for-breakpoint(tablet) {
+    &__email__form {
+      width: 70%;
+    }
+  }
+
+  @include for-breakpoint(mobile-lg) {
+    padding: 50px;
+
+    &__circle-block {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__title-first {
+      width: 100%;
+      margin-bottom: 50px;
+      margin-left: 100px;
+    }
+
+    &__info {
+      padding: 100px 70px;
+    }
+
+    &__email__form {
+      width: 90%;
+    }
+  }
+
+  @include for-breakpoint(mobile) {
+
+    padding: 50px 15px;
+
+    &__title-first {
+      margin-left: 0px;
+      text-align: center;
+    }
+
+    &__email__form {
+      width: 100%;
+    }
+  }
+}

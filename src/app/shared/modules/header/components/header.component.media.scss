@@ -1,0 +1,23 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.header {
+  @include for-breakpoint(tablet) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 17px;
+    padding-bottom: 17px;
+  }
+
+  &__logo {
+    @include for-breakpoint(tablet) {
+      margin-right: 16px;
+    }
+
+    &_logged {
+      @include for-breakpoint(tablet) {
+        margin-right: -26px;
+      }
+    }
+  }
+}

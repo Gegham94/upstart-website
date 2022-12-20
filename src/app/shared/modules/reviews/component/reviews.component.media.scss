@@ -1,0 +1,35 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+@import 'src/assets/styles/variables/colors';
+
+
+.reviews{
+  @include for-breakpoint(mobile-lg) {
+    border: 0;
+    border-bottom: 1px solid $dark-white;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0;
+    border-radius: 0;
+    &__img-reviewer{
+      text-align: center;
+      img{
+        width: 300px !important;
+        height: 240px !important;
+        height: 15em;
+      }
+    }
+    &__author{
+      margin-left: auto;
+    }
+    &__review-date{
+      margin: 4px 0 7px;
+    }
+    &__img-reviewer{
+      .rating{
+        transform: translate(-50%, 90px);
+        width: 152px;
+        padding-top: 5px;
+      }
+    }
+  }
+}

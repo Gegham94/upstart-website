@@ -1,0 +1,42 @@
+<div class="home-main">
+  <div class="home-main__container container">
+    <div class="home-main__content">
+      <h1 class="home-main__title">
+        {{ 'home.main.title' | translate }}
+      </h1>
+      <article class="home-main__description">
+        <strong> 1000+ </strong>
+        {{ 'home.main.description' | translate }}
+      </article>
+      <div class="home-main__action-keeper">
+        <us-button [theme]="buttonTheme.primary" (click)="goRegistrastion()">
+          {{ 'home.main.start-trial' | translate }}
+        </us-button>
+        <us-button [theme]="buttonTheme.primary" [outline]="true">
+          {{ 'home.main.how-it-works' | translate }}
+        </us-button>
+      </div>
+      <div class="home-main__count-keeper">
+        <div class="home-main__count">
+          <span class="home-main__count-number">{{ statisticList?.courses }}+</span>
+          <p class="home-main__count-description">
+            {{ 'home.main.courses-to-choose' | translate }}
+          </p>
+        </div>
+        <div class="home-main__count">
+          <span class="home-main__count-number">{{ statisticList?.students }}+</span>
+          <p class="home-main__count-description">
+            {{ 'home.main.students-trained' | translate }}
+          </p>
+        </div>
+        <div class="home-main__count">
+          <span class="home-main__count-number">{{ statisticList?.trainers }}+</span>
+          <p class="home-main__count-description">
+            {{ 'home.main.professional-trainers' | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <img class="home-main__image" src="./assets/images/home/main.png" alt="Home Main" />
+  </div>
+</div>

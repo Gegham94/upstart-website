@@ -1,0 +1,13 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.course-general {
+  margin-bottom: 19px;
+
+  &__container {
+    @include for-breakpoint(tablet-sm) {
+      flex-direction: column;
+      padding-top: 18px;
+      gap: 23px;
+    }
+  }
+}

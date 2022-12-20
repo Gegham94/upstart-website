@@ -1,0 +1,29 @@
+<div class="image-input__keeper">
+  <label class="image-input__label" *ngIf="!defaultFileUrl && (multiple || !uploadedFile)">
+    <button class="image-input__custom" (click)="openFileInput()" type="button">
+      <us-icon name="add" [size]="27.4"></us-icon>
+    </button>
+    <input
+      #input
+      class="image-input"
+      type="file"
+      (change)="fileUploaded($event)"
+      [multiple]="multiple"
+    />
+  </label>
+  <div class="image-input__uploaded-list">
+    <ng-container *ngIf="displayImages.length > 0">
+      <div class="image-input__uploaded" *ngFor="let file of displayImages; let i = index">
+        <img class="image-input__uploaded-image" [src]="file" width="64" height="64" />
+        <span class="image-input__uploaded-close" (click)="fileRemoved(i)">
+          <us-icon name="close_white" [size]="12"></us-icon>
+        </span>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div *ngIf="errors" class="image-input__error-block">
+  <span *ngFor="let error of errors | keyvalue">
+    {{ error.value }}
+  </span>
+</div>

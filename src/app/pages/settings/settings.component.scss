@@ -1,0 +1,152 @@
+@import "src/assets/styles/variables/colors";
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+.settings-page {
+  background: $white;
+
+  .content-center {
+    max-width: 1188px;
+    margin: auto;
+  }
+
+  .page-header {
+    padding: 15px 0 22px;
+  }
+  .errors_text{
+    color: $error;
+    font-size: 12px;
+  }
+  .page-body {
+    background: $light-purple;
+    border-radius: 8px;
+
+    .page-content {
+      padding: 30px 15px;
+
+      .nav-tabs {
+        margin-top: 35px;
+        border-bottom: 1px solid $placeholder;
+        max-width: 435px;
+
+        .nav-item:first-of-type {
+          margin-right: 40px;
+        }
+
+        .nav-link {
+          padding: 11px 55px;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 20px;
+          border: none;
+          color: $grey-text;
+
+          &.active {
+            border-bottom: 2px solid $main;
+            background: none;
+            color: $main;
+          }
+        }
+      }
+
+      .tab-content {
+        margin-top: 35px;
+        .btn-block{
+          display: flex;
+          justify-content: flex-end;
+          margin-top: 45px
+        }
+        .settings-page-btn{
+          margin-right: 8px;
+          ::ng-deep{
+            button{
+              padding: 10px 37px;
+              font-weight: 600;
+              font-size: 12px;
+              line-height: 14px;
+              display: flex;
+              align-items: center;
+              letter-spacing: 0.05em;
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
+      .form{
+        height: 420px;
+        display: flex;
+        justify-content: space-between;
+        us-editor{
+          ::ng-deep{
+
+          }
+        }
+        .user_input-area{
+          flex: 1;
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+        }
+        .area-left{
+          margin-right: 16px;
+        }
+        &.student-view{
+          height: 250px;
+          .area-left{
+            justify-content: flex-start;
+          }
+          us-input{
+            margin-bottom: 15px;
+          }
+        }
+        &.trc-view{
+          height: 500px;
+        }
+        @include for-breakpoint(tablet-sm) {
+          height: auto!important;
+          flex-direction: column;
+          us-input,us-editor {
+            ::ng-deep{
+              label {
+                margin-top: 20px;
+              }
+            }
+          }
+        }
+      }
+      .change-password{
+        form{
+          max-width: 601px;
+          us-input{
+            ::ng-deep{
+              label{
+                margin-top: 8px;
+              }
+            }
+          }
+          .toggle-password{
+            width: max-content;
+            cursor: pointer;
+            margin-top: 22px;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            display: flex;
+            align-items: center;
+            text-transform: capitalize;
+            color: $main;
+            &.disabled{
+              cursor: no-drop;
+              color: $light-grey-text
+            }
+          }
+        }
+      }
+    }
+  }
+}

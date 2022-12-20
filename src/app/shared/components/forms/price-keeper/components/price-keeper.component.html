@@ -1,0 +1,29 @@
+<label class="price-input__label">
+  <span *ngIf="label" class="price-input__label-text">
+    {{ label }}
+  </span>
+  <div class="price-input__group" usClickOutside (clickOutside)="currencyListOpened = false">
+    <button class="price-input__currency" (click)="currencyListOpened = !currencyListOpened">
+      {{ selectedCurrency ? selectedCurrency.displayName : currencyList[0].displayName }}
+      <us-icon *ngIf="currencyList.length > 1" name="chevron-down_white" [size]="6"></us-icon>
+    </button>
+    <div class="price-input__currency-list" *ngIf="currencyList.length > 1 && currencyListOpened">
+      <div
+        class="price-input__currency-element"
+        *ngFor="let currency of currencyList"
+        (click)="currencyChange(currency)"
+      >
+        {{ currency.displayName }}
+      </div>
+    </div>
+    <input
+      class="price-input"
+      type="number"
+      min="0"
+      [placeholder]="placeholder + (requiredPlaceholder ? ' *' : '')"
+      [value]="value ? value.amount : ''"
+      (focus)="currencyListOpened = false"
+      (input)="amountChange($event)"
+    />
+  </div>
+</label>

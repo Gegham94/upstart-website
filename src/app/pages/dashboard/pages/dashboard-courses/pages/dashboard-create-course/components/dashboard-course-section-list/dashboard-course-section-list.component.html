@@ -1,0 +1,168 @@
+<div class="course-section-list__keeper">
+  <us-accordion [autoOpen]="true" class="course-section-list" [collapsing]="true">
+    <div
+      class="course-section-list__header"
+      usAccordionItem
+      *ngFor="let sectionControl of sectionForms.controls; let i = index"
+    >
+      <ng-template
+        usAccordionHeader
+        let-item
+        let-index="index"
+        let-toggle="toggle"
+        let-expanded="expanded"
+      >
+        <div class="course-section-list__header">
+          <p class="course-section-list__header-title">
+            {{
+              sectionControl.value?.title ?? ('dashboard.courses.section' | translate) + (index + 1)
+            }}
+          </p>
+          <div class="course-section-list__action">
+            <us-button
+              [theme]="buttonTheme.transparent"
+              class="course-section-list__add"
+              (clicked)="addElementToSection(sectionControl, toggle, expanded)"
+              *ngIf="sectionControl.value?.elements[0]?.type !== sectionElementType.UNTYPED"
+            >
+              <us-icon name="add_primary" [size]="18"></us-icon>
+              {{ 'dashboard.courses.add-content' | translate }}
+            </us-button>
+            <button
+              (click)="toggle()"
+              class="course-section-list__toggle accordion__toggle-btn"
+              [class.course-section-list__toggle_rotated]="expanded"
+              [disabled]="item.disabled"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z" />
+              </svg>
+            </button>
+            <us-button
+              class="course-section-list__dropdown-toggle"
+              icon="horizontal-dots"
+              [iconSize]="24"
+              [circle]="true"
+              usDropdown
+              [tooltipContent]="courseSectionListDropdown"
+              [tooltipOrientation]="tooltipOrientation.vertical"
+            >
+            </us-button>
+            <ng-template #courseSectionListDropdown>
+              <div class="course-section-list__dropdown">
+                <a
+                  class="course-section-list__dropdown-button"
+                  (click)="!expanded && toggle(); sectionControl.get('isEdit')?.setValue(true)"
+                >
+                  {{ 'dashboard.courses.rename' | translate }}
+                </a>
+                <a
+                  *ngIf="sectionForms.controls.length > 1"
+                  class="course-section-list__dropdown-button course-section-list__dropdown-button_remove"
+                  (click)="removeSection(sectionControl.value.id, index)"
+                >
+                  {{ 'dashboard.courses.delete' | translate }}
+                </a>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template usAccordionContent let-toggle="toggle">
+        <ng-container [formGroup]="convertAbstractControlToFormGroup(sectionControl)">
+          <ng-container *ngIf="sectionControl.get('isEdit')?.value && sectionControl.get('title')">
+            <us-input
+              class="course-section-list__section-title-field"
+              [label]="'dashboard.courses.section-title' | translate"
+              formControlName="title"
+              [placeholder]="'dashboard.courses.section-title' | translate"
+            >
+            </us-input>
+            <div class="course-section-list__section-action">
+              <us-button
+                (clicked)="cancelRename(sectionControl)"
+                [theme]="buttonTheme.primary"
+                [outline]="true"
+              >
+                {{ 'global.button.cancel' | translate }}
+              </us-button>
+              <us-button
+                (clicked)="updateSection(sectionControl)"
+                [disabled]="
+                  !!sectionControl.get('title') &&
+                  (!sectionControl.get('title')?.dirty || !!sectionControl.get('title')?.invalid)
+                "
+                [theme]="buttonTheme.primary"
+              >
+                {{ 'global.button.save' | translate }}
+              </us-button>
+            </div>
+          </ng-container>
+          <ng-container *ngFor="let control of getElementFormGroups(i); let elementIndex = index">
+            <ng-container [ngSwitch]="control.value.type">
+              <div *ngSwitchCase="sectionElementType.UNTYPED" class="course-section-list__section">
+                <h4 class="course-section-list__section-title">
+                  {{ 'dashboard.courses.type-of-content' | translate }}
+                </h4>
+                <div class="course-section-list__type-keeper">
+                  <button
+                    class="course-section-list__type"
+                    (click)="setElementType(control, sectionElementType.LESSON, elementIndex)"
+                  >
+                    <us-icon class="course-section-list__type-icon" [size]="18" name="add_primary">
+                    </us-icon>
+                    <span class="course-section-list__type-name">
+                      {{ 'dashboard.courses.add-lesson' | translate }}
+                    </span>
+                  </button>
+                  <button
+                    class="course-section-list__type"
+                    (click)="setElementType(control, sectionElementType.QUIZ, elementIndex)"
+                  >
+                    <us-icon class="course-section-list__type-icon" [size]="18" name="add_primary">
+                    </us-icon>
+                    <span class="course-section-list__type-name">{{
+                      'dashboard.courses.add-quiz' | translate
+                    }}</span>
+                  </button>
+                </div>
+              </div>
+              <us-dashboard-course-lesson
+                *ngSwitchCase="sectionElementType.LESSON"
+                [lessonForm]="control"
+                [index]="elementIndex"
+                [type]="type"
+                [courseId]="courseId"
+                [sectionId]="sectionControl.value.id"
+                [resourceOptions]="resourceOptions"
+                [collapsed]="control.value.isOpened"
+              ></us-dashboard-course-lesson>
+              <us-dashboard-course-quiz
+                *ngSwitchCase="sectionElementType.QUIZ"
+                [quizForm]="control"
+                [index]="elementIndex"
+                [courseId]="courseId"
+                [sectionId]="sectionControl.value.id"
+                [collapsed]="control.value.isOpened"
+              ></us-dashboard-course-quiz>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-template>
+    </div>
+  </us-accordion>
+  <us-button
+    class="course-section-list__button"
+    icon="add"
+    [iconSize]="18"
+    [theme]="buttonTheme.primary"
+    (clicked)="addSection()"
+    *ngIf="
+      sectionForms.controls[sectionForms.controls.length - 1]?.value?.elements[0]?.type !==
+      sectionElementType.UNTYPED
+    "
+  >
+    {{ 'dashboard.courses.add-section' | translate }}
+  </us-button>
+</div>

@@ -1,0 +1,95 @@
+<div
+  class="create-course"
+  [class.create-course_loading]="isLoading"
+  *ngIf="!isStepsShown; else creationSteps"
+>
+  <h1 class="create-course__title">{{ 'dashboard.courses.what-course' | translate }}</h1>
+  <h4 class="create-course__subtitle">{{ 'dashboard.courses.description-here' | translate }}</h4>
+  <div class="create-course__type-list">
+    <div
+      class="create-course__type"
+      [class.create-course__type_disabled]="type.disabled"
+      [class.create-course__type_active]="typeControl.value === type.id"
+      *ngFor="let type of types"
+      (click)="!type.disabled && setActiveType(type.id)"
+    >
+      <img
+        class="create-course__type-image"
+        [src]="'./assets/images/create-course/' + type.imageName + '.png'"
+        [alt]="type.name"
+      />
+      <span class="create-course__type-text"> {{ type.name | translate }} </span>
+    </div>
+  </div>
+  <div class="create-course__action-keeper">
+    <us-button
+      class="create-course__action"
+      [disabled]="typeForm.invalid || isLoading"
+      [theme]="buttonTheme.primary"
+      (clicked)="saveType()"
+    >
+      {{ 'dashboard.courses.save-next' | translate }}
+    </us-button>
+  </div>
+</div>
+<ng-template #creationSteps>
+  <div class="create-course create-course_steps" [class.create-course_loading]="isLoading">
+    <h2 class="create-course__title create-course__title_steps">
+      {{ 'dashboard.courses.plan-course' | translate }}
+    </h2>
+    <us-tabs class="create-course__tabs" [isSteps]="true" [isStrict]="false">
+      <us-tab
+        [title]="'dashboard.courses.choose_category' | translate"
+        [completed]="completedSteps ? completedSteps[courseCreateSteps.FIRST] : false"
+        [invalid]="invalidSteps ? invalidSteps.includes(courseCreateSteps.FIRST) : false"
+      >
+        <us-dashboard-course-category
+          [publishDisabled]="getPublishDisabledState"
+          [courseId]="courseFormService.currentCourse?.id ?? 0"
+          (nextStep)="nextStep()"
+          (errorReceived)="receivedError($event, courseCreateSteps.FIRST)"
+        ></us-dashboard-course-category>
+      </us-tab>
+      <us-tab
+        [title]="'dashboard.courses.course-landing-page' | translate"
+        [completed]="completedSteps ? completedSteps[courseCreateSteps.SECOND] : false"
+        [invalid]="invalidSteps ? invalidSteps.includes(courseCreateSteps.SECOND) : false"
+      >
+        <us-dashboard-course-landing
+          [publishDisabled]="getPublishDisabledState"
+          [courseId]="courseFormService.currentCourse?.id ?? 0"
+          (nextStep)="nextStep()"
+          (errorReceived)="receivedError($event, courseCreateSteps.SECOND)"
+        ></us-dashboard-course-landing>
+      </us-tab>
+      <us-tab
+        [title]="'dashboard.courses.course-info' | translate"
+        [completed]="completedSteps ? completedSteps[courseCreateSteps.THIRD] : false"
+        [invalid]="invalidSteps ? invalidSteps.includes(courseCreateSteps.THIRD) : false"
+      >
+        <us-dashboard-course-information
+          [publishDisabled]="getPublishDisabledState"
+          (nextStep)="
+            !!(currentUser && currentUser.role_id === userRole.TRAINER) ? saveCourse() : nextStep()
+          "
+          [courseId]="courseFormService.currentCourse?.id ?? 0"
+          [isLast]="!!(currentUser && currentUser.role_id === userRole.TRAINER)"
+          (errorReceived)="receivedError($event, courseCreateSteps.THIRD)"
+        ></us-dashboard-course-information>
+      </us-tab>
+      <us-tab
+        *ngIf="currentUser && currentUser.role_id === userRole.TRAINING_CENTER"
+        [title]="'trainer_profile.information' | translate"
+        [completed]="completedSteps[courseCreateSteps.FORTH]"
+        [invalid]="invalidSteps ? invalidSteps.includes(courseCreateSteps.FORTH) : false"
+      >
+        <us-dashboard-course-trainer
+          [publishDisabled]="getPublishDisabledState"
+          [courseId]="courseFormService.currentCourse?.id ?? 0"
+          (nextStep)="saveCourse()"
+          (errorReceived)="receivedError($event, courseCreateSteps.FORTH)"
+        ></us-dashboard-course-trainer>
+      </us-tab>
+    </us-tabs>
+  </div>
+</ng-template>

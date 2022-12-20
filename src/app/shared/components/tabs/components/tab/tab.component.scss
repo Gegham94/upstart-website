@@ -1,0 +1,7 @@
+:host {
+  & > div {
+    height: calc(100% - 95px);
+    display: block;
+    overflow-y: auto;
+  }
+}

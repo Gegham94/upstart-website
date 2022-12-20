@@ -1,0 +1,30 @@
+<div class="about-area">
+  <span class="label">{{ label | translate }}</span>
+  <div
+    [class.active]="!showCoverSide"
+    style="max-height: {{ height }}px"
+    #bigBlock
+    class="big-block"
+  >
+    <div
+      #mainBlock
+      [class.active]="!showCoverSide"
+      class="main-block"
+      style="max-height: {{ height - 75 }}px"
+    >
+      <div #textBlock class="text" [innerHTML]="text"></div>
+    </div>
+    <span
+      (click)="hideCoverSide(mainBlock, bigBlock)"
+      *ngIf="showBtn"
+      [class.active]="!showCoverSide"
+      class="show-more"
+    >
+      <span *ngIf="showCoverSide">{{ 'course.show-more' | translate }}</span>
+      <span *ngIf="!showCoverSide">{{ 'course.show-less' | translate }}</span>
+      <span class="icon">
+        <us-icon [name]="'arrow-down'" [size]="14"></us-icon>
+      </span>
+    </span>
+  </div>
+</div>

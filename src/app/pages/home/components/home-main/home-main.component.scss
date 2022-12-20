@@ -1,0 +1,73 @@
+@import 'src/assets/styles/variables/colors';
+
+.home-main {
+  background: $light-purple;
+
+  &__container {
+    padding-right: 54px;
+    padding-top: 97px;
+    padding-bottom: 109.55px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+  }
+
+  &__content {
+    max-width: 524px;
+    width: 100%;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__description {
+    margin-bottom: 46px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    color: $light-grey-text;
+    opacity: 0.6;
+  }
+
+  &__action {
+    &-keeper {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 46px;
+    }
+  }
+
+  &__count {
+    &-number {
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 56px;
+      margin-bottom: 2px;
+      color: $title-color;
+    }
+
+    &-description {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 28px;
+      color: $grey-text;
+    }
+
+    &-keeper {
+      display: flex;
+      align-items: flex-start;
+      gap: 60px;
+    }
+  }
+
+  &__image {
+    max-width: 634.52px;
+    width: 100%;
+    object-fit: contain;
+    object-position: top left;
+  }
+}

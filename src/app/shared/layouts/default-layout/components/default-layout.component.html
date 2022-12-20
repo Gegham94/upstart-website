@@ -1,0 +1,6 @@
+<us-header *ngIf="!isPageHeaderless"></us-header>
+<main>
+  <ng-content></ng-content>
+</main>
+<us-footer *ngIf="!isPageFooterless"></us-footer>
+<us-loading [isGlobal]="true"></us-loading>

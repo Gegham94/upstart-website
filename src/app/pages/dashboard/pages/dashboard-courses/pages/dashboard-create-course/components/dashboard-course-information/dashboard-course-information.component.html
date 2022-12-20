@@ -1,0 +1,181 @@
+<form [formGroup]="informationForm" class="course-information">
+  <div class="course-information__image-keeper">
+    <div class="course-information__general">
+      <div class="course-information__form-row">
+        <div class="course-information__form-field">
+          <label class="course-information__form-label">{{
+            'dashboard.courses.select-language' | translate
+          }}</label>
+          <us-select
+            usValidationError
+            formControlName="language"
+            [placeholder]="'dashboard.courses.select' | translate"
+            [options]="languageOptions"
+          ></us-select>
+        </div>
+        <div class="course-information__form-field">
+          <label class="course-information__form-label">
+            {{ 'dashboard.courses.select-level' | translate }}
+          </label>
+          <us-select
+            usValidationError
+            formControlName="level"
+            [placeholder]="'dashboard.courses.select' | translate"
+            [options]="levelOptions"
+          ></us-select>
+        </div>
+      </div>
+      <ng-container [ngSwitch]="courseType">
+        <div class="course-information__form-row" *ngSwitchCase="courseTypeEnum.OFFLINE">
+          <us-input
+            usValidationError
+            formControlName="address"
+            [label]="'dashboard.courses.select-address' | translate"
+            [placeholder]="'dashboard.courses.address' | translate"
+          ></us-input>
+        </div>
+        <div class="course-information__form-row" *ngSwitchCase="courseTypeEnum.ONLINE_WEBINAR">
+          <us-input
+            usValidationError
+            formControlName="link"
+            iconName="link"
+            [label]="'dashboard.courses.insert-link' | translate"
+            [placeholder]="'dashboard.courses.link' | translate"
+          ></us-input>
+        </div>
+        <div class="course-information__form-row" *ngSwitchCase="courseTypeEnum.CONSULTATION">
+          <us-input
+            usValidationError
+            formControlName="address"
+            [label]="'dashboard.courses.select-address' | translate"
+            [placeholder]="'dashboard.courses.address' | translate"
+          ></us-input>
+        </div>
+      </ng-container>
+      <div class="course-information__form-row course-information__form-row_labeled">
+        <span class="course-information__form-row-label">
+          {{ 'dashboard.courses.course-price' | translate }}
+        </span>
+        <us-checkbox
+          [label]="'dashboard.courses.free' | translate"
+          (checked)="setPaidValue(!$event)"
+          [value]="!isPaid"
+        ></us-checkbox>
+        <us-checkbox
+          [label]="'dashboard.courses.paid' | translate"
+          (checked)="setPaidValue($event)"
+          [value]="isPaid"
+        ></us-checkbox>
+      </div>
+      <div class="course-information__form-row">
+        <us-input
+          usValidationError
+          *ngIf="courseType !== courseTypeEnum.ONLINE"
+          iconName="books"
+          [label]="'dashboard.courses.lessons-count' | translate"
+          placeholder="1"
+          type="number"
+          formControlName="lessonCount"
+          [min]="1"
+        ></us-input>
+        <us-price-keeper
+          *ngIf="!!informationForm.get('paid')?.value"
+          usValidationError
+          formControlName="price"
+          [label]="'dashboard.courses.course-price' | translate"
+          placeholder="0"
+        ></us-price-keeper>
+        <us-input
+          usValidationError
+          *ngIf="courseType !== courseTypeEnum.ONLINE; else emptyFields"
+          iconName="people"
+          [label]="'dashboard.courses.max-participants' | translate"
+          placeholder="1"
+          type="number"
+          formControlName="maxParticipants"
+          [min]="1"
+        ></us-input>
+        <ng-template #emptyFields>
+          <span class="course-information__form-field"></span>
+          <span class="course-information__form-field"></span>
+        </ng-template>
+      </div>
+    </div>
+    <img
+      class="course-information__image"
+      src="./assets/images/dashboard/courses/course-creation-illustration.png"
+      alt="Course Creation Illustration"
+    />
+  </div>
+  <us-dashboard-course-section-list
+    *ngIf="courseType === courseTypeEnum.ONLINE; else lessonsList"
+    [type]="courseTypeEnum.ONLINE"
+    [courseId]="courseId"
+    [sectionList]="courseFormService.currentCourse?.sections"
+    [resourceOptions]="resourcesOptions"
+  ></us-dashboard-course-section-list>
+  <ng-template #lessonsList>
+    <us-dashboard-course-lesson-list
+      [type]="courseType"
+      [courseId]="courseId"
+      [lessonsForms]="lessonGroupListControls"
+    ></us-dashboard-course-lesson-list>
+  </ng-template>
+  <div class="course-information__will-learn">
+    <h3 class="course-information__will-learn-title">
+      {{ 'dashboard.courses.what-will-students' | translate }}
+    </h3>
+    <div
+      class="course-information__will-learn-input-keeper"
+      *ngFor="let control of whatWillLearn.controls; let i = index"
+    >
+      <us-input
+        [placeholder]="'dashboard.courses.add-what-will-students' | translate"
+        class="course-information__will-learn-input"
+        [class.course-information__will-learn-input_buttoned]="whatWillLearn.controls.length > 1"
+        [formControl]="convertAbstractControlToFormControl(control)"
+      ></us-input>
+      <us-button
+        *ngIf="whatWillLearn.controls.length > 1"
+        [theme]="buttonTheme.error"
+        icon="trash"
+        autoSetSuffix="error"
+        (clicked)="removeWhatWillLearn(i)"
+      ></us-button>
+    </div>
+    <span class="course-information__will-learn-add-button" (click)="addWhatWillLearn()">
+      <us-icon name="add_primary"></us-icon>
+      {{ 'dashboard.courses.add-more' | translate }}
+    </span>
+  </div>
+  <div class="course-information__action-keeper">
+    <us-button
+      class="course-information__action"
+      [theme]="buttonTheme.primary"
+      [disabled]="publishDisabled"
+      (clicked)="publish()"
+      [usTooltip]="
+        publishDisabled
+          ? ('dashboard.courses.publication-available' | translate)
+          : ('dashboard.courses.course-publication' | translate)
+      "
+    >
+      {{ 'dashboard.courses.publish' | translate }}
+    </us-button>
+    <us-button
+      class="course-information__action"
+      (clicked)="preview()"
+      [theme]="buttonTheme.primary"
+      [outline]="true"
+    >
+      {{ 'dashboard.courses.preview' | translate }}
+    </us-button>
+    <us-button
+      class="course-information__action"
+      [theme]="buttonTheme.primary"
+      (clicked)="saveAndNext()"
+    >
+      {{ (isLast ? 'dashboard.courses.save' : 'dashboard.courses.save-next') | translate }}
+    </us-button>
+  </div>
+</form>

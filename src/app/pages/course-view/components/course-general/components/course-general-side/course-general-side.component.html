@@ -1,0 +1,160 @@
+<div class="course-side">
+  <ng-container *ngIf="course?.promo_video && course?.promo_video !== null; else cover_image">
+    <iframe
+      class="course-side__image"
+      width="1180"
+      height="664"
+      [src]="videoUrl"
+      frameborder="0"
+      webkitallowfullscreen
+      mozallowfullscreen
+      allowfullscreen
+    ></iframe>
+  </ng-container>
+
+  <div class="course-side__list">
+    <div class="course-side__element" *ngIf="course?.first_lesson_date !== null">
+      <us-icon class="course-side__element-icon" name="courses/calendar-square"></us-icon>
+      <span class="course-side__element-value">
+        <span *ngIf="course?.first_lesson_date">{{
+          course?.first_lesson_date | translateDate: 'd MMM, YYYY / HH:mm'
+        }}</span>
+        <span *ngIf="!course?.first_lesson_date">{{
+          'global.placeholder.lesson_date_here' | translate
+        }}</span>
+      </span>
+    </div>
+
+    <div class="course-side__element">
+      <us-icon class="course-side__element-icon" name="courses/lessons-square"></us-icon>
+      <span class="course-side__element-value">
+        <span *ngIf="course?.lessons_count"
+          >{{ course?.lessons_count }} {{ 'course.lessons' | translate }}</span
+        >
+        <span *ngIf="!course?.lessons_count">{{
+          'global.placeholder.lesson_count_here' | translate
+        }}</span>
+      </span>
+    </div>
+    <div
+      class="course-side__element"
+      *ngIf="course?.quiz_count !== 0 && course?.type_id === CourseType.ONLINE"
+    >
+      <us-icon class="course-side__element-quiz" name="courses/quiz"></us-icon>
+      <span class="course-side__element-value">
+        {{ course?.quiz_count }} {{ 'course.quiz' | translate }}
+      </span>
+    </div>
+    <div class="course-side__element">
+      <us-icon class="course-side__element-icon" name="courses/payment-square"></us-icon>
+      <span class="course-side__element-value">
+        <ng-container *ngIf="course!.price > 0; else freeBlock">
+          <span *ngIf="course?.price">{{ course?.price | number }} {{ getCurrency.AMD }}</span>
+          <span *ngIf="!course?.price">{{
+            'global.placeholder.course_price_here' | translate
+          }}</span>
+        </ng-container>
+        <ng-template #freeBlock>
+          <span class="course-side__element-free-price">{{
+            'dashboard.courses.free' | translate
+          }}</span>
+        </ng-template>
+      </span>
+    </div>
+    <div class="course-side__element" *ngIf="course?.type_id === CourseType.OFFLINE">
+      <us-icon class="course-side__element-icon" name="courses/location"></us-icon>
+      <span class="course-side__element-value">
+        {{
+          course?.address ? course?.address : ('global.placeholder.course_address_here' | translate)
+        }}
+      </span>
+    </div>
+    <div class="course-side__element">
+      <us-icon class="course-side__element-icon" name="courses/level-square"></us-icon>
+      <span class="course-side__element-value">
+        {{ course?.level ? course?.level : ('global.placeholder.course_level_here' | translate) }}
+      </span>
+    </div>
+
+    <div class="course-side__element">
+      <us-icon class="course-side__element-icon" name="courses/language-square"></us-icon>
+      <span class="course-side__element-value">
+        {{
+          course?.language
+            ? course?.language
+            : ('global.placeholder.course_language_here' | translate)
+        }}</span
+      >
+    </div>
+
+    <div *ngIf="course?.certificate && course?.certificate === 1" class="course-side__element">
+      <us-icon class="course-side__element-icon" name="courses/reward-square"></us-icon>
+      <span class="course-side__element-value"> {{ 'course.paid-certificate' | translate }} </span>
+    </div>
+
+    <div class="course-side__element">
+      <us-icon class="course-side__element-icon" name="courses/participants"></us-icon>
+      <span class="course-side__element-value">
+        <span *ngIf="course?.max_participants"
+          >{{ 'course.max-participants' | translate }} - {{ course?.max_participants }}</span
+        >
+        <span *ngIf="!course?.max_participants">{{
+          'global.placeholder.max_participants_here' | translate
+        }}</span>
+      </span>
+    </div>
+  </div>
+  <ng-container *ngIf="isGoToClass; else addToCart">
+    <us-button
+      [ngClass]="{ joined: isJoined || course?.full_access, loader: showLoader }"
+      (click)="joinToClass(course)"
+      [class.preview]="isPreview"
+      class="course-side__button"
+      [theme]="buttonTheme.primary"
+    >
+      <span *ngIf="!isJoined && !course?.full_access">{{ 'course.go_to_class' | translate }}</span>
+      <span *ngIf="isJoined || course?.full_access">{{ 'course.joined' | translate }}</span>
+    </us-button>
+  </ng-container>
+
+  <ng-template #addToCart>
+    <span *ngIf="!course?.in_basket || course?.price === 0">
+      <us-button
+        (click)="addToCartAction(course)"
+        [ngClass]="{ preview: isPreview, loader: showLoader }"
+        class="course-side__button"
+        [theme]="buttonTheme.primary"
+      >
+        {{ 'basket.courses.add-to-card' | translate }}
+      </us-button>
+    </span>
+
+    <span *ngIf="course?.in_basket">
+      <us-button
+        [ngClass]="{ preview: isPreview, loader: showLoader }"
+        (click)="removeFromCart(course)"
+        class="course-side__button"
+        [theme]="buttonTheme.primary"
+      >
+        {{ 'basket.courses.remove-from-card' | translate }}
+      </us-button>
+    </span>
+  </ng-template>
+  <us-button
+    class="course-side__button m-3"
+    (clicked)="openCertificateModal()"
+    [theme]="buttonTheme.primary"
+    [disabled]="false"
+    [outline]="true"
+  >
+    {{ 'dashboard.courses.download_certificate' | translate }}
+  </us-button>
+</div>
+<ng-template #cover_image>
+  <img
+    [src]="course?.cover_image"
+    onerror="this.onerror=null;this.src='../../../../../../../assets/images/course-view/no-photo.png'"
+    alt=""
+    class="course-side__image"
+  />
+</ng-template>

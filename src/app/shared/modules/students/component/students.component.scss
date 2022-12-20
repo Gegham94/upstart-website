@@ -1,0 +1,72 @@
+@import "src/assets/styles/variables/colors";
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.student{
+  &__card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: $white;
+    border: 1px solid $border-purple;
+    border-radius: 22px;
+    padding: 29px 34px;
+    max-width: 253px;
+    @include for-breakpoint(mobile-sm) {
+      padding: 20px 18px;
+    }
+  }
+  &__image{
+    width: 103px;
+    height: 103px;
+    border-radius: 50%;
+    overflow: hidden;
+    @include for-breakpoint(mobile-sm) {
+      width: 80px;
+      height: 80px;
+    }
+    &-not{
+      background: $border-purple;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    &-avatar{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__info{
+    text-align: center;
+    margin-top: 11px;
+    &-name{
+      letter-spacing: 0.1px;
+      color: $text-color;
+      width: 184px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      @include for-breakpoint(mobile-sm) {
+        font-size: 14px;
+      }
+    }
+    &-participated{
+      margin-top: 28px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+      letter-spacing: 0.1px;
+      color: $light-grey-text;
+      width: 184px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      @include for-breakpoint(mobile-sm) {
+        width: auto;
+        margin-top: 5px;
+        font-size: 12px;
+        line-height: 20px;
+      }
+    }
+  }
+}

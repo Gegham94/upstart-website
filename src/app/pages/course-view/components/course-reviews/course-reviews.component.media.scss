@@ -1,0 +1,24 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+.reviews{
+  @include for-breakpoint(mobile-lg) {
+    &__container{
+      padding: 0;
+    }
+    &__add-review{
+      ::ng-deep button{
+        width: 100%;
+        margin: 20px auto 0;
+      }
+      &.desktop{
+        display: none;
+      }
+      &.mobile{
+        display: block;
+      }
+    }
+    &__all-reviews{
+      margin: 12px auto 0;
+    }
+  }
+}

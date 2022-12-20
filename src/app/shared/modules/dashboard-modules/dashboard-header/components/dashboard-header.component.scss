@@ -1,0 +1,148 @@
+@import 'src/assets/styles/variables/colors';
+
+.dashboard-header {
+  background: $main;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1;
+
+  &_mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $white;
+    padding-top: 17px;
+    padding-bottom: 17px;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 21px;
+  }
+
+  &__logo-keeper,
+  &__action-keeper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__sidebar-action {
+    transform: scaleX(-1);
+    transition: transform 0.2s ease-in-out;
+
+    &_active {
+      transform: scaleX(1);
+    }
+
+    ::ng-deep {
+      .button {
+        padding: 0;
+      }
+    }
+  }
+
+  &__logo {
+    &-keeper {
+      gap: 33px;
+    }
+  }
+
+  &__action {
+    &-keeper {
+      gap: 18.67px;
+    }
+  }
+}
+
+.profile-icon {
+  border-radius: 50%;
+  background-color: $white;
+  position: relative;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+
+  &__sidebar {
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    background-color: $main;
+  }
+
+  &__text {
+    color: $main;
+    font-weight: 600;
+    font-size: 14px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__text-main {
+    color: $white;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  &__avatar {
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+}
+
+.user {
+  font-size: 14px;
+  line-height: 17px;
+
+  &__header {
+    padding: 25px;
+    background-color: $light-purple;
+  }
+
+  &__name {
+    font-weight: 600;
+  }
+
+  &__email {
+    font-weight: 400;
+    color: $light-grey-text;
+  }
+
+  &__menu-item {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: $light-grey-text;
+    margin-top: 18px;
+    cursor: pointer;
+  }
+
+  &__item-count {
+    background-color: $main;
+    border-radius: 50%;
+    color: $white;
+    width: 21px;
+    height: 21px;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 5px;
+  }
+
+  &__divider {
+    width: calc(100% + 24px);
+    margin: 23px -12px 25px;
+    border-color: #acb1c6;
+    border-width: 1px;
+  }
+}

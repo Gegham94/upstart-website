@@ -33,6 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TooltipModule } from '../../../../../../shared/directives/tooltip/tooltip.module';
 import { ValidationErrorModule } from '../../../../../../shared/directives/validation-error/validation-error.module';
 import { ConfirmationModalModule } from '../../../../../../shared/components/confirmation-modal/confirmation-modal.module';
+import { DashboardCourseQuestionComponent } from './components/dashboard-course-question/dashboard-course-question.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ConfirmationModalModule } from '../../../../../../shared/components/con
     DashboardCourseQuizComponent,
     DashboardCourseTrainerComponent,
     DashboardCourseLessonListComponent,
+    DashboardCourseQuestionComponent,
   ],
   imports: [
     CommonModule,
@@ -70,5 +72,6 @@ import { ConfirmationModalModule } from '../../../../../../shared/components/con
     ConfirmationModalModule,
   ],
   providers: [LessonsApiService, QuizApiService, TrainerCenterApiService],
+  exports: [DashboardCourseLessonListComponent],
 })
 export class DashboardCreateCourseModule {}

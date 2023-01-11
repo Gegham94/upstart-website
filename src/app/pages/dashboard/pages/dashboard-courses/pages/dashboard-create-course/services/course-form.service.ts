@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiResponse } from '../../../../../../../shared/interfaces/api/api-response.interface';
 import { CourseStatus } from '../../../../../../../shared/enums/course-status';
+import { ConfirmationModalComponent } from '../../../../../../../shared/components/confirmation-modal/components/confirmation-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable()
 export class CourseFormService {
@@ -34,6 +36,7 @@ export class CourseFormService {
     private readonly toastrService: ToastrService,
     private readonly translateService: TranslateService,
     private readonly router: Router,
+    private readonly dialog: MatDialog,
   ) {}
 
   public setCurrentCourse(course?: Partial<Course>) {
@@ -79,10 +82,9 @@ export class CourseFormService {
           });
       } else {
         coverImageSubject.next(
-          (this._formData.landingPage?.coverImage as string)?.replace(
-            /https:\/\/upstart.brainfors.am\//gm,
-            '',
-          ) ?? '',
+          (this._formData.landingPage?.coverImage as string)
+            ?.replace(/https:\/\/upstart.brainfors.am\//gm, '')
+            .replace(/https:\/\/api.upstart.am\//gm, '') ?? '',
         );
       }
       subjectList[0] = coverImageSubject;
@@ -94,10 +96,9 @@ export class CourseFormService {
           });
       } else {
         trainerAvatarSubject.next(
-          (this._formData.trainer?.image as string)?.replace(
-            /https:\/\/upstart.brainfors.am\//gm,
-            '',
-          ) ?? '',
+          (this._formData.trainer?.image as string)
+            ?.replace(/https:\/\/upstart.brainfors.am\//gm, '')
+            .replace(/https:\/\/api.upstart.am\//gm, '') ?? '',
         );
       }
       subjectList[1] = trainerAvatarSubject;
@@ -123,11 +124,13 @@ export class CourseFormService {
               if (res && res.success) {
                 this.currentCourse = res.data;
                 this.setCompletedSteps(res.data.completed_steps);
-                this.toastrService.success(
-                  data.status && data.status === CourseStatus.UNDER_REVIEW
-                    ? this.translateService.instant('dashboard.courses.published-toast')
-                    : this.translateService.instant('dashboard.courses.saved-toast'),
-                );
+                if (data.status && data.status === CourseStatus.UNDER_REVIEW) {
+                  this.publish();
+                } else {
+                  this.toastrService.success(
+                    this.translateService.instant('dashboard.courses.saved-toast'),
+                  );
+                }
 
                 if (data.status === CourseStatus.UNDER_REVIEW) {
                   this.router.navigate(['dashboard', 'courses']);
@@ -205,5 +208,16 @@ export class CourseFormService {
 
   public set courseID(value: number) {
     this._courseID = value;
+  }
+
+  public publish(): void {
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      data: {
+        description: this.translateService.instant('dashboard.courses.published_success'),
+        confirmed: () => {
+          dialogRef.close();
+        },
+      },
+    });
   }
 }

@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CourseTicketModule } from 'src/app/shared/modules/course-ticket/course-ticket.module';
 import { TrainerInfoModule } from 'src/app/shared/modules/trainer-info/trainer-info.module';
+import { ScrollTopModule } from 'src/app/shared/components/scroll-top/scroll-top.module';
 
 @NgModule({
   declarations: [TrainerComponent],
@@ -25,6 +26,7 @@ import { TrainerInfoModule } from 'src/app/shared/modules/trainer-info/trainer-i
     NgxSkeletonLoaderModule,
     CourseTicketModule,
     TrainerInfoModule,
+    ScrollTopModule,
   ],
 })
 export class TrainerModule {}

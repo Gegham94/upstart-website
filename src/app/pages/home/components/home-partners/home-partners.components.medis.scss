@@ -1,0 +1,11 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+
+@include for-breakpoint(mobile) {
+  .partners {
+    padding-bottom: 50px;
+
+    &__logos {
+      justify-content: center;
+    }
+  }
+}

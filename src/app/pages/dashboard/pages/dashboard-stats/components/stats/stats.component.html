@@ -1,0 +1,176 @@
+<div class="stats">
+  <span class="stats__title">{{ 'global.stats.title' | translate }}</span>
+  <div class="main">
+    <ngx-skeleton-loader
+      *ngIf="loader"
+      count="10"
+      [theme]="{ height: '20px', 'background-color': '#f8f8f8' }"
+      appearance="line"
+    ></ngx-skeleton-loader>
+    <ng-container *ngIf="!loader">
+      <div class="stats__resource-side">
+        <p *ngIf="stats?.in_basket" class="title">
+          {{ 'global.stats.in_basket' | translate }} {{ stats.in_basket.length }}
+          {{ 'global.stats.courses' | translate }}
+          {{ 'global.stats.total' | translate }} {{ basketStudents }}
+          {{ 'global.stats.users' | translate }}
+        </p>
+        <p *ngIf="!stats?.in_basket || stats.in_basket.length === 0" class="title">
+          {{ 'global.stats.no_data_basket' | translate }}
+        </p>
+      </div>
+      <div class="stats__student-side">
+        <div *ngFor="let course of stats.in_basket; let i = index" class="course">
+          <div class="header">
+            <div class="title-trainer">
+              <a [routerLink]="'/course/' + course.id" class="course-title">
+                {{ course.title }}
+              </a>
+              <span class="trainer">
+                <span class="trainer-strong">{{ 'global.stats.trainer' | translate }}</span
+                >:
+                {{ course.trainer }}
+              </span>
+            </div>
+            <span usClickOutside (clickOutside)="outside()" class="student-name">
+              <ng-container *ngFor="let student of course.students; let j = index">
+                <span
+                  (click)="expandItem(content, $event)"
+                  [ngClass]="{
+                    'less-items': course.students.length < 3,
+                    'more-items': course.students.length >= 3
+                  }"
+                  class="name"
+                >
+                  <div class="images">
+                    <img
+                      *ngIf="student.avatar"
+                      class="stat-student"
+                      [src]="student.avatar"
+                      alt=""
+                    />
+                    <span *ngIf="!student.avatar" class="stat-student no-image">
+                      <span class="fl-name">{{ student.letters }}</span>
+                    </span>
+                  </div>
+                </span>
+                <span *ngIf="j === 2" (click)="expandItem(content, $event)" class="count num-side">
+                  <span class="num num-side"> + {{ course.students.length - 2 }} </span>
+                </span>
+              </ng-container>
+              <div #content class="content">
+                <ul class="user-ul">
+                  <li class="header">
+                    <span class="title">{{ 'global.stats.students' | translate }}</span>
+                  </li>
+                  <li *ngFor="let student of course.students" class="list">
+                    <img
+                      *ngIf="student.avatar"
+                      class="student-icon"
+                      [src]="student.avatar"
+                      alt=""
+                    />
+                    <span *ngIf="!student.avatar" class="stat-student">
+                      <span class="fl-name">{{ student.letters }}</span>
+                    </span>
+                    <span class="name">{{ student.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <hr class="devider" />
+
+  <div class="main">
+    <ngx-skeleton-loader
+      *ngIf="loader"
+      count="10"
+      [theme]="{ height: '20px', 'background-color': '#f8f8f8' }"
+      appearance="line"
+    ></ngx-skeleton-loader>
+    <ng-container *ngIf="!loader">
+      <div class="stats__resource-side">
+        <p *ngIf="stats?.in_wish_list" class="title">
+          {{ 'global.stats.in_wish_list' | translate }} {{ stats.in_wish_list.length }}
+          {{ 'global.stats.courses' | translate }}
+          {{ 'global.stats.total' | translate }} {{ wishListStudents }}
+          {{ 'global.stats.users' | translate }}
+        </p>
+        <p *ngIf="!stats?.in_wish_list || stats.in_wish_list.length === 0" class="title">
+          {{ 'global.stats.no_data_wish_list' | translate }}
+        </p>
+      </div>
+      <div class="stats__student-side">
+        <div *ngFor="let course of stats.in_wish_list; let i = index" class="course">
+          <div class="header">
+            <div class="title-trainer">
+              <a [routerLink]="'/course/' + course.id" class="course-title">
+                {{ course.title }}
+              </a>
+              <span class="trainer">
+                <span class="trainer-strong">{{ 'global.stats.trainer' | translate }}</span
+                >:
+                {{ course.trainer }}
+              </span>
+            </div>
+            <span usClickOutside (clickOutside)="outsideList()" class="student-name">
+              <ng-container *ngFor="let student of course.students; let j = index">
+                <span
+                  (click)="expandItemList(content_list, $event)"
+                  [ngClass]="{
+                    'less-items': course.students.length < 3,
+                    'more-items': course.students.length >= 2
+                  }"
+                  class="name"
+                >
+                  <div class="images">
+                    <img
+                      *ngIf="student.avatar"
+                      class="stat-student"
+                      [src]="student.avatar"
+                      alt=""
+                    />
+                    <span *ngIf="!student.avatar" class="stat-student no-image">
+                      <span class="fl-name">{{ student.letters }}</span>
+                    </span>
+                  </div>
+                </span>
+                <span
+                  *ngIf="j === 2"
+                  (click)="expandItemList(content_list, $event)"
+                  class="count num-side"
+                >
+                  <span class="num"> + {{ course.students.length - 2 }} </span>
+                </span>
+              </ng-container>
+              <div #content_list class="content">
+                <ul class="user-ul">
+                  <li class="header">
+                    <span class="title">{{ 'global.stats.students' | translate }}</span>
+                  </li>
+                  <li *ngFor="let student of course.students" class="list">
+                    <img
+                      *ngIf="student.avatar"
+                      class="student-icon"
+                      [src]="student.avatar"
+                      alt=""
+                    />
+                    <span *ngIf="!student.avatar" class="stat-student">
+                      <span class="fl-name">{{ student.letters }}</span>
+                    </span>
+                    <span class="name">{{ student.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

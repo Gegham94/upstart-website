@@ -99,6 +99,8 @@
     justify-content: space-between;
   }
   &__price-side{
+    margin-left: auto;
+
     .course_price {
       font-weight: 700;
       font-size: 16px;
@@ -123,6 +125,7 @@
   &__star-side{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     .rate{
       font-size: 12px;
       font-weight: 500;
@@ -138,7 +141,15 @@
     }
   }
 
-
+  &__past {
+    background: $error;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.2;
+    color: $white;
+    margin-left: auto;
+  }
 
   &__calendar{
     display: flex;

@@ -78,7 +78,7 @@
         }
       }
       .form{
-        height: 420px;
+        height: 495px;
         display: flex;
         justify-content: space-between;
         us-editor{
@@ -87,9 +87,10 @@
           }
         }
         .user_input-area{
+          gap: 10px;
           flex: 1;
           display: flex;
-          justify-content: space-between;
+          justify-content: flex-start;
           flex-direction: column;
         }
         .area-left{

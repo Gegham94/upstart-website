@@ -8,6 +8,7 @@
     </p>
     <div class="confirmation-modal__action-keeper">
       <us-button
+        *ngIf="data.title"
         (clicked)="data.cancelled()"
         class="confirmation-modal__action"
         [outline]="true"

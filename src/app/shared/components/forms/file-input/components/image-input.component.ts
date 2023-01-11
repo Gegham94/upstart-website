@@ -1,5 +1,6 @@
 import { Component, ElementRef, forwardRef, HostListener, Input, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'us-image-input',
@@ -45,9 +46,11 @@ export class ImageInputComponent implements ControlValueAccessor {
         this.defaultFileUrl = '';
       } else {
         this.defaultFileUrl =
-          'https://upstart.brainfors.am/' +
+          environment.imageBaseUrl +
           (val.indexOf('https://') > -1
-            ? val.replace(/https:\/\/upstart.brainfors.am\//gm, '')
+            ? val
+                .replace(/https:\/\/upstart.brainfors.am\//gm, '')
+                .replace(/https:\/\/api.upstart.am\//gm, '')
             : val);
         this.displayImages = [this.defaultFileUrl];
       }

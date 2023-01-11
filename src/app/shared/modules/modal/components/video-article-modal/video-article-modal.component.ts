@@ -1,18 +1,19 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Lessons, Questions, Resources } from '../../../../interfaces/courses/course-details';
 import { GoToClassService } from 'src/app/shared/services/go-to-class/go-to-class.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { DialogRef } from '@angular/cdk/dialog';
 
 type ModalData = {
   quiz_id: number;
   id: number;
+  preview: boolean;
   lesson: Lessons;
   resources: Resources[];
+  course_id: number;
 };
 
 type QuestionsType = {
@@ -23,6 +24,12 @@ type QuestionsType = {
 type FinalRequestType = {
   quiz_id: number;
   questions: QuestionsType[];
+};
+
+type GroupNameType = {
+  questionId: number;
+  title: string;
+  group: FormGroup;
 };
 @Component({
   selector: 'us-video-article-modal',
@@ -36,7 +43,7 @@ export class VideoArticleModalComponent implements OnInit {
 
   public startQuiz: boolean = false;
 
-  public question: Questions;
+  public question?: Questions;
 
   public modalData: ModalData;
 
@@ -50,9 +57,15 @@ export class VideoArticleModalComponent implements OnInit {
 
   private final: QuestionsType[] = [];
 
-  public answerForm: FormGroup = new FormGroup({
-    answer_radio: new FormControl('', Validators.required),
-  });
+  public answerForm: FormGroup;
+
+  public forms: GroupNameType[] = [];
+
+  public isOpenNextButton: boolean = false;
+
+  public successQuiz: boolean = false;
+
+  public successQuizMessage: string = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -61,10 +74,10 @@ export class VideoArticleModalComponent implements OnInit {
     private goToClassService: GoToClassService,
     private toastrService: ToastrService,
     private translateService: TranslateService,
-    private dialogRef: DialogRef,
+    private dialogRef: MatDialogRef<VideoArticleModalComponent>,
   ) {
     this.modalData = this.data;
-    if (this.modalData.id !== -1) this.createFormControl();
+    if (this.modalData.id !== -1) this.createDynamicForm();
   }
 
   public ngOnInit(): void {
@@ -91,6 +104,7 @@ export class VideoArticleModalComponent implements OnInit {
     this.startQuiz = true;
     this.setDialogSize();
     this.getQuestionByStep(0);
+    this.getFormByStep(0);
   }
 
   private getQuestionByStep(step: number): void {
@@ -103,9 +117,14 @@ export class VideoArticleModalComponent implements OnInit {
       this.getQuestionByStep(this.step);
       this.final.push(this.choosenObject);
       this.choosenAnswers = [];
+      this.getFormByStep(this.step);
+      this.isOpenNextButton = false;
+      this.answerForm.updateValueAndValidity();
     } else {
       this.step--;
       this.getQuestionByStep(this.step);
+      this.getFormByStep(this.step);
+      this.answerForm.updateValueAndValidity();
     }
     if (this.step < 0) {
       this.step = 0;
@@ -125,46 +144,46 @@ export class VideoArticleModalComponent implements OnInit {
     }
   }
 
-  public chooseAnAnswer(): void {
-    this.choosenObject = {
-      id: this.question.question_id,
-      answer: [this.answerForm.controls['answer_radio'].value],
-    };
-  }
-
-  public chooseCheckbox(event: Event, answer: string): void {
-    const target = event.target as HTMLInputElement;
-    if (target.checked) {
-      this.choosenAnswers.push(answer);
-    } else {
-      this.choosenAnswers = this.choosenAnswers.filter((answers) => answers !== answer);
-    }
-    this.choosenObject = {
-      id: this.question.question_id,
-      answer: this.choosenAnswers,
-    };
-  }
-
   public finishQuiz(): void {
-    this.final.push(this.choosenObject);
-    this.final = this.getUniqueListBy();
-    this.choosenAnswers = [];
-    const obj = {
+    const formsData = [...this.forms] as GroupNameType[];
+    let requestObject: QuestionsType[] = [];
+    let choosenAnswers: string[] = [];
+    formsData.forEach((elem) => {
+      for (let [key, value] of Object.entries(elem.group.getRawValue())) {
+        if (key === 'radio') {
+          const obj = {
+            id: elem.questionId,
+            answer: [value],
+          } as QuestionsType;
+          requestObject.push(obj);
+        } else if (key !== 'radio' && value) {
+          choosenAnswers.push(key);
+          const obj = {
+            id: elem.questionId,
+            answer: choosenAnswers,
+          } as QuestionsType;
+          requestObject.push(obj);
+        }
+      }
+      requestObject = this.getUniqueListBy(requestObject);
+    });
+    const sendBody = {
       quiz_id: this.modalData.quiz_id,
-      questions: this.final,
+      questions: requestObject,
     } as FinalRequestType;
-    this.fetchQuizes(obj);
+    this.fetchQuizes(sendBody);
   }
 
-  private getUniqueListBy() {
-    return [...new Map(this.final.map((item) => [item.id, item])).values()];
+  private getUniqueListBy(array: QuestionsType[]) {
+    return [...new Map(array.map((item) => [item.id, item])).values()];
   }
 
   private fetchQuizes(data: FinalRequestType): void {
     this.goToClassService.passQuize(data).subscribe(
-      () => {
+      (res) => {
         this.toastrService.success(this.translateService.instant('global.pass_quiz'));
-        this.dialogRef.close();
+        this.successQuiz = true;
+        this.successQuizMessage = res.message;
       },
       (error) => {
         this.toastrService.error(error);
@@ -172,11 +191,70 @@ export class VideoArticleModalComponent implements OnInit {
     );
   }
 
-  private createFormControl(): void {
-    this.modalData.lesson.questions.forEach((question) => {
-      question.answers.forEach((elem) => {
-        this.answerForm.addControl(elem, new FormControl());
+  private createDynamicForm(): void {
+    let quizForm = 0;
+    this.modalData.lesson.questions.forEach((elem) => {
+      quizForm++;
+      let formGroup = new FormGroup({});
+      if (elem.multiple_choice === 0) {
+        elem.answers.forEach(() => {
+          formGroup.addControl(`radio`, new FormControl('', Validators.required));
+        });
+        this.forms.push({
+          questionId: elem.question_id,
+          title: `answerForm${quizForm}`,
+          group: formGroup,
+        });
+      } else {
+        const formGroupCheckbox = new FormGroup({});
+        elem.answers.forEach((answer) => {
+          formGroupCheckbox.addControl(answer, new FormControl());
+        });
+        this.forms.push({
+          questionId: elem.question_id,
+          title: `answerForm${quizForm}`,
+          group: formGroupCheckbox,
+        });
+      }
+    });
+  }
+
+  private getFormByStep(step: number): void {
+    if (step <= 0) step = 0;
+    this.answerForm = this.forms[step].group;
+    this.valueChanges();
+  }
+
+  private valueChanges(): void {
+    this.answerForm.valueChanges.subscribe((res) => {
+      Object.values(res).forEach((val) => {
+        if (val === true || val) {
+          this.isOpenNextButton = true;
+        } else if (val === false) {
+          this.isOpenNextButton = false;
+        }
       });
     });
+  }
+
+  public closeDialog(lesson_id?: number): void {
+    this.dialogRef.close(lesson_id);
+  }
+
+  public passTheLesson(): void {
+    const obj = {
+      course_id: this.modalData.course_id,
+      lesson_id: this.modalData.lesson.id,
+    };
+    this.goToClassService.passLesson(obj).subscribe(
+      (res) => {
+        this.toastrService.success(res.message);
+        this.closeDialog(this.modalData.quiz_id);
+      },
+      (error) => {
+        this.toastrService.error(error);
+        this.closeDialog();
+      },
+    );
   }
 }

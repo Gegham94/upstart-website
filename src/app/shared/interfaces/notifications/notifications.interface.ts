@@ -6,4 +6,10 @@ export interface NotificationsInterface {
   status: number;
   created_at: string;
   user_id: number;
+  url?: string;
+}
+
+export interface NotificationsUnread {
+  success: boolean;
+  unread: number;
 }

@@ -1,0 +1,41 @@
+@import 'src/assets/styles/variables/colors';
+
+.dashboard-lessons-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 46px);
+
+  ::ng-deep &__body {
+    background: $white;
+    border-radius: 12px;
+    padding: 12px 16px;
+  }
+
+  ::ng-deep &__title {
+    margin-bottom: 12px;
+  }
+
+  &__action {
+    &::ng-deep {
+      .button {
+        padding: 10px 17.5px;
+        min-width: 129px;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-width: 1px;
+      }
+    }
+
+    &-keeper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 16px;
+    }
+  }
+}

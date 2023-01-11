@@ -20,16 +20,16 @@ export class GlobalService {
     FilterToggleItemsInterface[]
   >([]);
 
-  private readonly levelsList$: BehaviorSubject<FilterToggleItemsInterface[]> = new BehaviorSubject<
-    FilterToggleItemsInterface[]
-  >([]);
+  private readonly levelsList$: BehaviorSubject<{ [key: string]: number }> = new BehaviorSubject<{
+    [key: string]: number;
+  }>({});
 
   private readonly languagesList$: BehaviorSubject<FilterToggleItemsInterface[]> =
     new BehaviorSubject<FilterToggleItemsInterface[]>([]);
 
-  private readonly coursesByLangList$: BehaviorSubject<PublicCourse[]> = new BehaviorSubject<
-    PublicCourse[]
-  >([]);
+  private readonly coursesByLangList$: BehaviorSubject<PublicCourse[] | null> = new BehaviorSubject<
+    PublicCourse[] | null
+  >(null);
 
   // Current User
   public set currentUser(user: CurrentUserInfoInterface | null) {
@@ -63,11 +63,11 @@ export class GlobalService {
   }
 
   // Levels List
-  public set levelsList(list: FilterToggleItemsInterface[]) {
+  public set levelsList(list: { [key: string]: number }) {
     this.levelsList$.next(list);
   }
 
-  public get levelsListObservable(): Observable<FilterToggleItemsInterface[]> {
+  public get levelsListObservable(): Observable<{ [key: string]: number }> {
     return this.levelsList$.asObservable();
   }
 
@@ -85,7 +85,7 @@ export class GlobalService {
     this.coursesByLangList$.next(list);
   }
 
-  public get getCoursesByLangList(): Observable<PublicCourse[]> {
+  public get getCoursesByLangList(): Observable<PublicCourse[] | null> {
     return this.coursesByLangList$.asObservable();
   }
 }

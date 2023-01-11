@@ -63,9 +63,13 @@ export class CourseFormToObjectDto {
       sub_title: formData.landingPage?.subtitle || undefined,
       description: formData.landingPage?.description || undefined,
       promo_video: formData.landingPage?.promotionalVideo || undefined,
-      cover_image: coverImage?.replace(/https:\/\/upstart.brainfors.am\//gm, '') || undefined,
+      cover_image:
+        coverImage
+          ?.replace(/https:\/\/upstart.brainfors.am\//gm, '')
+          .replace(/https:\/\/api.upstart.am\//gm, '') || undefined,
       price: formData.courseInformation?.price?.amount ?? undefined,
       currency: formData.courseInformation?.price?.currency || undefined,
+      certificate: formData.courseInformation?.certificate ? 1 : 0,
       language: formData.courseInformation?.language || undefined,
       max_participants: formData.courseInformation?.maxParticipants || undefined,
       level: formData.courseInformation?.level || undefined,
@@ -81,7 +85,10 @@ export class CourseFormToObjectDto {
             bio: formData.trainer?.bio || undefined,
             first_name: formData.trainer?.name || undefined,
             last_name: formData.trainer?.surname || undefined,
-            avatar: trainerImage?.replace(/https:\/\/upstart.brainfors.am\//gm, '') || undefined,
+            avatar:
+              trainerImage
+                ?.replace(/https:\/\/upstart.brainfors.am\//gm, '')
+                .replace(/https:\/\/api.upstart.am\//gm, '') || undefined,
           }
         : undefined,
     };
@@ -104,6 +111,10 @@ export class CourseFormToObjectDto {
         level: course.level ?? 1,
         address: course.address ?? null,
         link: course.link ?? null,
+        certificate:
+          course.certificate !== undefined && course.certificate !== null
+            ? !!course.certificate
+            : null,
         lessonsCount: course.lessons_count ? course.lessons_count : 1,
         whatWillLearn: course.will_learn ? JSON.parse(course.will_learn as string) : null,
         price: {

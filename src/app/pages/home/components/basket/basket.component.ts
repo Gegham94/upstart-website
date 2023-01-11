@@ -67,11 +67,7 @@ export class BasketComponent implements OnInit {
         this.coursesData = res.data;
         this.loader = false;
         this.update = false;
-        if (!this.coursesData) {
-          this.emptyBasket = true;
-        } else {
-          this.emptyBasket = false;
-        }
+        this.emptyBasket = !this.coursesData;
       });
   }
 

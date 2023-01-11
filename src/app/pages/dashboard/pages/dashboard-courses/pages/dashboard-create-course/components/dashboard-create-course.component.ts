@@ -45,6 +45,8 @@ export class DashboardCreateCourseComponent implements OnInit, OnDestroy {
 
   public currentUser?: CurrentUserInfoInterface | null;
 
+  public isReasonCollapsed: boolean = true;
+
   constructor(
     private readonly coursesApiService: CoursesApiService,
     public readonly courseFormService: CourseFormService,
@@ -152,6 +154,13 @@ export class DashboardCreateCourseComponent implements OnInit, OnDestroy {
 
   public get completedSteps(): { [key: string]: boolean } {
     return this.courseFormService.completedSteps;
+  }
+
+  public get isReasonTextLarge(): boolean {
+    return (
+      !!this.courseFormService.currentCourse?.declined_reason &&
+      this.courseFormService.currentCourse.declined_reason.length > 418
+    );
   }
 
   public receivedError(event: boolean, key: CourseCreateSteps) {

@@ -1,0 +1,30 @@
+@import '../../../../../assets/styles/mixins/for-breakpoint';
+
+.registration {
+  &__illustration {
+    max-width: 695px;
+    width: 100%;
+
+    .left_content {
+      width: 100%;
+      background-position: center bottom;
+      background-size: 524px 313px;
+    }
+  }
+
+  &__form {
+    max-width: 536px;
+    width: 100%;
+
+    &-keeper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @include for-breakpoint(mobile-lg) {
+        flex-direction: column;
+        padding-bottom: 22px;
+      }
+    }
+  }
+}

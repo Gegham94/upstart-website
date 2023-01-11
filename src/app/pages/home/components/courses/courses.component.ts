@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { TranslatedTitleService } from '../../../../shared/services/translated-title.service';
 import { TranslateService } from '@ngx-translate/core';
 import { PublicCourse } from '../../../../shared/interfaces/courses/public-course.interface';
@@ -11,14 +11,19 @@ import {
 import { HttpParams } from '@angular/common/http';
 import { PaginatePipeArgs } from 'ngx-pagination/lib/paginate.pipe';
 import { SelectOptions } from '../../../../shared/interfaces/select-options.interface';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'us-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss', './courses.component.media.scss'],
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
   private readonly title: string = 'courses.title';
+
+  private readonly mobileMaxWidth: number = 600;
+
+  public isMobile: boolean = false;
 
   public lang: string = '';
 
@@ -30,7 +35,7 @@ export class CoursesComponent implements OnInit {
 
   public labeles: string[] = ['Topic', 'Level', 'Type', 'Language'];
 
-  public selectedCategoryId: string;
+  public selectedCategoryIds: string[] = [];
 
   public searchText: string;
 
@@ -43,6 +48,8 @@ export class CoursesComponent implements OnInit {
   public config: PaginatePipeArgs;
 
   public sort: unknown;
+
+  public unsubscribe: Subject<void> = new Subject<void>();
 
   public sortOptions: { displayName: string; value: string }[] = [];
 
@@ -69,6 +76,18 @@ export class CoursesComponent implements OnInit {
     },
   };
 
+  private fetchTimeOut: NodeJS.Timeout;
+
+  @HostListener('window:resize', ['$event'])
+  public resizeHandler(event: Event) {
+    this.isMobile = (event.target as Window).innerWidth <= this.mobileMaxWidth;
+    if (this.isMobile) {
+      this.isColapsed = true;
+    } else {
+      this.isColapsed = false;
+    }
+  }
+
   constructor(
     private readonly translateService: TranslateService,
     private readonly translatedTitleService: TranslatedTitleService,
@@ -77,13 +96,15 @@ export class CoursesComponent implements OnInit {
     private router: Router,
   ) {
     this.translatedTitleService.setTranslatedTitle(this.title);
-    this.activatedRoute.params.subscribe((params) => {
-      this.selectedCategoryId = params['id'];
-    });
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.currentPage = params['p'];
-      this.sort = params['sort'];
-      this.searchText = params['search_text'];
+    this.activatedRoute.queryParams.pipe(takeUntil(this.unsubscribe)).subscribe((params) => {
+      if (Object.keys(params).length > 0) {
+        this.currentPage = params['p'];
+        this.sort = params['sort'];
+        this.searchText = params['search_text'];
+        this.selectedCategoryIds =
+          typeof params['categories'] === 'string' ? params['categories'].split(',') : [];
+      }
+      this.fetchData();
     });
   }
 
@@ -94,6 +115,18 @@ export class CoursesComponent implements OnInit {
     this.translateService.get('home.courses.highest').subscribe((res: string) => {
       this.sortOptions.push({ displayName: res, value: 'highest-rated' });
     });
+
+    if (this.mobileMaxWidth > window.innerWidth) {
+      this.isColapsed = true;
+      this.isMobile = true;
+    } else {
+      this.isColapsed = false;
+    }
+  }
+
+  public ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   public toggleFilter() {
@@ -113,7 +146,7 @@ export class CoursesComponent implements OnInit {
       }
     });
 
-    if (this.filterValues[filterKey]?.ids.length === 0) {
+    if (this.filterValues[filterKey]?.ids?.length === 0) {
       if (data.ids?.length === 0) {
         return;
       } else {
@@ -125,9 +158,14 @@ export class CoursesComponent implements OnInit {
 
     let params = new HttpParams();
     Object.entries(this.filterValues).forEach(([key, value]) => {
-      if (key === 'price' && value.ids.length > 0) {
-        params = params.append('price_from', this.filterValues.price.ids[0]);
-        params = params.append('price_to', this.filterValues.price.ids[1]);
+      if (key === 'price' && value.ids && value.ids.length > 0) {
+        if (this.filterValues.price.ids?.[0] !== undefined)
+          params = params.append('price_from', this.filterValues.price.ids[0]);
+        else params = params.delete(key);
+
+        if (this.filterValues.price.ids?.[1] !== undefined)
+          params = params.append('price_to', this.filterValues.price.ids[1]);
+        else params = params.delete(key);
       } else if (value.ids?.length) {
         params = params.append(key, value.ids.join(','));
       } else {
@@ -151,30 +189,46 @@ export class CoursesComponent implements OnInit {
     this.currentPage = 1;
     this.isLoading = true;
     this.addCurrentPageParam(paramObj);
-
-    this.fetchData();
   }
 
   public fetchData() {
     this.isLoading = true;
+
     if (this.coursesData) {
       this.coursesData = [];
     }
-    this.filterCoursesService
-      .getFilteredCoursesData(
-        this.filterValues,
-        this.currentPage,
-        this.searchText,
-        this.sort as string,
-      )
-      .subscribe((res) => {
-        this.coursesData = res.data;
-        this.currentPage = res.current_page!;
-        this.pageSize = res.per_page!;
-        this.totalPages = res.total_count!;
-        this.isLoading = false;
-        this.setPaginationConfig(this.pageSize, this.currentPage, this.totalPages);
-      });
+
+    clearTimeout(this.fetchTimeOut);
+
+    this.fetchTimeOut = setTimeout(() => {
+      this.filterCoursesService
+        .getFilteredCoursesData(
+          {
+            ...this.filterValues,
+            categories: {
+              ...this.filterValues.categories,
+              ids: Array.from(
+                new Set([
+                  ...this.selectedCategoryIds.map(Number),
+                  ...(!!this.filterValues.categories.ids ? this.filterValues.categories.ids : []),
+                ]),
+              ),
+            },
+          },
+          this.currentPage,
+          this.searchText,
+          this.sort as string,
+        )
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((res) => {
+          this.coursesData = res.data;
+          this.currentPage = res.current_page!;
+          this.pageSize = res.per_page!;
+          this.totalPages = res.total_count!;
+          this.isLoading = false;
+          this.setPaginationConfig(this.pageSize, this.currentPage, this.totalPages);
+        });
+    }, 200);
   }
 
   public setPaginationConfig(pageSize: number, currentPage: number, totalPages: number) {
@@ -188,7 +242,6 @@ export class CoursesComponent implements OnInit {
   public pageChanged(event: number): void {
     this.currentPage = event;
     this.addCurrentPageParam();
-    this.fetchData();
   }
 
   public addCurrentPageParam(params?: {}) {
@@ -205,7 +258,6 @@ export class CoursesComponent implements OnInit {
 
   public sortBy(ev: SelectOptions) {
     this.sort = ev.value;
-    this.fetchData();
     this.addCurrentPageParam();
   }
 }

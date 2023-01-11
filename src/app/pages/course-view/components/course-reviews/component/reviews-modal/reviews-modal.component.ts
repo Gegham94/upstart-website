@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ResponseError } from '../../../../../../shared/interfaces/settings.interface';
 import { TrainerReview } from '../../../../../../shared/interfaces/reviews/trainer-review';
 import { GlobalService } from 'src/app/shared/services/global.service';
+import { TranslateService } from '@ngx-translate/core';
 
 interface DialogData {
   title: string;
@@ -41,6 +42,7 @@ export class ReviewsModalComponent implements OnDestroy {
     public dialog: MatDialogRef<ReviewsModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private globalService: GlobalService,
+    private translateService: TranslateService,
   ) {
     this.getCurrentUserId();
     if (this.selectedReviewId !== -1) {
@@ -74,7 +76,7 @@ export class ReviewsModalComponent implements OnDestroy {
           this.loader = false;
         },
         () => {
-          this.toastr.error('Error request');
+          this.toastr.error(this.translateService.instant('toast-messages.request-error'));
           this.loader = false;
         },
       );

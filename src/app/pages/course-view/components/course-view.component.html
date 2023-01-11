@@ -2,13 +2,21 @@
   <us-course-general
     (previewEmitter$)="getPrevew($event)"
     (trainerEmitter$)="lessonTrainer($event)"
+    (reloadCourse)="getCourseById()"
     [reviewCount]="reviewCount"
     [preview]="preview"
+    [course]="course"
+    [loader]="loader"
   ></us-course-general>
   <us-course-trainer *ngIf="trainer?.company_name !== null" [trainer]="trainer"></us-course-trainer>
   <us-course-reviews
     *ngIf="!preview"
+    [courseOwnerId]="course?.user_id"
     (reviewCountEmitter$)="getRviewCount($event)"
+    (rateAdded)="getCourseById()"
+    [hasFullAccess]="hasFullAccess"
   ></us-course-reviews>
   <us-course-related *ngIf="!preview"></us-course-related>
 </div>
+
+<us-scroll-top></us-scroll-top>

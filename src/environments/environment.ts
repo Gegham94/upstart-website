@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://upstart.brainfors.am/api/v1/',
+  imageBaseUrl: 'https://upstart.brainfors.am/',
 };
 
 /*

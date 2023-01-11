@@ -14,9 +14,9 @@
       autoSetSuffix && isHovered
         ? outline
           ? icon
-          : icon + '_' + autoSetSuffix
+          : icon.split('_')[0] + '_' + autoSetSuffix
         : outline
-        ? icon + '_' + autoSetSuffix
+        ? icon.split('_')[0] + '_' + autoSetSuffix
         : icon
     "
     [size]="iconSize"

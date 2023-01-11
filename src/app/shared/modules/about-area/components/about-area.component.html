@@ -1,5 +1,5 @@
 <div class="about-area">
-  <span class="label">{{ label | translate }}</span>
+  <span class="label public-label">{{ label | translate }}</span>
   <div
     [class.active]="!showCoverSide"
     style="max-height: {{ height }}px"
@@ -12,7 +12,7 @@
       class="main-block"
       style="max-height: {{ height - 75 }}px"
     >
-      <div #textBlock class="text" [innerHTML]="text"></div>
+      <div #textBlock class="text public-text" [innerHTML]="text"></div>
     </div>
     <span
       (click)="hideCoverSide(mainBlock, bigBlock)"

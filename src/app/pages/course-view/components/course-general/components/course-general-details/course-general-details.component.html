@@ -4,7 +4,7 @@
       <h3 class="course-details__will-learn-title">{{ 'course.you-will-learn' | translate }}</h3>
       <ng-container>
         <ul class="course-details__will-learn-list">
-          <ng-container *ngIf="!preview && courseWill_learn.length > 0">
+          <ng-container *ngIf="courseWill_learn.length > 0">
             <li *ngFor="let learn of courseWill_learn" class="course-details__will-learn-element">
               <us-icon
                 class="course-details__will-learn-element-icon"
@@ -39,7 +39,7 @@
 
       <ng-container>
         <ul class="course-details__will-learn-list">
-          <ng-container *ngIf="!preview && courseRequirements.length > 0">
+          <ng-container *ngIf="courseRequirements.length > 0">
             <li
               *ngFor="let requirement of courseRequirements"
               class="course-details__will-learn-element"
@@ -50,7 +50,7 @@
                 [size]="18"
               ></us-icon>
               <span class="course-details__will-learn-element-text">
-                {{ requirement }}
+                {{ requirement }} asascasc
               </span>
             </li>
           </ng-container>

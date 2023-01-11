@@ -1,0 +1,86 @@
+<us-accordion [collapsing]="false" [autoOpen]="collapsed">
+  <div class="course-quiz__header" usAccordionItem [formGroup]="questionForm">
+    <ng-template usAccordionHeader let-item let-toggle="toggle" let-expanded="expanded">
+      <div class="course-quiz__header course-quiz__header_question">
+        <p class="course-quiz__header-title">
+          {{ ('dashboard.courses.question' | translate) + ' ' + (index + 1) }}
+        </p>
+        <div class="course-quiz__action">
+          <button
+            (click)="toggle()"
+            class="course-quiz__toggle accordion__toggle-btn"
+            [class.course-quiz__toggle_rotated]="expanded"
+            [disabled]="item.disabled"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template usAccordionContent>
+      <div class="course-quiz__form">
+        <us-editor
+          [label]="'dashboard.courses.add-question' | translate"
+          [placeholder]="'dashboard.courses.insert-question' | translate"
+          formControlName="question"
+        ></us-editor>
+        <div class="course-quiz__answer-list">
+          <div class="course-quiz__answer-title-keeper">
+            <h4 class="course-quiz__answer-title">
+              {{ 'dashboard.courses.add-answers' | translate }}
+            </h4>
+            <div class="course-quiz__answer-multiple">
+              <us-checkbox (checked)="multipleChecked()" formControlName="multiple"></us-checkbox>
+              <span>{{ 'dashboard.courses.multiple-choice' | translate }}</span>
+            </div>
+          </div>
+          <h5 class="course-quiz__answer-subtitle">
+            {{ 'dashboard.courses.correct-answer' | translate }}
+          </h5>
+          <div
+            class="course-quiz__answer"
+            *ngFor="let group of getQuestionAnswerList.controls; let i = index"
+            [formGroup]="getFormGroupFromAbstractControl(group)"
+          >
+            <us-checkbox
+              formControlName="correct"
+              (checked)="handleCorrectChecked($event, i)"
+            ></us-checkbox>
+            <us-input
+              formControlName="text"
+              [placeholder]="'dashboard.courses.answer' | translate"
+            ></us-input>
+            <us-icon
+              *ngIf="getQuestionAnswerList.controls.length > 1"
+              class="course-quiz__answer-remove"
+              name="delete"
+              [size]="18"
+              (click)="removeFromAnswerList(i)"
+            ></us-icon>
+          </div>
+          <us-button
+            [theme]="buttonTheme.transparent"
+            (clicked)="addAnswerForm()"
+            class="course-quiz__answer-add"
+          >
+            <us-icon name="add_primary"></us-icon>
+            {{ 'dashboard.courses.add-answer' | translate }}
+          </us-button>
+        </div>
+        <div class="course-quiz__question-action-keeper">
+          <us-button
+            [theme]="buttonTheme.primary"
+            class="course-quiz__question-action"
+            [disabled]="buttonDisabled()"
+            (clicked)="saveQuestion()"
+          >
+            {{ 'dashboard.courses.save-question' | translate }}
+          </us-button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</us-accordion>

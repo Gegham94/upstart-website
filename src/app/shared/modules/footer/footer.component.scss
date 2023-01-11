@@ -14,6 +14,10 @@
     justify-content: space-between;
   }
 
+  &__logo {
+    cursor: pointer;
+  }
+
   &__title {
     font-family: Noto Serif KR;
     font-size: 32px;

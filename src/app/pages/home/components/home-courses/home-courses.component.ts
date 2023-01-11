@@ -28,8 +28,10 @@ export class HomeCoursesComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.globalService.getCoursesByLangList.pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
-      this.loader = false;
-      this.courses = res;
+      if (res !== null) {
+        this.loader = false;
+        this.courses = res;
+      }
     });
   }
 

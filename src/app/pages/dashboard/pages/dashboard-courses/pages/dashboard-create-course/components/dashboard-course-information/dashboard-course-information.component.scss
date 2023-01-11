@@ -1,4 +1,4 @@
-@import "src/assets/styles/variables/colors";
+@import 'src/assets/styles/variables/colors';
 
 .course-information {
   &__image {
@@ -29,6 +29,10 @@
         flex-wrap: wrap;
       }
 
+      &_certificate {
+        flex-direction: column;
+      }
+
       &-label {
         width: 100%;
         font-weight: 500;
@@ -55,6 +59,23 @@
     }
   }
 
+  &__certificate {
+    &-button {
+      &::ng-deep {
+        .button {
+          padding: 10px 17.5px;
+          min-width: 129px;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 14px;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          border-width: 1px;
+        }
+      }
+    }
+  }
+
   &__action {
     &::ng-deep {
       button {
@@ -66,6 +87,7 @@
         letter-spacing: 0.05em;
         text-transform: uppercase;
         border-width: 1px;
+        gap: 8px;
       }
     }
 
@@ -131,6 +153,14 @@
       letter-spacing: 0.05em;
       color: $main;
       cursor: pointer;
+    }
+  }
+
+  &__lessons {
+    &-error {
+      margin: 5px 0;
+      color: $error;
+      font-size: 12px;
     }
   }
 }

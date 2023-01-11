@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ButtonTheme } from '../../../../shared/enums/button-theme.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { ReviewsModalComponent } from './component/reviews-modal/reviews-modal.component';
@@ -24,14 +24,23 @@ export class CourseReviewsComponent implements OnInit {
 
   public review: TrainerReview[] = [];
 
+  @Input()
+  public hasFullAccess: boolean = false;
+
+  @Input()
+  public courseOwnerId?: number;
+
   @Output()
   public reviewCountEmitter$: EventEmitter<number> = new EventEmitter<number>();
+
+  @Output()
+  public rateAdded: EventEmitter<void> = new EventEmitter<void>();
 
   public reviewTwoItem: TrainerReview[] = [];
 
   public seeAllReview: boolean = false;
 
-  private currentUserId: number = 0;
+  public currentUserId: number = 0;
 
   public isUserHasReview: boolean = false;
 
@@ -70,6 +79,7 @@ export class CourseReviewsComponent implements OnInit {
       dialog.afterClosed().subscribe((res: string) => {
         if (res === 'get') {
           this.getReviewsByCourseId(this.courseId);
+          this.rateAdded.emit();
         }
       });
     }
@@ -127,6 +137,7 @@ export class CourseReviewsComponent implements OnInit {
       } else {
         this.reviewLoader = false;
       }
+      this.rateAdded.emit();
     });
   }
 
@@ -140,11 +151,11 @@ export class CourseReviewsComponent implements OnInit {
             this.getReviewsByCourseId(review.course_id);
             this.toastr.success(res.message);
           } else {
-            this.toastr.error('Error request');
+            this.toastr.error(this.translateService.instant('toast-messages.request-error'));
           }
         },
         () => {
-          this.toastr.error('Error request');
+          this.toastr.error(this.translateService.instant('toast-messages.request-error'));
         },
       );
   }

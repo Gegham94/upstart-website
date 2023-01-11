@@ -34,6 +34,11 @@ const routes: Routes = [
         (m) => m.DashboardResourcesModule,
       ),
   },
+  {
+    path: 'stats',
+    loadChildren: () =>
+      import('./pages/dashboard-stats/dashboard-stats.module').then((m) => m.DashboardStatsModule),
+  },
 ];
 
 @NgModule({

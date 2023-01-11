@@ -47,14 +47,6 @@
     font-weight: 600;
     font-size: 24px;
   }
-  &__subtitle{
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 140%;
-    color: #737373;
-    margin-bottom: 35px;
-  }
   &__list {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

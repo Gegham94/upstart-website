@@ -15,10 +15,6 @@ export class TrainerCenterApiService {
   ) {}
 
   public getCurrentTrainers(): Observable<CenterTrainer[]> {
-    return this.httpClient.get<CenterTrainer[]>(`${API_URL}trainers/get-user-trainers`, {
-      params: {
-        language_code: this.translateService.currentLang,
-      },
-    });
+    return this.httpClient.get<CenterTrainer[]>(`${API_URL}trainers/get-user-trainers`);
   }
 }

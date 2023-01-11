@@ -1,0 +1,8 @@
+<div class="warning" *ngIf="hideMessage">
+  <div class="warning__block">
+    <us-button class="warning__close" (clicked)="hideMessage = false">
+      <us-icon class="warning__close-btn" [size]="16" name="close"></us-icon>
+    </us-button>
+    <p class="warning__text">{{ 'warning.warning_message' | translate }}</p>
+  </div>
+</div>

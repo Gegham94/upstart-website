@@ -1,4 +1,4 @@
-@import "src/assets/styles/variables/colors";
+@import 'src/assets/styles/variables/colors';
 
 :host {
   background: $light-purple;
@@ -42,7 +42,7 @@
     color: $title-color;
     width: 154px;
     height: 86px;
-    transition: box-shadow .2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
 
     &-text {
       color: $title-color;
@@ -55,7 +55,7 @@
 
     &:hover,
     &:focus {
-      box-shadow: 0 0 4px #A997FF;
+      box-shadow: 0 0 4px #a997ff;
     }
 
     &:active {
@@ -138,7 +138,7 @@
       display: flex;
       gap: 8px;
       opacity: 0;
-      transition: opacity .2s ease-in-out;
+      transition: opacity 0.2s ease-in-out;
       pointer-events: none;
     }
   }
@@ -225,6 +225,15 @@
       line-height: 20px;
       color: #262626;
       margin-bottom: 6px;
+    }
+
+    &-add {
+      display: block;
+      color: $main;
+      margin-top: 4px;
+      &:hover {
+        color: $dark-blue;
+      }
     }
   }
 }

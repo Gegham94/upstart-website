@@ -53,6 +53,17 @@
   }
 
   &__button {
+    pointer-events: none;
+    opacity: 0.5;
+    transition: all 0.5s;
+    &.active {
+      pointer-events: all;
+      opacity: 1;
+    }
+    &.disable {
+      pointer-events: none;
+      opacity: 0.5;
+    }
     &::ng-deep {
       .button {
         border-radius: 0 50px 50px 0;
@@ -62,6 +73,15 @@
         line-height: 28px;
         letter-spacing: 0.2px;
       }
+    }
+  }
+  .form {
+    .message {
+      display: block;
+      text-align: left;
+      margin-top: 10px;
+      padding-left: 30px;
+      color: $error;
     }
   }
 }

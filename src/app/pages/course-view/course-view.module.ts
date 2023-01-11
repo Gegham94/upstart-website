@@ -32,6 +32,8 @@ import { AccordionModule } from '../../shared/components/accordion/accordion.mod
 import { InputModule } from '../../shared/components/forms/input/input.module';
 import { CoursePreviewModalComponent } from './components/course-general/components/course-content/course-preview-modal/course-preview-modal.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CourseQuizModalComponent } from './components/course-general/components/course-content/course-quiz-modal/course-quiz-modal.component';
+import { ScrollTopModule } from 'src/app/shared/components/scroll-top/scroll-top.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CourseTrainerComponent,
     PreviewCourseComponent,
     CoursePreviewModalComponent,
+    CourseQuizModalComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +74,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     PipesModule,
     AccordionModule,
     InputModule,
+    ScrollTopModule,
   ],
   exports: [CourseContentComponent],
 })

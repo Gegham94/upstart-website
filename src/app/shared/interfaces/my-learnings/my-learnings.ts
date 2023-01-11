@@ -8,5 +8,6 @@ export interface MyLearnings {
   created_at: Date;
   updated_at: Date;
   categories: string[];
+  expired: boolean;
   course: PublicCourse;
 }

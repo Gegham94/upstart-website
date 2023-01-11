@@ -1,12 +1,13 @@
+import { UserRole } from '../enums/user-role';
+
 export interface Student {
   phone?: string | null;
   firstName: string | null;
   lastName: string | null;
   email: string | null;
-  password: string | null;
-  verifyPassword: string | null;
+  password?: string | null;
+  verifyPassword?: string | null;
   trainingName?: string;
   identityNum?: number;
-  language_code?: string;
-  role_id?: string;
+  role_id?: UserRole;
 }

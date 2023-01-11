@@ -2,7 +2,7 @@
 @import 'src/assets/styles/mixins/for-breakpoint';
 
 .basket-courses {
-  &__header-line{
+  &__header-line {
     @include for-breakpoint(mobile) {
       align-items: center;
     }

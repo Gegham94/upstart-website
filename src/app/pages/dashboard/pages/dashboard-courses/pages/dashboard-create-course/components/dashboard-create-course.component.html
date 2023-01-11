@@ -37,6 +37,29 @@
     <h2 class="create-course__title create-course__title_steps">
       {{ 'dashboard.courses.plan-course' | translate }}
     </h2>
+    <div
+      *ngIf="!!courseFormService.currentCourse?.declined_reason"
+      class="create-course__decline-reason-block"
+      [class.create-course__decline-reason-block_collapsed]="isReasonTextLarge && isReasonCollapsed"
+    >
+      <div class="create-course__decline-reason-title-keeper">
+        <h3 class="create-course__decline-reason-title">
+          {{ 'dashboard.courses.decline_title' | translate }}
+        </h3>
+        <span
+          *ngIf="isReasonTextLarge"
+          class="create-course__decline-reason-toggler"
+          (click)="isReasonCollapsed = !isReasonCollapsed"
+        >
+          {{
+            isReasonCollapsed ? ('course.show-more' | translate) : ('course.show-less' | translate)
+          }}
+        </span>
+      </div>
+      <article class="create-course__decline-reason">
+        {{ courseFormService.currentCourse?.declined_reason }}
+      </article>
+    </div>
     <us-tabs class="create-course__tabs" [isSteps]="true" [isStrict]="false">
       <us-tab
         [title]="'dashboard.courses.choose_category' | translate"

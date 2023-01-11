@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   debounceTime,
@@ -24,6 +24,9 @@ import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 export class HeaderSearchComponent implements OnInit, OnDestroy {
   @ViewChild(MatAutocompleteTrigger)
   public auto: MatAutocompleteTrigger;
+
+  @Output()
+  public closedSearch: EventEmitter<void> = new EventEmitter();
 
   public searchValuesForm = new FormControl();
 
@@ -90,7 +93,7 @@ export class HeaderSearchComponent implements OnInit, OnDestroy {
         ),
       )
       .subscribe((data: SearchResponseInterface) => {
-        if (!data.success) {
+        if (!data?.success) {
           this.errorMsg = this.translateService.instant('global.header.not-found');
           this.filteredText = [];
           this.publicCourse = [];
@@ -131,6 +134,7 @@ export class HeaderSearchComponent implements OnInit, OnDestroy {
 
   public redirectToSearch(text: string) {
     this.auto.closePanel();
+    this.closedSearch.emit();
     this.router.navigate(['/courses'], { queryParams: { search_text: text } });
   }
 

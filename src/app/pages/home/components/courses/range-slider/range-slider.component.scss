@@ -1,6 +1,6 @@
 @import 'src/assets/styles/variables/colors';
 
-.title{
+.title {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -15,31 +15,35 @@
     cursor: pointer;
     margin-bottom: 10px;
   }
-  us-icon{
+  us-icon {
     cursor: pointer;
     height: 5px;
   }
 }
 
 ::ng-deep {
-  .custom-slider, .ngx-slider, .ngx-slider-selection {
+  .custom-slider,
+  .ngx-slider,
+  .ngx-slider-selection {
     background-color: $main !important;
   }
-  .ngx-slider-pointer-min, .ngx-slider-pointer-max{
+  .ngx-slider-pointer-min,
+  .ngx-slider-pointer-max {
     background-color: $lighter-grey !important;
     border: 1px solid $light-grey !important;
     outline: none !important;
     width: 15px !important;
     height: 15px !important;
     margin-top: 8px !important;
-    &::after{
+    &::after {
       display: none;
     }
   }
-  .ngx-slider-limit{
+  .ngx-slider-limit {
     display: none !important;
   }
-  .ngx-slider-model-value, .ngx-slider-model-high {
+  .ngx-slider-model-value,
+  .ngx-slider-model-high {
     background-color: $main !important;
     color: $white !important;
     font-weight: 400 !important;
@@ -48,7 +52,7 @@
     text-align: center !important;
     padding: 3px 5px !important;
     border-radius: 3px !important;
-    &::after{
+    &::after {
       content: '';
       position: absolute;
       left: 30%;
@@ -62,6 +66,15 @@
     }
   }
 }
-.slider{
+.slider {
   width: 100%;
+
+  &__form {
+    &-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+  }
 }

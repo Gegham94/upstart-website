@@ -22,12 +22,19 @@
     [class.select__icon_toggled]="optionsListOpened"
   ></us-icon>
   <div class="select__option-keeper" *ngIf="optionsListOpened">
-    <us-option-list
-      *ngFor="let option of displayOptions"
-      [option]="option"
-      [selected]="multiple && isOptionSelected(option)"
-      (optionSelected)="optionSelected($event)"
-    ></us-option-list>
+    <ng-container *ngIf="displayOptions.length > 0; else notList">
+      <us-option-list
+        *ngFor="let option of displayOptions"
+        [option]="option"
+        [selected]="multiple && isOptionSelected(option)"
+        (optionSelected)="optionSelected($event)"
+      ></us-option-list>
+    </ng-container>
+    <ng-template #notList>
+      <p class="select__option-title">
+        {{ 'dashboard.courses.no_lists' | translate }}
+      </p>
+    </ng-template>
   </div>
 </div>
 

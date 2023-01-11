@@ -1,7 +1,6 @@
 <div class="home-courses">
   <div class="home-courses__container container">
     <h3 class="home-courses__title">{{ 'favorites.title' | translate }}</h3>
-    <p class="home-courses__subtitle">{{ 'favorites.subtitle' | translate }}</p>
     <h1 *ngIf="showEmptyMessage" class="no-data">{{ 'favorites.no_data' | translate }}</h1>
     <div *ngIf="showLoader" class="loader">
       <ngx-skeleton-loader
@@ -22,3 +21,5 @@
     </ng-container>
   </div>
 </div>
+
+<us-scroll-top></us-scroll-top>

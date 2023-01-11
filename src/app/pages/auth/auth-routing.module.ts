@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { AuthComponent } from './auth.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { AuthComponent } from './components/auth.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,13 @@ const routes: Routes = [
       },
       {
         path: 'reset',
+        component: ForgotPasswordComponent,
+        data: {
+          footerless: true,
+        },
+      },
+      {
+        path: 'password-reset/:token',
         component: ResetPasswordComponent,
         data: {
           footerless: true,

@@ -40,7 +40,12 @@
             "assets": ["src/favicon.ico", "src/assets", "src/.htaccess"],
             "allowedCommonJsDependencies": [
               "dayjs",
-              "lodash"
+              "lodash",
+              "jquery",
+              "core-js",
+              "html2canvas",
+              "rgbcolor",
+              "raf"
             ],
             "styles": [
               "node_modules/@angular/cdk/overlay-prebuilt.css",
@@ -89,6 +94,38 @@
               "vendorChunk": false,
               "buildOptimizer": true
             },
+            "live": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kb",
+                  "maximumError": "8kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.live.ts"
+                }
+              ],
+              "optimization": {
+                "scripts": true,
+                "styles": true,
+                "fonts": true
+              },
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -105,6 +142,9 @@
           "configurations": {
             "production": {
               "browserTarget": "upstart:build:production"
+            },
+            "live": {
+              "browserTarget": "upstart:build:live"
             },
             "development": {
               "browserTarget": "upstart:build:development"
@@ -163,6 +203,15 @@
                 }
               ]
             },
+            "live": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.live.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "sourceMap": true,
@@ -181,6 +230,10 @@
             "production": {
               "browserTarget": "upstart:build:production",
               "serverTarget": "upstart:server:production"
+            },
+            "live": {
+              "browserTarget": "upstart:build:live",
+              "serverTarget": "upstart:server:live"
             }
           },
           "defaultConfiguration": "development"
@@ -198,6 +251,10 @@
             "development": {
               "browserTarget": "upstart:build:development",
               "serverTarget": "upstart:server:development"
+            },
+            "live": {
+              "browserTarget": "upstart:build:live",
+              "serverTarget": "upstart:server:live"
             }
           },
           "defaultConfiguration": "production"

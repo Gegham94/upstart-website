@@ -1,6 +1,12 @@
 <footer class="footer">
   <div class="footer__container">
-    <h2 class="footer__title">Upstart</h2>
+    <!-- <h2 class="footer__title">Upstart</h2> -->
+    <img
+      class="footer__logo"
+      src="assets/images/logos/new-upstart-logo.svg"
+      alt="Upstart Logo"
+      routerLink="/"
+    />
     <div class="footer__company-info">
       <div class="footer__items">
         <a class="footer__link" routerLink="/">{{
@@ -34,8 +40,9 @@
           <us-icon name="twitter"></us-icon>
         </a>
       </div>
-      <span class="footer__copyright"> © 2022 upstart </span>
-      <img src="assets/images/logos/brain-fors-logo.svg" alt="" />
+      <span class="footer__copyright"> {{ 'global.footer.copyright' | translate }} </span>
+      <!-- <img src="assets/images/logos/brain-fors-logo.svg" alt="" /> -->
+      <div></div>
     </div>
   </div>
 </footer>

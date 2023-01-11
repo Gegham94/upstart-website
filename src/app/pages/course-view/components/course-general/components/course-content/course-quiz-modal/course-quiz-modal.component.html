@@ -1,0 +1,79 @@
+<div class="quiz">
+  <div class="quiz__content">
+    <ng-container *ngIf="questionList[0].your_answers; else notQuiz">
+      <h4 class="quiz__title">{{ 'course-content.quiz_answer' | translate }}</h4>
+      <us-icon mat-dialog-close name="close" class="quiz__close" [size]="24"></us-icon>
+      <div class="quiz__question">
+        <div class="quiz__question-header">
+          <p class="quiz__question-title" [innerHTML]="questionList[quiz].title"></p>
+          <div class="quiz__question-count">
+            <span>{{ quiz + 1 }}</span> / <span> {{ questionList.length }} </span>
+          </div>
+        </div>
+        <ul class="quiz__answers">
+          <li
+            class="quiz__answers-list"
+            *ngFor="let quizItem of questionList[quiz].answers"
+            [ngClass]="{
+              wrong: classForAnswers(quizItem, 'wrong'),
+              right: classForAnswers(quizItem, 'right')
+            }"
+          >
+            <div class="quiz__answers-item">
+              <us-icon
+                class="quiz__answers-item-icon"
+                *ngIf="classForAnswers(quizItem, 'right')"
+                name="quiz_right"
+                [size]="18"
+              ></us-icon>
+              <us-icon
+                class="quiz__answers-item-icon"
+                *ngIf="classForAnswers(quizItem, 'wrong') && !classForAnswers(quizItem, 'right')"
+                name="quiz_wrong"
+                [size]="18"
+              ></us-icon>
+              <us-icon
+                class="quiz__answers-item-icon"
+                *ngIf="!classForAnswers(quizItem, 'wrong') && !classForAnswers(quizItem, 'right')"
+                name="quiz_default"
+                [size]="18"
+              ></us-icon>
+            </div>
+            <p class="quiz__answers-text texts">{{ quizItem }}</p>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
+    <ng-template #notQuiz>
+      <h4 class="quiz__content-passed-text">{{ 'course-content.test_passed' | translate }}</h4>
+    </ng-template>
+  </div>
+
+  <ng-container *ngIf="questionList[0].your_answers; else notQuizBtn">
+    <div class="quiz__footer">
+      <us-button
+        *ngIf="getQuizPrev"
+        class="quiz__footer-btn"
+        [theme]="buttonTheme.primary"
+        [outline]="true"
+        (clicked)="backStep()"
+        >{{ 'global.quiz-modal.prev' | translate }}
+      </us-button>
+      <us-button class="quiz__footer-btn" [theme]="buttonTheme.primary" (clicked)="nextStep()">
+        <span *ngIf="!getQuizNext">{{ 'global.quiz-modal.next' | translate }}</span>
+        <span *ngIf="getQuizNext">{{ 'global.quiz-modal.cancel' | translate }}</span>
+      </us-button>
+    </div>
+  </ng-container>
+
+  <ng-template #notQuizBtn>
+    <us-button
+      class="quiz__footer-btn not-btn"
+      [theme]="buttonTheme.primary"
+      [outline]="true"
+      (clicked)="dialog.close()"
+    >
+      <span>{{ 'global.button.confirm' | translate }}</span>
+    </us-button>
+  </ng-template>
+</div>

@@ -1,6 +1,6 @@
 @import 'src/assets/styles/variables/colors';
 
-.loader-main{
+.loader-main {
   z-index: 1;
   width: max-content;
   height: max-content;
@@ -8,7 +8,8 @@
     width: 50px !important;
     height: 50px !important;
   }
-  ::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+  ::ng-deep.mat-progress-spinner circle,
+  .mat-spinner circle {
     stroke: $main;
   }
   ::ng-deep.mat-progress-spinner svg {
@@ -30,30 +31,22 @@
 .home-courses {
   margin-bottom: 30px;
   min-height: 500px;
-.loader{
-  height: 500px;
-}
-.disabled{
-  opacity: 0.8;
-  pointer-events: none;
-}
-.no-data{
-  text-align: center;
-  color:$light-grey-text;
-}
+  .loader {
+    height: 500px;
+  }
+  .disabled {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  .no-data {
+    text-align: center;
+    color: $light-grey-text;
+  }
   &__title {
-    padding: 26px 0 14px;
-    color:$title-color;
+    padding: 26px 0 35px;
+    color: $title-color;
     font-weight: 600;
     font-size: 24px;
-  }
-  &__subtitle{
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 140%;
-    color: #737373;
-    margin-bottom: 35px;
   }
   &__list {
     display: grid;
@@ -61,7 +54,7 @@
     row-gap: 26px;
     column-gap: 18px;
     .course {
-      &.loading{
+      &.loading {
         opacity: 0.5;
         pointer-events: none;
       }
@@ -119,26 +112,26 @@
       }
 
       &__description {
-        .course_category{
+        .course_category {
           color: $icon-color;
           font-weight: 500;
           font-size: 14px;
-          &::after{
-            content: "|";
+          &::after {
+            content: '|';
             margin: 0 5px;
           }
-          &:last-child{
-            &::after{
+          &:last-child {
+            &::after {
               display: none;
             }
           }
         }
       }
-      &__price-keeper{
+      &__price-keeper {
         display: flex;
         justify-content: space-between;
       }
-      &__price-side{
+      &__price-side {
         .course_price {
           font-weight: 700;
           font-size: 16px;
@@ -156,28 +149,28 @@
         }
       }
 
-      &__star-side{
+      &__star-side {
         display: flex;
         align-items: center;
-        .rate{
+        .rate {
           font-size: 12px;
           font-weight: 500;
           color: $title-color;
           display: inline-block;
           margin-right: 5px;
         }
-        .stars{
+        .stars {
           display: flex;
           align-items: center;
-          .icon{
+          .icon {
             margin-right: 2px;
           }
         }
       }
-      &__calendar{
+      &__calendar {
         display: flex;
         align-items: center;
-        .date{
+        .date {
           margin: 0 5px;
           display: inline-block;
           font-weight: 500;
@@ -185,7 +178,7 @@
           color: $light-grey-text;
         }
       }
-      &__type{
+      &__type {
         position: absolute;
         right: 0;
         top: 0;

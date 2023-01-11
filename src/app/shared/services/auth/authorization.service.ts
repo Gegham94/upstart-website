@@ -13,6 +13,9 @@ import { CurrentUserUpdateInterface } from '../../interfaces/current-user.interf
 import { ResponseError } from '../../interfaces/settings.interface';
 import { Router } from '@angular/router';
 import { GlobalService } from '../global.service';
+import { SocialLogin } from '../../interfaces/social-login.interface';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { ResetPassword } from '../../interfaces/reset-password.interface';
 
 const API_URL = environment.apiUrl;
 const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -29,6 +32,7 @@ export class AuthorizationService {
     @Inject(PLATFORM_ID)
     private readonly privateId: string,
     private readonly router: Router,
+    private readonly socialAuthService: SocialAuthService,
     private globalService: GlobalService,
   ) {
     if (isPlatformBrowser(this.privateId)) {
@@ -49,7 +53,6 @@ export class AuthorizationService {
           password: data.password,
           company_name: data.trainingName,
           tax_identity_number: data.identityNum,
-          language_code: this.lang,
           role_id: role_id,
         },
         { headers: headers },
@@ -77,14 +80,13 @@ export class AuthorizationService {
         {
           email: data.email,
           password: data.password,
-          language_code: this.lang,
           role_id: 3,
         },
         { headers: headers },
       )
       .pipe(
         tap((res) => {
-          if (res.data.api_token) {
+          if (res.data?.api_token) {
             this.authToken$.next(res.data.api_token);
             localStorage.setItem('auth', res.data.api_token);
           } else {
@@ -97,6 +99,7 @@ export class AuthorizationService {
   public localLogout(): void {
     localStorage.removeItem('auth');
     this.globalService.currentUser = null;
+    this.socialAuthService.signOut();
     this.authToken$.next('');
     this.router.navigate(['auth/login']);
   }
@@ -120,5 +123,43 @@ export class AuthorizationService {
 
   public updateUser(data: CurrentUserUpdateInterface): Observable<ResponseError> {
     return this.http.post<ResponseError>(`${API_URL}update/user`, { ...data });
+  }
+
+  public requestResetMail(email: string): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${API_URL}forgot-password`, { email });
+  }
+
+  public resetPassword(data: ResetPassword): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${API_URL}reset-password`, { ...data });
+  }
+
+  public socialLogin(data: SocialLogin): Observable<ApiResponse<CreatedUserInterface>> {
+    return this.http
+      .post<ApiResponse<CreatedUserInterface>>(`${API_URL}social/login`, {
+        first_name: data.firstName,
+        last_name: data.lastName,
+        phone: data.phone,
+        email: data.email,
+        password: data.password,
+        company_name: data.trainingName,
+        tax_identity_number: data.identityNum,
+        role_id: data.role_id,
+        unique_id: data.unique_id,
+        provider: data.provider,
+      })
+      .pipe(
+        tap((res) => {
+          if (res.success) {
+            if (res.data?.api_token) {
+              this.authToken$.next(res.data.api_token);
+              localStorage.setItem('auth', res.data.api_token);
+            } else {
+              this.localLogout();
+            }
+          } else {
+            this.localLogout();
+          }
+        }),
+      );
   }
 }

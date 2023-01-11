@@ -1,0 +1,230 @@
+@import 'src/assets/styles/variables/colors';
+.stats {
+  background-color: $white;
+  padding: 38px 38px 58px;
+  border-radius: 4px;
+  &__title {
+    color: $text-color;
+    font-weight: 500;
+    font-size: 20px;
+  }
+  &__resource-side {
+    margin-top: 20px;
+    .title {
+      text-align: left;
+      font-size: 20px;
+      font-weight: 600;
+      color: $text-color;
+    }
+  }
+  &__student-side {
+    margin-top: 25px;
+    .course{
+        min-height: 40px;
+        background-color: #faf8ff;
+        padding: 13px 35px 13px 35px;
+        box-shadow: 0px 7px 5px -6px #e9e4f5;
+        transition: all .5s;
+        margin-bottom: 20px;
+        &.expand {
+            min-height: max-content;
+        }
+        .header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .title-trainer {
+                display: flex;
+                flex-direction: column;
+                .trainer{
+                    display: inline-block;
+                    margin-top: 15px;
+                    color: $light-grey-text;
+                    font-size: 14px;
+                    font-weight: 400;
+                    .trainer-strong{
+                        font-weight: 500;
+                    }
+                }
+            }
+            .course-title{
+                font-size: 17px;
+                font-weight: 600;
+                color: $text-color;
+            }
+            .student-name {
+                display: flex;
+                height: 45px;
+                position: relative;
+                &.active{
+                    overflow: unset;
+                    height: max-content;
+                }
+                .name{
+                    display: inline-block;
+                    &.more-items{
+                        &:nth-child(1){
+                            transform: translateX(-15px);
+                        }
+                        &:hover{
+                            z-index: 3;
+                        }
+                    }
+                    &.less-items {
+                        &:nth-child(1){
+                            transform: translateX(-15px);
+                        }
+                        &:hover{
+                            z-index: 3;
+                        }
+                    }
+                    .images{
+                        position: relative;
+                        z-index: 1;
+                    .stat-student{
+                        background-color: $main;
+                        padding: 2px;
+                        width: 42px;
+                        height: 42px;
+                        border-radius: 50%;
+                        position: absolute;
+                        right: 0;
+                        z-index: 2;
+                        cursor: pointer;
+                        .fl-name{
+                            position: absolute;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                            color: white;
+                            font-weight: 600;
+                        }
+                    }
+
+                    }
+                    &:first-child{
+                        margin-top: 0;
+                    }
+
+                }
+                .count{
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 50%;
+                    background-color: $main;
+                    text-align: center;
+                    display: block;
+                    position: absolute;
+                    right: 0;
+                    transform: translateX(15px);
+                    z-index: 2;
+                    cursor: pointer;
+                    &.num-side{
+                        border: 2px solid white;
+                        white-space: nowrap;
+                    }
+                    .num{
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        font-weight: 500;
+                        color: $white;
+                        font-size: 14px;
+                    }
+                }
+                .content{
+                    right: 0;
+                    width: 246px;
+                    max-height: 272px;
+                    overflow: scroll;
+                    position: absolute;
+                    transform: translateY(45px);
+                    background: #FFFFFF;
+                    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                    z-index: 1;
+                    border-radius: 4px;
+                    display: none;
+                    &.active-expand{
+                        display: block;
+                        z-index: 9;
+                    }
+                    .user-ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style-type: none;
+                        .header{
+                            .title{
+                                padding: 10px;
+                                font-weight: 500;
+                                font-size: 16px;
+                                color: $text-color;
+
+                            }
+                            border-bottom: 1px solid $light-grey-text;
+                        }
+                        .list{
+                            padding:0 10px;
+                            display: flex;
+                            align-items: center;
+                            margin-top: 15px;
+                            .student-icon{
+                                padding: 2px;
+                                background-color: $main;
+                                width: 42px;
+                                height: 42px;
+                                border-radius: 50%;
+                                margin-right: 10px;
+                            }
+                            .stat-student{
+                                background-color: $main;
+                                padding: 2px;
+                                width: 42px;
+                                height: 42px;
+                                border-radius: 50%;
+                                position: relative;
+                                z-index: 2;
+                                margin-right: 10px;
+                                .fl-name{
+                                    position: absolute;
+                                    left: 50%;
+                                    top: 50%;
+                                    transform: translate(-50%, -50%);
+                                    color: white;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+  }
+  .main {
+    margin-top: 30px;
+  }
+  .devider {
+    height: 2px;
+    background-color: $light-grey-text;
+    margin-top: 40px;
+  }
+  .show-more {
+    margin-top: 15px;
+    color: $main;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 92px;
+    text-align: right;
+    display: block;
+    margin-top: 15px;
+  }
+  .less-items {
+    &:nth-child(1){
+        transform: translateX(-15px);
+    }
+    &:hover{
+        z-index: 3;
+    }
+  }
+}

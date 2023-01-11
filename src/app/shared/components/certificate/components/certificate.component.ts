@@ -8,10 +8,12 @@ import { CertificateInterface } from '../../../interfaces/certificate/certificat
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { formatDate } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 interface DialogData {
   course: number;
   type: string;
+  coursePassed: boolean;
 }
 
 @Component({
@@ -55,6 +57,7 @@ export class CertificateComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public page: DialogData,
     public toastrService: ToastrService,
     public dialog: MatDialogRef<CertificateComponent>,
+    private translateService: TranslateService,
   ) {}
 
   public ngOnInit(): void {
@@ -120,7 +123,7 @@ export class CertificateComponent implements OnInit, OnDestroy {
     };
     this.certificateService.saveCertificateData(body).subscribe((res) => {
       if (res.success) {
-        this.toastrService.success('Update Successfully');
+        this.toastrService.success(this.translateService.instant('toast-messages.update'));
       } else {
         this.toastrService.error(res.message);
       }

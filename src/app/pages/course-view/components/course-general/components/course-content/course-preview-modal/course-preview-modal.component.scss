@@ -1,72 +1,71 @@
 @import 'src/assets/styles/variables/colors';
-.preview_class{
+.preview_class {
   font-weight: 500;
   font-size: 12px;
   color: $icon-color;
-  line-height:20px
+  line-height: 20px;
 }
-.preview_title{
+.preview_title {
   font-weight: 600;
   font-size: 16px;
-  color: #13013F;
+  color: #13013f;
 }
-.preview_article{
+.preview_article {
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;
   color: #000000;
 }
-.preview_video{
+.preview_video {
   width: 100%;
   height: 380px;
 }
-.course_preview{
+.course_preview {
   display: flex;
   justify-content: center;
-  .mat-dialog-content{
+  .mat-dialog-content {
     width: 100%;
     padding: 0;
-
   }
-  .modal_header{
+  .modal_header {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    p{
+    p {
       font-weight: 700;
       font-size: 18px;
       line-height: 125%;
-      color: #13013F;
+      color: #13013f;
     }
-    &.title_position{
+    &.title_position {
       justify-content: space-between;
     }
   }
-  .quiz_content{
-    .quiz_title{
+  .quiz_content {
+    .quiz_title {
       font-weight: 700;
       font-size: 18px;
-      color: #13013F;
+      color: #13013f;
       line-height: 50px;
     }
-    .quiz_subtitle{
+    .quiz_subtitle {
       font-weight: 400;
       font-size: 14px;
       color: #000000;
     }
-    .good{
+    .good {
       font-weight: 500;
       font-size: 14px;
-      color: #6B63DD;
+      color: #6b63dd;
       line-height: 30px;
     }
-    .button_content{
+    .button_content {
       background: $light-purple;
       display: flex;
       width: 100%;
       align-items: center;
       justify-content: flex-end;
-      margin-top:50px;
+      margin-top: 50px;
       padding: 0 24px;
       &::ng-deep .button {
         min-width: 110px;
@@ -78,39 +77,36 @@
       .mat-dialog-actions {
         margin-bottom: 0;
       }
-
-      }
-    .check_forms{
-      .form-check{
+    }
+    .check_forms {
+      .form-check {
         display: flex;
         align-items: center;
         line-height: 30px;
-        .form-check-label{
-          margin-left:  10px;
+        .form-check-label {
+          margin-left: 10px;
         }
-        .form-check-input{
+        .form-check-input {
           margin-top: 0;
           background: $white;
         }
-        .form-check-input:checked{
-          background-image: url("../../../../../../../../assets/images/icons/purple_check.svg");
+        .form-check-input:checked {
+          background-image: url('../../../../../../../../assets/images/icons/purple_check.svg');
           background-repeat: no-repeat;
           background-position: center;
-          border-color:#6B63DD
+          border-color: #6b63dd;
         }
       }
     }
-    .step_2_subtitle{
+    .step_2_subtitle {
       font-weight: 400;
       font-size: 14px;
       line-height: 22px;
       color: #000000;
-
     }
   }
 }
-  ::ng-deep .mat-dialog-container{
-    background: $white;
-    padding: 0;
-  }
-
+::ng-deep .mat-dialog-container {
+  background: $white;
+  padding: 0;
+}

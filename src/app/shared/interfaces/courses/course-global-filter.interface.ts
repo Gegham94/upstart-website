@@ -8,5 +8,5 @@ export interface CourseGlobalFilter {
 
 export interface FilterItem {
   label: string;
-  ids: number[];
+  ids?: number[];
 }

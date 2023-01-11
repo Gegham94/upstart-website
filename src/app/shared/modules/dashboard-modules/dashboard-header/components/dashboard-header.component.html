@@ -11,15 +11,21 @@
       <a routerLink="/" class="dashboard-header__logo-link">
         <img
           class="dashboard-header__logo"
-          src="./assets/images/logos/upstart-logo.svg"
+          src="./assets/images/logos/new-upstart-logo.svg"
           alt="Upstart Logo"
         />
       </a>
     </div>
     <div class="dashboard-header__action-keeper">
       <!-- <us-button icon="profile_white" [iconSize]="32" class="dashboard-header__action"> </us-button> -->
-
+      <us-header-action-panel
+        (unreadCountEmit)="unreadCountNumber($event)"
+        [dashboard]="true"
+        [userInfo]="userInfo"
+      ></us-header-action-panel>
+      <us-header-language></us-header-language>
       <div
+        class="dashboard-header__action-avatar"
         *ngIf="!nameFirstLetters"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasExample"
@@ -27,6 +33,7 @@
         #sideMenuToggler
       >
         <img class="profile-icon__avatar" [src]="userInfo?.avatar" alt="Avatar" />
+        <span class="mat-select-arrow"></span>
       </div>
       <div
         *ngIf="nameFirstLetters"
@@ -130,8 +137,6 @@
           </div>
         </div>
       </div>
-
-      <us-header-language></us-header-language>
     </div>
   </div>
 </header>

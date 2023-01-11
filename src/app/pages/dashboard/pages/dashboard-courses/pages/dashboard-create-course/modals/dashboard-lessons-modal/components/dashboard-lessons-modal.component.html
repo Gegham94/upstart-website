@@ -1,0 +1,28 @@
+<h3 class="dashboard-lessons-modal__title" mat-dialog-title>
+  {{ 'dashboard.courses.lessons-modal-title' | translate }}
+</h3>
+
+<div class="dashboard-lessons-modal">
+  <us-dashboard-course-lesson-list
+    [type]="data.courseType"
+    [courseId]="data.courseId"
+    [lessonsForms]="data.lessonGroupListControls"
+  ></us-dashboard-course-lesson-list>
+  <div class="dashboard-lessons-modal__action-keeper">
+    <us-button
+      class="dashboard-lessons-modal__action"
+      [theme]="buttonTheme.primary"
+      [outline]="true"
+      (clicked)="cancel()"
+    >
+      {{ 'global.button.cancel' | translate }}
+    </us-button>
+    <us-button
+      class="dashboard-lessons-modal__action"
+      [theme]="buttonTheme.primary"
+      (clicked)="save()"
+    >
+      {{ 'global.button.save' | translate }}
+    </us-button>
+  </div>
+</div>

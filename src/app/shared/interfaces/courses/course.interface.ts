@@ -9,6 +9,7 @@ export interface Course {
   trainer_id: number;
   title: string;
   sub_title: string;
+  declined_reason: string;
   description: string;
   language: number;
   status: CourseStatus;
@@ -18,6 +19,7 @@ export interface Course {
   //Todo: Set Course Level enum
   level: number;
   currency: string;
+  certificate: number;
   promo_video: string;
   cover_image: string;
   link: string;

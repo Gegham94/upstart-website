@@ -5,15 +5,24 @@
     <article class="home-join-us__description">
       {{ 'home.join-us.description' | translate }}
     </article>
-    <form class="home-join-us__form">
-      <input
-        type="email"
-        class="home-join-us__input"
-        [placeholder]="'home.join-us.email' | translate"
-      />
-      <us-button [theme]="buttonTheme.primary" class="home-join-us__button">{{
-        'home.join-us.subscribe' | translate
-      }}</us-button>
-    </form>
+    <div class="form">
+      <form [formGroup]="subscribeForm" class="home-join-us__form">
+        <input
+          formControlName="email"
+          type="email"
+          class="home-join-us__input"
+          [placeholder]="'home.join-us.email' | translate"
+        />
+        <us-button
+          [class.disable]="disableSubscribeBtn"
+          (click)="subscribe()"
+          [class.active]="subscribeForm.valid"
+          [theme]="buttonTheme.primary"
+          class="home-join-us__button"
+          >{{ 'home.join-us.subscribe' | translate }}</us-button
+        >
+      </form>
+      <span *ngIf="errorMessage" class="message">{{ errorMessage }}</span>
+    </div>
   </div>
 </div>

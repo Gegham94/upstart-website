@@ -1,6 +1,5 @@
 import { Directive, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { debounceTime } from 'rxjs';
 
 @Directive({
   selector: '[usValidationError]',
@@ -14,15 +13,15 @@ export class ValidationErrorDirective implements OnInit {
   constructor(private readonly ngControl: NgControl) {}
 
   public ngOnInit(): void {
-    if (this.ngControl.errors) {
+    if ((this.ngControl.touched || this.ngControl.dirty) && this.ngControl.errors) {
       this.getErrors.emit(this.ngControl.errors);
     }
-    this.ngControl.statusChanges?.pipe(debounceTime(200)).subscribe(() => {
-      if (this.ngControl.errors) {
+    this.ngControl.statusChanges?.subscribe(() => {
+      if ((this.ngControl.touched || this.ngControl.dirty) && this.ngControl.errors) {
         this.getErrors.emit(this.ngControl.errors);
       }
     });
-    this.ngControl.valueChanges?.pipe(debounceTime(200)).subscribe(() => {
+    this.ngControl.valueChanges?.subscribe(() => {
       this.getErrors.emit({});
     });
   }

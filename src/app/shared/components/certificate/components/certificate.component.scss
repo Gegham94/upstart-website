@@ -173,6 +173,14 @@
 
     }
   }
+  .not-certificate{
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: $title-color;
+    display: block;
+    margin-bottom: 15px;
+  }
 }
 .certificate-modal-footer{
   background: #faf8ff;

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'us-header-mobile-action-panel',
@@ -8,4 +8,11 @@ import { Component, Input } from '@angular/core';
 export class HeaderMobileActionPanelComponent {
   @Input()
   public isLoggedIn: boolean = false;
+
+  @Output()
+  public showSearchMenu: EventEmitter<void> = new EventEmitter();
+
+  public showSearch() {
+    this.showSearchMenu.emit();
+  }
 }

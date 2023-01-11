@@ -20,6 +20,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { HeaderCategoriesComponent } from './components/header-categories/header-categories.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { HeaderCategoriesComponent } from './components/header-categories/header
     MatInputModule,
     MatAutocompleteModule,
     MatSelectModule,
+    NgxSkeletonLoaderModule,
   ],
   exports: [
     HeaderComponent,

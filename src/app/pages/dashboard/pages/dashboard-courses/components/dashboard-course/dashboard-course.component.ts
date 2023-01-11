@@ -12,6 +12,7 @@ import { CourseType } from 'src/app/shared/enums/course-type.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { CertificateComponent } from '../../../../../../shared/components/certificate/components/certificate.component';
 import { CourseStatus } from '../../../../../../shared/enums/course-status';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'us-dashboard-course',
@@ -42,6 +43,7 @@ export class DashboardCourseComponent implements OnInit {
     private readonly router: Router,
     private readonly toastrService: ToastrService,
     private readonly dialog: MatDialog,
+    private translateService: TranslateService,
   ) {}
 
   public ngOnInit(): void {
@@ -56,7 +58,7 @@ export class DashboardCourseComponent implements OnInit {
 
   public deleteCourse(): void {
     this.coursesApiService.deleteCourse(this.courseData.id).subscribe(() => {
-      this.toastrService.success('Course Successfully Deleted!');
+      this.toastrService.success(this.translateService.instant('toast-messages.course-deleted'));
       this.courseDeleted.emit();
     });
   }
@@ -69,6 +71,7 @@ export class DashboardCourseComponent implements OnInit {
     this.dialog.open(CertificateComponent, {
       data: {
         course: this.courseData.id,
+        coursePassed: true,
       },
       panelClass: 'certificate-dialog',
       width: '900px',

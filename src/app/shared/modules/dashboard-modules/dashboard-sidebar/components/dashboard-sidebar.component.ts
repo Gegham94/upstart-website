@@ -31,12 +31,6 @@ export class DashboardSidebarComponent implements OnInit {
   }
 
   public get checkUserRole(): boolean {
-    let temp = false;
-    if (this.user?.role_id !== UserRole.STUDENT) {
-      temp = true;
-    } else {
-      temp = false;
-    }
-    return temp;
+    return this.user?.role_id !== UserRole.STUDENT;
   }
 }

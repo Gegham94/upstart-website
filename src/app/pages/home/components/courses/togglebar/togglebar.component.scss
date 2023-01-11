@@ -16,21 +16,28 @@
     background-color: $main;
     border-color: $main;
   }
-  .form-check-input[type=checkbox]:indeterminate {
+  .form-check-input[type='checkbox']:indeterminate {
     background-color: $main;
   }
   .form-check-input:focus {
     border-color: $main;
     box-shadow: none;
   }
-  .form-check-label{
+  .form-check-label {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    word-break: break-all;
+    width: calc(100% - 24px);
+  }
+}
+::ng-deep {
+  .treeview-container {
+    overflow-y: scroll !important;
   }
 }
 
-.title{
+.title {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -45,12 +52,12 @@
     cursor: pointer;
     margin-bottom: 10px;
   }
-  us-icon{
+  us-icon {
     cursor: pointer;
     height: 5px;
   }
 }
-.togglebar_body{
+.togglebar_body {
   display: block;
   margin-bottom: 14px;
   border-bottom: 1px solid $light-grey;

@@ -5,7 +5,7 @@
     &__section-2 {
       flex-direction: column;
       padding: 30px 30px;
-      align-items: flex-end
+      align-items: flex-end;
     }
 
     &__about-section {
@@ -25,12 +25,11 @@
   @include for-breakpoint(tablet-sm) {
     &__section-1 {
       flex-direction: column;
-      align-items: center
+      align-items: center;
     }
   }
 
   @include for-breakpoint(mobile-lg) {
-
     &__about-section {
       padding: 20px;
     }
@@ -48,10 +47,7 @@
     }
   }
 
-
-
   @include for-breakpoint(mobile) {
-
     &__image {
       object-fit: contain;
     }
@@ -63,7 +59,7 @@
 
     &__section-4__info-block {
       flex-direction: column;
-      align-items: center
+      align-items: center;
     }
 
     &__section-3 {

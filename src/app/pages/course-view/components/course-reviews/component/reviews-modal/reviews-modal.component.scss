@@ -1,7 +1,7 @@
 @import 'src/assets/styles/variables/colors';
 
 ::ng-deep {
-  .add-reviews{
+  .add-reviews {
     width: 50vw;
     mat-dialog-container {
       background: $white;
@@ -20,8 +20,6 @@
       }
     }
   }
-
-
 }
 
 .reviews {
@@ -39,7 +37,6 @@
         &:hover:not(:disabled) {
           box-shadow: none;
         }
-
       }
     }
 
@@ -47,7 +44,7 @@
       padding: 24px;
     }
 
-    &-content{
+    &-content {
       height: 410px;
       overflow-y: auto;
     }

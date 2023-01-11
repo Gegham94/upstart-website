@@ -17,9 +17,7 @@
     </div>
     <ng-template #dataList>
       <ng-container *ngFor="let student of studentsList">
-        <us-students
-          (click)="openCourseList(student)"
-          [studentList]="student"></us-students>
+        <us-students (click)="openCourseList(student)" [studentList]="student"></us-students>
       </ng-container>
     </ng-template>
   </div>

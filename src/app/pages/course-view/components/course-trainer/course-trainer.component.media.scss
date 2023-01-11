@@ -1,8 +1,8 @@
 @import 'src/assets/styles/mixins/for-breakpoint';
 
-.trainer-info{
+.trainer-info {
   @include for-breakpoint(mobile-lg) {
-    &__container{
+    &__container {
       padding: 0;
     }
   }

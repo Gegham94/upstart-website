@@ -60,7 +60,7 @@
               >
             </div>
             <p class="created mt-2">
-              Created by
+              {{ 'course.created-by' | translate }}
               <a class="ms-1 trainer_info" routerLink="/profile/{{ course?.trainer?.id }}">{{
                 course?.trainer?.company_name
                   ? course?.trainer?.company_name
@@ -105,6 +105,7 @@
       *ngIf="course && course.type_id === CourseType.ONLINE"
       [course]="course"
       [isJoined]="isJoined"
+      (updated)="reloadCourse.emit()"
     ></us-course-content>
   </div>
 </div>

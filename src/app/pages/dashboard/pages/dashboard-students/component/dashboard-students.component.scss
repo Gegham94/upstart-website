@@ -1,4 +1,4 @@
-@import "src/assets/styles/variables/colors";
+@import 'src/assets/styles/variables/colors';
 @import 'src/assets/styles/mixins/for-breakpoint';
 
 .students {
@@ -7,14 +7,14 @@
   border-radius: 4px;
 
   &__header {
-    &-title{
+    &-title {
       font-weight: 500;
       font-size: 24px;
       line-height: 29px;
       color: $title-color;
     }
   }
-  &__list{
+  &__list {
     margin-top: 30px;
     display: flex;
     flex-wrap: wrap;
@@ -23,7 +23,7 @@
       justify-content: center;
     }
   }
-  &__not-data{
+  &__not-data {
     margin-top: 30px;
   }
 }

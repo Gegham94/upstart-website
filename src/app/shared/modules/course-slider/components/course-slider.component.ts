@@ -12,13 +12,14 @@ import {
 } from '@angular/core';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { isPlatformBrowser } from '@angular/common';
-import { ButtonTheme } from '../../../../shared/enums/button-theme.enum';
+import { ButtonTheme } from '../../../enums/button-theme.enum';
 import { PublicCourse } from 'src/app/shared/interfaces/courses/public-course.interface';
 import { CourseType } from 'src/app/shared/enums/course-type.enum';
 import { Currency } from 'src/app/shared/enums/currency';
 import { GlobalService } from '../../../services/global.service';
-import { filter, Subject, takeUntil } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { IsPreviewService } from 'src/app/shared/services/is-preview/is-preview.service';
+import { CoursesApiService } from '../../../services/courses/courses-api.service';
 
 @Component({
   selector: 'us-course-slider',
@@ -31,6 +32,8 @@ export class CourseSliderComponent implements AfterViewInit, OnChanges, OnDestro
 
   @Input()
   public slideToShow: number = 3;
+
+  private coursesSubscription$?: Subscription;
 
   @Input()
   public set updateCarousel(event: boolean) {
@@ -51,6 +54,9 @@ export class CourseSliderComponent implements AfterViewInit, OnChanges, OnDestro
 
   @Input()
   public show: string = 'courses';
+
+  @Input()
+  public isShowTitle: boolean = true;
 
   @Output()
   public addIntoBasket$: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -74,6 +80,7 @@ export class CourseSliderComponent implements AfterViewInit, OnChanges, OnDestro
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly globalService: GlobalService,
+    private readonly coursesApiService: CoursesApiService,
     @Inject('PLATFORM_ID') private readonly platformId: string,
     private isPreviewService: IsPreviewService,
   ) {
@@ -94,6 +101,10 @@ export class CourseSliderComponent implements AfterViewInit, OnChanges, OnDestro
   }
 
   public ngAfterViewInit(): void {
+    this.initSlider();
+  }
+
+  private initSlider(): void {
     this.carouselOptions = {
       slidesToShow: this.slideToShow,
       sliderToScroll: this.slideToScroll,
@@ -141,16 +152,18 @@ export class CourseSliderComponent implements AfterViewInit, OnChanges, OnDestro
   }
 
   private getCourses(): void {
-    this.globalService.getCoursesByLangList
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        filter((res) => res !== null),
-      )
-      .subscribe((res) => {
+    this.globalService.getCoursesByLangList.pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
+      if (res !== null) {
         this.dataToShow = res;
         this.translateType();
         this.loader = false;
-      });
+        this.changeDetectorRef.detectChanges();
+        this.initSlider();
+      } else {
+        this.coursesSubscription$?.unsubscribe();
+        this.coursesSubscription$ = this.coursesApiService.getCoursesByLang().subscribe();
+      }
+    });
   }
 
   private translateType() {}

@@ -1,14 +1,14 @@
-@import "src/assets/styles/variables/colors";
+@import 'src/assets/styles/variables/colors';
 
-.students{
-  &__courses{
+.students {
+  &__courses {
     background: $white;
     padding: 25px 18px 58px;
     border-radius: 4px;
   }
 
   &__header {
-    &-title{
+    &-title {
       font-weight: 500;
       font-size: 24px;
       line-height: 29px;
@@ -19,5 +19,4 @@
   &__courses-content {
     margin-top: 21px;
   }
-
 }

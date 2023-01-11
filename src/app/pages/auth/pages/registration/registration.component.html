@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="registration__form-keeper h-100">
+    <div class="registration__illustration d-none d-md-block">
+      <div class="left_content">
+        <p class="title">
+          <span class="bold">{{ 'auth.login.sign_in' | translate }}</span>
+          {{ 'auth.login.upstart' | translate }}
+        </p>
+        <p class="subtitle">
+          {{ 'auth.register.have_account' | translate
+          }}<a class="purple" routerLink="/auth/login">
+            {{ 'auth.register.login_here' | translate }}
+          </a>
+        </p>
+      </div>
+    </div>
+    <us-registration-form class="registration__form"></us-registration-form>
+    <p class="subtitle_mobile d-block d-md-none">
+      {{ 'auth.login.dont_account' | translate }}
+      <a class="purple" routerLink="/auth/login"> {{ 'auth.register.login_here' | translate }}</a>
+    </p>
+  </div>
+</div>

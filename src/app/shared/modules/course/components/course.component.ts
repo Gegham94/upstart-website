@@ -10,6 +10,7 @@ import { CourseCountService } from 'src/app/shared/services/course-count/course-
 import { FavoritesService } from 'src/app/shared/services/favorites/favorites.service';
 import { GlobalService } from 'src/app/shared/services/global.service';
 import { ButtonTheme } from '../../../enums/button-theme.enum';
+
 @Component({
   selector: 'us-course',
   templateUrl: './course.component.html',
@@ -21,6 +22,9 @@ export class CourseComponent {
 
   @Input()
   public hideBasketAndWishList: boolean = false;
+
+  @Input()
+  public expired: boolean = false;
 
   @Output()
   public removedFromWishList$: EventEmitter<boolean> = new EventEmitter<boolean>();

@@ -9,6 +9,11 @@ import { combineLatest } from 'rxjs';
 import { ResourceService } from '../../../../../../../../shared/services/resources/resource.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from '../../../../../../../../shared/components/confirmation-modal/components/confirmation-modal.component';
+import { CertificateComponent } from '../../../../../../../../shared/components/certificate/components/certificate.component';
+import { GlobalService } from '../../../../../../../../shared/services/global.service';
+import { DashboardLessonsModalComponent } from '../../modals/dashboard-lessons-modal/components/dashboard-lessons-modal.component';
+import { DashboardLessonsModalData } from '../../modals/dashboard-lessons-modal/interfaces/dashboard-lessons-modal-data.interface';
+import { DashboardLessonsModalResult } from '../../modals/dashboard-lessons-modal/interfaces/dashboard-lessons-modal-result.interface';
 
 @Component({
   selector: 'us-dashboard-course-information',
@@ -42,24 +47,7 @@ export class DashboardCourseInformationComponent implements OnInit {
     },
   ];
 
-  public readonly levelOptions: SelectOptions[] = [
-    {
-      displayName: 'All Levels',
-      value: 1,
-    },
-    {
-      displayName: 'Beginner',
-      value: 2,
-    },
-    {
-      displayName: 'Middle',
-      value: 3,
-    },
-    {
-      displayName: 'Advanced',
-      value: 4,
-    },
-  ];
+  public levelOptions: SelectOptions[] = [];
 
   public courseType!: CourseType;
 
@@ -83,12 +71,14 @@ export class DashboardCourseInformationComponent implements OnInit {
     private readonly translateService: TranslateService,
     private readonly resourceService: ResourceService,
     private readonly dialog: MatDialog,
+    private readonly globalService: GlobalService,
   ) {}
 
   public ngOnInit(): void {
     this.informationForm = this.formBuilder.group({
       language: new FormControl(this.translateService.currentLang === 'hy' ? 1 : 2),
       level: new FormControl(''),
+      certificate: new FormControl(false),
       whatWillLearn: new FormArray([new FormControl('')]),
       price: new FormControl({
         currency: 'usd',
@@ -229,10 +219,6 @@ export class DashboardCourseInformationComponent implements OnInit {
             displayName: el.title,
             value: el.id,
           })),
-          {
-            displayName: this.translateService.instant('dashboard.courses.add-resource'),
-            value: -1,
-          },
         ];
       });
       this.informationForm.addControl('link', new FormControl(''));
@@ -260,6 +246,7 @@ export class DashboardCourseInformationComponent implements OnInit {
           ? 1
           : 2,
         level: this.courseFormService.currentCourse.level ?? '',
+        certificate: !!this.courseFormService.currentCourse.certificate,
         price: {
           currency: this.courseFormService.currentCourse.currency,
           amount: this.courseFormService.currentCourse.price,
@@ -282,6 +269,28 @@ export class DashboardCourseInformationComponent implements OnInit {
         });
       }
     }
+
+    this.globalService.levelsListObservable.subscribe((levels) => {
+      this.levelOptions = Object.entries(levels).map(([key, value]) => {
+        return {
+          displayName: key,
+          value,
+        };
+      });
+    });
+  }
+
+  public openCertificateDialog(): void {
+    this.dialog.open(CertificateComponent, {
+      data: {
+        course: this.courseId,
+        type: '',
+        coursePassed: true,
+      },
+      panelClass: 'certificate-dialog',
+      width: '900px',
+      height: '600px',
+    });
   }
 
   public setPaidValue(isPaid: boolean): void {
@@ -332,6 +341,11 @@ export class DashboardCourseInformationComponent implements OnInit {
   public addLesson(): void {
     this.lessonGroupList.push(
       this.formBuilder.group({
+        title: new FormControl(
+          `${this.translateService.instant('dashboard.courses.lesson')} ${
+            this.lessonGroupList.length
+          }`,
+        ),
         enterDate: new FormControl(null),
         enterTime: new FormControl(null),
         duration: new FormControl(null),
@@ -353,6 +367,29 @@ export class DashboardCourseInformationComponent implements OnInit {
 
   public convertAbstractControlToFormControl(control: AbstractControl): FormControl {
     return control as FormControl;
+  }
+
+  public openLessonsModal(): void {
+    const dialogRef = this.dialog.open<
+      DashboardLessonsModalComponent,
+      DashboardLessonsModalData,
+      DashboardLessonsModalResult
+    >(DashboardLessonsModalComponent, {
+      width: '80vw',
+      height: '80vh',
+      panelClass: 'dashboard-lessons-modal__body',
+      data: {
+        lessonGroupListControls: this.lessonGroupListControls,
+        courseId: this.courseId,
+        courseType: this.courseType,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res?.isSave) {
+        this.save();
+      }
+    });
   }
 
   public get whatWillLearn(): FormArray {

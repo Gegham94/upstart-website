@@ -1,0 +1,462 @@
+<div class="registration__form">
+  <div class="form_content position-relative">
+    <div class="registration__title-keeper">
+      <p class="title">{{ 'auth.register.join_us' | translate }}</p>
+      <us-button
+        *ngIf="social"
+        [circle]="true"
+        (clicked)="closeRegistrationModal()"
+        icon="close"
+        [iconSize]="24"
+      ></us-button>
+    </div>
+    <div class="row tabs_style p-sm-0">
+      <div class="col-4 d-flex justify-content-start align-items-center">
+        <button
+          [class.active]="type === formTypeEnum.student"
+          class="tab_btns"
+          (click)="changeType(formTypeEnum.student)"
+        >
+          {{ 'auth.register.student' | translate }}
+        </button>
+      </div>
+      <div class="col-3 d-flex justify-content-start+ align-items-center">
+        <button
+          class="tab_btns"
+          [class.active]="type === formTypeEnum.trainer"
+          (click)="changeType(formTypeEnum.trainer)"
+        >
+          {{ 'auth.register.trainer' | translate }}
+        </button>
+      </div>
+      <div class="col-5 d-flex align-items-center">
+        <button
+          class="tab_btns"
+          [class.active]="type === formTypeEnum.training"
+          (click)="changeType(formTypeEnum.training)"
+        >
+          {{ 'auth.register.training' | translate }}
+        </button>
+      </div>
+    </div>
+    <ng-container
+      *ngTemplateOutlet="isStudent ? student : type === formTypeEnum.trainer ? trainer : training"
+    ></ng-container>
+    <us-button
+      class="disabled"
+      [disabled]="
+        (type === formTypeEnum.student && studentForm.invalid) ||
+        (type === formTypeEnum.trainer && trainerForm.invalid) ||
+        (type === formTypeEnum.training && trainingForm.invalid) ||
+        loader
+      "
+      [theme]="buttonTheme.primary"
+      (clicked)="submitForm()"
+      [loader]="loader"
+    >
+      {{ 'auth.register.sign_up' | translate }}
+    </us-button>
+  </div>
+</div>
+<ng-template #student>
+  <form [formGroup]="studentForm">
+    <div class="form_field">
+      <div class="mb-2">
+        <input
+          formControlName="firstName"
+          class="form-control"
+          placeholder="{{ 'auth.register.first_name' | translate }} *"
+          required
+        />
+        <div
+          class="errors_text"
+          *ngIf="fS['firstName'].errors?.['required'] && (fS['firstName'].dirty || fS['firstName'].touched)"
+        >
+          <p>{{ 'auth.errors.name' | translate }}</p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <input
+          formControlName="lastName"
+          class="form-control"
+          placeholder="{{ 'auth.register.last_name' | translate }} *"
+          required
+        />
+        <div
+          class="errors_text"
+          *ngIf="fS['lastName'].errors?.['required'] && (fS['lastName'].dirty || fS['lastName'].touched)"
+        >
+          <p>{{ 'auth.errors.last' | translate }}</p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <input
+          formControlName="phone"
+          class="form-control"
+          placeholder="{{ 'auth.register.phone' | translate }}"
+        />
+      </div>
+      <div class="mb-2">
+        <input
+          [ngClass]="{ error: studentForm.controls.email.errors?.['pattern'] && studentForm.controls.email.touched }"
+          formControlName="email"
+          type="email"
+          class="form-control"
+          placeholder="{{ 'auth.register.email' | translate }} *"
+          required
+        />
+        <div
+          class="errors_text"
+          *ngIf="fS['email'].errors?.['required'] && (fS['email'].dirty || fS['email'].touched)"
+        >
+          <p>{{ 'auth.errors.email' | translate }}</p>
+        </div>
+        <div class="errors_text" *ngIf="fS['email'].errors?.['pattern'] && fS['email'].touched">
+          <p>{{ 'auth.errors.email_correct' | translate }}</p>
+        </div>
+        <div class="errors_text" *ngIf="errorMessage">
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+      <div class="input-group mb-2" *ngIf="!social">
+        <input
+          formControlName="password"
+          type="{{ fieldTextType ? 'text' : 'password' }}"
+          class="form-control w-100"
+          placeholder="{{ 'auth.register.password' | translate }} *"
+          required
+        />
+
+        <img
+          *ngIf="!fieldTextType"
+          (click)="toggleFieldTextType()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/close_eye.svg"
+        />
+        <img
+          *ngIf="fieldTextType"
+          (click)="toggleFieldTextType()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/auth/show_eye.svg"
+        />
+        <div
+          class="errors_text"
+          *ngIf="fS['password'].errors?.['required'] && (fS['password'].dirty || fS['password'].touched)"
+        >
+          <p>{{ 'auth.errors.pass' | translate }}</p>
+        </div>
+        <div
+          class="errors_text"
+          *ngIf="fS['password'].errors?.['pattern'] && fS['password'].touched"
+        >
+          <p>{{ 'auth.errors.pass_lenght' | translate }}</p>
+        </div>
+      </div>
+      <div class="input-group mb-2" *ngIf="!social">
+        <input
+          formControlName="verifyPassword"
+          type="{{ verifyTextType ? 'text' : 'password' }}"
+          class="form-control w-100"
+          placeholder="{{ 'auth.register.verify_password' | translate }} *"
+          required
+        />
+        <img
+          *ngIf="!verifyTextType"
+          (click)="toggleEye()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/close_eye.svg"
+        />
+        <img
+          *ngIf="verifyTextType"
+          (click)="toggleEye()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/auth/show_eye.svg"
+        />
+        <div
+          class="errors_text"
+          *ngIf="fS['verifyPassword']?.errors?.['matching'] && fS['password'].value && fS['verifyPassword'].touched"
+        >
+          <p>{{ 'auth.errors.confirm' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+<ng-template #trainer>
+  <form [formGroup]="trainerForm">
+    <div class="form_field">
+      <div class="mb-2">
+        <input
+          formControlName="firstName"
+          class="form-control"
+          placeholder="{{ 'auth.register.first_name' | translate }} *"
+          required
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTr['firstName'].errors?.['required'] && (fTr['firstName'].dirty || fTr['firstName'].touched)"
+        >
+          <p>{{ 'auth.errors.name' | translate }}</p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <input
+          formControlName="lastName"
+          class="form-control"
+          placeholder="{{ 'auth.register.last_name' | translate }} *"
+          required
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTr['lastName'].errors?.['required'] && (fTr['lastName'].dirty || fTr['lastName'].touched)"
+        >
+          <p>{{ 'auth.errors.last' | translate }}</p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <input
+          formControlName="phone"
+          class="form-control"
+          placeholder="{{ 'auth.register.phone' | translate }}"
+        />
+      </div>
+      <div class="mb-2">
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control"
+          placeholder="{{ 'auth.register.email' | translate }} *"
+          required
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTr['email'].errors?.['required'] && (fTr['email'].dirty || fTr['email'].touched)"
+        >
+          <p>{{ 'auth.errors.email' | translate }}</p>
+        </div>
+        <div class="errors_text" *ngIf="fTr['email'].errors?.['pattern']">
+          <p>{{ 'auth.errors.email_correct' | translate }}</p>
+        </div>
+        <div class="errors_text" *ngIf="errorMessage">
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+      <div class="input-group mb-2" *ngIf="!social">
+        <input
+          formControlName="password"
+          type="{{ fieldTextType ? 'text' : 'password' }}"
+          class="form-control w-100"
+          placeholder="{{ 'auth.register.password' | translate }} *"
+          required
+        />
+        <img
+          *ngIf="!fieldTextType"
+          (click)="toggleFieldTextType()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/close_eye.svg"
+        />
+        <img
+          *ngIf="fieldTextType"
+          (click)="toggleFieldTextType()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/auth/show_eye.svg"
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTr['password'].errors?.['required'] && (fTr['password'].dirty || fTr['password'].touched)"
+        >
+          <p>{{ 'auth.errors.pass' | translate }}</p>
+        </div>
+        <div class="errors_text" *ngIf="fTr['password'].errors?.['pattern']">
+          <p>{{ 'auth.errors.pass_lenght' | translate }}</p>
+        </div>
+      </div>
+      <div class="input-group mb-2" *ngIf="!social">
+        <input
+          formControlName="verifyPassword"
+          type="{{ verifyTextType ? 'text' : 'password' }}"
+          class="form-control w-100"
+          placeholder="{{ 'auth.register.verify_password' | translate }} *"
+          required
+        />
+        <img
+          *ngIf="!verifyTextType"
+          (click)="toggleEye()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/close_eye.svg"
+        />
+        <img
+          *ngIf="verifyTextType"
+          (click)="toggleEye()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/auth/show_eye.svg"
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTr['verifyPassword']?.errors?.['matching'] && fTr['password'].value && fTr['verifyPassword'].touched"
+        >
+          <p>{{ 'auth.errors.confirm' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+<ng-template #training>
+  <form [formGroup]="trainingForm">
+    <div class="form_field">
+      <div class="mb-2">
+        <input
+          formControlName="firstName"
+          class="form-control"
+          placeholder="{{ 'auth.register.first_name' | translate }} *"
+          required
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTg['firstName'].errors?.['required'] && (fTg['firstName'].dirty || fTg['firstName'].touched)"
+        >
+          <p>{{ 'auth.errors.name' | translate }}</p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <input
+          formControlName="lastName"
+          class="form-control"
+          placeholder="{{ 'auth.register.last_name' | translate }} *"
+          required
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTg['lastName'].errors?.['required'] && (fTg['lastName'].dirty || fTg['lastName'].touched)"
+        >
+          <p>{{ 'auth.errors.last' | translate }}</p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <input
+          formControlName="identityNum"
+          class="form-control"
+          placeholder="{{ 'auth.register.tax_num' | translate }} *"
+          required
+          minlength="6"
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTg['identityNum'].errors?.['required'] && (fTg['identityNum'].dirty || fTg['identityNum'].touched)"
+        >
+          <p>{{ 'auth.errors.idenity' | translate }}</p>
+        </div>
+        <div class="errors_text" *ngIf="fTg['identityNum'].errors?.['pattern']">
+          <p>{{ 'auth.errors.idenity_num' | translate }}</p>
+        </div>
+        <div
+          class="errors_text"
+          *ngIf="(fTg['identityNum'].errors?.['minlength']?.['requiredLength']
+         || fTg['identityNum'].errors?.['maxlength']?.['requiredLength']) && (fTg['identityNum'].dirty
+         || fTg['identityNum'].touched)"
+        >
+          <p>{{ 'auth.errors.identity_lenght' | translate }}</p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <input
+          formControlName="trainingName"
+          class="form-control"
+          placeholder="{{ 'auth.register.training_name' | translate }} *"
+          required
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTg['trainingName'].errors?.['required'] && (fTg['trainingName'].dirty || fTg['trainingName'].touched)"
+        >
+          <p>{{ 'auth.errors.center' | translate }}</p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <input
+          formControlName="phone"
+          class="form-control"
+          placeholder="{{ 'auth.register.phone' | translate }}"
+        />
+      </div>
+      <div class="mb-2">
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control"
+          placeholder="{{ 'auth.register.email' | translate }} *"
+          required
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTg['email'].errors?.['required'] && (fTg['email'].dirty || fTg['email'].touched)"
+        >
+          <p>{{ 'auth.errors.email' | translate }}</p>
+        </div>
+        <div class="errors_text" *ngIf="fTg['email'].errors?.['pattern']">
+          <p>{{ 'auth.errors.email_correct' | translate }}</p>
+        </div>
+        <div class="errors_text" *ngIf="errorMessage">
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+      <div class="input-group mb-2" *ngIf="!social">
+        <input
+          formControlName="password"
+          type="{{ fieldTextType ? 'text' : 'password' }}"
+          class="form-control w-100"
+          placeholder="{{ 'auth.register.password' | translate }} *"
+          required
+        />
+        <img
+          *ngIf="!fieldTextType"
+          (click)="toggleFieldTextType()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/close_eye.svg"
+        />
+        <img
+          *ngIf="fieldTextType"
+          (click)="toggleFieldTextType()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/auth/show_eye.svg"
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTg['password'].errors?.['required'] && (fTg['password'].dirty || fTg['password'].touched)"
+        >
+          <p>{{ 'auth.errors.pass' | translate }}</p>
+        </div>
+        <div class="errors_text" *ngIf="fTg['password'].errors?.['pattern']">
+          <p>{{ 'auth.errors.pass_lenght' | translate }}</p>
+        </div>
+      </div>
+      <div class="input-group mb-2" *ngIf="!social">
+        <input
+          formControlName="verifyPassword"
+          type="{{ verifyTextType ? 'text' : 'password' }}"
+          class="form-control w-100"
+          placeholder="{{ 'auth.register.verify_password' | translate }} *"
+          required
+        />
+        <img
+          *ngIf="!verifyTextType"
+          (click)="toggleEye()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/close_eye.svg"
+        />
+        <img
+          *ngIf="verifyTextType"
+          (click)="toggleEye()"
+          class="close_eye"
+          src="../../../../../assets/images/icons/auth/show_eye.svg"
+        />
+        <div
+          class="errors_text"
+          *ngIf="fTg['verifyPassword']?.errors?.['matching'] && fTg['password'].value && fTg['verifyPassword'].touched"
+        >
+          <p>{{ 'auth.errors.confirm' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>

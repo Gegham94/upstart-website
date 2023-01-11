@@ -6,7 +6,20 @@
   </ng-template>
 </div>
 <div class="slider" [hidden]="isExpanded">
+  <div class="slider__form-row">
+    <us-checkbox
+      [(ngModel)]="isFree"
+      (ngModelChange)="paidStateChange('free', $event)"
+      [label]="'home.courses.free' | translate"
+    ></us-checkbox>
+    <us-checkbox
+      [(ngModel)]="isPaid"
+      (ngModelChange)="paidStateChange('paid', $event)"
+      [label]="'home.courses.paid' | translate"
+    ></us-checkbox>
+  </div>
   <ngx-slider
+    *ngIf="isPaid"
     [(value)]="minValue"
     [(highValue)]="maxValue"
     [options]="options"

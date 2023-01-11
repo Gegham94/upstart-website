@@ -52,6 +52,25 @@
           ></us-input>
         </div>
       </ng-container>
+      <div
+        class="course-information__form-row course-information__form-row_certificate course-information__form-row_labeled"
+      >
+        <span class="course-information__form-row-label">
+          {{ 'dashboard.courses.certificate' | translate }}
+        </span>
+        <us-checkbox
+          [label]="'dashboard.courses.certificate' | translate"
+          formControlName="certificate"
+        ></us-checkbox>
+        <us-button
+          *ngIf="informationForm.value.certificate"
+          class="course-information__certificate-button"
+          [theme]="buttonTheme.primary"
+          (clicked)="openCertificateDialog()"
+        >
+          Edit Certificate
+        </us-button>
+      </div>
       <div class="course-information__form-row course-information__form-row_labeled">
         <span class="course-information__form-row-label">
           {{ 'dashboard.courses.course-price' | translate }}
@@ -115,11 +134,22 @@
     [resourceOptions]="resourcesOptions"
   ></us-dashboard-course-section-list>
   <ng-template #lessonsList>
-    <us-dashboard-course-lesson-list
-      [type]="courseType"
-      [courseId]="courseId"
-      [lessonsForms]="lessonGroupListControls"
-    ></us-dashboard-course-lesson-list>
+    <us-button
+      [theme]="buttonTheme.primary"
+      class="course-information__action"
+      autoSetSuffix="primary"
+      icon="edit_white"
+      [iconSize]="18"
+      (clicked)="openLessonsModal()"
+    >
+      {{ 'dashboard.courses.edit-lessons' | translate }}
+    </us-button>
+    <span
+      class="course-information__lessons-error"
+      *ngIf="lessonGroupList.errors && (lessonGroupList.errors | keyvalue).length > 0"
+    >
+      {{ 'dashboard.courses.lessons-error' | translate }}
+    </span>
   </ng-template>
   <div class="course-information__will-learn">
     <h3 class="course-information__will-learn-title">
@@ -152,7 +182,7 @@
     <us-button
       class="course-information__action"
       [theme]="buttonTheme.primary"
-      [disabled]="publishDisabled"
+      [disabled]="publishDisabled && false"
       (clicked)="publish()"
       [usTooltip]="
         publishDisabled

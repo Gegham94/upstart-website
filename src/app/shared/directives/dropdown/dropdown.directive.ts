@@ -19,7 +19,7 @@ import { HorizontalFlexiblePositions, VerticalFlexiblePositions } from './consta
 })
 export class DropdownDirective implements OnInit {
   @Input()
-  public tooltipContent!: TemplateRef<unknown> | ComponentType<unknown>;
+  public tooltipContent?: TemplateRef<unknown> | ComponentType<unknown> | null;
 
   @Input()
   public tooltipOrientation?: TooltipOrientationEnum = TooltipOrientationEnum.vertical;
@@ -60,7 +60,7 @@ export class DropdownDirective implements OnInit {
 
   @HostListener('click')
   private show(): void {
-    if (this.overlayRef) {
+    if (this.overlayRef && this.tooltipContent) {
       this.overlayRef.detach();
       let containerPortal: TemplatePortal<unknown> | ComponentPortal<unknown>;
 
@@ -86,7 +86,7 @@ export class DropdownDirective implements OnInit {
     }
   }
 
-  @HostListener('window:scroll', ['$event.target'])
+  @HostListener('document:wheel')
   private hide(): void {
     if (this.overlayRef) {
       this.overlayRef.detach();

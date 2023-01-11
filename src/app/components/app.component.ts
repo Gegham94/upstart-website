@@ -114,10 +114,6 @@ export class AppComponent implements OnInit {
     this.languagesService.getLanguages().subscribe(() => {
       this.loadingService.hide();
     });
-
-    this.courseService.getCoursesByLang().subscribe(() => {
-      this.loadingService.hide();
-    });
   }
 
   public getLang(): string {

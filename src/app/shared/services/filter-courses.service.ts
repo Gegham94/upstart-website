@@ -3,7 +3,6 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs';
 import { ApiResponse } from './../interfaces/api/api-response.interface';
-import { TranslateService } from '@ngx-translate/core';
 import { CourseGlobalFilter } from './../interfaces/courses/course-global-filter.interface';
 import { PublicCourse } from '../interfaces/courses/public-course.interface';
 const API_URL = environment.apiUrl;
@@ -14,7 +13,7 @@ const API_URL = environment.apiUrl;
 export class FilterCoursesService {
   public lang: string = '';
 
-  constructor(private http: HttpClient, private readonly translateService: TranslateService) {}
+  constructor(private http: HttpClient) {}
 
   // Global API for Courses filter
   public getFilteredCoursesData(
@@ -23,7 +22,7 @@ export class FilterCoursesService {
     search_text?: string,
     sort?: string,
   ) {
-    let params = new HttpParams().set('current_page', currentPage!);
+    let params = new HttpParams().set('current_page', currentPage);
     if (search_text) {
       params = params.append('search_text', search_text);
     } else if (sort) {
@@ -31,9 +30,12 @@ export class FilterCoursesService {
     }
 
     Object.entries(filter).forEach(([key, value]) => {
-      if (key === 'price' && value.ids.length > 0) {
-        params = params.append('price_from', filter.price.ids[0]);
-        params = params.append('price_to', filter.price.ids[1]);
+      if (key === 'price' && value.ids && value.ids.length > 0) {
+        if (filter.price.ids?.[0] !== undefined)
+          params = params.append('price_from', filter.price.ids[0]);
+
+        if (filter.price.ids?.[1] !== undefined)
+          params = params.append('price_to', filter.price.ids[1]);
       } else if (value.ids?.length) {
         params = params.append(key, value.ids.join(','));
       }

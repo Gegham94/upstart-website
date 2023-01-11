@@ -1,5 +1,9 @@
 @import "src/assets/styles/variables/colors";
 
+.container {
+  padding: 0 230px;
+}
+
 .trainer{
   min-height: 500px;
     .title{
@@ -18,16 +22,16 @@
         min-height: 170px;
         margin-top: 50px;
       .profile{
-        margin-top: 100px;
+        margin-top: 60px;
       }
     }
     .about-trainer{
-        margin-top:100px;
+        margin-top: 40px;
         .links{
-            justify-content: start !important;
+            justify-content: center !important;
             border: 1px solid $light-purple;
             padding: 24px;
-            margin-top: 28px;
+            margin-top: 42px;
             .link-list{
                 padding: 0;
                 margin: 0;

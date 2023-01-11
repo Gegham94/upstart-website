@@ -7,7 +7,7 @@
     ></ngx-skeleton-loader>
   </div>
   <div class="course-related__container">
-    <h3 [class.pb-3]="isPreview" class="ps-4 pt-3 course-related__title">
+    <h3 [class.pb-3]="isPreview" class="ps-4 pt-3 course-related__title" *ngIf="isShowTitle">
       {{ 'course.related_courses' | translate }}
     </h3>
     <div *ngIf="!isPreview" class="course-related__slider-keeper">

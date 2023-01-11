@@ -77,7 +77,7 @@
       </div>
     </div>
     <span *ngIf="!hasHeadline" class="user-email">{{ userInfo?.email }}</span>
-    <span *ngIf="hasHeadline" class="user-email">{{ userInfo?.headline }}</span>
+    <!-- <span *ngIf="hasHeadline" class="user-email">{{ userInfo?.headline }}</span> -->
     <span *ngIf="imagePath && deleteImg" (click)="deleteAvatar()" class="about-user__delete">
       {{ 'trainer_profile.delete-img' | translate }}
     </span>

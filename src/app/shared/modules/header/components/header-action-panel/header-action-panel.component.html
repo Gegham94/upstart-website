@@ -1,72 +1,59 @@
 <div class="header-action">
   <ng-container *ngIf="loggedIn; else unauthorizedAction">
     <div class="header-action__authorized">
-      <div class="card-count-body">
+      <div *ngIf="!dashboard" class="card-count-body">
         <us-icon name="heart" (click)="goFavorites()"></us-icon>
         <span class="header-action__card-count" *ngIf="userInfo && coursesInWishList > 0">
           {{ coursesInWishList }}
         </span>
       </div>
-      <div class="card-count-body">
+      <div *ngIf="!dashboard" class="card-count-body">
         <us-icon name="cart" (click)="goBasket()"></us-icon>
         <span class="header-action__card-count" *ngIf="userInfo && coursesInBasket > 0">
           {{ coursesInBasket }}
         </span>
       </div>
       <div
-        *ngIf="!hasNewNotification"
         [class.notification-wrapp]="isHover"
         (click)="showNotificationList()"
         usClickOutside
         (clickOutside)="hideNotificationList()"
       >
-        <us-icon name="bell"> </us-icon>
+        <us-icon [name]="!hasNewNotification ? 'bell' : 'notification-bell'"> </us-icon>
         <div class="notification-block" *ngIf="isHover">
           <us-header-notification
-            [notifications]="allNotifications"
+            (unreadCountEmmit)="changeUnreadCount($event)"
+            [unreadCountNoti]="unreadCount"
             (hideNotificationsList)="hideNotificationList()"
           ></us-header-notification>
         </div>
-      </div>
-
-      <div
-        *ngIf="hasNewNotification"
-        [class.notification-wrapp]="isHover"
-        (click)="showNotificationList()"
-        usClickOutside
-        (clickOutside)="hideNotificationList()"
-      >
-        <us-icon name="notification-bell"> </us-icon>
-        <div class="notification-block" *ngIf="isHover">
-          <us-header-notification
-            [notifications]="allNotifications"
-            (hideNotificationsList)="hideNotificationList()"
-          ></us-header-notification>
-        </div>
-      </div>
-
-      <div
-        *ngIf="!nameFirstLetters"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasExample"
-        aria-controls="offcanvasExample"
-        #sideMenuToggler
-      >
-        <img class="profile-icon__avatar" [src]="userInfo?.avatar" alt="Avatar" />
-      </div>
-      <div
-        *ngIf="nameFirstLetters"
-        class="profile-icon"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasExample"
-        aria-controls="offcanvasExample"
-        #sideMenuToggler
-      >
-        <span class="profile-icon__text">{{ nameFirstLetters }}</span>
       </div>
     </div>
   </ng-container>
-  <us-header-language></us-header-language>
+  <us-header-language *ngIf="!dashboard"></us-header-language>
+  <ng-container *ngIf="!dashboard && loggedIn">
+    <div
+      *ngIf="!nameFirstLetters"
+      class="user_avatar"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasExample"
+      aria-controls="offcanvasExample"
+      #sideMenuToggler
+    >
+      <img class="profile-icon__avatar" [src]="userInfo?.avatar" alt="Avatar" />
+      <span class="mat-select-arrow"></span>
+    </div>
+    <div
+      *ngIf="nameFirstLetters"
+      class="profile-icon"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasExample"
+      aria-controls="offcanvasExample"
+      #sideMenuToggler
+    >
+      <span class="profile-icon__text">{{ nameFirstLetters }}</span>
+    </div>
+  </ng-container>
 </div>
 
 <div
@@ -74,7 +61,7 @@
   tabindex="-1"
   id="offcanvasExample"
   aria-labelledby="offcanvasExampleLabel"
-  *ngIf="loggedIn"
+  *ngIf="loggedIn && !dashboard"
 >
   <div>
     <div class="d-flex user__header">

@@ -39,34 +39,33 @@
       [name]="activeIcon"
     ></us-icon>
   </div>
-  <div *ngIf="errors" class="input__error-block">
+  <div *ngIf="errors && hasErrors" class="input__error-block">
     <span *ngFor="let error of errors | keyvalue">
-      <ng-container *ngIf="error.key === 'custom'; else errorText">
-        {{ error.value }}
-      </ng-container>
-      <ng-template #errorText>
-        <ng-container *ngIf="error.key === 'youtube'">
+      <ng-container [ngSwitch]="error.key">
+        <ng-container *ngSwitchCase="'custom'">
+          {{ error.value }}
+        </ng-container>
+        <ng-container *ngSwitchCase="'youtube'">
           {{ 'global.input.wrong_youtube_url' | translate }}
         </ng-container>
-        <div
-          *ngIf="getControlName?.dirty && getControlName.touched && getControlName?.errors"
-          class="input__error-block"
-        >
-          <span *ngIf="getControlName.errors?.['required']">{{
-            'global.input.field_required' | translate
-          }}</span>
-          <span *ngIf="getControlName.errors?.['minlength']"
-            >{{ 'global.input.the_field' | translate }}
-            {{ getControlName.errors?.['minlength']['requiredLength'] }}
-            {{ 'global.input.now_length' | translate }}
-            {{getControlName.errors?.['minlength']['actualLength']}}</span
-          >
-          <span
-            *ngIf="getControlName.errors?.['pattern'] && !getControlName.errors?.['minlength']"
-            >{{ 'global.input.wrong_password' | translate }}</span
-          >
-        </div>
-      </ng-template>
+        <ng-container *ngSwitchCase="'required'">
+          {{ 'global.input.field_required' | translate }}
+        </ng-container>
+        <ng-container *ngSwitchCase="'minlength'">
+          {{ 'global.input.the_field' | translate }}
+          {{ getChildValidationError(error.value, 'requiredLength') }}
+          {{ 'global.input.now_length' | translate }}
+          {{ getChildValidationError(error.value, 'actualLength') }}
+        </ng-container>
+        <ng-container *ngSwitchCase="'pattern'">
+          <ng-container *ngIf="errorList; else notList">
+            {{ errorList | translate }}
+          </ng-container>
+          <ng-template #notList>
+            {{ 'global.input.wrong_password' | translate }}
+          </ng-template>
+        </ng-container>
+      </ng-container>
     </span>
   </div>
 </label>

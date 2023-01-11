@@ -1,3 +1,4 @@
+import { ScrollTopModule } from '../../shared/components/scroll-top/scroll-top.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,6 +17,7 @@ import { NotificationsComponent } from './notifications.component';
     TranslateModule,
     IconModule,
     NgxSkeletonLoaderModule,
+    ScrollTopModule,
   ],
   providers: [],
 })

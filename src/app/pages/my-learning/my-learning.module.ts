@@ -10,6 +10,7 @@ import { CourseModule } from 'src/app/shared/modules/course/course.module';
 import { StarRatingModule } from 'src/app/shared/components/star-rating/star-rating.module';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ScrollTopModule } from 'src/app/shared/components/scroll-top/scroll-top.module';
 
 @NgModule({
   declarations: [MyLearningComponent],
@@ -23,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     StarRatingModule,
     PipesModule,
     MatProgressSpinnerModule,
+    ScrollTopModule,
   ],
 })
 export class MyLearningModule {}

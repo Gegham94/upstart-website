@@ -35,6 +35,7 @@
     "footer": {
       "main-title": "Get In Touch",
       "description": "the quick fox jumps over the lazy dog",
+      "copyright": "Copyright ©2022 All rights reserved, Upstart",
       "company-info": {
         "title": "Company info",
         "about-us": "About Us",
@@ -104,7 +105,8 @@
       "the_field": "The field must be at least",
       "now_length": "characters. Now length",
       "wrong_password": "Wrong password",
-      "wrong_youtube_url": "Must be YouTube link"
+      "wrong_youtube_url": "Must be YouTube link",
+      "invalid_data": "Invalid data"
     },
     "modal": {
       "desc_for_login": "Please login to create a review"
@@ -138,10 +140,29 @@
       "question_title": "Question",
       "next": "Next",
       "prev": "Previous",
-      "finish": "Finish"
+      "finish": "Finish",
+      "ok": "Okay"
     },
     "joined": "You are successfully Joined to this course",
-    "pass_quiz": "Your answers accepted"
+    "pass_quiz": "Your answers accepted",
+    "stats": {
+      "see_all": "See all",
+      "see_less": "See less",
+      "no_data_wish_list": "There are no courses added in wish list",
+      "no_data_basket": "There are not courses added in basket",
+      "in_basket": "In basket",
+      "courses": "courses",
+      "total": "total",
+      "users": "users",
+      "in_wish_list": "in wish list",
+      "title": "Stats",
+      "trainer": "Trainer",
+      "students": "Students"
+    },
+    "email_subscribe": {
+      "success": "Your subscribed successfully",
+      "ok": "Okay"
+    }
   },
 
   "basket": {
@@ -165,14 +186,13 @@
       "min": "min",
       "trainer-name": "Trainer name",
       "add-to-card": "Add to cart",
-      "remove-from-card": "Remove from card",
+      "remove-from-card": "Remove from cart",
       "remove-from-wishlist": "Remove from wishlist",
       "add-to-wishlist": "Add to wishlist"
     }
   },
   "favorites": {
-    "title": "My learning",
-    "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    "title": "Favorites",
     "success": "Course successfuly addeded to wish list",
     "error": "You already have this course into your favorites",
     "remove-success": "Course removed from wishlist successfully",
@@ -205,7 +225,9 @@
       "price": "Price",
       "sort_by": "Sort by",
       "newest": "Newest",
-      "highest": "Highest Rated"
+      "highest": "Highest Rated",
+      "free": "Free",
+      "paid": "Paid"
     },
     "top-categories": {
       "title": "Top categories"
@@ -221,12 +243,16 @@
       "description": "Problems trying to resolve the conflict between \nthe two major realms of Classical physics: Newtonian mechanics ",
       "email": "Your Email",
       "subscribe": "Subscribe"
+    },
+    "partners": {
+      "title": "This platform is implemented by UEICT within the framework of RECONOMY with financial support from the Swedish International Development Cooperation Agency (Sida). RECONOMY is an inclusive and green economic development program implemented by HELVETAS Swiss Intercorporation in the Eastern Partnership and the WesternBalkan countries."
     }
   },
   "course": {
     "title": "Course Details",
     "reviews": "reviews",
     "review": "review",
+    "created-by": "Created by",
     "requirements": "Requirements",
     "you-will-learn": "You will learn",
     "description": "Description",
@@ -251,11 +277,19 @@
       "beginner": "Beginner",
       "advanced": "Advanced"
     },
+    "past": "Past",
     "paid-certificate": "Paid Certificate Available",
     "max-participants": "Max participants"
   },
   "courses": {
-    "title": "Courses"
+    "title": "Courses",
+    "statuses": {
+      "all": "All",
+      "draft": "Draft",
+      "under-review": "Under Review",
+      "publish": "Publish",
+      "declined": "Declined"
+    }
   },
   "auth": {
     "login": {
@@ -292,11 +326,14 @@
     },
     "reset": {
       "title": "Reset Password",
-      "res_password": "Reset your password",
+      "reset": "Reset",
+      "password": "Password",
+      "confirm_password": "Confirm Password",
       "res_text": "Enter the email address associated with your account and we'll send you a link to reset your password.",
       "continue": "Continue",
       "dont_account": "Don't have an account?",
-      "sign_up": "Sign Up"
+      "sign_up": "Sign Up",
+      "success": "Successfully changed password"
     },
     "errors": {
       "name": "Name is required.",
@@ -346,6 +383,9 @@
       "save-next": "Save & Next",
       "select-language": "Select Language",
       "select-level": "Select Level",
+      "edit-lessons": "Edit Lessons",
+      "lessons-error": "The lesson list includes validation problems",
+      "lessons-modal-title": "Edit lessons",
       "what-will-students": "What will students learn in your course?",
       "add-what-will-students": "Add what Will Your Students Learn",
       "add-more": "Add more",
@@ -376,6 +416,7 @@
       "start-time": "Start Time",
       "enter-duration": "Enter Duration",
       "quiz": "Quiz",
+      "question": "Question",
       "add-question": "Add question",
       "insert-question": "Insert question",
       "add-answers": "Add Answers",
@@ -428,12 +469,13 @@
       "course-publication": "Course publication",
       "online": "Online",
       "offline": "Offline",
-      "online-webinar": "Online Webinar",
+      "online-webinar": "Webinar",
       "consultation": "Consultation",
       "sub-title-not-set": "[Sub title not set]",
       "saved-toast": "Saved Successfully",
       "published-toast": "Published Successfully",
       "edit_certificate": "Edit certificate",
+      "certificate": "Certificate",
       "paid": "Paid",
       "free": "Free",
       "add-resource": "Add Resource",
@@ -441,7 +483,11 @@
         "title": "Are you sure want to publish course?",
         "description": "Confirmation of the action will send the course you created for verification, during which you will not be able to edit or delete the course."
       },
-      "download_certificate": "Download Certificate"
+      "published_success": "Your course sent to moderators for validation. Process will take  24 hour, you will be notified about your course's status updates.",
+      "download_certificate": "Download Certificate",
+      "not_certificate": "You have not completed the course yet, please complete the course and try again",
+      "decline_title": "Course publish request is Declined",
+      "no_lists": "No lists"
     },
     "footer": {
       "made": "Made by BrainFors"
@@ -481,7 +527,7 @@
     "course_type": {
       "online": "Online",
       "offline": "Offline",
-      "online_webinar": "Online Webinar",
+      "online_webinar": "Webinar",
       "online_courses": "Online Courses",
       "consultation": "Consultation"
     },
@@ -542,6 +588,7 @@
     "student": "Student"
   },
   "learnings": {
+    "title": "My learnings",
     "no_data": "Oops you have not purchases yet"
   },
   "course-content": {
@@ -551,10 +598,32 @@
     "quizes": "Quizes",
     "course_content": "Course content",
     "question": "Question",
-    "lesson": "Lesson"
+    "lesson": "Lesson",
+    "quiz_answer": "Your Quiz Answers",
+    "passed": "passed",
+    "test_passed": "You already passed this quiz"
   },
   "test": {
     "newest": "Newest",
     "highest": "Highest Rated"
+  },
+  "warning": {
+    "warning_message": "Your course was declined by moderator. Please update your course and then re publish it In Edit course page you will see declined reasons."
+  },
+  "toast-messages": {
+    "update": "Updated Successfully",
+    "success": "Success",
+    "password-update": "Password updated successfully",
+    "password-confirmed": "Password confirmed",
+    "password-invalid": "Invalid password",
+    "section-created": "Section successfully created!",
+    "section-update": "Successfully updated Section!",
+    "section-removed": "Successfully removed Section!",
+    "question-update": "Successfully updated Question.",
+    "quiz-update": "Successfully updated Quiz!",
+    "lesson-update": "Successfully updated Lesson!",
+    "lesson-deleted": "Lesson deleted successfully",
+    "course-deleted": "Course Successfully Deleted!",
+    "request-error": "Error request"
   }
 }

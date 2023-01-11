@@ -15,13 +15,13 @@
     font-weight: 500;
     line-height: 21px;
     min-height: 28px;
-    span{
-      &::after{
-        content: "|";
+    span {
+      &::after {
+        content: '|';
         margin: 0 5px;
       }
-      &:last-child{
-        &::after{
+      &:last-child {
+        &::after {
           content: none;
         }
       }
@@ -68,7 +68,7 @@
     &-description {
       letter-spacing: 0.04em;
     }
-    &-req{
+    &-req {
       margin-right: 5px;
     }
   }
@@ -87,9 +87,9 @@
       }
     }
   }
-  &__will-learn-side{
+  &__will-learn-side {
     width: 50%;
-    &:first-child{
+    &:first-child {
       margin-right: 20px;
     }
   }
@@ -140,43 +140,40 @@
     margin-bottom: 8px;
     color: $black;
   }
-  .show-more{
+  .show-more {
     font-weight: 600;
     color: $main;
     display: flex;
     align-items: center;
     margin-top: 15px;
     position: relative;
-    &::before{
+    &::before {
       content: '';
       display: block;
       position: absolute;
       bottom: 0;
       width: 100%;
       height: 50px;
-      background: rgb(255,255,255);
-      background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+      background: rgb(255, 255, 255);
+      background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
       transform: translateY(-30px);
       z-index: 1;
     }
-    &.active{
-      .icon{
+    &.active {
+      .icon {
         transform: rotate(180deg);
       }
 
-      &::before{
+      &::before {
         display: none;
       }
-
-
     }
-    .icon{
-      transition: all .5s;
+    .icon {
+      transition: all 0.5s;
       margin-left: 6px;
     }
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
-
 }

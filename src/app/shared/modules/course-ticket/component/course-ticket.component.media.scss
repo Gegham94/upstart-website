@@ -100,3 +100,9 @@
     }
     }
     }
+
+    @include for-breakpoint(mobile) {
+      .title {
+        width: 64%;
+      }
+    }

@@ -17,13 +17,17 @@
     </div>
 
     <div class="courses__body">
-      <div class="courses__body-left-side col-3" [ngClass]="{ close_togglebar: isColapsed }">
+      <div
+        class="courses__body-left-side col-3"
+        [ngClass]="{ close_togglebar: isColapsed }"
+        *ngIf="!isMobile"
+      >
         <div class="togglebar">
           <ng-container *ngFor="let label of labeles">
             <us-togglebar
               [label]="label"
               (selectFilter)="selectFilter($event)"
-              [selectedCategoryId]="label === 'Topic' ? selectedCategoryId : ''"
+              [selectedCategoryId]="label === 'Topic' ? selectedCategoryIds : []"
             ></us-togglebar>
           </ng-container>
           <us-range-slider [label]="'Price'" (selectFilter)="selectFilter($event)">
@@ -56,3 +60,26 @@
     </div>
   </div>
 </div>
+
+<div
+  class="courses__body-left-side mobile"
+  [ngClass]="{ mobile_close: isColapsed }"
+  *ngIf="isMobile"
+>
+  <div class="mobile-header">
+    <us-icon (click)="toggleFilter()" class="close-icon" name="close"></us-icon>
+    <p class="mobile-header__text">{{ 'home.courses.filter' | translate }}</p>
+  </div>
+  <div class="togglebar mobile-togglebar">
+    <ng-container *ngFor="let label of labeles">
+      <us-togglebar
+        [label]="label"
+        (selectFilter)="selectFilter($event)"
+        [selectedCategoryId]="label === 'Topic' ? selectedCategoryIds : []"
+      ></us-togglebar>
+    </ng-container>
+    <us-range-slider [label]="'Price'" (selectFilter)="selectFilter($event)"> </us-range-slider>
+  </div>
+</div>
+<div class="backdrop" [class.backdrop_toggled]="!isColapsed && isMobile"></div>
+<us-scroll-top></us-scroll-top>

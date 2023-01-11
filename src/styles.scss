@@ -41,3 +41,11 @@ strong {
   background: $main;
   border-radius: 10px;
 }
+
+input {
+    color: black !important;
+    &::placeholder{
+      color: #cecdcd !important;
+      font-size: 12px !important;
+    }
+}

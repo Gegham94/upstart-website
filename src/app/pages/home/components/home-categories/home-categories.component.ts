@@ -30,7 +30,11 @@ export class HomeCategoriesComponent implements OnInit, OnDestroy {
   }
 
   public navigate(event: CategoriesInterface) {
-    this.router.navigate([`/courses/${event.id}`]);
+    this.router.navigate([`/courses`], {
+      queryParams: {
+        categories: event.id,
+      },
+    });
   }
 
   public ngOnDestroy(): void {

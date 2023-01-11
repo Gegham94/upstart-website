@@ -30,6 +30,16 @@
     align-items: center;
   }
 
+  &__action-avatar{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .mat-select-arrow{
+      cursor: pointer;
+      color: white;
+    }
+  }
+
   &__sidebar-action {
     transform: scaleX(-1);
     transition: transform 0.2s ease-in-out;

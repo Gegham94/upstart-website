@@ -24,6 +24,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  width: 100%;
 
   &:hover {
     transform: translateY(-4px);
@@ -33,7 +34,8 @@
     display: flex;
     align-items: center;
     border-radius: 8px;
-    width: 151px;
+    min-width: 151px;
+    width: 0;
     margin-right: 13px;
     cursor: pointer;
   }
@@ -52,11 +54,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    &-right{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-end;
+
+    &-left{
+      width: 100%;
     }
   }
 
@@ -86,6 +86,17 @@
     letter-spacing: 0.05em;
     text-transform: capitalize;
     color: $main;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    &-keeper {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
     &-category-title{
       display: flex !important;
       flex-direction: row !important;
@@ -102,6 +113,8 @@
   }
 
   &__description {
+    max-width: 623px;
+    height: 40px;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
@@ -109,7 +122,7 @@
     color: $light-grey-text;
     margin-bottom: 9px;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -161,9 +174,15 @@
 
   &__details {
     display: flex;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    &-keeper {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
     &-element {
       display: flex;
       align-items: center;

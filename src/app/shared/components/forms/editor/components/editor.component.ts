@@ -39,6 +39,9 @@ export class EditorComponent implements OnChanges, ControlValueAccessor {
   public placeholder?: string = '';
 
   @Input()
+  public insideModal?: boolean = false;
+
+  @Input()
   public label?: string = '';
 
   @Input()
@@ -123,7 +126,8 @@ export class EditorComponent implements OnChanges, ControlValueAccessor {
       contentsCss: [
         'body { font-family: Montserrat, Helvetica, sans-serif; font-size: 14px; color: #333; margin: 20px;' +
           'line-height: 1.6;' +
-          'word-wrap: break-word; }',
+          'word-wrap: break-word;}',
+        'body::before{font-size: 12px; font-weight: 400; color: #cecdcd;}',
       ],
       removeButtons:
         'Source,Save,Templates,NewPage,Preview,Print,Cut,Copy,Paste,PasteFromWord,PasteText,Redo,Undo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,RemoveFormat,CopyFormatting,NumberedList,BulletedList,Outdent,Indent,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Anchor,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Iframe,Smiley,Styles,Format,Font,FontSize,BGColor,TextColor,Maximize,ShowBlocks,About',

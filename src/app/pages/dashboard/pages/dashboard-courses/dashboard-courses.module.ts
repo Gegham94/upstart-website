@@ -20,6 +20,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { SelectModule } from '../../../../shared/components/select/select.module';
 import { ClickOutsideModule } from '../../../../shared/directives/click-outside/click-outside.module';
+import { WarningMessageModule } from '../../../../shared/components/warning-message/warning-message.module';
+import { DashboardLessonsModalModule } from './pages/dashboard-create-course/modals/dashboard-lessons-modal/dashboard-lessons-modal.module';
 
 @NgModule({
   declarations: [DashboardCoursesComponent, DashboardCourseComponent],
@@ -39,6 +41,8 @@ import { ClickOutsideModule } from '../../../../shared/directives/click-outside/
     NgxPaginationModule,
     SelectModule,
     ClickOutsideModule,
+    WarningMessageModule,
+    DashboardLessonsModalModule,
   ],
   providers: [CourseFormService, FileUploadService],
 })

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, QueryList, ViewChildren } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ButtonTheme } from '../../../../../../../../shared/enums/button-theme.enum';
 import { QuizApiService } from '../../../../../../../../shared/services/quiz-api.service';
@@ -8,13 +8,14 @@ import { SectionElementType } from '../../enums/section-element-type.enum';
 import { Quiz } from '../../../../../../../../shared/interfaces/quiz.interface';
 import { ApiResponse } from '../../../../../../../../shared/interfaces/api/api-response.interface';
 import { AccordionComponent } from '../../../../../../../../shared/components/accordion/components/accordion.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'us-dashboard-course-quiz',
   templateUrl: './dashboard-course-quiz.component.html',
   styleUrls: ['./dashboard-course-quiz.component.scss'],
 })
-export class DashboardCourseQuizComponent implements OnInit {
+export class DashboardCourseQuizComponent {
   public readonly buttonTheme = ButtonTheme;
 
   public editMode: boolean = true;
@@ -41,11 +42,8 @@ export class DashboardCourseQuizComponent implements OnInit {
     private readonly quizApiService: QuizApiService,
     private readonly courseFormService: CourseFormService,
     private readonly toastrService: ToastrService,
+    private translateService: TranslateService,
   ) {}
-
-  public ngOnInit(): void {
-    this.addQuestionField();
-  }
 
   public addQuestionField(): void {
     if (!this.quizForm.get('questions')) {
@@ -57,6 +55,7 @@ export class DashboardCourseQuizComponent implements OnInit {
               {
                 question: new FormControl('', Validators.required),
                 multiple: new FormControl(false),
+                isOpen: new FormControl(true),
                 answerList: new FormArray([
                   new FormGroup({
                     text: new FormControl('', Validators.required),
@@ -76,6 +75,7 @@ export class DashboardCourseQuizComponent implements OnInit {
           {
             question: new FormControl('', Validators.required),
             multiple: new FormControl(false),
+            isOpen: new FormControl(true),
             answerList: new FormArray([
               new FormGroup({
                 text: new FormControl('', Validators.required),
@@ -119,7 +119,9 @@ export class DashboardCourseQuizComponent implements OnInit {
           if (!res.success) {
             this.toastrService.error(res.message);
           } else {
-            this.toastrService.success('Successfully updated Question.');
+            this.toastrService.success(
+              this.translateService.instant('toast-messages.question-update'),
+            );
 
             if (!this.quizForm.get('id')) {
               this.quizForm.addControl(
@@ -174,90 +176,13 @@ export class DashboardCourseQuizComponent implements OnInit {
     this.editMode = newState;
   }
 
-  public getQuestionControl(control: AbstractControl): FormControl {
-    return control.get('question') as FormControl;
-  }
-
-  public getMultipleControl(control: AbstractControl): FormControl {
-    return control.get('multiple') as FormControl;
-  }
-
-  public getQuestionAnswerListForm(control: AbstractControl): FormArray {
-    return control.get('answerList') as FormArray;
-  }
-
   public getFromGroupFromAbstractControl(control: AbstractControl): FormGroup {
     return control as FormGroup;
-  }
-
-  public getCorrectControl(group: AbstractControl): FormControl {
-    return group.get('correct') as FormControl;
-  }
-
-  public getTextControl(group: AbstractControl): FormControl {
-    return group.get('text') as FormControl;
-  }
-
-  public addAnswerForm(control: AbstractControl): void {
-    (control.get('answerList') as FormArray).push(
-      new FormGroup({
-        text: new FormControl('', Validators.required),
-        correct: new FormControl(false),
-      }),
-    );
-
-    this.quizForm.updateValueAndValidity();
   }
 
   public removeFromAnswerList(control: AbstractControl, index: number): void {
     (control.get('answerList') as FormArray).removeAt(index);
     this.quizForm.updateValueAndValidity();
-  }
-
-  public handleCorrectChecked(
-    checked: boolean,
-    questionGroup: AbstractControl,
-    currentIndex: number,
-  ): void {
-    const controlList = this.getQuestionAnswerListForm(questionGroup).controls;
-    if (!questionGroup.get('multiple')?.value) {
-      controlList.forEach((control, index) => {
-        if (currentIndex !== index) {
-          control.get('correct')?.setValue(false);
-        } else {
-          control.get('correct')?.setValue(true);
-        }
-      });
-    } else {
-      const currentControl = controlList.find((control, index) => currentIndex === index);
-      const correctList = controlList.filter((control) => !!control.get('correct')?.value);
-      if (!checked && correctList.length > 1) {
-        currentControl?.get('correct')?.setValue(false);
-      } else {
-        currentControl?.get('correct')?.setValue(true);
-      }
-    }
-    this.quizForm.updateValueAndValidity();
-  }
-
-  public multipleChecked(checked: boolean, questionGroup: AbstractControl): void {
-    const controlList = this.getQuestionAnswerListForm(questionGroup).controls;
-
-    controlList.forEach((control) => {
-      control.get('correct')?.setValue(false);
-    });
-
-    controlList[0].get('correct')?.setValue(true);
-  }
-
-  public buttonDisabled(control: AbstractControl): boolean {
-    return (
-      !control.touched ||
-      control.pristine ||
-      (control.invalid &&
-        (control.get('answerList') as FormArray).controls.filter((answer) => answer.value).length >
-          0)
-    );
   }
 
   public deleteQuiz(id: number): void {
@@ -315,7 +240,9 @@ export class DashboardCourseQuizComponent implements OnInit {
               );
             } else {
               this.quizForm.get('isEdit')?.setValue(false);
-              this.toastrService.success('Successfully updated Quiz!');
+              this.toastrService.success(
+                this.translateService.instant('toast-messages.quize-update'),
+              );
             }
 
             this.courseFormService.isLoading = false;

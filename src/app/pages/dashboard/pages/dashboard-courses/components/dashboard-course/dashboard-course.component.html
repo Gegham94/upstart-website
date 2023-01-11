@@ -40,10 +40,6 @@
           <us-icon name="calendar-icon" [size]="16"></us-icon>
           {{ courseData.first_lesson_date | translateDate: 'd MMM, YYYY / HH:mm' }}
         </div>
-        <!-- <div class="dashboard-course__property">
-          <us-icon name="chart-area" [size]="16"></us-icon>
-          {{ courseData.status }}
-        </div> -->
         <div
           [routerLink]="'/profile/' + courseData.trainer.id"
           *ngIf="courseData.trainer"
@@ -77,7 +73,13 @@
     [iconSize]="15"
     [theme]="buttonTheme.transparent"
     [tooltipOrientation]="tooltipOrientation.vertical"
-    [tooltipContent]="dropdownOptions"
+    [tooltipContent]="
+      courseData.status === courseStatus.DRAFT ||
+      courseData.status === courseStatus.DECLINED ||
+      !!courseData.certificate
+        ? dropdownOptions
+        : null
+    "
     [circle]="true"
   ></us-button>
 </div>
@@ -85,19 +87,25 @@
 <ng-template #dropdownOptions>
   <div class="dashboard-course__dropdown">
     <a
-      *ngIf="courseData.status !== courseStatus.UNDER_REVIEW"
+      *ngIf="
+        courseData.status === courseStatus.DRAFT || courseData.status === courseStatus.DECLINED
+      "
       class="dashboard-course__dropdown-button"
       (click)="editCourse()"
     >
       {{ 'dashboard.courses.edit' | translate }}
     </a>
 
-    <a class="dashboard-course__dropdown-button" (click)="openCertificateDialog()">
+    <a
+      class="dashboard-course__dropdown-button"
+      *ngIf="!!courseData.certificate"
+      (click)="openCertificateDialog()"
+    >
       {{ 'dashboard.courses.edit_certificate' | translate }}
     </a>
 
     <a
-      *ngIf="courseData.status !== courseStatus.UNDER_REVIEW"
+      *ngIf="courseData.status === courseStatus.DRAFT"
       class="dashboard-course__dropdown-button dashboard-course__dropdown-button_red"
       (click)="deleteCourse()"
     >

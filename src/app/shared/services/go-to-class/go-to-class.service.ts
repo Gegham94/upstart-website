@@ -18,4 +18,8 @@ export class GoToClassService {
   public passQuize(data: object): Observable<SuccessApi> {
     return this.http.post<SuccessApi>(`${API_URL}pass-quize`, data);
   }
+
+  public passLesson(data: object): Observable<SuccessApi> {
+    return this.http.post<SuccessApi>(`${API_URL}course/lesson/pass`, data);
+  }
 }

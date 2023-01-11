@@ -17,24 +17,28 @@
 
       <div
         class="notification__wrapper"
-        [class.notification__left-border]="!notification.status"
+        [class.notification__left-border]="
+          !notification.status && !notificationList.includes(notification.id)
+        "
         *ngFor="let notification of allNotifications"
       >
         <div
           class="notification__block"
-          [class.notification__unread]="!notification.status"
+          [class.notification__unread]="
+            !notification.status && !notificationList.includes(notification.id)
+          "
           (click)="readNotification(notification.id, notification.status)"
         >
           <div class="d-flex justify-content-between">
-            <p class="notification__subtitle">{{ notification.title }}</p>
+            <p class="notification__subtitle" [innerHTML]="notification.title"></p>
             <div
               class="circle me-1"
-              [class.notification__unread-circle]="!notification.status"
+              [class.notification__unread-circle]="
+                !notification.status && !notificationList.includes(notification.id)
+              "
             ></div>
           </div>
-          <p class="notification__text mt-2">
-            {{ notification.message }}
-          </p>
+          <p class="notification__text mt-2" [innerHTML]="notification.message"></p>
           <div class="d-flex justify-content-between mt-3">
             <p class="notification__created">{{ notification.created_at | date }}</p>
             <us-icon
@@ -78,3 +82,5 @@
     appearance="line"
   ></ngx-skeleton-loader>
 </ng-template>
+
+<us-scroll-top></us-scroll-top>

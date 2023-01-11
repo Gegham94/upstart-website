@@ -27,15 +27,15 @@
     line-height: 24px;
     letter-spacing: 0.1px;
     color: $grey-text;
-    transition: background .2s ease-in-out;
+    transition: background 0.2s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
     &:hover & {
-      &-child-keeper{
+      &-child-keeper {
         display: block;
       }
-      &-arrow{
+      &-arrow {
         display: block;
       }
     }
@@ -65,13 +65,13 @@
     width: 100%;
     left: 0;
     height: 50px;
-    padding: 12px 90px;
+    padding: 12px;
     bottom: -47px;
     overflow: auto;
     display: none;
   }
 
-  &__element-child-container{
+  &__element-child-container {
     max-width: 1440px;
     justify-content: center;
     margin: auto;
@@ -81,16 +81,16 @@
     flex-flow: wrap;
   }
 
-  &__child-list{
+  &__child-list {
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
     letter-spacing: 0.1px;
     color: $white;
 
-    transition: .5s;
-    &:hover{
-      opacity: .8;
+    transition: 0.5s;
+    &:hover {
+      color: $main;
     }
   }
 }

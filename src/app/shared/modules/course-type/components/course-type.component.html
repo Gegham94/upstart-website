@@ -50,3 +50,11 @@
   class="type"
   >{{ underReview }}</span
 >
+
+<span
+  [ngClass]="{ 'block-position': blockPosition, 'basket-mobile': basketMobile }"
+  *ngIf="courseStatus === courseStatusType.DECLINED"
+  [style]="{ 'background-color': 'rgb(136 68 64)' }"
+  class="type"
+  >{{ declined }}</span
+>

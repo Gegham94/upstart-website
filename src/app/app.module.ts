@@ -31,8 +31,20 @@ import { registerLocaleData } from '@angular/common';
 import localeAm from '@angular/common/locales/hy';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { CertificateModule } from './shared/components/certificate/certificate.module';
+import {
+  FacebookLoginProvider,
+  GoogleInitOptions,
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+} from '@abacritt/angularx-social-login';
 
 registerLocaleData(localeAm);
+
+const googleLoginOptions: GoogleInitOptions = {
+  oneTapEnabled: false,
+  scopes: 'https://www.googleapis.com/auth/userinfo.profile',
+  prompt: 'select_account',
+};
 
 @NgModule({
   declarations: [AppComponent, ErrorToastComponent],
@@ -89,6 +101,28 @@ registerLocaleData(localeAm);
       provide: HTTP_INTERCEPTORS,
       useClass: LanguageInterceptor,
       multi: true,
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '921968365876-a7ru08vf0ju9g7pj2gbepa51mdohimrn.apps.googleusercontent.com',
+              googleLoginOptions,
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('584070343545912'),
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        },
+      } as SocialAuthServiceConfig,
     },
   ],
   bootstrap: [AppComponent],

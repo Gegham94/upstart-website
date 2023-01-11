@@ -1,11 +1,8 @@
 import { Component, HostListener, Inject, OnDestroy, OnInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Subject, takeUntil, mergeMap, timer, repeat, takeWhile } from 'rxjs';
-
+import { Subject, takeUntil } from 'rxjs';
 import { AuthorizationService } from '../../../services/auth/authorization.service';
 import { CurrentUserInfoInterface } from 'src/app/shared/interfaces/current-user.interface';
-import { NotificationsService } from 'src/app/shared/services/notifications/notifications.service';
-import { NotificationsInterface } from 'src/app/shared/interfaces/notifications/notifications.interface';
 import { GlobalService } from '../../../services/global.service';
 
 @Component({
@@ -26,7 +23,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroyed$: Subject<void> = new Subject<void>();
 
-  public allNotifications!: NotificationsInterface[];
+  public allNotifications: number = 0;
+
+  public isShowSearch: boolean = false;
 
   @HostListener('window:resize', ['$event'])
   public resizeHandler(event: Event) {
@@ -45,7 +44,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private readonly platformId: string,
     private readonly authorizationService: AuthorizationService,
     private readonly globalService: GlobalService,
-    private readonly notificationService: NotificationsService,
   ) {}
 
   public ngOnInit(): void {
@@ -57,7 +55,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isLoggedIn = !!res;
       if (!!res) {
         this.getCurrentUserInfo();
-        this.getNotifications();
       }
     });
   }
@@ -70,21 +67,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getNotifications() {
-    timer(0, 5000)
-      .pipe(
-        repeat(),
-        takeWhile(() => this.isLoggedIn),
-        mergeMap(() => this.notificationService.getNotifications()),
-      )
-      .subscribe(({ data }) => {
-        this.allNotifications = data;
-        this.allNotifications = [...this.allNotifications];
-      });
+  public showSearchMenu() {
+    this.isShowSearch = true;
+  }
+
+  public closeSearch() {
+    this.isShowSearch = false;
   }
 
   public ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  public unreadCount(event: number) {
+    this.allNotifications = event;
   }
 }

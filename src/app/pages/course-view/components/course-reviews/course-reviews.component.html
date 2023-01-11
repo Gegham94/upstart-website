@@ -2,9 +2,9 @@
   <div class="reviews__container">
     <div class="reviews__header">
       <h3 class="reviews__title">{{ 'course.reviews' | translate }}</h3>
-      <ng-container *ngIf="!isPreview">
+      <ng-container *ngIf="!isPreview && hasFullAccess">
         <us-button
-          *ngIf="!isUserHasReview"
+          *ngIf="!isUserHasReview && currentUserId !== courseOwnerId"
           (click)="openDialog()"
           class="reviews__add-review desktop"
           [theme]="buttonTheme.primary"
@@ -35,7 +35,7 @@
       <ng-template #hide>{{ 'reviews.hide_all' | translate }} </ng-template>
     </p>
     <us-button
-      *ngIf="!isUserHasReview"
+      *ngIf="!isUserHasReview && currentUserId !== courseOwnerId"
       (click)="openDialog()"
       class="reviews__add-review mobile"
       [theme]="buttonTheme.primary"

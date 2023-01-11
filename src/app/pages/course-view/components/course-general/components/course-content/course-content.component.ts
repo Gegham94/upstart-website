@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import {
   CourseDetails,
   Lessons,
   Quiz,
-  Resources,
   Section,
 } from '../../../../../../shared/interfaces/courses/course-details';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +11,8 @@ import { CoursePreviewModalComponent } from './course-preview-modal/course-previ
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SectionType } from 'src/app/shared/enums/section-type';
 import { VideoArticleModalComponent } from 'src/app/shared/modules/modal/components/video-article-modal/video-article-modal.component';
+import { CourseQuizModalComponent } from './course-quiz-modal/course-quiz-modal.component';
+import { Router } from '@angular/router';
 interface SliceOptions {
   start: number;
   end: number | undefined;
@@ -35,6 +36,8 @@ export class CourseContentComponent implements OnInit {
     default: 230,
   };
 
+  public preview: boolean = false;
+
   public courseData!: CourseDetails;
 
   public isExpendAllSections: boolean = false;
@@ -44,6 +47,8 @@ export class CourseContentComponent implements OnInit {
   public toggleAction: boolean = false;
 
   private toggleDesc: boolean = false;
+
+  public lessonIdList: number[] = [];
 
   @Input()
   public type?: string = '';
@@ -61,7 +66,10 @@ export class CourseContentComponent implements OnInit {
     console.log(data);
   }
 
-  constructor(public dialog: MatDialog, private sanitizer: DomSanitizer) {}
+  @Output()
+  private updated: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(public dialog: MatDialog, private router: Router, private sanitizer: DomSanitizer) {}
 
   public openDialog(data: Lessons | Quiz, type: string) {
     this.dialog.open(CoursePreviewModalComponent, {
@@ -71,6 +79,7 @@ export class CourseContentComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this.preview = this.router.url.includes('preview');
     if (this.course?.sections) {
       this.course.sections.find((leesson) => {
         this.url = leesson.lessons.find((el) => el.video_url !== '')?.video_url;
@@ -81,6 +90,12 @@ export class CourseContentComponent implements OnInit {
         this.videoUrl = this.getSafeUrl(embedUrl);
       });
     }
+  }
+
+  public allQuiz(section: Section) {
+    const quiz = [];
+    quiz.push(...section.lessons.filter((el) => el.type === 'quiz'));
+    return quiz.length;
   }
 
   public embedVideo(url: string) {
@@ -153,7 +168,10 @@ export class CourseContentComponent implements OnInit {
     const data = {
       quiz_id: lesson.id,
       id: -1,
+      preview: this.preview,
+      resources: lesson.resources,
       lesson: lesson,
+      course_id: this.courseData.id,
     };
     switch (event) {
       case 1:
@@ -165,6 +183,10 @@ export class CourseContentComponent implements OnInit {
         this.openSectionModal(this.dialogConfig('60vw', '90vh', 'video', data));
         break;
       case 3:
+        if (lesson.questions[0].your_answers || this.lessonIdList.includes(lesson.id)) {
+          this.openAnswersModal(lesson);
+          return;
+        }
         data.id = 3;
         this.openSectionModal(this.dialogConfig('600px', '100px', 'quiz-modal-section', data));
         break;
@@ -174,7 +196,8 @@ export class CourseContentComponent implements OnInit {
   private openSectionModal(config: object): void {
     const dialog = this.dialog.open(VideoArticleModalComponent, config);
     dialog.afterClosed().subscribe((res) => {
-      console.log(res);
+      this.updated.emit();
+      this.lessonIdList.push(res);
     });
   }
 
@@ -188,9 +211,14 @@ export class CourseContentComponent implements OnInit {
     return config;
   }
 
-  public openResourceDialog(resource: Resources): void {
-    this.openSectionModal(
-      this.dialogConfig('500px', '300px', 'pdf', { id: -1, resources: resource }),
-    );
+  public openAnswersModal(lesson: Lessons) {
+    this.dialog.open(CourseQuizModalComponent, {
+      panelClass: 'attention-dialog',
+      width: '40vw',
+      minHeight: '260px',
+      data: {
+        lesson,
+      },
+    });
   }
 }

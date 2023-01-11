@@ -1,4 +1,4 @@
-@import "src/assets/styles/variables/colors";
+@import 'src/assets/styles/variables/colors';
 
 .course-section-list {
   &__header {
@@ -40,7 +40,7 @@
       padding: 6px 3px;
 
       &:hover {
-        box-shadow: none!important;
+        box-shadow: none !important;
       }
     }
   }
@@ -83,11 +83,11 @@
     color: $title-color;
     width: 154px;
     height: 86px;
-    transition: box-shadow .2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
 
     &:hover,
     &:focus {
-      box-shadow: 0 0 4px #A997FF;
+      box-shadow: 0 0 4px #a997ff;
     }
 
     &:active {
@@ -116,38 +116,38 @@
     }
   }
 
-    &__dropdown {
-      border-radius: 4px;
-      background: $white;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      width: 222px;
-      box-shadow: 2px 4px 20px 0 $black-opacity-20;
-      display: flex;
-      flex-direction: column;
+  &__dropdown {
+    border-radius: 4px;
+    background: $white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 222px;
+    box-shadow: 2px 4px 20px 0 $black-opacity-20;
+    display: flex;
+    flex-direction: column;
 
-      &-button {
-        padding: 8px 14px 8px 29px;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 17px;
-        // Todo: Store this color in assets/variables/_colors.scss
-        color: #707070;
-        cursor: pointer;
+    &-button {
+      padding: 8px 14px 8px 29px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      // Todo: Store this color in assets/variables/_colors.scss
+      color: #707070;
+      cursor: pointer;
 
-        &:hover {
-          background: $lightest-grey;
-        }
+      &:hover {
+        background: $lightest-grey;
+      }
 
-        &:active {
-          background: $lighter-grey;
-        }
+      &:active {
+        background: $lighter-grey;
+      }
 
-        &_remove {
-          color: $error;
-        }
+      &_remove {
+        color: $error;
       }
     }
+  }
 
   &__keeper {
     display: flex;

@@ -5,7 +5,6 @@
     background: $white;
     padding: 20px 25px;
     border-radius: 4px;
-
   }
 
   &__title {
@@ -42,7 +41,7 @@
     &-item {
       flex: 1;
       padding: 27px 36px;
-      background: #D25CFE;
+      background: #d25cfe;
       border-radius: 4px;
       color: $white;
 
@@ -83,7 +82,7 @@
   }
 
   &__graph {
-    border: 1px solid #EBEBF5;
+    border: 1px solid #ebebf5;
     border-radius: 5px;
 
     &-header {
@@ -106,31 +105,31 @@
     }
     &-star {
       padding: 27px 31px;
-      .total_rate_title{
+      .total_rate_title {
         font-weight: 500;
         font-size: 16px;
         line-height: 20px;
         color: $grey-text;
       }
-      .total_rate{
+      .total_rate {
         font-weight: 600;
         font-size: 32px;
         line-height: 39px;
         color: $title-color;
       }
-      &-progress{
+      &-progress {
         display: flex;
         margin-top: 18px;
-        .not-rate-block{
+        .not-rate-block {
           width: 100%;
-          .not-rate-line{
+          .not-rate-line {
             width: 100%;
             background: $lightest-purple;
             border-radius: 2px;
             height: 18px;
             margin-bottom: 9px;
           }
-          .not-rate-text{
+          .not-rate-text {
             text-align: center;
             font-weight: 500;
             font-size: 14px;
@@ -139,36 +138,36 @@
           }
         }
 
-        .star_line{
+        .star_line {
           display: flex;
           flex-direction: column;
           align-items: center;
-          &:first-child .star_color{
+          &:first-child .star_color {
             border-radius: 2px 0 0 2px;
           }
-          &:last-child .star_color{
+          &:last-child .star_color {
             border-radius: 0 2px 2px 0;
           }
-          .star_color{
+          .star_color {
             height: 13px;
             display: block;
             width: 100%;
           }
-          .star_count{
+          .star_count {
             display: flex;
             flex-direction: column;
             align-items: center;
-            .star{
+            .star {
               margin-bottom: 4px;
               font-size: 120%;
             }
-            .all_star_count{
+            .all_star_count {
               font-weight: 500;
               font-size: 14px;
               line-height: 17px;
               color: $light-grey-text;
             }
-            .count{
+            .count {
               font-weight: 500;
               font-size: 14px;
               line-height: 17px;

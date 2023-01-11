@@ -233,8 +233,11 @@
     background: $main !important;
     border: 1px solid $main !important;
   }
-}
 
+  body > .cke_emoji-panel {
+    position: fixed!important;
+  }
+}
 .editor__label:hover .editor__icon.toggle{
   opacity: .5;
 }

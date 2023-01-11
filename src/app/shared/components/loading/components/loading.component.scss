@@ -54,32 +54,104 @@
     }
   }
 }
+.icons-block{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50% ,-50%);
+  width: 500px;
+  height: 500px;
+  .icon{
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation-name: animateThirdIcon;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    animation-timing-function: linear;
 
-@keyframes bxSpin {
-  17% {
-    border-bottom-right-radius: 3px;
-  }
-  25% {
-    transform: translateY(9px) rotate(22.5deg);
-  }
-  50% {
-    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
-    border-bottom-right-radius: 40px;
-  }
-  75% {
-    transform: translateY(9px) rotate(67.5deg);
-  }
-  100% {
-    transform: translateY(0) rotate(90deg);
+    &.icon-1{
+      transform: translate(-78%, -25%);
+      animation-name: animateFirstIcon;
+      animation-iteration-count: infinite;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+    }
+    &.icon-3{
+      transform: translate(-50%, 0%);
+      animation-name: animateSecondIcon;
+      animation-iteration-count: infinite;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+    }
   }
 }
 
-@keyframes shadow {
-  0%,
-  100% {
-    transform: scale(1, 1);
+@keyframes animateFirstIcon {
+  0%{
+    transform: translate(-78%, -25%);
   }
-  50% {
-    transform: scale(1.2, 1);
+  50%{
+    transform: translate(-150%, -25%);
+  }
+  100%,87%{
+    transform: translate(-78%, -25%);
   }
 }
+
+@keyframes animateSecondIcon {
+  0%{
+    transform: translate(-50%, 0%);
+  }
+  50%{
+    transform: translate(20%, 0%);
+  }
+  100%,87%{
+    transform: translate(-50%, 0%);
+  }
+}
+
+@keyframes animateThirdIcon {
+  0%{
+    transform: translate(-50%, -50%);
+  }
+  50%{
+    transform: translate(-50%, -90%);
+  }
+  100%,87%{
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+// @keyframes bxSpin {
+//   17% {
+//     border-bottom-right-radius: 3px;
+//   }
+//   25% {
+//     transform: translateY(9px) rotate(22.5deg);
+//   }
+//   50% {
+//     transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+//     border-bottom-right-radius: 40px;
+//   }
+//   75% {
+//     transform: translateY(9px) rotate(67.5deg);
+//   }
+//   100% {
+//     transform: translateY(0) rotate(90deg);
+//   }
+// }
+
+// @keyframes shadow {
+//   0%,
+//   100% {
+//     transform: scale(1, 1);
+//   }
+//   50% {
+//     transform: scale(1.2, 1);
+//   }
+// }

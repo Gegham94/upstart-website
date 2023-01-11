@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { CourseCountService } from '../../../../../../shared/services/course-count/course-count.service';
 import { CertificateComponent } from '../../../../../../shared/components/certificate/components/certificate.component';
+import { CurrentUserInfoInterface } from '../../../../../../shared/interfaces/current-user.interface';
 
 @Component({
   selector: 'us-course-general-side',
@@ -44,6 +45,8 @@ export class CourseGeneralSideComponent implements OnInit, OnChanges {
 
   public showLoader: boolean = false;
 
+  public currentUser?: CurrentUserInfoInterface | null;
+
   constructor(
     private sanitizer: DomSanitizer,
     private courseService: CoursesApiService,
@@ -66,6 +69,10 @@ export class CourseGeneralSideComponent implements OnInit, OnChanges {
       this.videoUrl = this.getSafeUrl(embedUrl);
       this.checkIsUserAuth();
     }
+
+    this.globalService.currentUserObservable.subscribe((user) => {
+      this.currentUser = user;
+    });
   }
 
   public ngOnChanges(): void {
@@ -152,7 +159,7 @@ export class CourseGeneralSideComponent implements OnInit, OnChanges {
       );
   }
 
-  private checkIsUserAuth(): boolean {
+  public checkIsUserAuth(): boolean {
     return this.globalService.isAuthenticated;
   }
 
@@ -183,10 +190,11 @@ export class CourseGeneralSideComponent implements OnInit, OnChanges {
       data: {
         type: 'pdf',
         course: this.course?.id,
+        coursePassed: this.course?.course_passed,
       },
       panelClass: 'certificate-dialog',
       width: '900px',
-      height: '600px',
+      height: this.course?.course_passed ? '600px' : '200px',
     });
   }
 }

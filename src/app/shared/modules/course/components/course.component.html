@@ -31,23 +31,25 @@
           [circle]="true"
         ></us-button>
 
-        <us-button
-          *ngIf="courseData.in_basket !== 0"
-          (click)="removeFromBasket(courseData.id, courseData)"
-          icon="full-basket"
-          [iconSize]="40"
-          [theme]="buttonTheme.light"
-          [circle]="true"
-        ></us-button>
+        <ng-container *ngIf="courseData.profile_id !== currentUser?.id">
+          <us-button
+            *ngIf="courseData.in_basket !== 0"
+            (click)="removeFromBasket(courseData.id, courseData)"
+            icon="full-basket"
+            [iconSize]="40"
+            [theme]="buttonTheme.light"
+            [circle]="true"
+          ></us-button>
 
-        <us-button
-          *ngIf="courseData.in_basket === 0"
-          (click)="addToCart(courseData.id, courseData)"
-          icon="cart"
-          [iconSize]="20"
-          [theme]="buttonTheme.light"
-          [circle]="true"
-        ></us-button>
+          <us-button
+            *ngIf="courseData.in_basket === 0"
+            (click)="addToCart(courseData.id, courseData)"
+            icon="cart"
+            [iconSize]="20"
+            [theme]="buttonTheme.light"
+            [circle]="true"
+          ></us-button>
+        </ng-container>
       </div>
     </div>
 
@@ -70,6 +72,9 @@
             [size]="14"
             [rateValue]="courseData.rating"
           ></us-star-rating>
+        </div>
+        <div class="course__past" *ngIf="!!expired">
+          {{ 'course.past' | translate }}
         </div>
       </div>
       <div class="course__price-keeper">

@@ -2,15 +2,18 @@
   <div class="header__container container">
     <div class="header__left">
       <a class="header__logo-keeper" routerLink="/">
-        <img class="header__logo" src="./assets/images/logos/upstart-logo.svg" alt="Upstart Logo" />
+        <img
+          class="header__logo"
+          src="./assets/images/logos/new-upstart-logo.svg"
+          alt="Upstart Logo"
+        />
       </a>
       <us-header-categories></us-header-categories>
       <us-header-search class="header__search"></us-header-search>
     </div>
     <div class="header__right">
       <us-header-action-panel
-        [loggedIn]="isLoggedIn"
-        [notifications]="allNotifications"
+        (unreadCountEmit)="unreadCount($event)"
         [userInfo]="userInfo"
       ></us-header-action-panel>
     </div>
@@ -22,6 +25,8 @@
       [isLoggedIn]="!!isLoggedIn"
       [notifications]="allNotifications"
       [userInfo]="userInfo"
+      [showSearchMenu]="isShowSearch"
+      (closedSearch)="closeSearch()"
     ></us-header-mobile-menu>
     <a class="header__logo-keeper" routerLink="/">
       <img
@@ -31,6 +36,9 @@
         alt="Upstart Logo"
       />
     </a>
-    <us-header-mobile-action-panel [isLoggedIn]="isLoggedIn"></us-header-mobile-action-panel>
+    <us-header-mobile-action-panel
+      [isLoggedIn]="isLoggedIn"
+      (showSearchMenu)="showSearchMenu()"
+    ></us-header-mobile-action-panel>
   </header>
 </ng-template>

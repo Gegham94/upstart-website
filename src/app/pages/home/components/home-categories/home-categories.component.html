@@ -4,7 +4,8 @@
       <a
         *ngIf="category.parent_id === null"
         class="home-categories__element"
-        [routerLink]="category.children.length > 0 ? null : '/courses/' + category.id"
+        [routerLink]="category.children.length > 0 ? null : '/courses'"
+        [queryParams]="{ categories: category.id }"
         [class.home-categories__element_child]="category.children.length > 0"
       >
         <ng-container *ngIf="category.children.length > 0; else noChild">
@@ -27,7 +28,8 @@
               <a
                 *ngFor="let child of category.children"
                 class="home-categories__child-list"
-                [routerLink]="'/courses/' + child.id"
+                [routerLink]="'/courses'"
+                [queryParams]="{ categories: child.id }"
               >
                 {{ child.title }}
               </a>

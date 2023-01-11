@@ -36,6 +36,9 @@ import { StatisticService } from '../../shared/services/statistics/statistics.se
 import { PaginationModule } from '../../shared/components/pagination/pagination.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SelectModule } from '../../shared/components/select/select.module';
+import { HomePartnersComponent } from './components/home-partners/home-partners.component';
+import { CheckboxModule } from '../../shared/components/forms/checkbox/checkbox.module';
+import { ScrollTopModule } from 'src/app/shared/components/scroll-top/scroll-top.module';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,7 @@ import { SelectModule } from '../../shared/components/select/select.module';
     RangeSliderComponent,
     BasketComponent,
     FavoritesComponent,
+    HomePartnersComponent,
   ],
   imports: [
     CommonModule,
@@ -77,6 +81,8 @@ import { SelectModule } from '../../shared/components/select/select.module';
     PaginationModule,
     NgxPaginationModule,
     SelectModule,
+    CheckboxModule,
+    ScrollTopModule,
   ],
   providers: [StatisticService],
 })

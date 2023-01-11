@@ -91,4 +91,8 @@ export class DashboardHeaderComponent implements OnInit {
       return this.userInfo?.first_name[0]! + this.userInfo?.last_name[0];
     } else return;
   }
+
+  public unreadCountNumber(count: number) {
+    this.unreadCount = count;
+  }
 }

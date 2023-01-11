@@ -40,7 +40,6 @@
 
   &__option {
     &-keeper {
-      max-width: 470px;
       width: 100%;
       max-height: 582px;
       padding: 20px 7px;
@@ -52,6 +51,11 @@
       background: $white;
       border-radius: 8px;
       overflow: auto;
+    }
+    &-title {
+      font-size: 14px;
+      text-align: center;
+      color: #aaa;
     }
   }
 

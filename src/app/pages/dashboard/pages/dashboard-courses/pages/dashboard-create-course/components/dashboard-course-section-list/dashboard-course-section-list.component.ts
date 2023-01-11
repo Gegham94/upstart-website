@@ -23,6 +23,7 @@ import { Quiz } from '../../../../../../../../shared/interfaces/quiz.interface';
 import { ApiResponse } from '../../../../../../../../shared/interfaces/api/api-response.interface';
 import { CourseFormService } from '../../services/course-form.service';
 import { SelectOptions } from '../../../../../../../../shared/interfaces/select-options.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'us-dashboard-course-section-list',
@@ -56,6 +57,7 @@ export class DashboardCourseSectionListComponent implements OnChanges {
     private readonly lessonsApiService: LessonsApiService,
     private readonly courseFormService: CourseFormService,
     private readonly toastrService: ToastrService,
+    private translateService: TranslateService,
   ) {
     this.sectionForms = this.formBuilder.array([]);
   }
@@ -156,6 +158,7 @@ export class DashboardCourseSectionListComponent implements OnChanges {
                   new FormGroup({
                     id: new FormControl(question.id, Validators.required),
                     question: new FormControl(question.question, Validators.required),
+                    isOpen: new FormControl(false),
                     multiple: new FormControl(JSON.parse(question.right_answers).length > 1),
                     answerList: new FormArray(
                       (JSON.parse(question.answers) as string[]).map(
@@ -204,7 +207,7 @@ export class DashboardCourseSectionListComponent implements OnChanges {
         );
 
         this.sectionForms.updateValueAndValidity();
-        this.toastrService.success('Section successfully created!');
+        this.toastrService.success(this.translateService.instant('toast-messages.section-created'));
       }
 
       this.courseFormService.isLoading = false;
@@ -247,7 +250,9 @@ export class DashboardCourseSectionListComponent implements OnChanges {
             if (sectionFromlist) {
             }
 
-            this.toastrService.success('Successfully updated Section!');
+            this.toastrService.success(
+              this.translateService.instant('toast-messages.section-update'),
+            );
           }
 
           this.courseFormService.isLoading = false;
@@ -339,7 +344,7 @@ export class DashboardCourseSectionListComponent implements OnChanges {
       } else {
         this.sectionForms.removeAt(index);
         this.sectionForms.updateValueAndValidity();
-        this.toastrService.success('Successfully removed Section!');
+        this.toastrService.success(this.translateService.instant('toast-messages.section-removed'));
       }
 
       this.courseFormService.isLoading = false;

@@ -1,0 +1,82 @@
+@import '../../../../../assets/styles/variables/colors';
+@import '../../../../../assets/styles/mixins/for-breakpoint';
+@import '../../../../../toast';
+
+.container {
+  @include for-breakpoint(mobile-lg) {
+    .social_btn {
+      max-width: 64px;
+      max-height: 32px;
+      border: 1px solid $border-purple;
+
+      img {
+        width: 15px;
+      }
+    }
+  }
+
+  .mobile_btns {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    & > div {
+      width: 100%;
+    }
+
+    .google_btn {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  .social_btn {
+    background: #f6f6f6;
+    border: 1px solid #dddfdd;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+    color: $light-grey-text;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+  }
+}
+
+.google_btn {
+  asl-google-signin-button {
+    display: none;
+  }
+}
+
+.login {
+  &__illustration {
+    max-width: 695px;
+    width: 100%;
+
+    .left_content {
+      width: 100%;
+      background-position: center bottom;
+      background-size: 524px 313px;
+    }
+  }
+
+  &__form {
+    max-width: 536px;
+    width: 100%;
+
+    &-keeper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @include for-breakpoint(mobile-lg) {
+        flex-direction: column;
+        padding-bottom: 22px;
+      }
+    }
+  }
+}

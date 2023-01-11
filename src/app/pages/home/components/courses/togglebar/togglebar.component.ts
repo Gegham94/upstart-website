@@ -15,6 +15,7 @@ import { ToggleItem } from '../../../../../shared/interfaces/toggle-item.interfa
 import { CategoriesInterface } from '../../../../../shared/interfaces/categories/categories.interface';
 import { FilterItem } from '../../../../../shared/interfaces/courses/course-global-filter.interface';
 import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'us-togglebar',
   templateUrl: './togglebar.component.html',
@@ -41,12 +42,12 @@ export class TogglebarComponent implements OnInit, AfterViewInit {
   public language: ToggleItem[] = [];
 
   @Input()
-  public selectedCategoryId: string;
+  public selectedCategoryId: string[];
 
   @Output()
   public selectFilter: EventEmitter<FilterItem> = new EventEmitter<FilterItem>();
 
-  public config: TreeviewConfig = {
+  public readonly config: TreeviewConfig = {
     hasAllCheckBox: false,
     hasFilter: false,
     hasCollapseExpand: false,
@@ -95,22 +96,7 @@ export class TogglebarComponent implements OnInit, AfterViewInit {
       case 'Topic':
         this.globalService.categoriesListObservable.subscribe((res) => {
           if (res.length <= 0) return;
-          if (this.searchText) {
-            for (let i = 0; i < res.length; i++) {
-              if (res[i].title.toLowerCase() === this.searchText.toLowerCase()) {
-                this.selectedCategoryId = res[i].id.toString();
-                break;
-              }
-              if (res[i].children.length > 0) {
-                for (let j = 0; j < res[i].children.length; j++) {
-                  if (res[i].children[j].title.toLowerCase() === this.searchText.toLowerCase()) {
-                    this.selectedCategoryId = res[i].children[j].id.toString();
-                    break;
-                  }
-                }
-              }
-            }
-          }
+
           this.topic = this.parseCategoriesChildren(res, this.selectedCategoryId);
           this.items = this.getItems(this.topic);
         });
@@ -160,17 +146,17 @@ export class TogglebarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public parseCategoriesChildren(children: CategoriesInterface[], selectedCategoryId?: string) {
+  public parseCategoriesChildren(children: CategoriesInterface[], selectedCategoryId?: string[]) {
     let itemsArray: ToggleItem[] = [];
     children.forEach((element: CategoriesInterface) => {
       if (!element.children || element.children.length === 0) {
-        if (element.id === Number(selectedCategoryId)) {
+        if (selectedCategoryId?.includes(element.id.toString())) {
           itemsArray.push({
             checked: true,
             text: element.title,
             value: element.id,
           });
-        } else if (element.parent_id === Number(selectedCategoryId)) {
+        } else if (selectedCategoryId?.includes(element.parent_id?.toString())) {
           itemsArray.push({
             checked: true,
             text: element.title,
@@ -183,7 +169,7 @@ export class TogglebarComponent implements OnInit, AfterViewInit {
             value: element.id,
           });
         }
-      } else if (element.id === Number(selectedCategoryId)) {
+      } else if (selectedCategoryId?.includes(element.id.toString())) {
         itemsArray.push({
           checked: true,
           text: element.title,
@@ -193,7 +179,7 @@ export class TogglebarComponent implements OnInit, AfterViewInit {
       } else {
         let prop: boolean = false;
         element.children.forEach((item) => {
-          if (item.id === Number(selectedCategoryId)) {
+          if (selectedCategoryId?.includes(item.id.toString())) {
             prop = true;
           }
         });
@@ -228,6 +214,15 @@ export class TogglebarComponent implements OnInit, AfterViewInit {
   }
 
   public selectedValue(ids: number[]) {
+    if (this.label === 'Topic') {
+      const foundedParent = this.topic.filter(
+        (el) =>
+          el.children && el.children.filter((child) => !ids.includes(child.value)).length === 0,
+      );
+
+      ids.push(...foundedParent.map((parent) => parent.value));
+    }
+
     this.selectFilter.emit({ ids, label: this.label });
   }
 

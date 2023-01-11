@@ -1,0 +1,28 @@
+@import 'src/assets/styles/variables/colors';
+
+.warning{
+  margin-bottom: 10px;
+  position: relative;
+  &__block{
+    padding: 20px;
+    background: #ff000052;
+    border-radius: 5px;
+  }
+  &__close{
+    position: absolute;
+    right: 7px;
+    top: 6px;
+    ::ng-deep{
+      button{
+        padding: 0;
+      }
+    }
+  }
+  &__text{
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #000000;
+  }
+}

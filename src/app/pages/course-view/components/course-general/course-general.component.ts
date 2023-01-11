@@ -1,24 +1,23 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Output, EventEmitter, Input, OnChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CourseType } from 'src/app/shared/enums/course-type.enum';
 import { CourseDetails, LessonTrainer } from 'src/app/shared/interfaces/courses/course-details';
 import { Preview } from '../course-view.component';
 import { CoursesApiService } from 'src/app/shared/services/courses/courses-api.service';
-import { GlobalService } from 'src/app/shared/services/global.service';
+
 @Component({
   selector: 'us-course-general',
   templateUrl: './course-general.component.html',
   styleUrls: ['./course-general.component.scss', './course-general.component.media.scss'],
 })
-export class CourseGeneralComponent implements OnInit, OnChanges {
-  public course?: CourseDetails;
-
-  public loader: boolean = true;
-
+export class CourseGeneralComponent implements OnChanges {
   public isJoined: boolean = false;
 
   @Input()
   public preview: boolean = false;
+
+  @Input()
+  public loader: boolean = true;
 
   public previewCourse!: CourseDetails;
 
@@ -26,6 +25,9 @@ export class CourseGeneralComponent implements OnInit, OnChanges {
 
   @Input()
   public reviewCount: number = 0;
+
+  @Input()
+  public course?: CourseDetails;
 
   public trainer: LessonTrainer;
 
@@ -35,48 +37,15 @@ export class CourseGeneralComponent implements OnInit, OnChanges {
   @Output()
   public previewEmitter$: EventEmitter<Preview> = new EventEmitter<Preview>();
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private courseService: CoursesApiService,
-    private router: Router,
-    private globalService: GlobalService,
-  ) {}
+  @Output()
+  public reloadCourse: EventEmitter<Preview> = new EventEmitter<Preview>();
 
-  public ngOnInit(): void {
-    this.getCourseById();
-    this.globalService.currentUserObservable.subscribe((res) => {
-      console.log(res);
-    });
-  }
+  constructor(private activatedRoute: ActivatedRoute, private courseService: CoursesApiService) {}
 
   public ngOnChanges(): void {
     if (this.preview) {
       this.getPreviewDetails();
     }
-  }
-
-  public getCourseById(): void {
-    this.activatedRoute.params.subscribe((param) => {
-      var parts = this.router.url.split('/');
-      var result = parts[parts.length - 1];
-      if (result != 'preview') {
-        this.courseService.getCourseDetails(param['id']).subscribe(
-          (res) => {
-            this.course = res.data;
-            this.loader = false;
-            this.trainer = res.data.trainer;
-            this.trainerEmitter$.emit(this.trainer);
-          },
-          () => {
-            this.router.navigate(['not-found']);
-            this.loader = false;
-          },
-        );
-      } else {
-        this.preview = true;
-        this.getPreviewDetails();
-      }
-    });
   }
 
   public getPreviewDetails(): void {
@@ -94,12 +63,12 @@ export class CourseGeneralComponent implements OnInit, OnChanges {
 
   public reloadData(event: boolean | number): void {
     if (event && event !== -1) {
-      this.getCourseById();
+      this.reloadCourse.emit();
       this.getPreviewDetails();
     }
     if (event === -1) {
       this.isJoined = true;
-      this.getCourseById();
+      this.reloadCourse.emit();
     }
   }
 }

@@ -1,19 +1,18 @@
 @import 'src/assets/styles/variables/colors';
 
-.trainer-info{
-    margin-bottom: 15px;
-    .content{
-        background-color: $white;
-        padding: 32px;
-        border-radius: 8px;
-    .trainer-label{
+.trainer-info {
+  margin-bottom: 15px;
+  .content {
+    background-color: $white;
+    padding: 32px;
+    border-radius: 8px;
+    .trainer-label {
       color: $title-color;
       font-weight: 600;
       font-size: 24px;
       margin-bottom: 24px;
     }
-    .trainer{
-
-    }
+    .trainer {
     }
   }
+}

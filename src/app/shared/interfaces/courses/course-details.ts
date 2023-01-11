@@ -19,6 +19,7 @@ export interface CourseDetails {
   link?: string;
   lessons: Lessons[];
   lessons_count: number;
+  lessons_passed: string;
   level: 'All levels';
   max_participants: number;
   price: number;
@@ -40,6 +41,7 @@ export interface CourseDetails {
   full_access: boolean;
   in_basket: number;
   quiz_id?: number;
+  course_passed?: boolean;
 }
 export interface LessonTrainer {
   avatar: string;
@@ -93,6 +95,12 @@ export interface Questions {
   answers: string[];
   multiple_choice: number;
   title: string;
+  your_answers: YourAnswers;
+}
+
+export interface YourAnswers {
+  right_answers: string[];
+  your_answer: string[];
 }
 
 export interface Resources {

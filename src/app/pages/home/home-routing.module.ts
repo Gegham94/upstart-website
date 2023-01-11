@@ -8,7 +8,6 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'courses', component: CoursesComponent },
-  { path: 'courses/:id', component: CoursesComponent },
   { path: 'basket', component: BasketComponent },
   { path: 'favorites', component: FavoritesComponent },
 ];

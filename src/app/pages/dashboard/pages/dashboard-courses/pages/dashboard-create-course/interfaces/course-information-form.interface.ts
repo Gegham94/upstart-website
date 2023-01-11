@@ -8,6 +8,7 @@ export interface CourseInformationForm {
   lessonsCount: number | null;
   whatWillLearn: string[] | null;
   resources: number[] | null;
+  certificate: boolean | null;
   price: {
     amount?: number;
     currency?: string | null;

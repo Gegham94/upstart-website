@@ -2,113 +2,128 @@
   <us-button class="close-btn" (click)="dialog.close()">
     <us-icon class="reviews__modal-btn" name="close"></us-icon>
   </us-button>
-  <div *ngIf="loaderDate; else loadData" class="loader">
-    <ngx-skeleton-loader
-      count="5"
-      [theme]="{
-        maxWidth: '700px',
-        height: '80px',
-        'background-color': '#f8f8f8'
-      }"
-      appearance="line"
-    ></ngx-skeleton-loader>
-  </div>
-  <ng-template #loadData>
-    <div class="certificate" #pdfTable [class.pdf]="page.type">
-      <div class="certificate__container">
-        <div class="certificate__title">
-          <p *ngIf="page.type">
-            {{ title }}
-          </p>
-          <input *ngIf="!page.type" class="certificate__input" [(ngModel)]="title" type="text" />
-        </div>
-
-        <div class="certificate__sub-title">
-          <p *ngIf="page.type">
-            {{ subTitle }}
-          </p>
-          <input *ngIf="!page.type" class="certificate__input" [(ngModel)]="subTitle" type="text" />
-        </div>
-
-        <div class="certificate__for">
-          <p *ngIf="page.type">
-            {{ forUser }}
-          </p>
-          <input *ngIf="!page.type" class="certificate__input" [(ngModel)]="forUser" type="text" />
-        </div>
-
-        <div class="certificate__student-name">
-          <p *ngIf="page.type">
-            {{ studentName }}
-          </p>
-          <input
-            *ngIf="!page.type"
-            readonly
-            class="certificate__input"
-            [(ngModel)]="studentName"
-            type="text"
-          />
-        </div>
-
-        <div class="certificate__description-title">
-          <p *ngIf="page.type">
-            {{ descriptionTitle }}
-          </p>
-          <input
-            *ngIf="!page.type"
-            class="certificate__input"
-            [(ngModel)]="descriptionTitle"
-            type="text"
-          />
-        </div>
-
-        <div class="certificate__description">
-          <p *ngIf="page.type">
-            {{ description }}
-          </p>
-          <input
-            *ngIf="!page.type"
-            class="certificate__input"
-            [(ngModel)]="description"
-            type="text"
-          />
-        </div>
-
-        <div class="certificate__footer">
-          <div class="certificate__signature">
+  <ng-container *ngIf="page.coursePassed; else notCertificate">
+    <div *ngIf="loaderDate; else loadData" class="loader">
+      <ngx-skeleton-loader
+        count="5"
+        [theme]="{
+          maxWidth: '700px',
+          height: '80px',
+          'background-color': '#f8f8f8'
+        }"
+        appearance="line"
+      ></ngx-skeleton-loader>
+    </div>
+    <ng-template #loadData>
+      <div class="certificate" #pdfTable [class.pdf]="page.type">
+        <div class="certificate__container">
+          <div class="certificate__title">
             <p *ngIf="page.type">
-              {{ signature }}
+              {{ title }}
+            </p>
+            <input *ngIf="!page.type" class="certificate__input" [(ngModel)]="title" type="text" />
+          </div>
+
+          <div class="certificate__sub-title">
+            <p *ngIf="page.type">
+              {{ subTitle }}
             </p>
             <input
               *ngIf="!page.type"
               class="certificate__input"
-              [(ngModel)]="signature"
+              [(ngModel)]="subTitle"
               type="text"
             />
-            <span class="certificate__footer-label">Instructor</span>
           </div>
 
-          <img src="../../../../../assets/images/certificate/certificate-icon.svg" alt="" />
-          <div class="certificate__date">
+          <div class="certificate__for">
             <p *ngIf="page.type">
-              {{ completedDate }}
+              {{ forUser }}
+            </p>
+            <input
+              *ngIf="!page.type"
+              class="certificate__input"
+              [(ngModel)]="forUser"
+              type="text"
+            />
+          </div>
+
+          <div class="certificate__student-name">
+            <p *ngIf="page.type">
+              {{ studentName }}
             </p>
             <input
               *ngIf="!page.type"
               readonly
               class="certificate__input"
-              [(ngModel)]="completedDate"
+              [(ngModel)]="studentName"
               type="text"
             />
-            <span class="certificate__footer-label">Date</span>
+          </div>
+
+          <div class="certificate__description-title">
+            <p *ngIf="page.type">
+              {{ descriptionTitle }}
+            </p>
+            <input
+              *ngIf="!page.type"
+              class="certificate__input"
+              [(ngModel)]="descriptionTitle"
+              type="text"
+            />
+          </div>
+
+          <div class="certificate__description">
+            <p *ngIf="page.type">
+              {{ description }}
+            </p>
+            <input
+              *ngIf="!page.type"
+              class="certificate__input"
+              [(ngModel)]="description"
+              type="text"
+            />
+          </div>
+
+          <div class="certificate__footer">
+            <div class="certificate__signature">
+              <p *ngIf="page.type">
+                {{ signature }}
+              </p>
+              <input
+                *ngIf="!page.type"
+                class="certificate__input"
+                [(ngModel)]="signature"
+                type="text"
+              />
+              <span class="certificate__footer-label">Instructor</span>
+            </div>
+
+            <img src="../../../../../assets/images/certificate/certificate-icon.svg" alt="" />
+            <div class="certificate__date">
+              <p *ngIf="page.type">
+                {{ completedDate }}
+              </p>
+              <input
+                *ngIf="!page.type"
+                readonly
+                class="certificate__input"
+                [(ngModel)]="completedDate"
+                type="text"
+              />
+              <span class="certificate__footer-label">Date</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-template>
+  </ng-container>
+  <ng-template #notCertificate>
+    <h3 class="not-certificate">{{ 'dashboard.courses.not_certificate' | translate }}</h3>
   </ng-template>
 </div>
 
-<div class="certificate-modal-footer" *ngIf="!loaderDate">
+<div class="certificate-modal-footer" *ngIf="!loaderDate && page.coursePassed">
   <us-button
     *ngIf="page.type"
     class="custom-btn"

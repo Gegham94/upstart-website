@@ -23,6 +23,7 @@
     <div class="row">
       <div class="bio col-lg-9 col-md-8">
         <us-about-area
+          *ngIf="trainerData.bio"
           [height]="270"
           [label]="'trainer_profile.about_me'"
           [text]="trainerData.bio"
@@ -112,3 +113,5 @@
     </div>
   </div>
 </div>
+
+<us-scroll-top></us-scroll-top>

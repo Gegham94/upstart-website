@@ -20,6 +20,7 @@ import { AuthorizationService } from '../../shared/services/auth/authorization.s
 import { CurrentUserInfoService } from '../../shared/services/current-user-info/current-user-info.service';
 import { TranslatedTitleService } from '../../shared/services/translated-title.service';
 import { UserRole } from '../../shared/enums/user-role';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'us-settings',
@@ -64,6 +65,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   public URLreg: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
+  public URLYoutube: string = '^(https?\\:\\/\\/)?(www\\.youtube\\.com|youtu\\.be)\\/.+$';
+
   public settingsForm = new FormGroup({
     first_name: new FormControl<string>('', Validators.required),
     last_name: new FormControl<string>('', Validators.required),
@@ -74,7 +77,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     twitter: new FormControl<string>('', Validators.pattern(this.URLreg)),
     facebook: new FormControl<string>('', Validators.pattern(this.URLreg)),
     linkedin: new FormControl<string>('', Validators.pattern(this.URLreg)),
-    youtube: new FormControl<string>('', Validators.pattern(this.URLreg)),
+    youtube: new FormControl<string>('', Validators.pattern(this.URLYoutube)),
     tax_identity_number: new FormControl<string>('', [
       Validators.required,
       Validators.maxLength(8),
@@ -110,6 +113,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private settingsService: SettingsService,
     private toastr: ToastrService,
     private readonly translatedTitleService: TranslatedTitleService,
+    private translateService: TranslateService,
   ) {
     this.translatedTitleService.setTranslatedTitle(this.title);
   }
@@ -265,7 +269,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .subscribe(
         (metaData: MetaDataInterface) => {
           if (metaData.success) {
-            this.toastr.success('Success');
+            this.toastr.success(this.translateService.instant('toast-messages.success'));
             this.getCurrentUserInfo();
           } else if (metaData.errors) {
             this.errors = metaData.errors;
@@ -292,7 +296,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .updateUser(data)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        this.toastr.success('Password updated successfully');
+        this.toastr.success(this.translateService.instant('toast-messages.password-update'));
         this.showChangePasswordInputs = false;
         this.loader = false;
       });
@@ -307,10 +311,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((res) => {
         if (res.success) {
-          this.toastr.success('Password confirmed');
+          this.toastr.success(this.translateService.instant('toast-messages.password-confirmed'));
           this.activeInputs = false;
         } else {
-          this.toastr.error('Invalid password');
+          this.toastr.error(this.translateService.instant('toast-messages.password-invalid'));
         }
       });
   }

@@ -1,11 +1,10 @@
 import { Component, EventEmitter, forwardRef, HostListener, Input, Output } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-  ValidationErrors,
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
 import { InputTypeEnum } from '../../../../enums/input-type.enum';
+
+export interface ValidationError {
+  [keys: string]: ValidationError | string;
+}
 
 @Component({
   selector: 'us-input',
@@ -23,6 +22,11 @@ export class InputComponent implements ControlValueAccessor {
   private _value: string = '';
 
   private isShow = false;
+
+  public errors?: ValidationError;
+
+  @Input()
+  public errorList: string;
 
   @Input()
   public type?: string = 'text';
@@ -48,8 +52,6 @@ export class InputComponent implements ControlValueAccessor {
   @Input()
   public iconSize?: number = 24;
 
-  public errors?: ValidationErrors;
-
   @Input()
   public set value(val) {
     this._value = val;
@@ -63,9 +65,6 @@ export class InputComponent implements ControlValueAccessor {
 
   @Input()
   public readonly?: boolean = false;
-
-  @Input()
-  public controlName?: FormControl | null;
 
   @Input()
   public autocomplete?: boolean = true;
@@ -122,15 +121,12 @@ export class InputComponent implements ControlValueAccessor {
     this.readonly = false;
   }
 
-  public get getControlName() {
-    return this.controlName as FormControl;
+  public get hasErrors(): boolean {
+    return !!this.errors && Object.keys(this.errors).length > 0;
   }
 
-  public get hasErrors(): boolean {
-    return (
-      (!!this.errors && Object.keys(this.errors).length > 0) ||
-      (!!this.getControlName?.errors && Object.keys(this.getControlName.errors).length > 0)
-    );
+  public getChildValidationError(error: string | ValidationError, key: string): string {
+    return typeof error !== 'string' ? (error[key] as string) : error;
   }
 
   public showInputText() {

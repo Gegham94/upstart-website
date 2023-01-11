@@ -70,40 +70,41 @@
                 usValidationError
                 [formControl]="firstName"
                 label="{{ 'auth.register.first_name' | translate }}"
-                [controlName]="firstName"
                 placeholder="{{ 'auth.register.first_name' | translate }}"
               ></us-input>
 
               <us-input
+                usValidationError
                 [formControl]="lastName"
-                [controlName]="lastName"
                 label="{{ 'auth.register.last_name' | translate }}"
                 placeholder="{{ 'auth.register.last_name' | translate }}"
               ></us-input>
               <us-input
                 [formControl]="phone"
-                [controlName]="phone"
+                usValidationError
                 label="{{ 'auth.register.phone' | translate }}"
                 placeholder="{{ 'auth.register.phone' | translate }}"
               ></us-input>
 
               <us-input
+                usValidationError
                 *ngIf="getUserRole !== 'ST'"
                 [formControl]="headline"
-                [controlName]="headline"
+                usValidationError
                 label="{{ 'auth.register.headline' | translate }}"
                 placeholder="{{ 'settings.instructor' | translate }}"
               ></us-input>
 
               <us-input
+                usValidationError
                 *ngIf="getUserRole === 'TRC'"
                 [formControl]="trainingName"
-                [controlName]="trainingName"
                 label="{{ 'auth.register.training_name' | translate }}"
                 placeholder="{{ 'auth.register.training_name' | translate }}"
               ></us-input>
 
               <us-editor
+                usValidationError
                 *ngIf="getUserRole !== 'ST'"
                 [formControl]="biography"
                 label="{{ 'trainer_profile.bio' | translate }}"
@@ -113,39 +114,49 @@
 
             <div class="user_input-area area-right" *ngIf="getUserRole !== 'ST'">
               <us-input
+                usValidationError
                 [formControl]="website"
+                [errorList]="'global.input.invalid_data'"
                 [label]="'trainer_profile.website' | translate"
                 placeholder="URL"
               ></us-input>
 
               <us-input
+                usValidationError
                 [formControl]="twitter"
+                [errorList]="'global.input.invalid_data'"
                 label="Twitter"
                 placeholder="Link eg: https://twitter.com/"
               ></us-input>
 
               <us-input
+                usValidationError
                 [formControl]="facebook"
+                [errorList]="'global.input.invalid_data'"
                 label="Facebook"
                 placeholder="Link eg: https://www.facebook.com/"
               ></us-input>
 
               <us-input
+                usValidationError
                 [formControl]="linkedIn"
+                [errorList]="'global.input.invalid_data'"
                 label="LinkedIn"
                 placeholder="Link eg: https://www.linkedin.com/"
               ></us-input>
 
               <us-input
+                usValidationError
                 [formControl]="youtube"
+                [errorList]="'global.input.invalid_data'"
                 label="Youtube"
-                placeholder="Link eg: https://www.youtube.com/"
+                placeholder="Link eg: https://www.youtube.com/@username"
               ></us-input>
 
               <us-input
+                usValidationError
                 *ngIf="getUserRole === 'TRC'"
                 [formControl]="identityNum"
-                [controlName]="identityNum"
                 label="{{ 'auth.register.tax_num' | translate }}"
                 placeholder="{{ 'auth.register.tax_num' | translate }}"
               ></us-input>
@@ -193,10 +204,10 @@
               >{{ 'settings.change_password' | translate }}</span
             >
             <us-input
-              *ngIf="showChangePasswordInputs"
+              usValidationError
+              [ngStyle]="{ display: showChangePasswordInputs ? 'block' : 'none' }"
               [formControl]="oldPassword"
               [activeIcon]="'close-eye'"
-              [controlName]="oldPassword"
               [type]="inputTypeEnum.password"
               label="{{ 'settings.current_password' | translate }}"
               placeholder="{{ 'settings.enter_current_password' | translate }}"
@@ -211,9 +222,9 @@
             >
 
             <us-input
-              *ngIf="showChangePasswordInputs"
+              usValidationError
+              [ngStyle]="{ display: showChangePasswordInputs ? 'block' : 'none' }"
               [formControl]="newPassword"
-              [controlName]="newPassword"
               [readonly]="activeInputs"
               [activeIcon]="'close-eye'"
               [type]="inputTypeEnum.password"
@@ -222,7 +233,8 @@
             ></us-input>
 
             <us-input
-              *ngIf="showChangePasswordInputs"
+              usValidationError
+              [ngStyle]="{ display: showChangePasswordInputs ? 'block' : 'none' }"
               [readonly]="activeInputs"
               [formControl]="verifyPassword"
               [activeIcon]="'close-eye'"

@@ -1,10 +1,9 @@
 import { CourseCountService } from './../../../../services/course-count/course-count.service';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
 import { CategoriesInterface } from '../../../../interfaces/categories/categories.interface';
 import { Router } from '@angular/router';
-import { NotificationsInterface } from 'src/app/shared/interfaces/notifications/notifications.interface';
 import { GlobalService } from '../../../../services/global.service';
 import { CurrentUserInfoInterface } from 'src/app/shared/interfaces/current-user.interface';
 import { AuthorizationService } from 'src/app/shared/services/auth/authorization.service';
@@ -22,16 +21,22 @@ export class HeaderMobileMenuComponent implements OnInit, OnDestroy {
   public isLoggedIn: boolean = false;
 
   @Input()
-  public set notifications(data: NotificationsInterface[]) {
-    if (data) {
-      this.unreadCount = 0;
-      for (const notification of data) {
-        if (notification.status === 0) {
-          this.unreadCount++;
-        }
-      }
+  public set notifications(data: number) {
+    if (data > 0) {
+      this.unreadCount = data;
     }
   }
+
+  @Input()
+  public set showSearchMenu(data: boolean) {
+    if (data) {
+      this.isShowSearch = data;
+      this.menuOpened = true;
+    }
+  }
+
+  @Output()
+  public closedSearch: EventEmitter<void> = new EventEmitter();
 
   @Input()
   public userInfo?: CurrentUserInfoInterface;
@@ -60,6 +65,8 @@ export class HeaderMobileMenuComponent implements OnInit, OnDestroy {
   public coursesInBasket: number = 0;
 
   public coursesInWishList: number = 0;
+
+  public isShowSearch: boolean = false;
 
   constructor(
     private readonly globalService: GlobalService,
@@ -125,6 +132,8 @@ export class HeaderMobileMenuComponent implements OnInit, OnDestroy {
       this.subcategories = null;
       this.openLanguages = false;
       this.isOpenMenu = false;
+      this.isShowSearch = false;
+      this.closedSearch.emit();
     }
   }
 
@@ -176,5 +185,10 @@ export class HeaderMobileMenuComponent implements OnInit, OnDestroy {
   public openBasketPage() {
     this.menuOpened = false;
     this.router.navigateByUrl('/basket');
+  }
+
+  public closeSearchMenu() {
+    this.isShowSearch = false;
+    this.menuOpened = false;
   }
 }

@@ -92,7 +92,7 @@
       <span class="course-side__element-value"> {{ 'course.paid-certificate' | translate }} </span>
     </div>
 
-    <div class="course-side__element">
+    <div class="course-side__element" *ngIf="course?.type_id !== CourseType.ONLINE">
       <us-icon class="course-side__element-icon" name="courses/participants"></us-icon>
       <span class="course-side__element-value">
         <span *ngIf="course?.max_participants"
@@ -104,51 +104,55 @@
       </span>
     </div>
   </div>
-  <ng-container *ngIf="isGoToClass; else addToCart">
+  <ng-container *ngIf="!preview && course && course.user_id !== currentUser?.id">
+    <ng-container *ngIf="isGoToClass; else addToCart">
+      <us-button
+        [ngClass]="{ joined: isJoined || course.full_access, loader: showLoader }"
+        (click)="joinToClass(course)"
+        [class.preview]="isPreview"
+        class="course-side__button"
+        [theme]="buttonTheme.primary"
+      >
+        <span *ngIf="!isJoined && !course.full_access">{{ 'course.go_to_class' | translate }}</span>
+        <span *ngIf="isJoined || course.full_access">{{ 'course.joined' | translate }}</span>
+      </us-button>
+    </ng-container>
+
+    <ng-template #addToCart>
+      <span *ngIf="!course?.in_basket || course?.price === 0">
+        <us-button
+          (click)="addToCartAction(course)"
+          [ngClass]="{ preview: isPreview, loader: showLoader }"
+          class="course-side__button"
+          [theme]="buttonTheme.primary"
+        >
+          {{ 'basket.courses.add-to-card' | translate }}
+        </us-button>
+      </span>
+
+      <span *ngIf="course?.in_basket">
+        <us-button
+          [ngClass]="{ preview: isPreview, loader: showLoader }"
+          (click)="removeFromCart(course)"
+          class="course-side__button"
+          [theme]="buttonTheme.primary"
+        >
+          {{ 'basket.courses.remove-from-card' | translate }}
+        </us-button>
+      </span>
+    </ng-template>
+
     <us-button
-      [ngClass]="{ joined: isJoined || course?.full_access, loader: showLoader }"
-      (click)="joinToClass(course)"
-      [class.preview]="isPreview"
-      class="course-side__button"
+      *ngIf="course?.certificate === 1 && checkIsUserAuth() && course?.full_access"
+      class="course-side__button m-3"
+      (clicked)="openCertificateModal()"
       [theme]="buttonTheme.primary"
+      [disabled]="false"
+      [outline]="true"
     >
-      <span *ngIf="!isJoined && !course?.full_access">{{ 'course.go_to_class' | translate }}</span>
-      <span *ngIf="isJoined || course?.full_access">{{ 'course.joined' | translate }}</span>
+      {{ 'dashboard.courses.download_certificate' | translate }}
     </us-button>
   </ng-container>
-
-  <ng-template #addToCart>
-    <span *ngIf="!course?.in_basket || course?.price === 0">
-      <us-button
-        (click)="addToCartAction(course)"
-        [ngClass]="{ preview: isPreview, loader: showLoader }"
-        class="course-side__button"
-        [theme]="buttonTheme.primary"
-      >
-        {{ 'basket.courses.add-to-card' | translate }}
-      </us-button>
-    </span>
-
-    <span *ngIf="course?.in_basket">
-      <us-button
-        [ngClass]="{ preview: isPreview, loader: showLoader }"
-        (click)="removeFromCart(course)"
-        class="course-side__button"
-        [theme]="buttonTheme.primary"
-      >
-        {{ 'basket.courses.remove-from-card' | translate }}
-      </us-button>
-    </span>
-  </ng-template>
-  <us-button
-    class="course-side__button m-3"
-    (clicked)="openCertificateModal()"
-    [theme]="buttonTheme.primary"
-    [disabled]="false"
-    [outline]="true"
-  >
-    {{ 'dashboard.courses.download_certificate' | translate }}
-  </us-button>
 </div>
 <ng-template #cover_image>
   <img

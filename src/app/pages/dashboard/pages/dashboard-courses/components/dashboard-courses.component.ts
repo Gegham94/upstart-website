@@ -7,10 +7,11 @@ import { CoursesApiService } from '../../../../../shared/services/courses/course
 import { CurrentUserInfoInterface } from '../../../../../shared/interfaces/current-user.interface';
 import { UserRole } from '../../../../../shared/enums/user-role';
 import { GlobalService } from '../../../../../shared/services/global.service';
-import { filter, Subject, Subscription, takeUntil } from 'rxjs';
+import { combineLatest, filter, Subject, Subscription, takeUntil } from 'rxjs';
 import { PaginatePipeArgs } from 'ngx-pagination/lib/paginate.pipe';
 import { SelectOptions } from '../../../../../shared/interfaces/select-options.interface';
 import { CourseStatus } from '../../../../../shared/enums/course-status';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'us-dashboard-courses',
@@ -36,26 +37,9 @@ export class DashboardCoursesComponent implements OnInit, OnDestroy {
 
   public config: PaginatePipeArgs;
 
-  public selectedOption?: SelectOptions;
+  public selectedOption?: SelectOptions<CourseStatus>;
 
-  public readonly courseStatusOptions: SelectOptions[] = [
-    {
-      displayName: 'All',
-      value: -1,
-    },
-    {
-      displayName: 'Draft',
-      value: CourseStatus.DRAFT,
-    },
-    {
-      displayName: 'Under Review',
-      value: CourseStatus.UNDER_REVIEW,
-    },
-    {
-      displayName: 'Published',
-      value: CourseStatus.PUBLISHED,
-    },
-  ];
+  public courseStatusOptions: SelectOptions<CourseStatus | -1>[] = [];
 
   public isFilterActive: boolean = false;
 
@@ -63,18 +47,28 @@ export class DashboardCoursesComponent implements OnInit, OnDestroy {
 
   private coursesSubscription?: Subscription;
 
+  private routerParamsSubscription?: Subscription;
+
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly courseApiService: CoursesApiService,
+    private readonly translateService: TranslateService,
     private globalService: GlobalService,
   ) {}
 
   public ngOnInit(): void {
-    this.getCourseList();
+    const statusTranslations = [
+      'courses.statuses.all',
+      'courses.statuses.draft',
+      'courses.statuses.under-review',
+      'courses.statuses.publish',
+      'courses.statuses.declined',
+    ];
+
     this.currentUserInfo();
 
-    this.route.queryParams.subscribe((params) => {
+    this.routerParamsSubscription = this.route.queryParams.subscribe((params) => {
       if (params && params['status']) {
         const statusOption = this.courseStatusOptions.find((el) => el.value === +params['status']);
         this.filterCoursesBy(statusOption ?? this.courseStatusOptions[0]);
@@ -82,6 +76,41 @@ export class DashboardCoursesComponent implements OnInit, OnDestroy {
         this.filterCoursesBy(this.courseStatusOptions[0]);
       }
     });
+
+    combineLatest(statusTranslations.map((el) => this.translateService.get(el))).subscribe(
+      ([all, draft, underReview, publish, declined]) => {
+        this.courseStatusOptions = [
+          {
+            displayName: all,
+            value: -1,
+          },
+          {
+            displayName: draft,
+            value: CourseStatus.DRAFT,
+          },
+          {
+            displayName: underReview,
+            value: CourseStatus.UNDER_REVIEW,
+          },
+          {
+            displayName: publish,
+            value: CourseStatus.PUBLISHED,
+          },
+          {
+            displayName: declined,
+            value: CourseStatus.DECLINED,
+          },
+        ];
+      },
+    );
+  }
+
+  public get checkDeclined() {
+    if (this.courseList?.filter((el) => el?.status === CourseStatus.DECLINED).length! > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public ngOnDestroy(): void {
@@ -100,7 +129,6 @@ export class DashboardCoursesComponent implements OnInit, OnDestroy {
         this.totalPages = response.data.total;
         this.pageSize = response.data.per_page;
         this.currentPage = response.data.current_page;
-
         this.setPaginationConfig(this.pageSize, this.currentPage, this.totalPages);
       });
   }
@@ -137,12 +165,13 @@ export class DashboardCoursesComponent implements OnInit, OnDestroy {
     };
   }
 
-  public filterCoursesBy(option: SelectOptions): void {
+  public filterCoursesBy(option?: SelectOptions): void {
     this.courseList = undefined;
     this.coursesSubscription?.unsubscribe();
-    this.selectedOption = option;
+    this.routerParamsSubscription?.unsubscribe();
+    this.selectedOption = option as SelectOptions<CourseStatus | -1>;
 
-    if (option.value !== -1) {
+    if (option && option.value !== -1) {
       this.getCourseList(option.value as CourseStatus);
       this.isFilterActive = true;
       this.router.navigate([], {

@@ -1,0 +1,121 @@
+@import 'src/assets/styles/variables/colors';
+
+::ng-deep {
+  .mat-dialog-container {
+    padding: 0;
+    background: $white;
+    box-shadow: 0 4px 4px #00000040;
+    border-radius: 4px;
+    position: relative;
+  }
+}
+
+.quiz {
+  &__content {
+    padding: 27px 37px;
+    &-passed-text {
+      text-align: center;
+      font-size: 24px;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    right: 14px;
+    top: 12px;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: $title-color;
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  &__question {
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    &-count {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 130%;
+      color: $light-grey-text;
+    }
+
+    &-title {
+      text-align: center;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      color: $black;
+    }
+  }
+
+  &__answers {
+    &-list {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 14px;
+
+      &.wrong {
+        .texts {
+          color: $error;
+        }
+      }
+
+      &.right {
+        .texts {
+          color: $free-text-color;
+        }
+      }
+    }
+
+    &-item {
+      margin-right: 7px;
+    }
+
+    &-text {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 22px;
+      color: $black;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    padding: 15px 22px;
+    background: #faf8ff;
+
+    &-btn {
+      ::ng-deep {
+        button {
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 14px;
+          padding: 10px 21px;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .not-btn {
+    button {
+      margin: auto;
+      top: 83px;
+    }
+  }
+}

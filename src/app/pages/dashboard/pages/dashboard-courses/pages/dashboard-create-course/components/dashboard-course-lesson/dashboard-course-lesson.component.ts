@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, OnChanges, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ResourceType } from '../../enums/resource-type.enum';
 import { ButtonTheme } from '../../../../../../../../shared/enums/button-theme.enum';
@@ -12,13 +12,14 @@ import { ApiResponse } from '../../../../../../../../shared/interfaces/api/api-r
 import { SelectOptions } from '../../../../../../../../shared/interfaces/select-options.interface';
 import { Router } from '@angular/router';
 import { AccordionComponent } from '../../../../../../../../shared/components/accordion/components/accordion.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'us-dashboard-course-lesson',
   templateUrl: './dashboard-course-lesson.component.html',
   styleUrls: ['./dashboard-course-lesson.component.scss'],
 })
-export class DashboardCourseLessonComponent implements OnChanges, OnInit {
+export class DashboardCourseLessonComponent implements OnChanges {
   public readonly resourceType = ResourceType;
 
   public readonly buttonTheme = ButtonTheme;
@@ -54,15 +55,8 @@ export class DashboardCourseLessonComponent implements OnChanges, OnInit {
     private readonly lessonsApiService: LessonsApiService,
     private readonly toastrService: ToastrService,
     private readonly router: Router,
+    private translateService: TranslateService,
   ) {}
-
-  public ngOnInit(): void {
-    this.lessonForm.get('resources')?.valueChanges.subscribe((newValue) => {
-      if (newValue.includes(-1)) {
-        this.router.navigate(['dashboard', 'resources']);
-      }
-    });
-  }
 
   public ngOnChanges(): void {
     this.setElementResourceType(this.lessonForm.get('resource')?.value);
@@ -87,11 +81,6 @@ export class DashboardCourseLessonComponent implements OnChanges, OnInit {
 
   public addResourcesField(): void {
     this.lessonForm.addControl('resources', new FormControl([]));
-    this.lessonForm.get('resources')?.valueChanges.subscribe((newValue) => {
-      if (newValue.includes(-1)) {
-        this.router.navigate(['dashboard', 'resources']);
-      }
-    });
   }
 
   public setEditMode(newState: boolean): void {
@@ -127,7 +116,7 @@ export class DashboardCourseLessonComponent implements OnChanges, OnInit {
             ?.setErrors(errors ? { custom: errors['video_url'] } : null);
         } else {
           this.accordionQueryList.first.expanded.delete(0);
-          this.toastrService.success('Successfully updated Lesson!');
+          this.toastrService.success(this.translateService.instant('toast-messages.lesson-update'));
         }
       });
   }
@@ -145,7 +134,7 @@ export class DashboardCourseLessonComponent implements OnChanges, OnInit {
           ),
         );
         this.courseFormService.isLoading = false;
-        this.toastrService.success('Lesson deleted successfully');
+        this.toastrService.success(this.translateService.instant('toast-messages.lesson-deleted'));
       }
     });
   }
@@ -192,7 +181,9 @@ export class DashboardCourseLessonComponent implements OnChanges, OnInit {
               ?.setErrors(errors ? { custom: errors['video_url'] } : null);
           } else {
             this.lessonForm.get('isEdit')?.setValue(false);
-            this.toastrService.success('Successfully updated Section!');
+            this.toastrService.success(
+              this.translateService.instant('toast-messages.section-update'),
+            );
           }
 
           this.courseFormService.isLoading = false;

@@ -1,37 +1,40 @@
-import { Component, ElementRef, Input, ViewChild, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+  OnDestroy,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { ButtonTheme } from '../../../../enums/button-theme.enum';
 import { Router } from '@angular/router';
 import { CurrentUserInfoInterface } from 'src/app/shared/interfaces/current-user.interface';
 import { AuthorizationService } from 'src/app/shared/services/auth/authorization.service';
-import { NotificationsInterface } from 'src/app/shared/interfaces/notifications/notifications.interface';
+import {
+  NotificationsInterface,
+  NotificationsUnread,
+} from 'src/app/shared/interfaces/notifications/notifications.interface';
 import { CourseCountService } from 'src/app/shared/services/course-count/course-count.service';
-import { Subject, takeUntil } from 'rxjs';
+import { mergeMap, Subject, takeUntil, takeWhile, timer } from 'rxjs';
+import { NotificationsService } from '../../../../services/notifications/notifications.service';
 @Component({
   selector: 'us-header-action-panel',
   templateUrl: './header-action-panel.component.html',
   styleUrls: ['./header-action-panel.component.scss'],
 })
-export class HeaderActionPanelComponent implements OnDestroy {
+export class HeaderActionPanelComponent implements OnInit, OnDestroy {
+  public loggedIn: boolean = false;
+
+  @Output()
+  public unreadCountEmit: EventEmitter<number> = new EventEmitter<number>();
+
   @Input()
-  public loggedIn?: boolean = false;
+  public dashboard?: boolean = false;
 
   @Input()
   public isMobile?: boolean = false;
-
-  @Input()
-  public set notifications(data: NotificationsInterface[]) {
-    if (data) {
-      this.unreadCount = 0;
-      this.allNotifications = data;
-      this.allNotifications = [...this.allNotifications];
-      for (const notification of data) {
-        if (notification.status === 0) {
-          this.hasNewNotification = true;
-          this.unreadCount++;
-        }
-      }
-    }
-  }
 
   @Input()
   public userInfo?: CurrentUserInfoInterface;
@@ -65,6 +68,7 @@ export class HeaderActionPanelComponent implements OnDestroy {
     private router: Router,
     private readonly authorizationService: AuthorizationService,
     private courseCountService: CourseCountService,
+    private readonly notificationService: NotificationsService,
   ) {
     this.courseCountService.coursesInBasket$
       .pipe(takeUntil(this.destroyed$))
@@ -94,6 +98,15 @@ export class HeaderActionPanelComponent implements OnDestroy {
   }
 
   public readonly buttonTheme = ButtonTheme;
+
+  public ngOnInit(): void {
+    this.authorizationService.authToken.pipe(takeUntil(this.destroyed$)).subscribe((res) => {
+      this.loggedIn = !!res;
+      if (!!res) {
+        this.getNotifications();
+      }
+    });
+  }
 
   public goLogin() {
     this.router.navigate(['auth/login']);
@@ -145,5 +158,32 @@ export class HeaderActionPanelComponent implements OnDestroy {
     this.coursesInBasket = 0;
     this.destroyed$.next(true);
     this.destroyed$.complete();
+  }
+
+  private getNotifications() {
+    timer(0, 5000)
+      .pipe(
+        takeWhile(() => this.loggedIn),
+        mergeMap(() => this.notificationService.unread()),
+        takeUntil(this.destroyed$),
+      )
+      .subscribe((data: NotificationsUnread) => {
+        if (data.success) {
+          if (this.unreadCount !== data.unread) {
+            this.notificationService.getNotificationList().subscribe();
+            this.notificationService.getNotifications().subscribe();
+          }
+
+          this.unreadCount = data.unread;
+          this.unreadCountEmit.emit(data.unread);
+          this.hasNewNotification = data.unread > 0;
+        }
+      });
+  }
+
+  public changeUnreadCount(count: number) {
+    if (count === 0) {
+      this.hasNewNotification = false;
+    }
   }
 }

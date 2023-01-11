@@ -1,0 +1,11 @@
+@import 'src/assets/styles/variables/colors';
+
+::ng-deep {
+  .social-registration-modal {
+    &__body {
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: $white;
+    }
+  }
+}

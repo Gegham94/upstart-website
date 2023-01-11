@@ -35,6 +35,8 @@ export class CourseTypeComponent implements OnChanges {
 
   public underReview: string = '';
 
+  public declined: string = '';
+
   constructor(private translateService: TranslateService) {}
 
   public ngOnChanges(): void {
@@ -59,13 +61,16 @@ export class CourseTypeComponent implements OnChanges {
 
     switch (this.courseStatus) {
       case CourseStatus.DRAFT:
-        this.draft = 'draft';
+        this.draft = this.translateService.instant('courses.statuses.draft');
         break;
       case CourseStatus.PUBLISHED:
-        this.published = 'published';
+        this.published = this.translateService.instant('courses.statuses.publish');
         break;
       case CourseStatus.UNDER_REVIEW:
-        this.underReview = 'under review';
+        this.underReview = this.translateService.instant('courses.statuses.under-review');
+        break;
+      case CourseStatus.DECLINED:
+        this.declined = this.translateService.instant('courses.statuses.declined');
     }
   }
 

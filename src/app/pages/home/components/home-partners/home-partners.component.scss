@@ -1,0 +1,25 @@
+@import 'src/assets/styles/mixins/for-breakpoint';
+@import 'src/assets/styles/variables/colors';
+
+.partners {
+  padding: 60px;
+
+  &__title {
+    margin-bottom: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: center;
+    color: $light-grey-text;
+  }
+
+  &__logos {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    &-item {
+      margin-bottom: 60px;
+    }
+  }
+}

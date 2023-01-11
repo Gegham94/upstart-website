@@ -20,6 +20,11 @@ export class TranslatedTitleService {
     });
   }
 
+  public setTitle(newTitle: string): void {
+    this.title = newTitle;
+    this.titleService.setTitle(newTitle + ' ' + this.titleSuffix);
+  }
+
   public updateTitle(): void {
     this.setTranslatedTitle(this.title);
   }

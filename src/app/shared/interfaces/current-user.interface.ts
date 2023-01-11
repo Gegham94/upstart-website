@@ -21,7 +21,6 @@ export interface CurrentUserUpdateInterface {
   tax_identity_number?: number;
   current_password?: string;
   new_password?: string;
-  language_code?: string;
 }
 
 export interface UploadFilePath {

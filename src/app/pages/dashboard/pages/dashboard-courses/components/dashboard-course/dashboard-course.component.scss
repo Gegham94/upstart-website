@@ -1,4 +1,4 @@
-@import "src/assets/styles/variables/colors";
+@import 'src/assets/styles/variables/colors';
 
 .dashboard-course {
   background: $light-purple;
@@ -9,15 +9,15 @@
   height: max-content;
   ::ng-deep .mat-progress-bar-fill::after {
     background-color: $main;
-}
+  }
 
-::ng-deep .mat-progress-bar-buffer {
-    background: #E4E8EB;
-}
+  ::ng-deep .mat-progress-bar-buffer {
+    background: #e4e8eb;
+  }
 
-::ng-deep .mat-progress-bar {
+  ::ng-deep .mat-progress-bar {
     border-radius: 2px;
-}
+  }
   &:not(:host:last-child &) {
     margin-bottom: 16px;
   }
@@ -86,7 +86,7 @@
     align-items: center;
     gap: 5px;
     cursor: pointer;
-    .trainer-avatar{
+    .trainer-avatar {
       width: 20px;
       height: 20px;
       border-radius: 50%;
@@ -104,10 +104,10 @@
     background: $white;
     border-radius: 11px;
     padding: 8px 0;
-    width: 186px;
+    width: 200px;
     display: flex;
     flex-direction: column;
-    transition: .2s all ease-in-out;
+    transition: 0.2s all ease-in-out;
 
     &-button {
       padding: 0 12px;
@@ -115,6 +115,7 @@
       display: flex;
       align-items: center;
       cursor: pointer;
+      white-space: nowrap;
 
       &:hover {
         background: $lightest-grey;
@@ -149,29 +150,28 @@
     object-fit: cover;
     object-position: center;
   }
-  &__course-type{
+  &__course-type {
     margin-top: 5px;
-    ::ng-deep .block-position{
-      &:first-child{
+    ::ng-deep .block-position {
+      &:first-child {
         margin-left: 0 !important;
         margin-right: 10px !important;
       }
-
     }
   }
-  &__categories{
+  &__categories {
     margin-bottom: 5px;
-    .category{
-      &::after{
+    .category {
+      &::after {
         content: '|';
         margin: 0 5px;
       }
     }
   }
-  &__progress{
+  &__progress {
     margin: 5px 0;
     position: relative;
-    .progress-data{
+    .progress-data {
       display: none;
       width: 110px;
       height: 15px;
@@ -186,34 +186,32 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, 66%);
-      .arrow{
+      .arrow {
         clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         width: 10px;
         height: 10px;
-        background-color:$main;
+        background-color: $main;
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -150%);
       }
     }
-    .progress-bar{
+    .progress-bar {
       cursor: pointer;
       width: 100%;
       height: 10px;
       border-radius: 18px;
-      background-color: #E4E8EB;
-      .progress-body{
+      background-color: #e4e8eb;
+      .progress-body {
         height: 10px;
         background-color: $main;
       }
-      &:hover{
-        .progress-data{
+      &:hover {
+        .progress-data {
           display: block;
-
         }
       }
-
     }
   }
 }

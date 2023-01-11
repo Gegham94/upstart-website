@@ -99,10 +99,10 @@
       position: relative;
       cursor: default;
       overflow: hidden;
-      margin-right: 13px;
+      margin-right: 22px;
       border-radius: 50%;
-      height: 224px;
-      width: 224px;
+      height: 200px;
+      width: 200px;
 
       &:hover .add-photo {
         top: 0;
@@ -160,11 +160,19 @@
         align-items: flex-start;
         .role{
           color: $light-grey-text;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
+          font-size: 24px;
         }
+        // .public-role {
+        //   font-size: 24px;
+        // }
+        // .public-name {
+        //   font-size: 32px;
+        // }
         .name-surname{
-          margin-bottom: 20px;
+          margin-bottom: 10px;
           line-height: 40px;
+          font-size: 32px;
         }
         .category{
           color: $main;
@@ -172,7 +180,7 @@
           font-weight: 500;
         }
         .course-and-review{
-          margin-top: 15px;
+          margin-top: 30px;
           display: flex;
           justify-content: space-between;
           width: 50%;

@@ -70,6 +70,7 @@
   &__title {
     color: $title-color;
     letter-spacing: 0.1px;
+    height: 48px;
 
     &-keeper {
       display: flex;
@@ -126,6 +127,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    min-height: 25px;
     .rate{
       font-size: 12px;
       font-weight: 500;

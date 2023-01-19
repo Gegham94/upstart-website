@@ -7,7 +7,7 @@
     <input
       class="date-input__field"
       type="text"
-      [value]="value | date: (mode !== 'time' ? 'dd-MM-YYYY' : 'HH:mm')"
+      [value]="value | date : (mode !== 'time' ? 'dd-MM-YYYY' : 'HH:mm')"
       [readOnly]="true"
       [mode]="mode"
       [dpDayPicker]="{ min: minDate, showTwentyFourHours: true, showGoToCurrent: false }"

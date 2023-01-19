@@ -104,6 +104,7 @@ export class TogglebarComponent implements OnInit, AfterViewInit {
         break;
       case 'Level':
         this.globalService.levelsListObservable.subscribe((res) => {
+          this.level = [];
           Object.entries(res).forEach(([key, value]) => {
             if (Number(value) !== 1) {
               this.level.push({
@@ -119,6 +120,7 @@ export class TogglebarComponent implements OnInit, AfterViewInit {
         break;
       case 'Type':
         this.globalService.typesListObservable.subscribe((res) => {
+          this.type = [];
           Object.entries(res).forEach(([key, value]) => {
             this.type.push({
               checked: false,
@@ -132,6 +134,7 @@ export class TogglebarComponent implements OnInit, AfterViewInit {
         break;
       case 'Language':
         this.globalService.languagesListObservable.subscribe((res) => {
+          this.language = [];
           res.forEach((element) => {
             this.language.push({
               checked: false,

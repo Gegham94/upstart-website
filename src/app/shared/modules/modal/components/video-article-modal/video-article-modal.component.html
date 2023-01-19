@@ -173,7 +173,7 @@
 
   <ng-container *ngIf="!modalData.preview">
     <button (click)="passTheLesson()" *ngIf="modalData.id !== 3" class="pass-the-lesson">
-      Pass the lesson
+      {{ 'course.pass_the_lesson' | translate }}
     </button>
   </ng-container>
 </div>

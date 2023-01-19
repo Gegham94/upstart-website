@@ -5,6 +5,12 @@
   background: $white;
   border-radius: 2px;
 
+  ::ng-deep{
+    input::-webkit-input-placeholder{
+      color: black !important;
+      font-family: 'Roboto Slab' !important;
+    }
+  }
   .mat-dialog-container{
     padding: 0;
   }
@@ -18,6 +24,8 @@
     position: absolute;
     right: 15px;
     top: 18px;
+    z-index: 1;
+
     ::ng-deep button{
       padding: 0;
     }
@@ -31,9 +39,18 @@
   }
 
   .certificate {
-    background: url('../../../../../assets/images/certificate/certificate-bg.svg') no-repeat center center;
+    background: url('../../../../../assets/images/certificate/certificate-new-1.svg') no-repeat center center;
     background-size: contain;
-
+    width: 865px;
+    height: 462px;
+    margin: auto;
+    position: relative;
+    .inputs{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
     &.pdf {
       background-size: 750px;
 
@@ -67,32 +84,52 @@
     }
 
     &__container {
-      padding: 30px 40px;
-      text-align: center;
-      max-width: 665px;
-      margin: auto;
+      // padding: 30px 40px;
+      // text-align: center;
+      // max-width: 665px;
+      // margin: auto;
       z-index: 1;
     }
 
     &__title {
+      position: absolute;
+      width: 220px;
+      left: 0;
+      top: 0;
+      transform: translate(-312px, -210px);
       p, input {
         margin: auto;
-        font-size: 60px;
+        font-size: 30px;
         font-family: 'Roboto Slab';
         letter-spacing: 6px;
         text-align: center;
         font-weight: 600;
+        background-color: transparent;
       }
 
     }
 
     &__sub-title {
+        position: absolute;
+        width: 291px;
+        left: 0;
+        top: 0;
+        transform: translate(-306px, -174px);
       p, input {
         margin: 10px auto 0;
         font-size: 38px;
         font-family: 'Roboto Slab';
         font-weight: 300;
         letter-spacing: 3px;
+      }
+      input{
+        margin: 10px auto 0;
+        font-size: 23px;
+        font-family: "Roboto Slab";
+        font-weight: 300;
+        letter-spacing: 3px;
+        background: transparent;
+        text-align: left;
       }
     }
 
@@ -106,16 +143,17 @@
     }
 
     &__student-name {
+      width: 355px;
+      border-bottom: 0;
+      font-size: 15px;
+      transform: translate(-65px, -15px);
+      position: absolute;
       p, input {
         margin: auto;
         font-family: 'Roboto Slab';
         background: transparent;
-        font-size: 50px;
+        font-size: 26px;
         letter-spacing: 3px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid black;
-        max-width: 500px;
-        min-width: 400px;
       }
     }
 
@@ -128,11 +166,18 @@
     }
 
     &__description {
+      position: absolute;
+      width: 138px;
+      transform: translate(91px, 63px);
       p, input {
         margin: 10px auto 0;
-        font-size: 18px;
+        font-size: 15px;
         text-transform: capitalize;
-        font-weight: 600;
+        font-weight: 500;
+        background-color: transparent;
+        &::placeholder{
+          color: black;
+        }
       }
     }
 
@@ -151,24 +196,30 @@
     }
 
     &__date {
+      position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translate(-289px, 230px);
       p, input {
-        font-family: "Roboto Slab";
-        font-size: 20px;
+        font-family: 'Roboto Slab';
+        font-size: 17px;
         padding-bottom: 8px;
-        border-bottom: 1px solid black;
-        max-width: 225px;
-        min-width: 200px;
         background: transparent;
+        width: 96px;
+        letter-spacing: 1px;
+        font-weight: 600;
+
       }
     }
 
     &__signature {
+      position: fixed;
+      transform: translate(-73px, 160px);
+      width: 200px;
       p, input {
-        min-width: 200px;
-        font-size: 38px;
-        font-family: 'Mrs Saint Delafield', cursive;
-        border-bottom: 1px solid black;
-        max-width: 225px;
+        font-size: 18px;
+        font-family: 'Roboto Slab';
+        background-color: transparent;
       }
 
     }

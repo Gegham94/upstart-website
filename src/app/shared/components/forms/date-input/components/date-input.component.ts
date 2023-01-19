@@ -79,12 +79,15 @@ export class DateInputComponent implements ControlValueAccessor {
   }
 
   public get value() {
+    if (typeof this._value === 'string') {
+      this._value = dayjs(this._value, 'DD-MM-YYYY').toDate();
+    }
     return this._value;
   }
 
   public calendarDaySelected(event: CalendarValue) {
     if (event) {
-      this.value = (event as Dayjs).toDate();
+      this.value = dayjs(event as Dayjs).toDate();
     }
   }
 }

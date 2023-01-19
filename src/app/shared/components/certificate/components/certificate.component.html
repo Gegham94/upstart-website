@@ -16,7 +16,77 @@
     </div>
     <ng-template #loadData>
       <div class="certificate" #pdfTable [class.pdf]="page.type">
-        <div class="certificate__container">
+        <div class="inputs">
+          <div class="certificate__student-name">
+            <p *ngIf="page.type">
+              {{ studentName }}
+            </p>
+            <input
+              *ngIf="!page.type"
+              class="certificate__input"
+              [(ngModel)]="studentName"
+              placeholder="[ Student Name ]"
+              type="text"
+            />
+          </div>
+
+          <div class="certificate__signature">
+            <p *ngIf="page.type">
+              {{ signature }}
+            </p>
+            <input
+              *ngIf="!page.type"
+              class="certificate__input"
+              [(ngModel)]="signature"
+              type="text"
+            />
+          </div>
+
+          <div class="certificate__description">
+            <p *ngIf="page.type">
+              {{ description }}
+            </p>
+            <input
+              *ngIf="!page.type"
+              class="certificate__input"
+              [(ngModel)]="description"
+              type="text"
+              placeholder="[Course Title]"
+            />
+          </div>
+          <div class="certificate__date">
+            <p *ngIf="page.type">
+              {{ completedDate }}
+            </p>
+            <input
+              *ngIf="!page.type"
+              class="certificate__input"
+              [(ngModel)]="completedDate"
+              type="text"
+              placeholder="[Date]"
+            />
+          </div>
+
+          <div class="certificate__title">
+            <p *ngIf="page.type">
+              {{ title }}
+            </p>
+            <input *ngIf="!page.type" class="certificate__input" [(ngModel)]="title" type="text" />
+          </div>
+
+          <div class="certificate__sub-title">
+            <p *ngIf="page.type">
+              {{ subTitle }}
+            </p>
+            <input
+              *ngIf="!page.type"
+              class="certificate__input"
+              [(ngModel)]="subTitle"
+              type="text"
+            />
+          </div>
+        </div>
+        <!-- <div class="certificate__container">
           <div class="certificate__title">
             <p *ngIf="page.type">
               {{ title }}
@@ -114,7 +184,7 @@
               <span class="certificate__footer-label">Date</span>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </ng-template>
   </ng-container>

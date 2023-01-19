@@ -5,6 +5,8 @@ import { NotificationsInterface } from 'src/app/shared/interfaces/notifications/
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { GlobalNotificationsService } from '../../../../services/notifications/global-notifications.service';
+import { NotificationType } from 'src/app/shared/enums/notification-type.enum';
+import { GlobalService } from 'src/app/shared/services/global.service';
 
 @Component({
   selector: 'us-header-notification',
@@ -33,9 +35,12 @@ export class HeaderNotificationComponent implements OnInit {
 
   public loader: boolean = false;
 
+  private currentUserId!: number;
+
   constructor(
     private notificationService: NotificationsService,
     private globalNotificationService: GlobalNotificationsService,
+    private globalService: GlobalService,
     private router: Router,
     private toastr: ToastrService,
   ) {}
@@ -51,6 +56,10 @@ export class HeaderNotificationComponent implements OnInit {
           this.loader = false;
         }
       });
+
+    this.globalService.currentUserObservable.subscribe((res) => {
+      if (res && res.id) this.currentUserId = res?.id;
+    });
   }
 
   public fetchData() {
@@ -104,9 +113,12 @@ export class HeaderNotificationComponent implements OnInit {
     }
   }
 
-  public redirectNotification(url: string = '') {
-    if (url) {
-      this.router.navigate([url]);
+  public redirectNotification(itemId: number | undefined, type: string | undefined) {
+    if (itemId && type !== NotificationType.review) {
+      this.router.navigateByUrl(`course/${itemId}`);
+      this.hideNotificationsList.emit();
+    } else if (itemId && type === NotificationType.review) {
+      this.router.navigate([`profile/${this.currentUserId}`], { queryParams: { review: true } });
       this.hideNotificationsList.emit();
     }
   }

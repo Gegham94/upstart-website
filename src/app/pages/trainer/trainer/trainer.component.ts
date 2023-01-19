@@ -130,6 +130,13 @@ export class TrainerComponent implements OnInit, OnDestroy, AfterViewInit {
           if (this.trainerData.role_id !== this.userRoles.TRAINING_CENTER) {
             this.tabs = this.tabs.filter((tab) => tab.id !== this.userRoles.TRAINING_CENTER);
           }
+          this.activatedRoute.queryParams.subscribe((queryRes) => {
+            if (queryRes['review']) {
+              this.tabs.every((tab) => (tab.clicked = false));
+              const foundedTab = this.tabs.find((foundTab) => foundTab.id === 2);
+              if (foundedTab) foundedTab.clicked = true;
+            }
+          });
         },
         () => {
           this.router.navigate(['not-found']);

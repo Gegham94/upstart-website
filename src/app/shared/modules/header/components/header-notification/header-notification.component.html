@@ -20,7 +20,7 @@
     </div>
     <div
       class="notification__wrapper"
-      (click)="redirectNotification(notification?.url)"
+      (click)="redirectNotification(notification?.item_id, notification?.item)"
       [class.notification__left-border]="!notification.status"
       *ngFor="let notification of allNotifications | slice: 0:3; let index = index"
     >

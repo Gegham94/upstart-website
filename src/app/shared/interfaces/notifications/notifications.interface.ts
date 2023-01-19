@@ -7,6 +7,8 @@ export interface NotificationsInterface {
   created_at: string;
   user_id: number;
   url?: string;
+  item_id?: number;
+  item?: string;
 }
 
 export interface NotificationsUnread {
